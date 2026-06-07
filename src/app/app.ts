@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MainLayoutComponent } from "./layouts/main-layout/main-layout.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [MatButtonModule, MatIconModule, MainLayoutComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

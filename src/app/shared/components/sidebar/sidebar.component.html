@@ -1,0 +1,26 @@
+<aside> 
+    <div class="logo-container">
+        <span class="bg-logo">
+            <lucide-icon class="logo" [img]="icons.Car"></lucide-icon>        
+        </span>
+        @if(!this.isClose) {
+            <div class="title-name">
+                <h2 class="Logo">Motora</h2>
+                <p class="text-muted light">ERP</p>
+            </div>
+        }
+    </div>
+    <div class="button-control-container">
+        <button
+            (click)="toggleClose()"
+        >
+        <lucide-icon [img]=" this.isClose ? icons.ChevronRight: icons.ChevronLeft"></lucide-icon>
+        @if(!this.isClose) {
+            <p>Recolher menu</p>
+        }
+        </button>
+
+    </div>
+    <app-menu-items></app-menu-items>
+
+</aside>

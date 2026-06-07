@@ -1,0 +1,29 @@
+.main-container {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--mat-sys-outline);
+    margin-bottom: 32px;
+  }
+
+  section {
+    margin-bottom: 40px;
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+}

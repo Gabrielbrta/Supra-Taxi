@@ -1,6 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "schematics": {
+    "@schematics/angular:component": {
+      "inlineStyle": false,
+      "inlineTemplate": false
+    }
+  },
   "cli": {
     "packageManager": "npm"
   },
@@ -9,8 +15,11 @@
     "motora-erp": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
+         "@schematics/angular:component": {
+          "style": "scss",
+          "standalone": true,
+          "inlineTemplate": false,
+          "inlineStyle": false
         }
       },
       "root": "",
@@ -23,6 +32,9 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
             "assets": [
               {
                 "glob": "**/*",

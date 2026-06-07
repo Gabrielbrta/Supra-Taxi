@@ -1,0 +1,16 @@
+<nav class="menu-container text-sm">
+    @if(this.Items.length > 0) {
+        @for(item of Items; track item.path) {
+            @if(item.name) {
+                <p class="title-menu">{{item.name}}</p>
+
+            }
+            <a [routerLink]="item.path"
+                routerLinkActive="active" class="item-menu" (click)="handleClick($event)">
+                <lucide-icon class="icon-md" [img]="item.icon"></lucide-icon>
+                <span class="text-sm">{{item.label}}</span>
+            </a>
+
+        }
+    }
+</nav>

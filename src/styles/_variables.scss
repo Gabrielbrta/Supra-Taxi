@@ -1,0 +1,412 @@
+// =============================================================================
+// TaxiFleet ERP — Design Tokens (Material Design 3 inspired)
+// Arquivo completo de estilização para uso no Angular 20+ / Angular Material
+//
+// Uso:
+//   @use 'design-tokens' as *;
+//
+//   .card {
+//     background: $color-surface;
+//     color: $color-foreground;
+//     padding: $spacing-4;
+//     border-radius: $radius-lg;
+//     box-shadow: $shadow-elevation-2;
+//     font: $text-body-md;
+//   }
+// =============================================================================
+// =============================================================================
+// 1. PALETA BASE (cores cruas — não usar diretamente em componentes)
+// =============================================================================
+// --- Neutros ---
+$palette-white:    #ffffff;
+$palette-black:    #000000;
+$palette-gray-50:  #f8fafc;
+$palette-gray-100: #f1f5f9;
+$palette-gray-200: #e2e8f0;
+$palette-gray-300: #cbd5e1;
+$palette-gray-400: #94a3b8;
+$palette-gray-500: #64748b;
+$palette-gray-600: #7487a3;
+$palette-gray-700: #334155;
+$palette-gray-800: #1e293b;
+$palette-gray-900: #0f172a;
+$palette-gray-950: #020617;
+// --- Azul / Índigo (cor primária da marca) ---
+$palette-blue-50:  #eef2ff;
+$palette-blue-100: #e0e7ff;
+$palette-blue-200: #c7d2fe;
+$palette-blue-300: #a5b4fc;
+$palette-blue-400: #818cf8;
+$palette-blue-500: #4f46e5; // PRIMARY
+$palette-blue-600: #4338ca;
+$palette-blue-700: #3730a3;
+$palette-blue-800: #312e81;
+$palette-blue-900: #1e1b4b;
+// --- Verde (success) ---
+$palette-green-50:  #ecfdf5;
+$palette-green-100: #d1fae5;
+$palette-green-300: #6ee7b7;
+$palette-green-500: #10b981;
+$palette-green-600: #059669;
+$palette-green-700: #047857;
+$palette-green-900: #064e3b;
+// --- Amarelo / Âmbar (warning) ---
+$palette-amber-50:  #fffbeb;
+$palette-amber-100: #fef3c7;
+$palette-amber-300: #fcd34d;
+$palette-amber-500: #f59e0b;
+$palette-amber-600: #d97706;
+$palette-amber-700: #b45309;
+$palette-amber-900: #78350f;
+// --- Vermelho (danger / error) ---
+$palette-red-50:  #fef2f2;
+$palette-red-100: #fee2e2;
+$palette-red-300: #fca5a5;
+$palette-red-500: #ef4444;
+$palette-red-600: #dc2626;
+$palette-red-700: #b91c1c;
+$palette-red-900: #7f1d1d;
+// --- Ciano (info) ---
+$palette-cyan-50:  #ecfeff;
+$palette-cyan-500: #06b6d4;
+$palette-cyan-600: #0891b2;
+$palette-cyan-700: #0e7490;
+// =============================================================================
+// 2. TOKENS SEMÂNTICOS — LIGHT THEME (padrão da área principal)
+// =============================================================================
+// --- Surfaces ---
+$color-background:            $palette-gray-50;
+$color-foreground:            $palette-gray-900;
+$color-surface:               $palette-white;
+$color-surface-container:     #f5f7fa;
+$color-surface-container-high:#eef1f5;
+$color-surface-variant:       #e8ecf2;
+$color-on-surface-variant:    $palette-gray-600;
+$color-card:                  $palette-white;
+$color-card-foreground:       $palette-gray-900;
+$color-popover:               $palette-white;
+$color-popover-foreground:    $palette-gray-900;
+// --- Primary (Indigo/Azul da marca) ---
+$color-primary:               $palette-blue-500;
+$color-primary-foreground:    $palette-white;
+$color-primary-hover:         $palette-blue-600;
+$color-primary-pressed:       $palette-blue-700;
+$color-primary-container:     $palette-blue-100;
+$color-on-primary-container:  $palette-blue-800;
+// --- Secondary / Accent ---
+$color-secondary:             $palette-gray-100;
+$color-secondary-foreground:  $palette-gray-800;
+$color-accent:                $palette-blue-50;
+$color-accent-foreground:     $palette-blue-700;
+// --- Muted ---
+$color-muted:                 $palette-gray-100;
+$color-muted-foreground:      $palette-gray-500;
+// --- Success ---
+$color-success:               $palette-green-600;
+$color-success-foreground:    $palette-white;
+$color-success-container:     $palette-green-100;
+$color-on-success-container:  $palette-green-900;
+// --- Warning ---
+$color-warning:               $palette-amber-500;
+$color-warning-foreground:    $palette-amber-900;
+$color-warning-container:     $palette-amber-100;
+$color-on-warning-container:  $palette-amber-900;
+// --- Danger / Error ---
+$color-danger:                $palette-red-600;
+$color-danger-foreground:     $palette-white;
+$color-danger-container:      $palette-red-100;
+$color-on-danger-container:   $palette-red-900;
+$color-destructive:           $color-danger;
+$color-destructive-foreground:$color-danger-foreground;
+// --- Info ---
+$color-info:                  $palette-cyan-600;
+$color-info-foreground:       $palette-white;
+$color-info-container:        $palette-cyan-50;
+$color-on-info-container:     $palette-cyan-700;
+// --- Bordas / Outlines / Inputs ---
+$color-border:                #e2e6ec;
+$color-divider:               #eef0f4;
+$color-input-background:      $palette-white;
+$color-input-border:          #d6dbe2;
+$color-input-border-hover:    $palette-gray-400;
+$color-input-border-focus:    $palette-blue-500;
+$color-input-placeholder:     $palette-gray-400;
+$color-outline:               $palette-gray-400;
+$color-outline-variant:       #dde2e8;
+$color-ring:                  $palette-blue-500;
+// --- Sidebar (sempre escura no light theme) ---
+$color-sidebar:                    #1a1f2e;
+$color-sidebar-foreground:         #e6e9ef;
+$color-sidebar-muted:              #8b93a7;
+$color-sidebar-border:             #2a3142;
+$color-sidebar-hover:              #232a3a;
+$color-sidebar-active:             #2e3a5f;
+$color-sidebar-active-foreground:  $palette-white;
+// --- Overlays / Scrim ---
+$color-overlay:               rgba(15, 23, 42, 0.5);
+$color-scrim:                 rgba(0, 0, 0, 0.32);
+$color-backdrop:              rgba(15, 23, 42, 0.6);
+// =============================================================================
+// 3. TOKENS SEMÂNTICOS — DARK THEME
+// =============================================================================
+$dark-color-background:            #0f1320;
+$dark-color-foreground:            #e8eaf0;
+$dark-color-surface:               #161b2b;
+$dark-color-surface-container:     #1c2236;
+$dark-color-surface-container-high:#222942;
+$dark-color-surface-variant:       #2a3148;
+$dark-color-on-surface-variant:    #b8bdcc;
+$dark-color-card:                  #1c2236;
+$dark-color-card-foreground:       #e8eaf0;
+$dark-color-popover:               #1c2236;
+$dark-color-popover-foreground:    #e8eaf0;
+$dark-color-primary:               $palette-blue-400;
+$dark-color-primary-foreground:    $palette-blue-900;
+$dark-color-primary-container:     $palette-blue-800;
+$dark-color-on-primary-container:  $palette-blue-100;
+$dark-color-secondary:             #2a3148;
+$dark-color-secondary-foreground:  #e8eaf0;
+$dark-color-muted:                 #232a3f;
+$dark-color-muted-foreground:      #9ba3b7;
+$dark-color-accent:                #2c3556;
+$dark-color-accent-foreground:     $palette-blue-200;
+$dark-color-success:               $palette-green-500;
+$dark-color-success-container:     $palette-green-900;
+$dark-color-warning:               $palette-amber-500;
+$dark-color-warning-container:     $palette-amber-900;
+$dark-color-danger:                $palette-red-500;
+$dark-color-danger-container:      $palette-red-900;
+$dark-color-info:                  $palette-cyan-500;
+$dark-color-border:                #2a3148;
+$dark-color-divider:               #232a3f;
+$dark-color-input-background:      #1c2236;
+$dark-color-input-border:          #323a55;
+$dark-color-ring:                  $palette-blue-400;
+// =============================================================================
+// 4. TIPOGRAFIA
+// =============================================================================
+// --- Famílias ---
+$font-family-sans:    'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+$font-family-display: 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+$font-family-mono:    'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+// --- Pesos ---
+$font-weight-regular:  400;
+$font-weight-medium:   500;
+$font-weight-semibold: 600;
+$font-weight-bold:     700;
+// --- Tamanhos (escala) ---
+$font-size-xs:   12px;
+$font-size-sm:   13px;
+$font-size-md:   14px;  // base do ERP
+$font-size-lg:   16px;
+$font-size-xl:   18px;
+$font-size-2xl:  20px;
+$font-size-3xl:  24px;
+$font-size-4xl:  28px;
+$font-size-5xl:  32px;
+$font-size-6xl:  40px;
+// --- Line heights ---
+$line-height-tight:   1.2;
+$line-height-snug:    1.35;
+$line-height-normal:  1.5;
+$line-height-relaxed: 1.65;
+// --- Letter spacing ---
+$letter-spacing-tighter: -0.02em;
+$letter-spacing-tight:   -0.015em;
+$letter-spacing-normal:  0;
+$letter-spacing-wide:    0.025em;
+$letter-spacing-wider:   0.08em;
+$letter-spacing-widest:  0.14em;
+// --- Estilos compostos (Material Type Scale) ---
+$text-display-lg:   $font-weight-semibold #{$font-size-6xl} / #{$line-height-tight} $font-family-display;
+$text-display-md:   $font-weight-semibold #{$font-size-5xl} / #{$line-height-tight} $font-family-display;
+$text-display-sm:   $font-weight-semibold #{$font-size-4xl} / #{$line-height-tight} $font-family-display;
+$text-headline-lg:  $font-weight-semibold #{$font-size-3xl} / #{$line-height-snug} $font-family-display;
+$text-headline-md:  $font-weight-semibold #{$font-size-2xl} / #{$line-height-snug} $font-family-display;
+$text-headline-sm:  $font-weight-semibold #{$font-size-xl} / #{$line-height-snug} $font-family-display;
+$text-title-lg:     $font-weight-semibold #{$font-size-lg} / #{$line-height-normal} $font-family-sans;
+$text-title-md:     $font-weight-semibold #{$font-size-md} / #{$line-height-normal} $font-family-sans;
+$text-title-sm:     $font-weight-semibold #{$font-size-sm} / #{$line-height-normal} $font-family-sans;
+$text-body-lg:      $font-weight-regular  #{$font-size-lg} / #{$line-height-relaxed} $font-family-sans;
+$text-body-md:      $font-weight-regular  #{$font-size-md} / #{$line-height-normal} $font-family-sans;
+$text-body-sm:      $font-weight-regular  #{$font-size-sm} / #{$line-height-normal} $font-family-sans;
+$text-label-lg:     $font-weight-medium   #{$font-size-md} / #{$line-height-normal} $font-family-sans;
+$text-label-md:     $font-weight-medium   #{$font-size-sm} / #{$line-height-normal} $font-family-sans;
+$text-label-sm:     $font-weight-medium   #{$font-size-xs} / #{$line-height-normal} $font-family-sans;
+$text-overline:     $font-weight-semibold #{$font-size-xs} / #{$line-height-normal} $font-family-sans;
+// =============================================================================
+// 5. SPACING (escala de 4px)
+// =============================================================================
+$spacing-0:   0;
+$spacing-1:   4px;
+$spacing-2:   8px;
+$spacing-3:   12px;
+$spacing-4:   16px;
+$spacing-5:   20px;
+$spacing-6:   24px;
+$spacing-7:   28px;
+$spacing-8:   32px;
+$spacing-10:  40px;
+$spacing-12:  48px;
+$spacing-14:  56px;
+$spacing-16:  64px;
+$spacing-20:  80px;
+$spacing-24:  96px;
+// --- Spacings semânticos ---
+$gap-form-field:        $spacing-4;
+$gap-form-section:      $spacing-6;
+$gap-card-padding:      $spacing-6;
+$gap-page-padding:      $spacing-6;
+$gap-table-cell-x:      $spacing-5;
+$gap-table-cell-y:      $spacing-3;
+// =============================================================================
+// 6. BORDAS / RAIOS
+// =============================================================================
+$radius-none:  0;
+$radius-xs:    4px;
+$radius-sm:    6px;
+$radius-md:    10px;
+$radius-lg:    14px;
+$radius-xl:    20px;
+$radius-2xl:   28px;
+$radius-full:  9999px;
+$border-width-thin:    1px;
+$border-width-regular: 2px;
+$border-width-thick:   3px;
+// --- Bordas semânticas ---
+$border-default:   $border-width-thin solid $color-border;
+$border-divider:   $border-width-thin solid $color-divider;
+$border-input:     $border-width-thin solid $color-input-border;
+$border-focus:     $border-width-regular solid $color-ring;
+// =============================================================================
+// 7. SOMBRAS / ELEVAÇÃO (Material Design)
+// =============================================================================
+$shadow-none:        none;
+$shadow-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+                     0 1px 3px 0 rgba(0, 0, 0, 0.05);
+$shadow-elevation-2: 0 2px 4px -1px rgba(0, 0, 0, 0.06),
+                     0 4px 8px -2px rgba(0, 0, 0, 0.06);
+$shadow-elevation-3: 0 4px 12px -2px rgba(0, 0, 0, 0.08),
+                     0 8px 24px -4px rgba(0, 0, 0, 0.08);
+$shadow-elevation-4: 0 8px 16px -4px rgba(0, 0, 0, 0.10),
+                     0 16px 32px -8px rgba(0, 0, 0, 0.10);
+$shadow-elevation-5: 0 16px 32px -8px rgba(0, 0, 0, 0.14),
+                     0 24px 48px -12px rgba(0, 0, 0, 0.14);
+$shadow-focus-ring:  0 0 0 3px rgba(79, 70, 229, 0.25);
+$shadow-error-ring:  0 0 0 3px rgba(220, 38, 38, 0.25);
+$shadow-inner:       inset 0 2px 4px rgba(0, 0, 0, 0.06);
+// =============================================================================
+// 8. Z-INDEX
+// =============================================================================
+$z-base:        0;
+$z-dropdown:    1000;
+$z-sticky:      1020;
+$z-fixed:       1030;
+$z-overlay:     1040;
+$z-modal:       1050;
+$z-popover:     1060;
+$z-tooltip:     1070;
+$z-toast:       1080;
+// =============================================================================
+// 9. MOVIMENTO / TRANSIÇÕES
+// =============================================================================
+$duration-instant: 75ms;
+$duration-fast:    150ms;
+$duration-normal:  200ms;
+$duration-slow:    300ms;
+$duration-slower:  500ms;
+$easing-standard:    cubic-bezier(0.2, 0, 0, 1);
+$easing-decelerate:  cubic-bezier(0, 0, 0, 1);
+$easing-accelerate:  cubic-bezier(0.3, 0, 1, 1);
+$easing-emphasized:  cubic-bezier(0.2, 0, 0, 1);
+$transition-default: all $duration-normal $easing-standard;
+$transition-colors:  background-color $duration-fast $easing-standard,
+                     color $duration-fast $easing-standard,
+                     border-color $duration-fast $easing-standard;
+// =============================================================================
+// 10. BREAKPOINTS (responsividade)
+// =============================================================================
+$breakpoint-xs:  480px;
+$breakpoint-sm:  640px;
+$breakpoint-md:  768px;
+$breakpoint-lg:  1024px;
+$breakpoint-xl:  1280px;
+$breakpoint-2xl: 1536px;
+// --- Dimensões do layout ERP ---
+$layout-sidebar-width:           248px;
+$layout-sidebar-collapsed-width: 76px;
+$layout-header-height:           64px;
+$layout-breadcrumb-height:       40px;
+$layout-content-max-width:       1440px;
+$brand-primary-palette: (
+  50:  $palette-blue-50,
+  100: $palette-blue-100,
+  200: $palette-blue-200,
+  300: $palette-blue-300,
+  400: $palette-blue-400,
+  500: $palette-blue-500,
+  600: $palette-blue-600,
+  700: $palette-blue-700,
+  800: $palette-blue-800,
+  900: $palette-blue-900,
+  contrast: (
+    50:  $palette-gray-900,
+    100: $palette-gray-900,
+    200: $palette-gray-900,
+    300: $palette-gray-900,
+    400: $palette-white,
+    500: $palette-white,
+    600: $palette-white,
+    700: $palette-white,
+    800: $palette-white,
+    900: $palette-white,
+  ),
+);
+$brand-accent-palette: (
+  50:  $palette-cyan-50,
+  100: #cffafe,
+  200: #a5f3fc,
+  300: #67e8f9,
+  400: #22d3ee,
+  500: $palette-cyan-500,
+  600: $palette-cyan-600,
+  700: $palette-cyan-700,
+  800: #155e75,
+  900: #164e63,
+  contrast: (
+    50:  $palette-gray-900,
+    100: $palette-gray-900,
+    200: $palette-gray-900,
+    300: $palette-gray-900,
+    400: $palette-white,
+    500: $palette-white,
+    600: $palette-white,
+    700: $palette-white,
+    800: $palette-white,
+    900: $palette-white,
+  ),
+);
+$brand-warn-palette: (
+  50:  $palette-red-50,
+  100: $palette-red-100,
+  200: #fecaca,
+  300: $palette-red-300,
+  400: #f87171,
+  500: $palette-red-500,
+  600: $palette-red-600,
+  700: $palette-red-700,
+  800: #991b1b,
+  900: $palette-red-900,
+  contrast: (
+    50:  $palette-gray-900,
+    100: $palette-gray-900,
+    200: $palette-gray-900,
+    300: $palette-gray-900,
+    400: $palette-white,
+    500: $palette-white,
+    600: $palette-white,
+    700: $palette-white,
+    800: $palette-white,
+    900: $palette-white,
+  ),
+);

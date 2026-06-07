@@ -1,0 +1,10 @@
+<main class="wrapper">
+    <app-sidebar class="menu-side"
+    [class.close]="isClose"
+    (toggleSidebar)="onToggleClose($event)" 
+    ></app-sidebar>
+    <div class="content">
+        <app-topbar></app-topbar>
+        <router-outlet></router-outlet>
+    </div>
+</main>

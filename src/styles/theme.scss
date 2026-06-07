@@ -1,0 +1,190 @@
+@use '@angular/material' as mat;
+@use 'variables' as var;
+
+// =============================================================================
+// 1. DEFINIÇÃO DO TEMA (LIGHT APENAS)
+// =============================================================================
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$orange-palette,
+  ),
+  typography: (
+    brand-family: var.$font-family-sans,
+    plain-family: var.$font-family-sans,
+  ),
+  density: (scale: 0)
+));
+
+// =============================================================================
+// 2. MIXIN DE TOKENS E VARIÁVEIS (LIGHT MODE COMPLETO)
+// =============================================================================
+@mixin inject-design-system {
+  // --- Extração das Variáveis Sass ---
+  $p: var.$color-primary;
+  $s: var.$color-secondary;
+  $t: var.$color-warning;
+  $err: var.$color-danger;
+  $bg: var.$color-background;
+  $surf: var.$color-surface;
+  $txt: var.$color-foreground;
+
+  // --- Foregrounds (Contraste) ---
+  $on-p: var.$color-primary-foreground;
+  $on-s: var.$color-secondary-foreground;
+  $on-t: var.$color-warning-foreground;
+  $on-err: var.$color-danger-foreground;
+
+  // ---------------------------------------------------------------------------
+  // A. VARIÁVEIS PARA CSS NORMAL (Seus Elementos)
+  // ---------------------------------------------------------------------------
+  // Cores de Marca e Status
+  --primary: #{$p};
+  --primary-hover: #{var.$color-primary-hover};
+  --on-primary: #{$on-p};
+  --secondary: #{$s};
+  --on-secondary: #{$on-s};
+  --tertiary: #{$t};
+  --on-tertiary: #{$on-t};
+  --error: #{$err};
+  --on-error: #{$on-err};
+  --info: #{var.$color-info};
+  --on-info: #{var.$palette-white};
+
+  // Superfícies e Backgrounds
+  --background: #{$bg};
+  --surface: #{$surf};
+  --surface-container: #{var.$color-surface-container};
+  --surface-variant: #{var.$color-surface-variant};
+  --surface-card: #{var.$color-card};
+  
+  // Texto
+  --text-main: #{$txt};
+  --text-muted: #{var.$color-on-surface-variant};
+  
+  // Bordas e Outlines
+  --border-color: #{var.$color-border};
+  --border-divider: #{var.$color-divider};
+  --outline-focus: #{var.$color-ring};
+  
+  // Sidebar (Específico ERP)
+  --sidebar-bg: #{var.$color-sidebar};
+  --sidebar-text: #{var.$color-sidebar-foreground};
+  --sidebar-muted: #{var.$color-sidebar-muted};
+  --sidebar-border: #{var.$color-sidebar-border};
+  --sidebar-hover: #{var.$color-sidebar-hover};
+  --sidebar-active: #{var.$color-sidebar-active};
+
+  // Inputs
+  --input-bg: #{var.$color-input-background};
+  --input-border: #{var.$color-input-border};
+  --input-border-hover: #{var.$color-input-border-hover};
+  --input-border-focus: #{var.$color-input-border-focus};
+  --input-placeholder: #{var.$color-input-placeholder};
+
+  // Cards e Elevação
+  --card-shadow: #{var.$shadow-elevation-1};
+  --card-shadow-hover: #{var.$shadow-elevation-2};
+  
+  // Design System (Radius / Spacing)
+  --radius-erp: #{var.$radius-md};
+  --radius-lg: #{var.$radius-lg};
+  --radius-xl: #{var.$radius-xl};
+  //icone
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+
+  // ---------------------------------------------------------------------------
+  // B. ANGULAR MATERIAL (Sincronizado)
+  // ---------------------------------------------------------------------------
+  --mat-sys-primary: #{$p} !important;
+  --mat-sys-on-primary: #{$on-p} !important;
+  --mat-sys-secondary: #{$s} !important;
+  --mat-sys-on-secondary: #{$on-s} !important;
+  --mat-sys-tertiary: #{$t} !important;
+  --mat-sys-error: #{$err} !important;
+  --mat-sys-on-error: #{$on-err} !important;
+
+  --mat-sys-background: #{$bg} !important;
+  --mat-sys-surface: #{$surf} !important;
+  --mat-sys-on-surface: #{$txt} !important;
+  --mat-sys-outline: #{var.$color-border} !important;
+
+  // Tokens de Componente (Força nos Botões MDC)
+  --mdc-filled-button-container-color: #{$p} !important;
+  --mdc-filled-button-label-text-color: #{$on-p} !important;
+  --mdc-filled-button-secondary-container-color: #{$s} !important;
+  --mdc-filled-button-secondary-label-text-color: #{$on-s} !important;
+  --mdc-filled-button-error-container-color: #{$err} !important;
+  --mdc-filled-button-error-label-text-color: #{$on-err} !important;
+}
+
+// =============================================================================
+// 3. APLICAÇÃO GLOBAL
+// =============================================================================
+html {
+  @include mat.core();
+  @include mat.all-component-themes($theme);
+
+  // Tipografia e Reset
+  font-family: var.$font-family-sans;
+  font-size: var.$font-size-md;
+
+  &, &.light-theme {
+    @include inject-design-system;
+    color-scheme: light;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: var(--background);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+.cdk-overlay-container {
+  @include inject-design-system;
+}
+
+// =============================================================================
+// 4. CLASSES UTILITÁRIAS (DESIGN SYSTEM)
+// =============================================================================
+.card-erp {
+  background-color: var(--surface-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-erp);
+  padding: 16px;
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+}
+
+.primary-color { background-color: var(--primary) !important;}
+.secondary-color { background-color: var(--secondary) !important;}
+.tertiary-color { background-color: var(--tertiary) !important;}
+
+.light {
+  font-weight: 200;
+}
+// texto
+.text-primary { color: var(--primary) !important; }
+.text-secondary { color: var(--secondary) !important; }
+.text-error { color: var(--error) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-sm { font-size: .875rem;}
+.text-md { font-size: 1.2rem;}
+.text-big { font-size: 2rem;}
+
+//icone 
+.icon-sm {width: var(--icon-sm); height: var(--icon-sm); }
+.icon-md {width: var(--icon-md); height: var(--icon-md); }
+.icon-lg {width: var(--icon-lg); height: var(--icon-lg); }
