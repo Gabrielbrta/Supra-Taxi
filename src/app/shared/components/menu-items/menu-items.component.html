@@ -1,14 +1,19 @@
 <nav class="menu-container text-sm">
     @if(this.Items.length > 0) {
         @for(item of Items; track item.path) {
-            @if(item.name) {
+            @if(item.name && !this.closedMenu()) {
                 <p class="title-menu">{{item.name}}</p>
 
             }
             <a [routerLink]="item.path"
-                routerLinkActive="active" class="item-menu" (click)="handleClick($event)">
+                routerLinkActive="active" class="item-menu"
+                [class.center]="this.closedMenu()"
+                >
                 <lucide-icon class="icon-md" [img]="item.icon"></lucide-icon>
-                <span class="text-sm">{{item.label}}</span>
+
+                @if(!this.closedMenu()) {
+                    <span class="text-sm" [class.center]="this.closedMenu()">{{item.label}}</span>
+                }
             </a>
 
         }

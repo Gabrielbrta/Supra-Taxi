@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MainLayoutComponent } from "./layouts/main-layout/main-layout.component";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-root',
-  imports: [MatButtonModule, MatIconModule, MainLayoutComponent],
+  imports: [MatButtonModule, MatIconModule, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

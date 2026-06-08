@@ -1,5 +1,5 @@
 <aside> 
-    <div class="logo-container">
+    <div class="logo-container" [class.center]="this.isClose">
         <span class="bg-logo">
             <lucide-icon class="logo" [img]="icons.Car"></lucide-icon>        
         </span>
@@ -21,6 +21,9 @@
         </button>
 
     </div>
-    <app-menu-items></app-menu-items>
+    <app-menu-items
+    [closedMenu]="isClose"
+    >
+    </app-menu-items>
 
 </aside>

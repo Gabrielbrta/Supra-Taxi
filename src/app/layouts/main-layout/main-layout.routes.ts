@@ -7,8 +7,14 @@ import { BanidosComponent } from '../../pages/banidos/banidos.component';
 import { OcorrenciasComponent } from '../../pages/ocorrencias/ocorrencias.component';
 import { UsuariosComponent } from '../../pages/admin/usuarios/usuarios.component';
 import { ConfiguracoesComponent } from '../../pages/configuracoes/configuracoes.component';
+import { VistoriasComponent } from '../../pages/vistorias/vistorias.component';
 
 export const MainLayoutsRoutes: Routes = [
+    {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+    },
     {
         path: 'dashboard',
         component: DashboardComponent
@@ -20,6 +26,10 @@ export const MainLayoutsRoutes: Routes = [
     {
         path: 'associados',
         component: AssociadosComponent
+    },
+    {
+        path: 'vistorias',
+        component: VistoriasComponent
     },
     {
         path: 'unidades',

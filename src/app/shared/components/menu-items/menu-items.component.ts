@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { MenuItem } from '../../models/menu/menuList';
 import { Icons } from '../../icons/icons';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -11,6 +11,7 @@ import { LucideAngularModule } from 'lucide-angular';
   styleUrl: './menu-items.component.scss',
 })
 export class MenuItemsComponent {
+  closedMenu = input<boolean>();
   
   private icons = Icons;
   Items: MenuItem[] = [
@@ -79,7 +80,4 @@ export class MenuItemsComponent {
     }
   ];
 
-  handleClick($event: any) {
-    console.log($event.target);
-  }
 }
