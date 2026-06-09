@@ -1,1 +1,22 @@
-<p>topbar works!</p>
+<header class="topbar-container">
+    <div class="profile"
+    (click)="toggleMenu($event)"
+    >
+        <div class="image-user">
+            <lucide-icon [img]="this.icons.User"></lucide-icon>
+        </div>
+        <div class="profile-info">
+            <p class="profile-info-name text-sm">Nome generico</p>
+            <p class="profile-info-cargo text-sm">cargo</p>
+        </div>
+        <lucide-icon [img]="this.icons.ChevronDown"></lucide-icon>
+        
+        <div class="profile-nav-container"
+        [class.opened]="!this.isClosedMenu"
+        >
+            <app-menu-items
+            [selectMenuItems]="menuItems"
+            ></app-menu-items>
+        </div>
+    </div>
+</header>

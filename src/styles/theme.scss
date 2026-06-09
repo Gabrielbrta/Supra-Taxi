@@ -86,6 +86,9 @@ $theme: mat.define-theme((
   // Cards e Elevação
   --card-shadow: #{var.$shadow-elevation-1};
   --card-shadow-hover: #{var.$shadow-elevation-2};
+
+  //profile
+  --profile-hover: #ECECED;
   
   // Design System (Radius / Spacing)
   --radius-erp: #{var.$radius-md};

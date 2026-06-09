@@ -2,6 +2,7 @@
     width: 100%;
     font-weight: 500;
     color: var(--sidebar-muted); 
+    transition: .3s;
     
     .title-menu {
         text-transform: uppercase;
@@ -30,5 +31,59 @@
             background-color: var(--sidebar-active);
         }
         
+    }
+
+    .header-profile {
+        border-radius: 12px 12px 0px 0px;
+        background-color: var(--profile-hover);
+        padding: 10px;
+
+        .profile-name {
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .profile-mail {
+            color: var(--sidebar-muted);
+        }
+    }
+
+    &.select {
+        background-color: var(--surface);
+        color: var(--text-main);
+        border-radius: var(--radius-erp);
+        cursor: default;
+        box-shadow: var(--card-shadow-hover);
+        transition: .3s;
+        height: auto;
+
+        .item-menu:last-of-type {
+            border-top: 1px solid var(--border-color);
+            padding: 15px 15px;
+            color: red;
+            background-color: var(--background);
+            &:hover {
+                color: red;
+                text-decoration: underline;
+                span {
+                    color: red;
+                }
+            }
+        }
+        
+        .item-menu {
+            border-radius: 0px;
+            
+            &:hover{
+                background-color: var(--profile-hover);
+                color: var(--text-main);
+                
+                span {
+                    color: var(--text-main);
+
+                }
+            }
+
+        }
     }
 }

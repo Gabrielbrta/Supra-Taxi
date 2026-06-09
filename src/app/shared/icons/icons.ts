@@ -1,6 +1,7 @@
 import {
   LayoutDashboard, // home
   Users, // associados
+  User, // usuario 
   UserCog , // usuarios config
   ListOrdered, // unidades
   ClipboardCheck , // vistorias 
@@ -19,18 +20,21 @@ import {
   House, // Casa 
   Save, // Disquete
   Lock, // Cadeado
+  LogOut, // sair
   LockOpen, // Cadeado aberto 
   TriangleAlert, // Alerta
   Clock, // relogio
   KeyRound, // Chave reset senha 
   ChevronRight, // Maior que
   ChevronLeft, // Menor que
+  ChevronDown, // seta pra baixo 
   ArrowDownToLine  // Download
 } from 'lucide-angular';
 
 export const Icons = {
   LayoutDashboard,
   Users,
+  User,  
   UserCog,
   ListOrdered,
   ClipboardCheck,
@@ -52,8 +56,10 @@ export const Icons = {
   TriangleAlert,
   Lock, 
   LockOpen,
+  LogOut,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   Menu,
   ArrowDownToLine 
 };

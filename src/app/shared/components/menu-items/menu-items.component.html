@@ -1,6 +1,6 @@
-<nav class="menu-container text-sm">
-    @if(this.Items.length > 0) {
-        @for(item of Items; track item.path) {
+@if(this.menuItems()) {
+    <nav class="menu-container text-sm">
+        @for(item of this.menuItems(); track item.path) {
             @if(item.name && !this.closedMenu()) {
                 <p class="title-menu">{{item.name}}</p>
 
@@ -17,5 +17,30 @@
             </a>
 
         }
+    </nav>
+}
+
+@if(this.selectMenuItems()) {
+    <nav class="menu-container text-sm select"
+    >
+        @for(item of this.selectMenuItems(); track item.label) {
+            @if(item.profileMail && item.profileName) {
+               <div class="header-profile">
+                    <p class="profile-name">{{item.profileName}}</p>
+                    <p class="profile-mail">{{item.profileMail}}</p>
+               </div> 
+            }
+        <a [routerLink]="item.path"
+            class="item-menu item-select"
+            [id]="item.label.toLowerCase()"
+            >
+            <lucide-icon class="icon-md" [img]="item.icon"></lucide-icon>
+
+            @if(!this.closedMenu()) {
+
+                <span class="text-sm">{{item.label}}</span>
+            }
+        </a>
     }
-</nav>
+    </nav>
+}
