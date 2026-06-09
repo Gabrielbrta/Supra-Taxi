@@ -44,11 +44,9 @@ export class TopbarComponent {
     toggleMenu(event: any) {
       if(!event.target.id.includes('sair')) {
         this.isClosedMenu = !this.isClosedMenu;
-        
       }
       
-      console.log(event.target);
-      console.log(this.isClosedMenu)
+      
     }
 
 

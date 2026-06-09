@@ -10,5 +10,5 @@ import { RouterOutlet } from "@angular/router";
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('motora-erp');
+  protected readonly title = signal('supra-taxi');
 }

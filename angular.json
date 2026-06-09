@@ -12,7 +12,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "motora-erp": {
+    "supra-taxi": {
       "projectType": "application",
       "schematics": {
          "@schematics/angular:component": {
@@ -73,10 +73,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "motora-erp:build:production"
+              "buildTarget": "supra-taxi:build:production"
             },
             "development": {
-              "buildTarget": "motora-erp:build:development"
+              "buildTarget": "supra-taxi:build:development"
             }
           },
           "defaultConfiguration": "development"
