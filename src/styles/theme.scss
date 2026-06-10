@@ -70,7 +70,7 @@ $theme: mat.define-theme((
   
   // Sidebar (Específico ERP)
   --sidebar-bg: #{var.$color-sidebar};
-  --sidebar-text: #{var.$color-sidebar-foreground};
+  --text-light: #{var.$color-sidebar-foreground};
   --sidebar-muted: #{var.$color-sidebar-muted};
   --sidebar-border: #{var.$color-sidebar-border};
   --sidebar-hover: #{var.$color-sidebar-hover};
@@ -88,7 +88,7 @@ $theme: mat.define-theme((
   --card-shadow-hover: #{var.$shadow-elevation-2};
 
   //profile
-  --profile-hover: #ECECED;
+  --profile-hover: #F4F7FA;
   
   // Design System (Radius / Spacing)
   --radius-erp: #{var.$radius-md};
@@ -122,6 +122,55 @@ $theme: mat.define-theme((
   --mdc-filled-button-secondary-label-text-color: #{$on-s} !important;
   --mdc-filled-button-error-container-color: #{$err} !important;
   --mdc-filled-button-error-label-text-color: #{$on-err} !important;
+
+$font-size-xs:   0.75rem;   // 12px
+$font-size-sm:   0.8125rem; // 13px
+$font-size-md:   0.875rem;  // 14px
+$font-size-lg:   1rem;      // 16px
+$font-size-xl:   1.125rem;  // 18px
+$font-size-2xl:  1.25rem;   // 20px
+$font-size-3xl:  1.5rem;    // 24px
+$font-size-4xl:  1.75rem;   // 28px
+$font-size-5xl:  2rem;      // 32px
+$font-size-6xl:  2.5rem;    // 40px
+
+--font-size-xs:   #{$font-size-xs};
+--font-size-sm:   #{$font-size-sm};
+--font-size-md:   #{$font-size-md };
+--font-size-lg:   #{$font-size-lg};
+--font-size-xl:   #{$font-size-xl};
+--font-size-2xl:  #{$font-size-2xl};
+--font-size-3xl:  #{$font-size-3xl};
+--font-size-4xl:  #{$font-size-4xl};
+--font-size-5xl:  #{$font-size-5xl};
+--font-size-6xl:  #{$font-size-6xl};
+
+--dark-color-background:            #0f1320;
+--dark-color-foreground:            #e8eaf0;
+--dark-color-surface:               #161b2b;
+--dark-color-surface-container:     #1c2236;
+--dark-color-surface-container-high:#222942;
+--dark-color-surface-variant:       #2a3148;
+--dark-color-on-surface-variant:    #b8bdcc;
+--dark-color-card:                  #1c2236;
+--dark-color-card-foreground:       #e8eaf0;
+--dark-color-popover:               #1c2236;
+--dark-color-popover-foreground:    #e8eaf0;
+
+--palette-white:    #ffffff;
+--palette-black:    #000000;
+--palette-gray-50:  #F9FAFC;
+--palette-gray-100: #f1f5f9;
+--palette-gray-200: #e2e8f0;
+--palette-gray-300: #cbd5e1;
+--palette-gray-400: #94a3b8;
+--palette-gray-500: #64748b;
+--palette-gray-600: #7487a3;
+--palette-gray-700: #334155;
+--palette-gray-800: #1e293b;
+--palette-gray-900: #0f172a;
+--palette-gray-950: #020617;
+
 }
 
 // =============================================================================

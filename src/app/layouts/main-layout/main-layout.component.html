@@ -5,6 +5,9 @@
     ></app-sidebar>
     <div class="content">
         <app-topbar></app-topbar>
-        <router-outlet></router-outlet>
+        <div class="pages">
+            <app-content-page-header></app-content-page-header>
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </main>

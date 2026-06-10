@@ -32,13 +32,17 @@
             }
         <a [routerLink]="item.path"
             class="item-menu item-select"
-            [id]="item.label.toLowerCase()"
+            [attr.data-id]="item.label.toLowerCase()"
             >
-            <lucide-icon class="icon-md" [img]="item.icon"></lucide-icon>
+            <lucide-icon class="icon-md" [img]="item.icon"
+            [attr.data-id]="item.label.toLowerCase()"
+            ></lucide-icon>
 
             @if(!this.closedMenu()) {
 
-                <span class="text-sm">{{item.label}}</span>
+                <span class="text-sm"
+                [attr.data-id]="item.label.toLowerCase()"
+                >{{item.label}}</span>
             }
         </a>
     }

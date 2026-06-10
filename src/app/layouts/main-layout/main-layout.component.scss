@@ -6,7 +6,7 @@
 }
 
 .menu-side {
-    color: var(--sidebar-text);
+    color: var(--text-light);
     max-width: 250px;
     width: 100%;
     background-color: var(--sidebar-bg);
@@ -22,5 +22,11 @@
 
 .content {
     width: 100%;
+    height: 100%;
     background-color: var(--background);
+}
+
+.pages {
+    width: 100%;
+    padding: 30px;
 }

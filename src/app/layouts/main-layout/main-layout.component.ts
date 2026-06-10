@@ -3,10 +3,11 @@ import { SidebarComponent } from '../../shared/components/sidebar/sidebar.compon
 import { TopbarComponent } from '../../shared/components/topbar/topbar.component';
 import { RouterOutlet } from "@angular/router";
 import { Icons } from '../../shared/icons/icons';
+import { ContentPageHeaderComponent } from '../../shared/components/content-page-header/content-page-header.component';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [SidebarComponent, TopbarComponent, RouterOutlet],
+  imports: [SidebarComponent, TopbarComponent, RouterOutlet, ContentPageHeaderComponent],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
 })

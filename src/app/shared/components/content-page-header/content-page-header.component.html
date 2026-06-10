@@ -1,0 +1,28 @@
+<div class="header-content-container">
+    <div class="header-content-wrapper">
+        <div class="header-content-title">
+            @if(title()) {
+                <h1 class="primary-title">{{title()}}</h1>
+                <p>{{description()}}</p>
+            }
+        </div>
+        
+        <div class="header-content-buttons">
+            @if(buttonLabel() && icon()) {
+            <!-- <button class="primary-color">
+                <lucide-icon [img]="icons[icon()]"
+                ></lucide-icon>
+                {{buttonLabel()}}
+            </button>                 -->
+            <a  matButton="filled" routerLink="." class="primary-color title">
+                <lucide-icon [img]="icons[icon()]"
+            ></lucide-icon>
+            {{buttonLabel()}}
+      </a>
+            }
+        </div>
+        
+
+    </div>
+
+</div>
