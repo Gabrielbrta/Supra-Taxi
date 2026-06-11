@@ -1,18 +1,22 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { every, filter } from 'rxjs';
 import { LucideAngularModule } from "lucide-angular";
 import { Icons } from '../../icons/icons';
 import { MatButtonModule } from '@angular/material/button';
+import { ButtonComponent } from '../button/button.component';
 
 
 @Component({
   selector: 'app-content-page-header',
-  imports: [LucideAngularModule, LucideAngularModule, MatButtonModule],
+  imports: [LucideAngularModule, MatButtonModule, ButtonComponent],
   templateUrl: './content-page-header.component.html',
   styleUrl: './content-page-header.component.scss',
 })
 export class ContentPageHeaderComponent implements OnInit {
+click($event: MouseEvent) {
+  console.log($event);
+}
   constructor(
     private router: Router,
   ){}
@@ -20,6 +24,7 @@ export class ContentPageHeaderComponent implements OnInit {
   title = signal('');
   description = signal('');
   buttonLabel = signal('');
+  routerLink = signal('');
   icon = signal<keyof typeof Icons>('Plus');
   exportable = signal(false);
 
@@ -48,6 +53,7 @@ export class ContentPageHeaderComponent implements OnInit {
       this.description.set(route.snapshot.data['description'] ?? '');
       this.buttonLabel.set(route.snapshot.data['buttonLabel'] ?? '');
       this.icon.set(route.snapshot.data['icon'] ?? '');
+      this.routerLink.set(route.snapshot.data['routerLink'] ?? '');
       this.exportable.set(route.snapshot.data['exportable'] ?? false);
   }
 }

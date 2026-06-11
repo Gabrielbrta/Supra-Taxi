@@ -1,1 +1,24 @@
-<p>button works!</p>
+@if(routerLink()) {
+    <a  [matButton]="buttonType()" [routerLink]="routerLink()" (click)="onClick($event)" class="title"
+    [class.primary-color-button-filled]="buttonType() !== 'outlined'"
+    >
+    @if(icon()) {
+        <lucide-icon [img]="icons[icon() ?? 'Plus']"
+        ></lucide-icon>
+    }
+        {{labelButton()}}
+    </a>
+}
+
+@if(exportable()) {
+    <button  [matButton]="buttonType()" [routerLink]="routerLink()" (click)="onClick($event)" class="title"
+    [class.primary-color-button-filled]="buttonType() !== 'outlined'"
+    >
+    @if(icon()) {
+        <lucide-icon [img]="icons[icon() ?? 'Plus']"
+        ></lucide-icon>
+    }
+        {{labelButton()}}
+</button>
+}
+
