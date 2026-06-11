@@ -9,20 +9,25 @@
         
         <div class="header-content-buttons">
             @if(buttonLabel() && icon()) {
-            <!-- <button class="primary-color">
-                <lucide-icon [img]="icons[icon()]"
-                ></lucide-icon>
-                {{buttonLabel()}}
-            </button>                 -->
-            <a  matButton="filled" routerLink="." class="primary-color title">
-                <lucide-icon [img]="icons[icon()]"
-            ></lucide-icon>
-            {{buttonLabel()}}
-      </a>
+
+                <app-button
+                [labelButton]="buttonLabel()"
+                (clicked)="click($event)"
+                [buttonType]="'filled'"
+                [routerLink]="routerLink()"
+                [icon]="icon()"
+                ></app-button>
+            }
+            
+            @if(exportable()) {
+                <app-button
+                [labelButton]="'Exportar'"
+                (clicked)="click($event)"
+                [buttonType]="'outlined'"
+                [exportable]="true"
+                [icon]="'ArrowDownToLine'"
+                ></app-button>
             }
         </div>
-        
-
     </div>
-
 </div>

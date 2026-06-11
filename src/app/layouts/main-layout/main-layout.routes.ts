@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterLink, Routes } from '@angular/router';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { MotoristasComponent } from '../../pages/motoristas/motoristas.component';
 import { AssociadosComponent } from '../../pages/associados/associados.component';
@@ -8,6 +8,7 @@ import { OcorrenciasComponent } from '../../pages/ocorrencias/ocorrencias.compon
 import { UsuariosComponent } from '../../pages/admin/usuarios/usuarios.component';
 import { ConfiguracoesComponent } from '../../pages/configuracoes/configuracoes.component';
 import { VistoriasComponent } from '../../pages/vistorias/vistorias.component';
+import { pageHeaderData } from '../../shared/models/pageHeaderContent/pageHeaderContentModel';
 
 export const MainLayoutsRoutes: Routes = [
     {
@@ -20,7 +21,7 @@ export const MainLayoutsRoutes: Routes = [
         component: DashboardComponent,
         title: 'Visão geral da operação',
         data: {
-            description: "Olá, Jorge. Você tem 7 documentos críticos precisando de atenção hoje.",
+            description: null,
             buttonLabel: null,
             icon: null,
             exportable: true,
@@ -30,88 +31,120 @@ export const MainLayoutsRoutes: Routes = [
         path: 'motoristas',
         component: MotoristasComponent,
         title: 'Motoristas',
-        data: {
+        data: <pageHeaderData> {
             description: "1.284 motoristas cadastrados — 12 novos nos últimos 30 dias.",
             buttonLabel: "Novo motorista",
+            routerLink: 'motoristas/novo',
             icon: 'Plus',
             exportable: true
-        }
+        },
+        children: [{
+            path: 'novo',
+            component: MotoristasComponent,
+        }]
     },
     {
         path: 'associados',
         component: AssociadosComponent,
         title: 'Associados',
-        data: {
+        data: <pageHeaderData>{
             description: "318 associados — gerencie cadastros, documentos e veículos.",
             buttonLabel: "Novo associado",
+            routerLink: 'associados/novo',
             icon: 'Plus',
             exportable: true
-        }
+        },
+        children: [{
+            path: 'novo',
+            component: AssociadosComponent,
+        }]
     },
     {
         path: 'vistorias',
         component: VistoriasComponent,
         title: 'Vistorias',
-        data: {
+        data:<pageHeaderData> {
             description: "Acompanhe vistorias de frota — aprove ou registre reprovações com motivo detalhado.",
             buttonLabel: "Nova vistoria",
+            routerLink: 'vistorias/novo',
             icon: 'Plus',
             exportable: true
-        }
+        },
+        children: [{
+            path: 'novo',
+            component: VistoriasComponent,
+        }]
     },
     {
         path: 'unidades',
         component: UnidadesComponent,
         title: 'Unidades',
-        data: {
+        data:<pageHeaderData> {
             description: "Cadastre e gerencie as unidades operacionais da cooperativa.",
             buttonLabel: "Nova unidade",
+            routerLink: 'unidades/novo',
             icon: 'Plus',
             exportable: true
-        }
+        },
+        children: [{
+            path: 'novo',
+            component: UnidadesComponent,
+        }]
     },
     {
         path: 'banidos',
         component: BanidosComponent,
         title: 'Motoristas e associados banidos',
-        data: {
+        data:<pageHeaderData> {
             description: "Lista negra utilizada nas validações de cadastro.",
             buttonLabel: "Adicionar banimento",
+            routerLink: 'banidos/novo',
             icon: 'Plus',
             exportable: true
-        }
+        },
+        children: [{
+            path: 'novo',
+            component: BanidosComponent,
+        }]
     },
     {
         path: 'ocorrencias',
         component: OcorrenciasComponent,
         title: 'Ocorrências',
-        data: {
+        data:<pageHeaderData> {
             description: "Registro de eventos operacionais reportados pelos diretores.",
             buttonLabel: "Nova ocorrência",
+            routerLink: 'ocorrencias/novo',
             icon: 'Plus',
             exportable: true
-        }
+        },
+        children: [{
+            path: 'novo',
+            component: OcorrenciasComponent,
+        }]
     },
     {
         path: 'usuarios',
         component: UsuariosComponent,
         title: 'Usuários e permissões',
-        data: {
+        data:<pageHeaderData> {
             description: "Crie diretores e operadores, defina perfis de acesso e gerencie credenciais.",
             buttonLabel: "Novo usuário",
+            routerLink: 'usuarios/novo',
             icon: 'Plus',
             exportable: true
-        }
+        },
+        children: [{
+            path: 'novo',
+            component: UsuariosComponent,
+        }]
     },
     {
         path: 'configuracoes',
         component: ConfiguracoesComponent,
         title: 'Configurações',
-        data: {
+        data: <pageHeaderData> {
             description: "Preferências da cooperativa, integrações e regras operacionais.",
-            buttonLabel: null,
-            icon: 'Plus',
-            exportable: false
         } 
     }
 ];

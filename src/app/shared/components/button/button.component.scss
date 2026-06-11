@@ -1,0 +1,37 @@
+::ng-deep .mdc-button__label {
+    display: flex !important;
+    align-items: center;    
+    gap: 5px;
+    font-weight: bold;
+    svg {
+        max-width: 20px !important;
+    }
+}
+
+.primary-color-button-filled {
+    background-color: var(--primary) !important;
+    transition: all 0.2s ease !important;
+
+    &:hover {
+        background-color: var(--primary-blue-600) !important;
+        transition: all 0.2s ease !important;
+    }
+}
+
+::ng-deep .mat-mdc-outlined-button {
+    border: 1px solid var(--primary) !important;
+    color: var(--primary) !important;
+    
+    &:hover {
+        transition:
+        background-color 0.2s  !important;
+        color: var(--palette-gray-100) !important;
+        background-color: var(--primary);
+    }
+    svg {
+        max-width: 20px !important;
+    }
+}
+::ng-deep .mat-mdc-outlined-button:hover {
+    transition: all 0.3s ease-in-out !important;
+}

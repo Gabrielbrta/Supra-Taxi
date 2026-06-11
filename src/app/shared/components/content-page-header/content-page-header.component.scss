@@ -6,6 +6,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+    align-items: end;
 }
 
 .header-content-title {
@@ -13,14 +14,15 @@
     font-size: var(--font-size-lg);  
     
     h1 {
-      font-weight: bold;
+      font-weight: bolder;
       color: var(--dark-color-background);
       font-size: var(--font-size-3xl);  
     }
 }
 
-::ng-deep .mdc-button__label {
-    display: flex !important;
-    align-items: center;    
-    gap: 5px;
+.header-content-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
