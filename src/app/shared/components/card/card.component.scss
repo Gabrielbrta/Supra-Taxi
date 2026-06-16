@@ -1,0 +1,19 @@
+:host { // card
+    flex: 1;    
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    height: 100%;
+    display: block;
+    overflow-x: hidden;
+    position: relative;
+    border-radius: var(--radius-xl);
+}
+.card {
+    background-color: var(--palette-white);
+    padding: 20px 0px;
+    min-width: 260px;
+}
+
+.no-padding {
+    padding: 0px !important;
+}

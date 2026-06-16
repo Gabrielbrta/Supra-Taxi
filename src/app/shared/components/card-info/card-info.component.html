@@ -1,0 +1,20 @@
+<article class="card card-info">
+    <div [class]="'icon icon--' + typeIconStatus()" 
+    >
+        @if(icon()) {
+            <lucide-icon [img]="icons[icon()!]"></lucide-icon>
+        }
+    </div>
+    <div class="info-title-container">
+        <h2>{{title()}}</h2>
+        <p>{{description()}}</p>
+    </div>
+    <div class="info-stats">
+        @if(statsIcon()) {
+            <div class="icon">
+                <lucide-icon [img]="icons[statsIcon()!]"></lucide-icon>
+            </div>
+        }
+        <p>{{stats()}}</p>
+    </div>
+</article>

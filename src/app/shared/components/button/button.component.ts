@@ -1,5 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { MatButtonAppearance, MatButtonModule } from '@angular/material/button';
+import{MatBadgeModule} from "@angular/material/badge";
 import { LucideAngularModule } from 'lucide-angular';
 import { Icons } from '../../icons/icons';
 import { RouterLink } from '@angular/router';

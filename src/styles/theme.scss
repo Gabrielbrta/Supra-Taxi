@@ -36,6 +36,13 @@ $theme: mat.define-theme((
   $on-t: var.$color-warning-foreground;
   $on-err: var.$color-danger-foreground;
 
+  --breakpoint-xs:  var.$breakpoint-xs; // 480px
+  --breakpoint-sm:  var.$breakpoint-sm; // 640px
+  --breakpoint-md:  var.$breakpoint-md; // 768px
+  --breakpoint-lg:  var.$breakpoint-lg; // 1024px
+  --breakpoint-xl:  var.$breakpoint-xl; // 1280px
+  --breakpoint-2xl: var.$breakpoint-2xl; // 1536px
+
   // ---------------------------------------------------------------------------
   // A. VARIÁVEIS PARA CSS NORMAL (Seus Elementos)
   // ---------------------------------------------------------------------------
@@ -180,13 +187,13 @@ $theme: mat.define-theme((
 --primary-green-700: #{var.$palette-green-700};
 --primary-green-900: #{var.$palette-green-900};
 // --- Amarelo / Âmbar (warning) ---
---primary-amber-50:  #{var.$palette-amber-50};
---primary-amber-100: #{var.$palette-amber-100};
---primary-amber-300: #{var.$palette-amber-300};
---primary-amber: #{var.$palette-amber-500};
---primary-amber-600: #{var.$palette-amber-600};
---primary-amber-700: #{var.$palette-amber-700};
---primary-amber-900: #{var.$palette-amber-900};
+--primary-yellow-50:  #{var.$palette-amber-50};
+--primary-yellow-100: #{var.$palette-amber-100};
+--primary-yellow-300: #{var.$palette-amber-300};
+--primary-yellow: #{var.$palette-amber-500};
+--primary-yellow-600: #{var.$palette-amber-600};
+--primary-yellow-700: #{var.$palette-amber-700};
+--primary-yellow-900: #{var.$palette-amber-900};
 // --- Vermelho (danger / error) ---
 
 --primary-red-50:  #{var.$palette-red-50};

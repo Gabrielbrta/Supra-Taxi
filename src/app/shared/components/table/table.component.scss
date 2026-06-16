@@ -1,0 +1,49 @@
+.container-table {
+    padding: 10px 0;
+    overflow-x: auto;
+
+}
+
+::ng-deep .mat-mdc-header-row {
+    color: var(--palette-gray-700) !important;
+    background-color: var(--palette-cyan-50) !important;
+    padding: 0px !important;
+    th {
+        text-transform: uppercase;
+        font-size: var(--font-size-xs) !important;
+        font-weight: 600;
+
+    }
+} 
+
+//celulas
+::ng-deep .mat-mdc-row {
+    background-color: var(--palette-white) !important;
+}
+//bordas das celulas
+::ng-deep .mat-mdc-cell {
+    border-bottom: 1px solid var(--palette-gray-200) !important;
+
+}
+
+//bordas dos titulos
+::ng-deep .mat-mdc-header-cell {
+  border-bottom: 1px solid var(--palette-gray-200) !important;
+}
+
+// altura dos titulos
+::ng-deep .mat-mdc-header-row {
+    height: 40px !important;
+
+}
+
+::ng-deep.mat-column-actions {
+  white-space: nowrap !important;
+}
+
+app-button.button-action-table {
+    lucide-icon {
+        padding: 0px !important;
+        width: 10px !important;
+    }
+}

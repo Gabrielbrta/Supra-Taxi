@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+    width: 100%;
+
+}
+
+.container-table {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.container-cards-info {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+
+}
+
+.container-table {
+    width: 100%;
+}

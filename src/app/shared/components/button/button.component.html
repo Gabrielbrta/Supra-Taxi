@@ -1,5 +1,5 @@
 @if(routerLink()) {
-    <a  [matButton]="buttonType()" [routerLink]="routerLink()" (click)="onClick($event)" class="title"
+    <a  [matButton]="buttonType()" [routerLink]="routerLink() ?? ''" (click)="onClick($event)" class="title"
     [class.primary-color-button-filled]="buttonType() !== 'outlined'"
     >
     @if(icon()) {
@@ -9,10 +9,9 @@
         {{labelButton()}}
     </a>
 }
-
-@if(exportable()) {
+@else if(exportable()) {
     <button  [matButton]="buttonType()" [routerLink]="routerLink()" (click)="onClick($event)" class="title"
-    [class.primary-color-button-filled]="buttonType() !== 'outlined'"
+    [class.primary-color-button-outlined]="buttonType() !== 'outlined'"
     >
     @if(icon()) {
         <lucide-icon [img]="icons[icon() ?? 'Plus']"
@@ -20,5 +19,21 @@
     }
         {{labelButton()}}
 </button>
+}
+@else if(buttonType() === 'text'){
+    <button
+    [matButton]="buttonType()"
+    (click)="onClick($event)"
+    [class]="'primary-color-button--' + buttonType()"
+    class="title">
+
+    @if(icon()) {
+        <lucide-icon
+        [img]="icons[icon()!]">
+        </lucide-icon>
+    }
+
+    {{ labelButton() }}
+    </button>
 }
 
