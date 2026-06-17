@@ -1,7 +1,7 @@
 import { Icons } from "../../icons/icons";
 
 export interface PageResult<T> {
-    data: T[],
+    data?: T[],
     paginadora?: paginadora;
 }
 
@@ -17,7 +17,7 @@ interface paginadora {
 export interface ColumnType<T> {
     key: keyof T;
     header: string;
-    type?: 'text' | 'date';
+    type?: 'text' | 'date' | 'status';
 }
 
 export interface TableAction {

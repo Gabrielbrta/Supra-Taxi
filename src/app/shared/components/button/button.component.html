@@ -29,6 +29,8 @@
 
     @if(icon()) {
         <lucide-icon
+        [class.red]="icon()=== 'Trash2'"
+        [class.key]="icon() === 'KeyRound'"
         [img]="icons[icon()!]">
         </lucide-icon>
     }

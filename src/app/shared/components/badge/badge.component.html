@@ -1,0 +1,8 @@
+<div class="badge-container"
+     [class.critical]="status() === StatusDocumento.Critico"   
+     [class.warning]="status() === StatusDocumento.VencimentoProximo"   
+     [class.alert]="status() === StatusDocumento.Aviso"   
+     [class.sucess]="status() === StatusDocumento.Regular"   
+>
+    <span>{{getLabel()}}</span>
+</div>

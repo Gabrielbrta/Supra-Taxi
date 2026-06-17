@@ -1,0 +1,58 @@
+.badge-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 5px;
+    font-size: var(--font-size-xs);
+    position: relative;
+    justify-content: center;
+    padding: 3px 5px;
+    padding-left: 18px;
+    white-space: nowrap !important;
+    border-radius: 20px;
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        left: 6px;
+        border-radius: 50%;
+    }
+    /*
+    class.critical
+class.warning
+class.alert
+class.sucess
+    */
+    &.critical {
+        background-color: var(--primary-red);
+        color: var(--palette-white);
+        &::before {
+            background-color: var(--palette-white);
+        }
+    }
+    &.warning {
+        background-color: var(--primary-red-300);
+        color: var(--primary-red-900);
+        &::before {
+            background-color: var(--primary-red-600);
+        }
+    }
+    &.alert {
+        background-color: var(--primary-yellow-300);
+        color: var(--primary-yellow-900);
+        &::before {
+            background-color: var(--primary-yellow-600);
+        }
+    }
+    &.sucess {
+        background-color: var(--primary-green-300);
+        color: var(--primary-green-900);
+        &::before {
+            background-color: var(--primary-green-600);
+        }
+    }
+
+}

@@ -6,10 +6,11 @@ import { DatePipe } from '@angular/common';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from '../button/button.component';
+import { BadgeComponent } from '../badge/badge.component';
 
 @Component({
   selector: 'app-table',
-  imports: [MatTableModule, MatPaginatorModule, DatePipe, MatButtonModule, MatIconModule, ButtonComponent],
+  imports: [MatTableModule, MatPaginatorModule, DatePipe, MatButtonModule, MatIconModule, ButtonComponent, BadgeComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })

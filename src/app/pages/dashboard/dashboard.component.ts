@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import { CardInfoComponent } from '../../shared/components/card-info/card-info-component';
-import { Icons } from '../../shared/icons/icons';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { ColumnType, PageResult, TableAction } from '../../shared/models/table/Table';
 import { TableDataDocuments } from '../../shared/models/dashboard/TableDataDocuments';
 import { TableComponent } from '../../shared/components/table/table.component';
+import { StatusDocumento } from '../../shared/enums/StatusDocumentoEnum';
+import { DashboardService } from '../../core/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,14 @@ import { TableComponent } from '../../shared/components/table/table.component';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
+
+  private readonly dashboardService = inject(DashboardService);
+
+  ngOnInit() {
+    this.getAllDocuments();
+  }
+
   tableColumns: ColumnType<TableDataDocuments>[] =  [
     {
       key: 'prefixo',
@@ -37,56 +45,34 @@ export class DashboardComponent {
     },
     {
       key: 'status',
-      header: 'Status'
+      header: 'Status',
+      type: 'status'
     }
   ]
 
-  dataSource: PageResult<TableDataDocuments> = {
-    data: [
-      {
-        idMotorista: 'asdlkajd-23adaskj-32123',
-        prefixo: 'A502',
-        nomeMotorista: 'Pedrinho matador',
-        telefoneMotorista: '(13) 99999-9999',
-        tipoMotorista: 'Associado',
-        dataVencimento: new Date('06-03-2024'),
-        status: 'Vencido'
-      },
-      {
-        idMotorista: 'asdlkajd-23adaskj-32123',
-        prefixo: 'A502',
-        nomeMotorista: 'Pedrinho matador',
-        telefoneMotorista: '(13) 99999-9999',
-        tipoMotorista: 'Associado',
-        dataVencimento: new Date('06-03-2024'),
-        status: 'Vencido'
-      },
-      {
-        idMotorista: 'asdlkajd-23adaskj-32123',
-        prefixo: 'A502',
-        nomeMotorista: 'Pedrinho matador',
-        telefoneMotorista: '(13) 99999-9999',
-        tipoMotorista: 'Associado',
-        dataVencimento: new Date('06-03-2024'),
-        status: 'Vencido'
-      }
-    ],
+  getAllDocuments() {
+    // this.dashboardService.getAllDocuments().subscribe({
+    //   next: result => {
+    //     this.dataSource = result;
+    //   },
+    //   error: err => {
+    //     console.error(err);
+    //   }
+    // })
+
+    this.dataSource = this.dashboardService.getAll();
   }
 
+  dataSource!: PageResult<TableDataDocuments>
 
    actions: TableAction[] = [
-    //  {
-    //    icon: 'add',
-    //    action: 'create',
-    //    tooltip: 'Cadastrar'
-    //  },
-    {
-      icon: 'Pencil',
-      action: 'edit',
-      tooltip: 'Editar'
-    },
     // {
-    //   icon: 'delete',
+    //   icon: 'Pencil',
+    //   action: 'edit',
+    //   tooltip: 'Editar'
+    // },
+    // {
+    //   icon: 'Trash2',
     //   action: 'delete',
     //   tooltip: 'Excluir'
     // },
@@ -94,20 +80,20 @@ export class DashboardComponent {
       icon: 'Eye',
       action: 'view',
       tooltip: 'Visualizar'
-    }
+    },
     // {
-    //   icon: 'key',
-    //   action: 'key',
+    //   icon: 'KeyRound',
+    //   action: 'view',
     //   tooltip: 'Alterar senha'
     // },
     // {
-    //   icon: 'print',
-    //   action: 'print',
+    //   icon: 'Printer',
+    //   action: 'view',
     //   tooltip: 'Imprimir'
     // },
     // {
-    //   icon: 'unlock',
-    //   action: 'unlock',
+    //   icon: 'LockOpen',
+    //   action: 'view',
     //   tooltip: 'Remover banimento'
     // },
 

@@ -24,6 +24,15 @@
     color: var(--palette-gray-500) !important;
     display: inline-block !important;
 
+    .red {
+        color: var(--primary-red) ;
+        
+    }
+
+    .key {
+        color: var(--primary-yellow);
+    }
+
     &:hover{
         background-color: var(--palette-gray-100) !important;
         color: var(--palette-gray-800) !important;
