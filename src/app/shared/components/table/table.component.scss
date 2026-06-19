@@ -4,31 +4,61 @@
 
 }
 
+.paginadora-container {
+    width: 100%;
+    display: flex;
+}
+
+::ng-deep .mat-mdc-paginator {
+  background-color: transparent !important;
+  font-size: var(--font-size-xs) !important;
+}
+
 ::ng-deep .mat-mdc-header-row {
     color: var(--palette-gray-700) !important;
     background-color: var(--palette-cyan-50) !important;
     padding: 0px !important;
     th {
-        text-transform: uppercase;
         font-size: var(--font-size-xs) !important;
+        text-transform: uppercase;
         font-weight: 600;
-
+        
     }
-} 
+    
+}
+
+::ng-deep .mat-mdc-paginator-icon {
+    fill: var(--palette-gray-400) !important;
+}
+
+::ng-deep .mat-mdc-paginator {
+    color: var(--primary-gray);
+}
+
+::ng-deep .mat-mdc-select-panel{
+    background-color: var(--palette-white) !important;
+}
 
 //celulas
 ::ng-deep .mat-mdc-row {
     background-color: var(--palette-white) !important;
     color: var(--palette-gray-700) !important;
+        font-size: var(--font-size-sm) !important;
+
+
+}
+::ng-deep .mat-mdc-row:hover {
+  background-color: var(--palette-gray-100) !important;
 }
 //bordas das celulas
 ::ng-deep .mat-mdc-cell {
     border-bottom: 1px solid var(--palette-gray-200) !important;
-
+    
 }
 
 //bordas dos titulos
 ::ng-deep .mat-mdc-header-cell {
+  border-top: 1px solid var(--palette-gray-200) !important;   
   border-bottom: 1px solid var(--palette-gray-200) !important;
 }
 

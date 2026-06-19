@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { StatusDocumento } from '../../enums/StatusDocumentoEnum';
+import { StatusEnum } from '../../enums/StatusEnum';
 
 @Component({
   selector: 'app-badge',
@@ -8,17 +8,22 @@ import { StatusDocumento } from '../../enums/StatusDocumentoEnum';
   styleUrl: './badge.component.scss',
 })
 export class BadgeComponent {
-  status = input.required<StatusDocumento>()
+  status = input.required<StatusEnum>()
   diasFaltantes = input<number>();
 
-  protected readonly StatusDocumento = StatusDocumento;
-
+  protected readonly StatusEnum = StatusEnum;
 
   getLabel() : string {
-    if(this.status() === StatusDocumento.Critico) {
+    if(this.status() === StatusEnum.Critico) {
       return 'Vencido'
-    } else {
+    } 
+    else if(this.status() && this.diasFaltantes()) {
       return this.diasFaltantes() + 'd restantes'
+    } 
+    else {
+      let status = this.status() === StatusEnum.Aprovado ? 'Aprovado' : 
+                   this.status() === StatusEnum.Reprovado ? 'Reprovado' : 'Pendente';
+                   return status;
     }
   }
  }

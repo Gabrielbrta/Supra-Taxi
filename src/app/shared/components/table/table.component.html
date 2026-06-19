@@ -1,7 +1,7 @@
 <div class="container-table">
-  @if(dataSource().data.length > 0 ) {
+  @if(dataSource().data?.length ) {
     
-    <table mat-table [dataSource]="dataSource().data">
+    <table mat-table [dataSource]="dataSource().data ?? []">
       
       @for(col of displayedColumns(); track col.key) {
         <!-- Position Column -->
@@ -12,10 +12,16 @@
               {{row[col.key] | date: 'dd/MM/yyyy'}} 
             }
             @else if(col.type === 'status') {
-              <app-badge
-              [status]="row.status"
-              [diasFaltantes]="32"
-              ></app-badge>
+              @if(row.diasFaltantes) {
+                <app-badge
+                [status]="row.status"
+                [diasFaltantes]="row.diasFaltantes"
+                ></app-badge>
+              } @else {
+                <app-badge
+                [status]="row.status || row.situacao"
+                ></app-badge>
+              }
             } 
             @else {
               {{row[col.key]}}
@@ -52,14 +58,17 @@
     </table>
   
     @if(dataSource().paginadora) {
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                      [pageIndex]="dataSource().paginadora!.pageNumber - 1"
-                      [pageSize]="dataSource().paginadora!.pageSize"
-                      [length]="dataSource().paginadora!.totalCount"
-                      (page)="pageChange.emit($event)"
-                     showFirstLastButtons
-                     aria-label="Select page of periodic elements">
-      </mat-paginator>
+      <div class="paginadora-container">
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                        [pageIndex]="dataSource().paginadora!.pageNumber - 1"
+                        [pageSize]="dataSource().paginadora!.pageSize"
+                        [length]="dataSource().paginadora!.totalCount"
+                        (page)="pageChange.emit($event)"
+                       showFirstLastButtons
+                       aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
     }
   }
 </div>

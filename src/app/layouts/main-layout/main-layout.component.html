@@ -1,6 +1,6 @@
 <main class="wrapper">
     <app-sidebar class="menu-side"
-    [class.close]="isClose"
+    [class.close]="isClose ?? false"
     (toggleSidebar)="onToggleClose($event)" 
     ></app-sidebar>
     <div class="content">

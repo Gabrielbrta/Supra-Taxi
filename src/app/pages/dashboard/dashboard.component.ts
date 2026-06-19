@@ -4,8 +4,9 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { ColumnType, PageResult, TableAction } from '../../shared/models/table/Table';
 import { TableDataDocuments } from '../../shared/models/dashboard/TableDataDocuments';
 import { TableComponent } from '../../shared/components/table/table.component';
-import { StatusDocumento } from '../../shared/enums/StatusDocumentoEnum';
 import { DashboardService } from '../../core/services/dashboard.service';
+import { InfoCardsData } from '../../shared/models/dashboard/InfoCardsData';
+import { DashboardVistoriaData } from '../../shared/models/dashboard/DashboardVistoriasQuery';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,12 +17,17 @@ import { DashboardService } from '../../core/services/dashboard.service';
 export class DashboardComponent implements OnInit{
 
   private readonly dashboardService = inject(DashboardService);
+  dataSourceDocuments!: PageResult<TableDataDocuments>;
+  dataSourceVistorias!: PageResult<DashboardVistoriaData>;
+  infoCards!: InfoCardsData;
 
   ngOnInit() {
+    this.getInfoCards();
     this.getAllDocuments();
+    this.getAllVistorias();
   }
 
-  tableColumns: ColumnType<TableDataDocuments>[] =  [
+  tableDocumentColumns: ColumnType<TableDataDocuments>[] =  [
     {
       key: 'prefixo',
       header: 'Prefixo',
@@ -49,6 +55,30 @@ export class DashboardComponent implements OnInit{
       type: 'status'
     }
   ]
+  tableVistoriasColumns: ColumnType<DashboardVistoriaData>[] =  [
+    {
+      key: 'prefixo',
+      header: 'Prefixo',
+    },
+    {
+      key: 'veiculo',
+      header: 'Veículo'
+    },
+    {
+      key: 'dataVistoria',
+      header: 'Data',
+      type: 'date'
+    },
+    {
+      key: 'nomeDiretor',
+      header: 'Diretor'
+    },
+    {
+      key: 'status',
+      header: 'Situação',
+      type: 'status'
+    }
+  ]
 
   getAllDocuments() {
     // this.dashboardService.getAllDocuments().subscribe({
@@ -60,10 +90,34 @@ export class DashboardComponent implements OnInit{
     //   }
     // })
 
-    this.dataSource = this.dashboardService.getAll();
+    this.dataSourceDocuments = this.dashboardService.getAllDocuments();
+  }
+  getAllVistorias() {
+    // this.dashboardService.getAllVistorias().subscribe({
+    //   next: result => {
+    //     this.dataSource = result;
+    //   },
+    //   error: err => {
+    //     console.error(err);
+    //   }
+    // })
+
+    this.dataSourceVistorias = this.dashboardService.getAllVistorias();
+  }
+  getInfoCards() {
+    // this.dashboardService.getInfoCards().subscribe({
+    //   next: result => {
+    //     this.infoCards = result;
+    //   },
+    //   error: err => {
+    //     console.error(err);
+    //   }
+    // })
+
+    this.infoCards = this.dashboardService.getInfoCards();
   }
 
-  dataSource!: PageResult<TableDataDocuments>
+
 
    actions: TableAction[] = [
     // {

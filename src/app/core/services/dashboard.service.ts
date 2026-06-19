@@ -4,29 +4,52 @@ import { PageResult } from '../../shared/models/table/Table';
 import { TableDataDocuments } from '../../shared/models/dashboard/TableDataDocuments';
 import { MOCK_DOCUMENTS } from '../../shared/models/mock-documents';
 import { HttpClient } from '@angular/common/http';
+import { InfoCardsData } from '../../shared/models/dashboard/InfoCardsData';
+import { INFO_CARDS } from '../../shared/models/mock-info-cards';
+import { DASHBOARD_VISTORIAS } from '../../shared/models/mock-dashboard-vistorias';
+import { DashboardVistoriaData } from '../../shared/models/dashboard/DashboardVistoriasQuery';
 
 @Service()
 export class DashboardService {
     private readonly http = inject(HttpClient);
     private readonly STORAGE_KEY = 'dashboards';
+    private readonly STORAGE_KEY_INFO = 'dashboard-info-cards';
+    private readonly STORAGE_KEY_VISTORIAS = 'dashboard-vistorias';
 
     constructor() {
         if(!localStorage.getItem(this.STORAGE_KEY)) {
-            this.save(MOCK_DOCUMENTS);
+            this.save(MOCK_DOCUMENTS, this.STORAGE_KEY);
+        }
+        if(!localStorage.getItem(this.STORAGE_KEY_INFO)) {
+            this.save(INFO_CARDS, this.STORAGE_KEY_INFO);
+        }
+        if(!localStorage.getItem(this.STORAGE_KEY_VISTORIAS)) {
+            this.save(DASHBOARD_VISTORIAS, this.STORAGE_KEY_VISTORIAS);
         }
     }
 
-    save(data: PageResult<TableDataDocuments>) {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(MOCK_DOCUMENTS))
+    save(data: any, key: any) {
+
+        localStorage.setItem(key, JSON.stringify(data))
     }
 
-    // getAllDocuments(): Observable<PageResult<TableDataDocuments>> {
+    // getAllDashDocuments(): Observable<PageResult<TableDataDocuments>> {
     //     return this.http.get<PageResult<TableDataDocuments>>(
-    //         'api/v1/allDocuments'
+    //         'api/v1/dashboard/documents'
+    //     );
+    // }
+    // getAllDashInfoCards(): Observable<InfoCardsData> {
+    //     return this.http.get<InfoCardsData>(
+    //         'api/v1/dashboard/info-card'
+    //     );
+    // }
+    // getAllDashVistorias(): Observable<PageResult<DashboardVistoriaData>> {
+    //     return this.http.get<DashboardVistoriaData>(
+    //         'api/v1/dashboard/vistorias'
     //     );
     // }
 
-    getAll(): PageResult<TableDataDocuments> {
+    getAllDocuments(): PageResult<TableDataDocuments> {
         const data = localStorage.getItem(this.STORAGE_KEY);
         if(!data) {
             return {
@@ -35,4 +58,23 @@ export class DashboardService {
         }
         return JSON.parse(data);
     }
+    getAllVistorias(): PageResult<DashboardVistoriaData> {
+        const data = localStorage.getItem(this.STORAGE_KEY_VISTORIAS);
+        if(!data) {
+            return {
+                data: [],
+            }
+        }
+        return JSON.parse(data);
+    }
+    getInfoCards(): InfoCardsData {
+        const data = localStorage.getItem(this.STORAGE_KEY_INFO);
+        if(!data) {
+            return {
+                data: [],
+            }
+        }
+        return JSON.parse(data);
+    }
+
 }

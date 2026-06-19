@@ -11,10 +11,23 @@ import { MenuItem } from '../../models/menu/menuList';
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-  toggleSidebar = output<boolean>();
+  private readonly startMenuValue = false;
 
+  constructor() {
+    if(!localStorage.getItem('menu')) {
+      localStorage.setItem('menu', JSON.stringify(this.startMenuValue));
+    } else {
+      this.isClose = JSON.parse(localStorage.getItem('menu')!);
+    }
+  }
+  toggleSidebar = output<boolean>();
   isClose: boolean = false;
   icons = Icons;
+
+  changeMenuValue() {
+    localStorage.setItem('menu', JSON.stringify(this.isClose))
+  }
+
   menuItems: MenuItem[] = [
     {
       name: 'Operação',
@@ -84,6 +97,8 @@ export class SidebarComponent {
   
   toggleClose() {
     this.isClose = !this.isClose;
+    this.changeMenuValue();
+    console.log(JSON.parse(localStorage.getItem('menu')!))
 
     this.toggleSidebar.emit(this.isClose);
   }

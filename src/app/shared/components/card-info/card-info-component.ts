@@ -16,9 +16,9 @@ export class CardInfoComponent {
   typeIconStatus = input<keyof cardStatusType>();
   icon = input<keyof typeof Icons>();
   linkIcon = input<keyof typeof Icons>()
-  title = input<string>();
+  title = input<string | number>();
   description = input<string>();
-  stats = input<string>('0');
+  stats = input<string | number>('0');
   statsIcon = input<keyof typeof Icons>();
   InteractiveIcon = input<keyof typeof Icons>();
 }

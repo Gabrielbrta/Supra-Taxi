@@ -1,4 +1,4 @@
-import { StatusDocumento } from "../../enums/StatusDocumentoEnum";
+import { StatusEnum } from "../../enums/StatusEnum";
 
 export interface TableDataDocuments {
     idMotorista: string | number;
@@ -7,5 +7,6 @@ export interface TableDataDocuments {
     telefoneMotorista: string;
     tipoMotorista: string;
     dataVencimento: Date;
-    status: StatusDocumento;
+    diasFaltantes: string | number,
+    status: StatusEnum;
 }

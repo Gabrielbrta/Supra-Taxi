@@ -1,61 +1,47 @@
 <div class="container">
     <div class="container-cards-info">
-        <app-card-info
-        [title]="'1.284'"
-        [description]="'Motoristas Ativos'"
-        [icon]="'Car'"
-        [stats]="'1200'"
-        [typeIconStatus]="'data'"
-        [statsIcon]="'ClipboardCheck'"
-        >
-        </app-card-info>
-        <app-card-info
-        [title]="'1.284'"
-        [description]="'Associados Ativos'"
-        [icon]="'Users'"
-        [stats]="'12'"
-        [typeIconStatus]="'data'"
-        [statsIcon]="'ClipboardCheck'"
-        >
-        </app-card-info>
-        <app-card-info
-        [title]="'1.284'"
-        [description]="'Vistorias Registradas'"
-        [icon]="'ClipboardCheck'"
-        [stats]="'12'"
-        [typeIconStatus]="'approved'"
-        [statsIcon]="'ClipboardCheck'"
-        >
-        </app-card-info>
-        <app-card-info
-        [title]="'1.284'"
-        [description]="'Documentos Pendentes'"
-        [icon]="'TriangleAlert'"
-        [stats]="'12'"
-        [typeIconStatus]="'denied'"
-        [statsIcon]="'ClipboardCheck'"
-        >
-        </app-card-info>
+        @if(infoCards.data.length > 0) {
+            @for(infoCard of infoCards.data; track infoCard.description) {
+                
+                <app-card-info
+                [title]="infoCard.title"
+                [description]="infoCard.description"
+                [icon]="infoCard.icon"
+                [stats]="infoCard.stats ?? ''"
+                [typeIconStatus]="infoCard.typeIconStatus"
+                [statsIcon]="infoCard.statsIcon"
+                >
+                </app-card-info>
+            }
+        }
     </div>
 
     <div class="container-table">
-        <app-card>
-            <app-table
-            [displayedColumns]="tableColumns"
-            [dataSource]="dataSource"
-            [actions]="actions"
-            (actionClick)="actionClick($event)"
+        @if(dataSourceDocuments.data?.length) {
+            <app-card
+            [title]="'Documentos próximos do vencimento'">
+                <app-table
+                [displayedColumns]="tableDocumentColumns"
+                [dataSource]="dataSourceDocuments"
+                [actions]="actions"
+                (actionClick)="actionClick($event)"
+                >
+                </app-table>
+            </app-card>
+        }
+        @if(dataSourceVistorias.data?.length) {
+            <app-card
+            [title]="'Vistorias recentes'"
+            [description]="'Vistorias da última semana'"
             >
-            </app-table>
-        </app-card>
-        <app-card>
-            <app-table
-            [displayedColumns]="tableColumns"
-            [dataSource]="dataSource"
-            (actionClick)="actionClick($event)"
-            >
-            </app-table>
-        </app-card>
+                <app-table
+                [displayedColumns]="tableVistoriasColumns"
+                [dataSource]="dataSourceVistorias"
+                (actionClick)="actionClick($event)"
+                >
+                </app-table>
+            </app-card>
+        }
     </div>
 </div>
 

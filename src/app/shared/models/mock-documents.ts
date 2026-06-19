@@ -1,4 +1,4 @@
-import { StatusDocumento } from "../enums/StatusDocumentoEnum";
+import { StatusEnum } from "../enums/StatusEnum";
 import { TableDataDocuments } from "./dashboard/TableDataDocuments";
 import { PageResult } from "./table/Table";
 
@@ -12,7 +12,8 @@ export const MOCK_DOCUMENTS: PageResult<TableDataDocuments> = {
         telefoneMotorista: '(13) 99999-9999',
         tipoMotorista: 'Associado',
         dataVencimento: new Date('06-03-2024'),
-        status: StatusDocumento.Critico
+        diasFaltantes: '0',
+        status: StatusEnum.Critico
       },
       {
         idMotorista: Date.now() + 1,
@@ -21,7 +22,8 @@ export const MOCK_DOCUMENTS: PageResult<TableDataDocuments> = {
         telefoneMotorista: '(13) 99999-9999',
         tipoMotorista: 'Associado',
         dataVencimento: new Date('06-03-2024'),
-        status: StatusDocumento.Aviso
+        diasFaltantes: '15',
+        status: StatusEnum.Pendente
       },
       {
         idMotorista: Date.now() + 2,
@@ -30,7 +32,8 @@ export const MOCK_DOCUMENTS: PageResult<TableDataDocuments> = {
         telefoneMotorista: '(13) 99999-9999',
         tipoMotorista: 'Associado',
         dataVencimento: new Date('06-03-2024'),
-        status: StatusDocumento.VencimentoProximo
+        diasFaltantes: '5',
+        status: StatusEnum.Reprovado
       },
       {
         idMotorista: Date.now() + 3,
@@ -39,14 +42,17 @@ export const MOCK_DOCUMENTS: PageResult<TableDataDocuments> = {
         telefoneMotorista: '(13) 99999-9999',
         tipoMotorista: 'Associado',
         dataVencimento: new Date('06-03-2024'),
-        status: StatusDocumento.Regular
+        diasFaltantes: '45',
+        status: StatusEnum.Aprovado
       }
     ],
 
     paginadora: {
-        pageNumber: 1,
-        pageSize: 10,
-        totalPages: 1,
-        totalCount: 4
+      pageSize: 5,
+      pageNumber: 3,
+      totalPages: 5,
+      totalCount: 20,
+      hasNextPage: true,
+      hasPreviousPage: false
     }
 }
