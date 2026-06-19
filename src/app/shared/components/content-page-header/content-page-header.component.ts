@@ -21,12 +21,12 @@ click($event: MouseEvent) {
     private router: Router,
   ){}
   icons = Icons;
-  title = signal('');
-  description = signal('');
-  buttonLabel = signal('');
-  routerLink = signal('');
+  title = signal<string>('');
+  description = signal<string>('');
+  buttonLabel = signal<string>('');
+  routerLink = signal<string>('');
   icon = signal<keyof typeof Icons>('Plus');
-  exportable = signal(false);
+  exportable = signal<boolean>(false);
 
   ngOnInit() {
     this.updatePageInfo();

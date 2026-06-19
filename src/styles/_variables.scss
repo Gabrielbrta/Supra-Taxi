@@ -45,7 +45,7 @@ $palette-blue-900: #1e1b4b;
 // --- Verde (success) ---
 $palette-green-50:  #ecfdf5;
 $palette-green-100: #d1fae5;
-$palette-green-300: #6ee7b7;
+$palette-green-300: #9df8d4;
 $palette-green-500: #10b981;
 $palette-green-600: #059669;
 $palette-green-700: #047857;
@@ -53,7 +53,7 @@ $palette-green-900: #064e3b;
 // --- Amarelo / Âmbar (warning) ---
 $palette-amber-50:  #fffbeb;
 $palette-amber-100: #fef3c7;
-$palette-amber-300: #fcd34d;
+$palette-amber-300: #fae7ab;
 $palette-amber-500: #f59e0b;
 $palette-amber-600: #d97706;
 $palette-amber-700: #b45309;
@@ -61,7 +61,7 @@ $palette-amber-900: #78350f;
 // --- Vermelho (danger / error) ---
 $palette-red-50:  #fef2f2;
 $palette-red-100: #fee2e2;
-$palette-red-300: #fca5a5;
+$palette-red-300: #fad2d2;
 $palette-red-500: #ef4444;
 $palette-red-600: #dc2626;
 $palette-red-700: #b91c1c;
@@ -124,7 +124,7 @@ $color-info-foreground:       $palette-white;
 $color-info-container:        $palette-cyan-50;
 $color-on-info-container:     $palette-cyan-700;
 // --- Bordas / Outlines / Inputs ---
-$color-border:                #e2e6ec;
+$color-border:                #d9dde4;
 $color-divider:               #eef0f4;
 $color-input-background:      $palette-white;
 $color-input-border:          #d6dbe2;
@@ -195,16 +195,16 @@ $font-weight-medium:   500;
 $font-weight-semibold: 600;
 $font-weight-bold:     700;
 // --- Tamanhos (escala) ---
-$font-size-xs:   12px;
-$font-size-sm:   13px;
-$font-size-md:   14px;  // base do ERP
-$font-size-lg:   16px;
-$font-size-xl:   18px;
-$font-size-2xl:  20px;
-$font-size-3xl:  24px;
-$font-size-4xl:  28px;
-$font-size-5xl:  32px;
-$font-size-6xl:  40px;
+$font-size-xs:   .75rem;
+$font-size-sm:   .875rem;
+$font-size-md:   1rem;  // base do ERP
+$font-size-lg:   1.125rem;
+$font-size-xl:   1.25rem;
+$font-size-2xl:  1.5rem;
+$font-size-3xl:   1.875rem;
+$font-size-4xl:  2.25rem;
+$font-size-5xl:  3.25rem;
+$font-size-6xl:  4.5rem;
 // --- Line heights ---
 $line-height-tight:   1.2;
 $line-height-snug:    1.35;

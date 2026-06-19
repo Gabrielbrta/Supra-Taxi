@@ -1,1 +1,47 @@
-<p>dashboard works!</p>
+<div class="container">
+    <div class="container-cards-info">
+        @if(infoCards.data.length > 0) {
+            @for(infoCard of infoCards.data; track infoCard.description) {
+                
+                <app-card-info
+                [title]="infoCard.title"
+                [description]="infoCard.description"
+                [icon]="infoCard.icon"
+                [stats]="infoCard.stats ?? ''"
+                [typeIconStatus]="infoCard.typeIconStatus"
+                [statsIcon]="infoCard.statsIcon"
+                >
+                </app-card-info>
+            }
+        }
+    </div>
+
+    <div class="container-table">
+        @if(dataSourceDocuments.data?.length) {
+            <app-card
+            [title]="'Documentos próximos do vencimento'">
+                <app-table
+                [displayedColumns]="tableDocumentColumns"
+                [dataSource]="dataSourceDocuments"
+                [actions]="actions"
+                (actionClick)="actionClick($event)"
+                >
+                </app-table>
+            </app-card>
+        }
+        @if(dataSourceVistorias.data?.length) {
+            <app-card
+            [title]="'Vistorias recentes'"
+            [description]="'Vistorias da última semana'"
+            >
+                <app-table
+                [displayedColumns]="tableVistoriasColumns"
+                [dataSource]="dataSourceVistorias"
+                (actionClick)="actionClick($event)"
+                >
+                </app-table>
+            </app-card>
+        }
+    </div>
+</div>
+

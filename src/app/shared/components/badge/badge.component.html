@@ -1,0 +1,8 @@
+<div class="badge-container"
+     [class.critical]="status() === StatusEnum.Critico"   
+     [class.warning]="status() === StatusEnum.Reprovado"   
+     [class.alert]="status() === StatusEnum.Pendente"   
+     [class.sucess]="status() === StatusEnum.Aprovado"   
+>
+    <span>{{getLabel()}}</span>
+</div>

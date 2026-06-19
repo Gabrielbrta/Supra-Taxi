@@ -3,7 +3,8 @@
     align-items: center;    
     gap: 5px;
     font-weight: bold;
-    svg {
+    justify-content: center;
+    lucide-icon {
         max-width: 20px !important;
     }
 }
@@ -15,6 +16,26 @@
     &:hover {
         background-color: var(--primary-blue-600) !important;
         transition: all 0.2s ease !important;
+    }
+}
+
+// botão da tabela
+.primary-color-button--text {
+    color: var(--palette-gray-500) !important;
+    display: inline-block !important;
+
+    .red {
+        color: var(--primary-red) ;
+        
+    }
+
+    .key {
+        color: var(--primary-yellow);
+    }
+
+    &:hover{
+        background-color: var(--palette-gray-100) !important;
+        color: var(--palette-gray-800) !important;
     }
 }
 
@@ -34,4 +55,13 @@
 }
 ::ng-deep .mat-mdc-outlined-button:hover {
     transition: all 0.3s ease-in-out !important;
+}
+// botão da tabela
+
+::ng-deep .mat-mdc-button  {
+    
+    svg {
+        max-width: 18px !important;
+    }
+
 }

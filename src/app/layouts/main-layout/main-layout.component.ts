@@ -13,7 +13,12 @@ import { ContentPageHeaderComponent } from '../../shared/components/content-page
 })
 export class MainLayoutComponent {
 
-  isClose: boolean = false;
+  isClose!: boolean;
+  constructor () {
+    if(localStorage.getItem('menu')) {
+      this.isClose = JSON.parse(localStorage.getItem('menu')!);
+    }
+  }
   icons = Icons;
 
   onToggleClose(data: boolean) {

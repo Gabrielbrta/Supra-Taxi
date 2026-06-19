@@ -28,7 +28,8 @@ import {
   ChevronRight, // Maior que
   ChevronLeft, // Menor que
   ChevronDown, // seta pra baixo 
-  ArrowDownToLine  // Download
+  ArrowDownToLine,  // Download
+  Printer   // imprimir
 } from 'lucide-angular';
 
 export const Icons = {
@@ -61,5 +62,6 @@ export const Icons = {
   ChevronLeft,
   ChevronDown,
   Menu,
-  ArrowDownToLine 
+  ArrowDownToLine,
+  Printer 
 };
