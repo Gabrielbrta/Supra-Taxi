@@ -54,5 +54,12 @@ class.sucess
             background-color: var(--primary-green-600);
         }
     }
+    &.data {
+        background-color: var(--primary-blue-200);
+        color: var(--primary-blue-900);
+        &::before {
+            background-color: var(--primary-blue-600);
+        }
+    }
 
 }

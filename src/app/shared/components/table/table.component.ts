@@ -7,10 +7,14 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from '../button/button.component';
 import { BadgeComponent } from '../badge/badge.component';
+import { ChangeDataToBrasilPipe } from '../../pipes/text/change-data-to-brasil-pipe';
+import { ShortNamePipe } from '../../pipes/text/short-name-pipe';
+import { ShortenerLongTextPipe } from '../../pipes/text/shortener-long-text-pipe';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-table',
-  imports: [MatTableModule, MatPaginatorModule, DatePipe, MatButtonModule, MatIconModule, ButtonComponent, BadgeComponent],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatIconModule, ButtonComponent, BadgeComponent, ChangeDataToBrasilPipe, ShortNamePipe, ShortenerLongTextPipe, MatTooltipModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })

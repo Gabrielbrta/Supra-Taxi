@@ -2,7 +2,8 @@
      [class.critical]="status() === StatusEnum.Critico"   
      [class.warning]="status() === StatusEnum.Reprovado"   
      [class.alert]="status() === StatusEnum.Pendente"   
-     [class.sucess]="status() === StatusEnum.Aprovado"   
+     [class.sucess]="status() === StatusEnum.Aprovado || status() === tipoMotoristaEnum.Associado"   
+     [class.data]="status() === tipoMotoristaEnum.Motorista"   
 >
     <span>{{getLabel()}}</span>
 </div>

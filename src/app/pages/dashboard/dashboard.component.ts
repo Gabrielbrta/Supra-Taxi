@@ -7,10 +7,14 @@ import { TableComponent } from '../../shared/components/table/table.component';
 import { DashboardService } from '../../core/services/dashboard.service';
 import { InfoCardsData } from '../../shared/models/dashboard/InfoCardsData';
 import { DashboardVistoriaData } from '../../shared/models/dashboard/DashboardVistoriasQuery';
+import { ProfileImageComponent } from "../../shared/components/profile-image/profile-image.component";
+import { ListProfileComponent } from "../../shared/components/list-profile/list-profile.component";
+import { DashboardRegistersQuery } from '../../shared/models/dashboard/DashboardRegistersQuery';
+import { TipoMotoristaEnum } from '../../shared/enums/TipoMotoristaEnum';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardInfoComponent, CardComponent, TableComponent],
+  imports: [CardInfoComponent, CardComponent, TableComponent, ListProfileComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -34,7 +38,8 @@ export class DashboardComponent implements OnInit{
     },
     {
       key: 'nomeMotorista',
-      header: 'Nome'
+      header: 'Nome',
+      type: 'name'
     },
     {
       key: 'telefoneMotorista',
@@ -71,7 +76,8 @@ export class DashboardComponent implements OnInit{
     },
     {
       key: 'nomeDiretor',
-      header: 'Diretor'
+      header: 'Diretor',
+      type: 'name',
     },
     {
       key: 'status',
@@ -79,6 +85,29 @@ export class DashboardComponent implements OnInit{
       type: 'status'
     }
   ]
+
+  dataSourceRegister: PageResult<DashboardRegistersQuery> = {
+    data: [
+      {
+        id: 'asdlkjas-dalskdjas-oiepqowie',
+        name: 'Gabriel Correa Amparo Pedroso',
+        tipoMotorista: TipoMotoristaEnum.Motorista,
+        dataCadastro: new Date('08-05-2010')
+      },
+      {
+        id: 'asdlkjas-dalskdjas-oiepqasde',
+        name: 'Mariana Santos Americo',
+        tipoMotorista: TipoMotoristaEnum.Associado,
+        dataCadastro: new Date('06-03-2005')
+      },
+      {
+        id: 'asdlkjas-asdadwqwe-oiepqowie',
+        name: 'Pedrinho Pai De Pet',
+        tipoMotorista: TipoMotoristaEnum.Motorista,
+        dataCadastro: new Date('08-11-2007')
+      }
+    ] 
+  }
 
   getAllDocuments() {
     // this.dashboardService.getAllDocuments().subscribe({
