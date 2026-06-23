@@ -17,7 +17,7 @@ interface paginadora {
 export interface ColumnType<T> {
     key: keyof T;
     header: string;
-    type?: 'text' | 'date' | 'status' | 'name';
+    type?: 'text' | 'date' | 'status' | 'name' | 'cpf' | 'cnh' | 'tel';
 }
 
 export interface TableAction {

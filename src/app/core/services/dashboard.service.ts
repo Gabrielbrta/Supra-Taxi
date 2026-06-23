@@ -8,6 +8,8 @@ import { InfoCardsData } from '../../shared/models/dashboard/InfoCardsData';
 import { INFO_CARDS } from '../../shared/models/mock-info-cards';
 import { DASHBOARD_VISTORIAS } from '../../shared/models/mock-dashboard-vistorias';
 import { DashboardVistoriaData } from '../../shared/models/dashboard/DashboardVistoriasQuery';
+import { DASHBOARD_REGISTERS } from '../../shared/models/Mock-dashboard-registers';
+import { DashboardRegistersQuery } from '../../shared/models/dashboard/DashboardRegistersQuery';
 
 @Service()
 export class DashboardService {
@@ -15,6 +17,7 @@ export class DashboardService {
     private readonly STORAGE_KEY = 'dashboards';
     private readonly STORAGE_KEY_INFO = 'dashboard-info-cards';
     private readonly STORAGE_KEY_VISTORIAS = 'dashboard-vistorias';
+    private readonly STORAGE_KEY_REGISTERS = 'dashboard-registers';
 
     constructor() {
         if(!localStorage.getItem(this.STORAGE_KEY)) {
@@ -25,6 +28,9 @@ export class DashboardService {
         }
         if(!localStorage.getItem(this.STORAGE_KEY_VISTORIAS)) {
             this.save(DASHBOARD_VISTORIAS, this.STORAGE_KEY_VISTORIAS);
+        }
+        if(!localStorage.getItem(this.STORAGE_KEY_REGISTERS)) {
+            this.save(DASHBOARD_REGISTERS, this.STORAGE_KEY_REGISTERS);
         }
     }
 
@@ -48,6 +54,11 @@ export class DashboardService {
     //         'api/v1/dashboard/vistorias'
     //     );
     // }
+    // getAllDashRegisters(): Observable<PageResult<DashboardRegistersQuery>> {
+    //     return this.http.get<DashboardRegistersQuery>(
+    //         'api/v1/dashboard/registers'
+    //     );
+    // }
 
     getAllDocuments(): PageResult<TableDataDocuments> {
         const data = localStorage.getItem(this.STORAGE_KEY);
@@ -60,6 +71,15 @@ export class DashboardService {
     }
     getAllVistorias(): PageResult<DashboardVistoriaData> {
         const data = localStorage.getItem(this.STORAGE_KEY_VISTORIAS);
+        if(!data) {
+            return {
+                data: [],
+            }
+        }
+        return JSON.parse(data);
+    }
+    getAllRegisters(): PageResult<DashboardRegistersQuery> {
+        const data = localStorage.getItem(this.STORAGE_KEY_REGISTERS);
         if(!data) {
             return {
                 data: [],

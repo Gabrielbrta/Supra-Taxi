@@ -98,8 +98,6 @@ export class SidebarComponent {
   toggleClose() {
     this.isClose = !this.isClose;
     this.changeMenuValue();
-    console.log(JSON.parse(localStorage.getItem('menu')!))
-
     this.toggleSidebar.emit(this.isClose);
   }
 

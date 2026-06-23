@@ -7,6 +7,9 @@
             }
             <a [routerLink]="item.path"
                 routerLinkActive="active" class="item-menu"
+                [matTooltip]="item.label"
+                [matTooltipDisabled]="!this.closedMenu()"
+                [matTooltipPosition]="'right'"
                 [class.center]="this.closedMenu()"
                 >
                 <lucide-icon class="icon-md" [img]="item.icon"></lucide-icon>

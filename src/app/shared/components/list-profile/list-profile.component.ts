@@ -3,14 +3,14 @@ import { PageResult } from '../../models/table/Table';
 import { DashboardRegistersQuery } from '../../models/dashboard/DashboardRegistersQuery';
 import { BadgeComponent } from '../badge/badge.component';
 import { ProfileImageComponent } from "../profile-image/profile-image.component";
-import { DatePipe } from '@angular/common';
 import { ShortNamePipe } from '../../pipes/text/short-name-pipe';
 import { ChangeDataToBrasilPipe } from '../../pipes/text/change-data-to-brasil-pipe';
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 
 @Component({
   selector: 'app-list-profile',
-  imports: [BadgeComponent, ProfileImageComponent, DatePipe, ShortNamePipe, ChangeDataToBrasilPipe],
+  imports: [BadgeComponent, ProfileImageComponent, ShortNamePipe, ChangeDataToBrasilPipe, MatTooltipModule],
   templateUrl: './list-profile.component.html',
   styleUrl: './list-profile.component.scss',
 })

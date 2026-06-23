@@ -1,6 +1,6 @@
 import { RouterLink, Routes } from '@angular/router';
-import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
-import { MotoristasComponent } from '../../pages/motoristas/motoristas.component';
+import { DashboardComponent } from '../../pages/dashboard/dashboard/dashboard.component';
+import { MotoristasComponent } from '../../pages/motoristas/motoristas/motoristas.component';
 import { AssociadosComponent } from '../../pages/associados/associados.component';
 import { UnidadesComponent } from '../../pages/unidades/unidades.component';
 import { BanidosComponent } from '../../pages/banidos/banidos.component';

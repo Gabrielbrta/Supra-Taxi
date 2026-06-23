@@ -1,16 +1,14 @@
 import { Component, inject, Inject, OnInit } from '@angular/core';
-import { CardInfoComponent } from '../../shared/components/card-info/card-info-component';
-import { CardComponent } from '../../shared/components/card/card.component';
-import { ColumnType, PageResult, TableAction } from '../../shared/models/table/Table';
-import { TableDataDocuments } from '../../shared/models/dashboard/TableDataDocuments';
-import { TableComponent } from '../../shared/components/table/table.component';
-import { DashboardService } from '../../core/services/dashboard.service';
-import { InfoCardsData } from '../../shared/models/dashboard/InfoCardsData';
-import { DashboardVistoriaData } from '../../shared/models/dashboard/DashboardVistoriasQuery';
-import { ProfileImageComponent } from "../../shared/components/profile-image/profile-image.component";
-import { ListProfileComponent } from "../../shared/components/list-profile/list-profile.component";
-import { DashboardRegistersQuery } from '../../shared/models/dashboard/DashboardRegistersQuery';
-import { TipoMotoristaEnum } from '../../shared/enums/TipoMotoristaEnum';
+import { CardInfoComponent } from '../../../shared/components/card-info/card-info-component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { ColumnType, PageResult, TableAction } from '../../../shared/models/table/Table';
+import { TableDataDocuments } from '../../../shared/models/dashboard/TableDataDocuments';
+import { TableComponent } from '../../../shared/components/table/table.component';
+import { DashboardService } from '../../../core/services/dashboard.service';
+import { InfoCardsData } from '../../../shared/models/dashboard/InfoCardsData';
+import { DashboardVistoriaData } from '../../../shared/models/dashboard/DashboardVistoriasQuery';
+import { ListProfileComponent } from "../../../shared/components/list-profile/list-profile.component";
+import { DashboardRegistersQuery } from '../../../shared/models/dashboard/DashboardRegistersQuery';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,11 +21,13 @@ export class DashboardComponent implements OnInit{
   private readonly dashboardService = inject(DashboardService);
   dataSourceDocuments!: PageResult<TableDataDocuments>;
   dataSourceVistorias!: PageResult<DashboardVistoriaData>;
+  dataSourceRegister!: PageResult<DashboardRegistersQuery>;
   infoCards!: InfoCardsData;
 
   ngOnInit() {
     this.getInfoCards();
     this.getAllDocuments();
+    this.getAllRegisters();
     this.getAllVistorias();
   }
 
@@ -86,28 +86,6 @@ export class DashboardComponent implements OnInit{
     }
   ]
 
-  dataSourceRegister: PageResult<DashboardRegistersQuery> = {
-    data: [
-      {
-        id: 'asdlkjas-dalskdjas-oiepqowie',
-        name: 'Gabriel Correa Amparo Pedroso',
-        tipoMotorista: TipoMotoristaEnum.Motorista,
-        dataCadastro: new Date('08-05-2010')
-      },
-      {
-        id: 'asdlkjas-dalskdjas-oiepqasde',
-        name: 'Mariana Santos Americo',
-        tipoMotorista: TipoMotoristaEnum.Associado,
-        dataCadastro: new Date('06-03-2005')
-      },
-      {
-        id: 'asdlkjas-asdadwqwe-oiepqowie',
-        name: 'Pedrinho Pai De Pet',
-        tipoMotorista: TipoMotoristaEnum.Motorista,
-        dataCadastro: new Date('08-11-2007')
-      }
-    ] 
-  }
 
   getAllDocuments() {
     // this.dashboardService.getAllDocuments().subscribe({
@@ -132,6 +110,18 @@ export class DashboardComponent implements OnInit{
     // })
 
     this.dataSourceVistorias = this.dashboardService.getAllVistorias();
+  }
+  getAllRegisters() {
+    // this.dashboardService.getAllRegisters().subscribe({
+    //   next: result => {
+    //     this.dataSourceRegister = result;
+    //   },
+    //   error: err => {
+    //     console.error(err);
+    //   }
+    // })
+
+    this.dataSourceRegister = this.dashboardService.getAllRegisters();
   }
   getInfoCards() {
     // this.dashboardService.getInfoCards().subscribe({

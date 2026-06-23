@@ -23,6 +23,20 @@
                 {{row[col.key] | changeDataToBrasil}} 
               </p>
             }
+            @else if(col.type === 'cpf') {
+              <p [matTooltip]="row[col.key] | cpf"
+              [matTooltipPosition]="'above'"
+              >
+                {{row[col.key] | cpf}} 
+              </p>
+            }
+            @else if(col.type === 'tel') {
+              <p [matTooltip]="row[col.key] | telefone"
+              [matTooltipPosition]="'above'"
+              >
+                {{row[col.key] | telefone}} 
+              </p>
+            }
             @else if(col.type === 'status') {
               @if(row.diasFaltantes) {
                 <app-badge

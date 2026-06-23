@@ -26,6 +26,8 @@ export class BadgeComponent {
       let status = this.status() === StatusEnum.Aprovado ? 'Aprovado' : 
                    this.status() === StatusEnum.Reprovado ? 'Reprovado' : 
                    this.status() === StatusEnum.Pendente ? 'Pendente' : 
+                   this.status() === StatusEnum.Ativo ? 'Ativo' : 
+                   this.status() === StatusEnum.Inativo ? 'Inativo' : 
                    this.status() === TipoMotoristaEnum.Motorista ? 'Motorista' : 'Associado'
                    return status
     }

@@ -11,10 +11,12 @@ import { ChangeDataToBrasilPipe } from '../../pipes/text/change-data-to-brasil-p
 import { ShortNamePipe } from '../../pipes/text/short-name-pipe';
 import { ShortenerLongTextPipe } from '../../pipes/text/shortener-long-text-pipe';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CpfPipe } from '../../pipes/text/cpf-pipe';
+import { TelefonePipe } from '../../pipes/text/telefone-pipe';
 
 @Component({
   selector: 'app-table',
-  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatIconModule, ButtonComponent, BadgeComponent, ChangeDataToBrasilPipe, ShortNamePipe, ShortenerLongTextPipe, MatTooltipModule],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatIconModule, ButtonComponent, BadgeComponent, ChangeDataToBrasilPipe, ShortNamePipe, ShortenerLongTextPipe, MatTooltipModule, CpfPipe, TelefonePipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })

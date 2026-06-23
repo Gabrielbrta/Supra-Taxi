@@ -3,6 +3,6 @@ export enum StatusEnum {
     'Reprovado' = 2,
     'Pendente' = 3,
     'Aprovado' = 4,
-    'Associado' = 4,
-    'Motorista' = 5,
+    'Inativo' = 5,
+    'Ativo' = 6,
 }

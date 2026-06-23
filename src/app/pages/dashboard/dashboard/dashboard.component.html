@@ -43,17 +43,19 @@
             </app-card>
         }
     </div>
-    <div class="container-table">
-        <app-card
-        [title]="'Cadastros recentes'"
-        [description]="'Cadastros da última semana'"
-        >
-            <app-list-profile
-            [dataSource]="dataSourceRegister"
+    @if(dataSourceRegister.data?.length) {
+        <div class="container-table">
+            <app-card
+            [title]="'Cadastros recentes'"
+            [description]="'Cadastros da última semana'"
             >
-
-            </app-list-profile>
-        </app-card>
-    </div>
+                <app-list-profile
+                [dataSource]="dataSourceRegister"
+                >
+    
+                </app-list-profile>
+            </app-card>
+        </div>
+    }
 </div>
 

@@ -1,16 +1,8 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px 0;
-    width: 100%;
-
-}
-
 .container-table {
     display: flex;
     align-items: start;
-    min-width: 1000px;
+    min-width: 320px;
+    width: 100%;
     flex-wrap: wrap;
     gap: 20px;
 
@@ -28,8 +20,4 @@ app-card:nth-of-type(odd) {
     display: flex;
     gap: 15px;
 
-}
-
-.container-table {
-    width: 100%;
 }
