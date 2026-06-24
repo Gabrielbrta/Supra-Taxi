@@ -1,0 +1,22 @@
+.profile-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50%;
+    width: 46px;
+    height: 44px;
+    min-height: 28px;
+    
+    &.primary {
+        background-color: var(--primary);
+        color: var(--palette-white);
+        font-weight: bold;
+    }
+
+    &.simple {
+        background-color: var(--palette-gray-200);
+        color: var(--palette-gray-900);
+        font-weight: bold;
+    }
+}

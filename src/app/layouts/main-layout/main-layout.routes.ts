@@ -1,6 +1,6 @@
 import { RouterLink, Routes } from '@angular/router';
-import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
-import { MotoristasComponent } from '../../pages/motoristas/motoristas.component';
+import { DashboardComponent } from '../../pages/dashboard/dashboard/dashboard.component';
+import { MotoristasComponent } from '../../pages/motoristas/motoristas/motoristas.component';
 import { AssociadosComponent } from '../../pages/associados/associados.component';
 import { UnidadesComponent } from '../../pages/unidades/unidades.component';
 import { BanidosComponent } from '../../pages/banidos/banidos.component';
@@ -9,6 +9,7 @@ import { UsuariosComponent } from '../../pages/admin/usuarios/usuarios.component
 import { ConfiguracoesComponent } from '../../pages/configuracoes/configuracoes.component';
 import { VistoriasComponent } from '../../pages/vistorias/vistorias.component';
 import { pageHeaderData } from '../../shared/models/pageHeaderContent/pageHeaderContentModel';
+import { MotoristaCadastroComponent } from '../../pages/motoristas/motorista-cadastro/motorista-cadastro.component';
 
 export const MainLayoutsRoutes: Routes = [
     {
@@ -37,11 +38,15 @@ export const MainLayoutsRoutes: Routes = [
             routerLink: 'motoristas/novo',
             icon: 'Plus',
             exportable: true
-        },
-        children: [{
-            path: 'novo',
-            component: MotoristasComponent,
-        }]
+        }
+    },
+    {
+        path: 'motoristas/novo',
+        component: MotoristaCadastroComponent,
+        title: 'Novo Motorista',
+        data: <pageHeaderData> {
+            description: "Preencha os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+        }
     },
     {
         path: 'associados',

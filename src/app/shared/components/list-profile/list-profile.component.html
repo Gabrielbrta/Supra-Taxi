@@ -1,0 +1,33 @@
+@if(dataSource().data?.length) {
+    <div class="container-list-profile">
+        @for(item of dataSource().data; track item.id) {
+            <div class="item">
+                <div class="container-profile">
+                    <app-profile-image
+                    [name]="item.name"
+                    [typeColor]="'Simple'"
+                    >
+                    </app-profile-image>
+                    <div class="item-content">
+                        <p class="profile-name"
+                        [matTooltipPosition]="'above'"
+                        [matTooltip]="item.name"
+                        >{{ item.name | shortName}}
+                        </p>
+
+                        <div class="item-data">
+                            <p class="item-type">{{item.tipoMotorista}}</p>
+                            <p class="item-date">{{item.dataCadastro | changeDataToBrasil}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="badge-type-profile">
+                    <app-badge
+                    [status]="item.tipoMotorista"
+                    >
+                    </app-badge>
+                </div>
+            </div>
+        }
+    </div>    
+}

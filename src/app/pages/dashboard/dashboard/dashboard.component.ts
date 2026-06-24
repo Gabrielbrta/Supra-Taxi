@@ -1,16 +1,18 @@
 import { Component, inject, Inject, OnInit } from '@angular/core';
-import { CardInfoComponent } from '../../shared/components/card-info/card-info-component';
-import { CardComponent } from '../../shared/components/card/card.component';
-import { ColumnType, PageResult, TableAction } from '../../shared/models/table/Table';
-import { TableDataDocuments } from '../../shared/models/dashboard/TableDataDocuments';
-import { TableComponent } from '../../shared/components/table/table.component';
-import { DashboardService } from '../../core/services/dashboard.service';
-import { InfoCardsData } from '../../shared/models/dashboard/InfoCardsData';
-import { DashboardVistoriaData } from '../../shared/models/dashboard/DashboardVistoriasQuery';
+import { CardInfoComponent } from '../../../shared/components/card-info/card-info-component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { ColumnType, PageResult, TableAction } from '../../../shared/models/table/Table';
+import { TableDataDocuments } from '../../../shared/models/dashboard/TableDataDocuments';
+import { TableComponent } from '../../../shared/components/table/table.component';
+import { DashboardService } from '../../../core/services/dashboard.service';
+import { InfoCardsData } from '../../../shared/models/dashboard/InfoCardsData';
+import { DashboardVistoriaData } from '../../../shared/models/dashboard/DashboardVistoriasQuery';
+import { ListProfileComponent } from "../../../shared/components/list-profile/list-profile.component";
+import { DashboardRegistersQuery } from '../../../shared/models/dashboard/DashboardRegistersQuery';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CardInfoComponent, CardComponent, TableComponent],
+  imports: [CardInfoComponent, CardComponent, TableComponent, ListProfileComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -19,11 +21,13 @@ export class DashboardComponent implements OnInit{
   private readonly dashboardService = inject(DashboardService);
   dataSourceDocuments!: PageResult<TableDataDocuments>;
   dataSourceVistorias!: PageResult<DashboardVistoriaData>;
+  dataSourceRegister!: PageResult<DashboardRegistersQuery>;
   infoCards!: InfoCardsData;
 
   ngOnInit() {
     this.getInfoCards();
     this.getAllDocuments();
+    this.getAllRegisters();
     this.getAllVistorias();
   }
 
@@ -34,7 +38,8 @@ export class DashboardComponent implements OnInit{
     },
     {
       key: 'nomeMotorista',
-      header: 'Nome'
+      header: 'Nome',
+      type: 'name'
     },
     {
       key: 'telefoneMotorista',
@@ -71,7 +76,8 @@ export class DashboardComponent implements OnInit{
     },
     {
       key: 'nomeDiretor',
-      header: 'Diretor'
+      header: 'Diretor',
+      type: 'name',
     },
     {
       key: 'status',
@@ -79,6 +85,7 @@ export class DashboardComponent implements OnInit{
       type: 'status'
     }
   ]
+
 
   getAllDocuments() {
     // this.dashboardService.getAllDocuments().subscribe({
@@ -103,6 +110,18 @@ export class DashboardComponent implements OnInit{
     // })
 
     this.dataSourceVistorias = this.dashboardService.getAllVistorias();
+  }
+  getAllRegisters() {
+    // this.dashboardService.getAllRegisters().subscribe({
+    //   next: result => {
+    //     this.dataSourceRegister = result;
+    //   },
+    //   error: err => {
+    //     console.error(err);
+    //   }
+    // })
+
+    this.dataSourceRegister = this.dashboardService.getAllRegisters();
   }
   getInfoCards() {
     // this.dashboardService.getInfoCards().subscribe({

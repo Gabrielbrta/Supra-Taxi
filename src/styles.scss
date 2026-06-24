@@ -1,5 +1,6 @@
 // Configuração Global de Estilos
 @use 'styles/theme'; // Importa seu novo sistema de temas M3
+@use '@angular/material' as mat;
 @use 'styles/variables' as var;
 @use 'styles/mixins' as mix;
 
@@ -234,6 +235,32 @@ body::-webkit-scrollbar {
   body::-webkit-scrollbar-corner {
     background: transparent;
   }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.container-table {
+    display: flex;
+    align-items: start;
+    min-width: 320px;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+:root {
+  @include mat.tooltip-overrides((
+    container-color: var(--primary-blue-900),
+    supporting-text-color: var(--palette-gray-100),
+    supporting-text-size: var(--font-size-sm)
+  ));
+}
 
 // Estilos extras que não dependem do Material podem vir aqui
 // Exemplo:

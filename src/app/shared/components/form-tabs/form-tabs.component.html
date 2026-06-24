@@ -1,0 +1,11 @@
+@if(tabs().length > 0) {
+    <nav class="tabs-container">
+        @for(tab of tabs(); track tab.key) {
+            <li (click)="selectedTab(tab.key)" class="tab"
+                [class.active]="activeTab === tab.key"
+            >
+                {{tab.label}}
+            </li>
+        }
+    </nav>
+}
