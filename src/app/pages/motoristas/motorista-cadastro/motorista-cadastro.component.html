@@ -1,21 +1,29 @@
+
 <div class="container-motoristas">
-    <app-card>
-        <app-form-tabs
-        [tabs]="tabs"
-        (clicked)="selectedTab($event)"
-        ></app-form-tabs>
+    <form action="">
+        <app-card>
+            <app-form-tabs
+            [tabs]="tabs"
+            (clicked)="selectedTab($event)"
+            ></app-form-tabs>
+        
+            <div [hidden]="this.activeTab !== 'dados_pessoais'">
+                <app-dados-pessoais
+                [formGroup]="form.controls.dadosPessoais"
+                >
     
-        <div [hidden]="this.activeTab !== 'dados_pessoais'">
-            <p>Dados pessoais</p>
-        </div>
-        <div [hidden]="this.activeTab !== 'endereco'">
-            <p>Endereco</p>
-        </div>
-        <div [hidden]="this.activeTab !== 'dados_profissionais'">
-            <p>Dados profissionais</p>
-        </div>
-        <div [hidden]="this.activeTab !== 'documentos'">
-            <p>Documentos</p>
-        </div>
-    </app-card>
+                </app-dados-pessoais>
+            </div>
+            <div [hidden]="this.activeTab !== 'endereco'">
+                <p>Endereco</p>
+            </div>
+            <div [hidden]="this.activeTab !== 'dados_profissionais'">
+                <p>Dados profissionais</p>
+            </div>
+            <div [hidden]="this.activeTab !== 'documentos'">
+                <p>Documentos</p>
+            </div>
+        </app-card>
+        <button>Enviar</button>
+    </form>
 </div>

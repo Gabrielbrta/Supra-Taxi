@@ -1,44 +1,50 @@
 @if(type() === 'text') {
-    <mat-form-field class="input-default">
         <mat-label>{{label() ?? ''}}</mat-label>
         <input matInput 
-        [placeholder]="placeholder() ?? ''" 
-        [value]="value() ?? ''"
+        (input)="onInput($event)"
+        [placeholder]="placeholder()" 
+        [value]="value"
+        [disabled]="disabled"
         [type]="type()"
         >
-    </mat-form-field>
 }
 @if(type() === 'email') {
-    <mat-form-field class="input-default">
         <mat-label>{{label() ?? ''}}</mat-label>
         <input matInput 
-        [placeholder]="placeholder() ?? ''" 
-        [value]="value() ?? ''"
+        (input)="onInput($event)"
+        [placeholder]="placeholder()" 
+        [value]="value"
+        [disabled]="disabled"
         [type]="type()"
         >
-    </mat-form-field>
 }
 @if(type() === 'tel') {
-    <mat-form-field class="input-default">
         <mat-label>{{label() ?? ''}}</mat-label>
         <input matInput 
-        [placeholder]="placeholder() ?? ''" 
-        [value]="value() ?? ''"
+          (input)="onInput($event)"
+        [placeholder]="placeholder()" 
+        [value]="value"
+        [disabled]="disabled"
         [type]="type()"
         >
-    </mat-form-field>
 }
 @if(type() === 'password') {
     <mat-label>{{label() ?? ''}}</mat-label>
     <input matInput 
-    [placeholder]="placeholder() ?? ''" 
-    [value]="value() ?? ''"
-    [type]="type()"
+       (input)="onInput($event)"
+        [placeholder]="placeholder()" 
+        [value]="value"
+        [disabled]="disabled"
+        [type]="type()"
     >
 }
 @if(type() === 'date') {
   <mat-label>{{label()}}</mat-label>
-  <input matInput [matDatepicker]="picker">
+  <input matInput [matDatepicker]="picker"
+  [value]="value"
+  [disabled]="disabled"
+  (dateChange)="onDateChange($event)"
+  >
   <mat-hint>{{placeholder() ?? 'dd/mm/aaaa' }}</mat-hint>
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
