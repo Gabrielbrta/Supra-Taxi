@@ -1,51 +1,67 @@
 @if(type() === 'text') {
-        <mat-label>{{label() ?? ''}}</mat-label>
-        <input matInput 
+    <div class="form-wrapper">
+        <mat-label>{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></mat-label>
+        <input matInput
         (input)="onInput($event)"
-        [placeholder]="placeholder()" 
+        [placeholder]="placeholder()"
         [value]="value"
+        [required]="required()"
         [disabled]="disabled"
         [type]="type()"
         >
+    </div>
 }
 @if(type() === 'email') {
-        <mat-label>{{label() ?? ''}}</mat-label>
-        <input matInput 
-        (input)="onInput($event)"
-        [placeholder]="placeholder()" 
-        [value]="value"
-        [disabled]="disabled"
-        [type]="type()"
-        >
+        <div class="form-wrapper">
+            <mat-label>{{label() ?? ''}}</mat-label>
+            <input matInput
+            (input)="onInput($event)"
+            [placeholder]="placeholder()"
+            [value]="value"
+            [disabled]="disabled"
+            [type]="type()"
+            >
+        </div>
 }
 @if(type() === 'tel') {
-        <mat-label>{{label() ?? ''}}</mat-label>
-        <input matInput 
-          (input)="onInput($event)"
-        [placeholder]="placeholder()" 
-        [value]="value"
-        [disabled]="disabled"
-        [type]="type()"
-        >
+        <div class="form-wrapper">
+            <mat-label>{{label() ?? ''}}</mat-label>
+            <input matInput
+              (input)="onInput($event)"
+            [placeholder]="placeholder()"
+            [value]="value"
+            [disabled]="disabled"
+            [type]="type()"
+            >
+        </div>
 }
 @if(type() === 'password') {
-    <mat-label>{{label() ?? ''}}</mat-label>
-    <input matInput 
-       (input)="onInput($event)"
-        [placeholder]="placeholder()" 
-        [value]="value"
-        [disabled]="disabled"
-        [type]="type()"
-    >
+    <div class="form-wrapper">
+        <mat-label>{{label() ?? ''}}</mat-label>
+        <input matInput
+           (input)="onInput($event)"
+            [placeholder]="placeholder()"
+            [value]="value"
+            [disabled]="disabled"
+            [type]="type()"
+        >
+    </div>
 }
 @if(type() === 'date') {
-  <mat-label>{{label()}}</mat-label>
-  <input matInput [matDatepicker]="picker"
-  [value]="value"
-  [disabled]="disabled"
-  (dateChange)="onDateChange($event)"
-  >
-  <mat-hint>{{placeholder() ?? 'dd/mm/aaaa' }}</mat-hint>
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
+  <div class="form-wrapper-date">
+      <mat-label>{{label()}}</mat-label>
+      <div class="form-wrapper-input">
+          <input matInput [matDatepicker]="picker"
+          [value]="value"
+          [disabled]="disabled"
+          (dateChange)="onDateChange($event)"
+          >
+          <div class="date-picker">
+              <mat-hint>{{placeholder() ?? 'dd/mm/aaaa' }}</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker
+              ></mat-datepicker>
+          </div>
+      </div>
+  </div>
 }

@@ -1,8 +1,33 @@
 
 .container-motoristas {
     margin-top: 20px;
-    
+    background-color: var(--palette-white);
     div {
         padding: 20px;
     }
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.container-form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.container-sides {
+    display: flex;
+}
+
+.container-form-left-side {
+    flex: 2;
+    border-right: 1px solid var(--palette-gray-300);
+}
+
+.container-form-right-side {
+    flex: 1;
 }

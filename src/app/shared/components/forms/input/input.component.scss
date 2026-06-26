@@ -1,0 +1,49 @@
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 5px 0;
+    width: 100%;
+}
+
+.form-wrapper-date {
+    display: flex;
+    flex-direction: column;
+    .form-wrapper-input  {
+        display: flex;
+        position: relative;
+
+        .date-picker {
+            position: absolute !important;
+            right: 15px;
+            bottom: 0px;
+        }
+    }
+
+}
+
+mat-label {
+    font-size: var(--font-size-sm) !important;
+
+    span {
+        color: var(--primary-red-600) !important;
+    }
+}
+
+input {
+    flex: 1;
+    padding: 10px 15px;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--palette-gray-300);
+    color: var(--palette-gray-800);
+    outline: none;
+    font-size: var(--font-size-sm);
+    &::placeholder {
+        font-size: var(--font-size-sm);
+    }
+    
+    &:focus {
+        outline: 1px solid var(--outline-focus);
+
+    }
+}

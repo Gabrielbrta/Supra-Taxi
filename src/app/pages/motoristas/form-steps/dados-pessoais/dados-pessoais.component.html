@@ -1,9 +1,86 @@
-<app-input
-[label]="'Nome completo'"
-[type]="'text'"
-[name]="'nomeMotorista'"
-[placeholder]="'Pedrinho da silva'"
-formControlName="nomeMotorista"
->
+<div [formGroup]="formGroup()">
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Nome completo'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Pedrinho da silva'"
+        formControlName="nomeMotorista"
+        >
+        </app-input>
+        <app-input
+        [label]="'E-mail'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'email@gmail.com'"
+        formControlName="email"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Nome do pai'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'joao da silva'"
+        formControlName="nomePai"
+        >
+        </app-input>
+        <app-input
+        [label]="'Nome da mãe'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'maria da silva'"
+        formControlName="nomeMae"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'CPF'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'000.000.000-00'"
+        formControlName="cpfMotorista"
+        >
+        </app-input>
+        <app-input
+        [label]="'RG'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'00.000.000-0'"
+        formControlName="rgMotorista"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'CNH'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'000.000.000-00'"
+        formControlName="cnhMotorista"
+        >
+        </app-input>
+        <app-input
+        [label]="'Data'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="''"
+        formControlName="dataEmissaoCNH"
+        >
+        </app-input>
+    </div>
 
-</app-input>
+    <!--
+      dataEmissaoCNH: ['', Validators.required],
+      dataValidadeCNH: ['', Validators.required],
+      nacionalidade: ['', Validators.required],
+      naturalidade: ['', Validators.required],
+      estadoCivil: ['', Validators.required],
+      escolaridade: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telMotorista: ['', Validators.required],
+      celMotorista: ['', Validators.required]
+    -->
+</div>

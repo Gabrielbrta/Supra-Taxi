@@ -3,11 +3,12 @@ import { TabsHeader } from '../../../shared/models/forms/TabsHeader';
 import { CardComponent } from "../../../shared/components/card/card.component";
 import { FormTabsComponent } from "../../../shared/components/form-tabs/form-tabs.component";
 import { DadosPessoaisComponent } from '../form-steps/dados-pessoais/dados-pessoais.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-motorista-cadastro',
-  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent],
+  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent],
   templateUrl: './motorista-cadastro.component.html',
   styleUrl: './motorista-cadastro.component.scss',
 })

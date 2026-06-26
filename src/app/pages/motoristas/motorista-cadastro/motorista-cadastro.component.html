@@ -1,29 +1,38 @@
 
 <div class="container-motoristas">
-    <form action="">
-        <app-card>
+    <app-card>
             <app-form-tabs
             [tabs]="tabs"
             (clicked)="selectedTab($event)"
             ></app-form-tabs>
+        <form class="container-form" [formGroup]="form">
         
-            <div [hidden]="this.activeTab !== 'dados_pessoais'">
-                <app-dados-pessoais
-                [formGroup]="form.controls.dadosPessoais"
+            <div class="container-sides">
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'dados_pessoais'">
+                    <app-dados-pessoais
+                    [formGroup]="form.controls.dadosPessoais"
+                    >
+                    </app-dados-pessoais>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'endereco'">
+                    <p>Endereco</p>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'dados_profissionais'">
+                    <p>Dados profissionais</p>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'documentos'">
+                    <p>Documentos</p>
+                </div>
+                <div class="container-form-right-side"></div>
+            </div>
+            <div class="button-container">
+                <app-button
+                [labelButton]="'Salvar'"
+                [buttonType]="'filled'"
+                [disabled]="!this.form.valid"
                 >
-    
-                </app-dados-pessoais>
+                </app-button>
             </div>
-            <div [hidden]="this.activeTab !== 'endereco'">
-                <p>Endereco</p>
-            </div>
-            <div [hidden]="this.activeTab !== 'dados_profissionais'">
-                <p>Dados profissionais</p>
-            </div>
-            <div [hidden]="this.activeTab !== 'documentos'">
-                <p>Documentos</p>
-            </div>
-        </app-card>
-        <button>Enviar</button>
-    </form>
+        </form>
+    </app-card>
 </div>

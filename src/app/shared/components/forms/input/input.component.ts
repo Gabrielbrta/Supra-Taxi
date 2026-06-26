@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, forwardRef, input } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
 import { MatLabel, MatHint } from '@angular/material/select';
@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
   providers: [provideNativeDateAdapter(),
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: InputComponent,
+      useExisting: forwardRef(() => InputComponent),
       multi: true
     }
   ],
@@ -27,7 +27,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
 export class InputComponent implements ControlValueAccessor {
   value:string | Date | null = null;
   label = input.required<string>();
-  name = input.required<string>();
+  required = input<boolean>();
   placeholder = input.required<string>();
   hidden = input<boolean>();
   type = input.required<string>();
@@ -69,4 +69,5 @@ export class InputComponent implements ControlValueAccessor {
     this.onChange(value);
     this.onTouched();
   }
+
 }
