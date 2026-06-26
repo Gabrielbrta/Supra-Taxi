@@ -1,7 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { every, filter } from 'rxjs';
-import { LucideAngularModule } from "lucide-angular";
 import { Icons } from '../../icons/icons';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from '../button/button.component';
@@ -9,7 +8,7 @@ import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-content-page-header',
-  imports: [LucideAngularModule, MatButtonModule, ButtonComponent],
+  imports: [MatButtonModule, ButtonComponent],
   templateUrl: './content-page-header.component.html',
   styleUrl: './content-page-header.component.scss',
 })
@@ -25,7 +24,7 @@ click($event: MouseEvent) {
   description = signal<string>('');
   buttonLabel = signal<string>('');
   routerLink = signal<string>('');
-  icon = signal<keyof typeof Icons>('Plus');
+  icon = signal<keyof typeof Icons>('LucidePlus');
   exportable = signal<boolean>(false);
 
   ngOnInit() {

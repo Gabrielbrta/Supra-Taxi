@@ -1,4 +1,5 @@
-import { LucideIconData } from "lucide-angular";
+import { Type } from "@angular/core";
+import { LucideIcon } from "@lucide/angular";
 
 export interface MenuItem {
     name?: string | null,
@@ -6,6 +7,6 @@ export interface MenuItem {
     profileMail?: string | null,
     label: string,
     path?: string,
-    icon: LucideIconData,
+    icon: Type<unknown>,
     children?: MenuItem[];
 }

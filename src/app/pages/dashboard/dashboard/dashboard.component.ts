@@ -140,32 +140,32 @@ export class DashboardComponent implements OnInit{
 
    actions: TableAction[] = [
     // {
-    //   icon: 'Pencil',
+    //   icon: 'LucidePencil',
     //   action: 'edit',
     //   tooltip: 'Editar'
     // },
     // {
-    //   icon: 'Trash2',
+    //   icon: 'LucideTrash2',
     //   action: 'delete',
     //   tooltip: 'Excluir'
     // },
     {
-      icon: 'Eye',
+      icon: 'LucideEye',
       action: 'view',
       tooltip: 'Visualizar'
     },
     // {
-    //   icon: 'KeyRound',
+    //   icon: 'LucideKeyRound',
     //   action: 'view',
     //   tooltip: 'Alterar senha'
     // },
     // {
-    //   icon: 'Printer',
+    //   icon: 'LucidePrinter',
     //   action: 'view',
     //   tooltip: 'Imprimir'
     // },
     // {
-    //   icon: 'LockOpen',
+    //   icon: 'LucideLockOpen',
     //   action: 'view',
     //   tooltip: 'Remover banimento'
     // },

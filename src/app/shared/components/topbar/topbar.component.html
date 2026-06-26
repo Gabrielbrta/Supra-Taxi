@@ -2,13 +2,13 @@
     <div class="profile"
     >
         <div class="image-user">
-            <lucide-icon [img]="this.icons.User"></lucide-icon>
+            <svg [lucideIcon]="this.icons.User"></svg>
         </div>
         <div class="profile-info">
             <p class="profile-info-name text-sm">Nome generico</p>
             <p class="profile-info-cargo text-sm">cargo</p>
         </div>
-        <lucide-icon [img]="this.icons.ChevronDown"></lucide-icon>
+        <svg [lucideIcon]="this.icons.ChevronDown"></svg>
         
         <div class="profile-nav-container"
         [class.opened]="!this.isClosedMenu"

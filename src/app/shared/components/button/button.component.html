@@ -3,19 +3,27 @@
     [class.primary-color-button-filled]="buttonType() !== 'outlined'"
     >
     @if(icon()) {
-        <lucide-icon [img]="icons[icon() ?? 'Plus']"
-        ></lucide-icon>
+        <svg [lucideIcon]="icons[icon() ?? 'LucidePlus']"></svg>
     }
         {{labelButton()}}
     </a>
 }
-@else if(exportable()) {
-    <button  [matButton]="buttonType()" [routerLink]="routerLink()" (click)="onClick($event)" class="title"
+@else if(buttonType() === 'outlined' && exportable()) {
+    <button  [matButton]="buttonType()" [disabled]="disabled()" [routerLink]="routerLink()" (click)="onClick($event)" class="title"
     [class.primary-color-button-outlined]="buttonType() !== 'outlined'"
     >
     @if(icon()) {
-        <lucide-icon [img]="icons[icon() ?? 'Plus']"
-        ></lucide-icon>
+        <svg [lucideIcon]="icons[icon() ?? 'LucidePlus']"></svg>
+    }
+        {{labelButton()}}
+</button>
+}
+@else if(buttonType() === 'filled') {
+    <button  [matButton]="buttonType()" [disabled]="disabled()" [routerLink]="routerLink()" (click)="onClick($event)" class="title"
+    [class.primary-color-button-filled]="buttonType() !== 'outlined'"
+    >
+    @if(icon()) {
+        <svg [lucideIcon]="icons[icon()!]"></svg>
     }
         {{labelButton()}}
 </button>
@@ -24,18 +32,28 @@
     <button
     [matButton]="buttonType()"
     (click)="onClick($event)"
+    [disabled]="disabled()"
     [class]="'primary-color-button--' + buttonType()"
     class="title">
 
     @if(icon()) {
-        <lucide-icon
-        [class.red]="icon()=== 'Trash2'"
-        [class.key]="icon() === 'KeyRound'"
-        [img]="icons[icon()!]">
-        </lucide-icon>
+        <svg
+        [class.red]="icon()=== 'LucideTrash2'"
+        [class.key]="icon() === 'LucideKeyRound'"
+        [lucideIcon]="icons[icon()!]">
+        </svg>
     }
 
     {{ labelButton() }}
+    </button>
+}@else  {
+  <button
+    [matButton]="buttonType()"
+    (click)="onClick($event)"
+    [disabled]="disabled()"
+    [class]="'primary-color-button--' + buttonType()"
+    class="title">
+    {{labelButton()}}
     </button>
 }
 

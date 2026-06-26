@@ -1,12 +1,13 @@
 import { Component, ElementRef, HostListener, output } from '@angular/core';
-import { LucideAngularModule } from "lucide-angular";
+
 import { Icons } from '../../icons/icons';
 import { MenuItemsComponent } from "../menu-items/menu-items.component";
 import { MenuItem } from '../../models/menu/menuList';
+import { LucideDynamicIcon } from '@lucide/angular';
 
 @Component({
   selector: 'app-topbar',
-  imports: [LucideAngularModule, MenuItemsComponent],
+  imports: [LucideDynamicIcon, MenuItemsComponent],
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.scss',
 })
@@ -26,22 +27,22 @@ export class TopbarComponent{
         profileMail: this.profileMail,
         label: 'Meu Perfil',
         path: '/configuracoes',
-        icon: this.icons.User,
+        icon: this.icons.LucideUser,
       },
       {
         label: 'Alterar Senha',
         path: '/configuracoes',
-        icon: this.icons.KeyRound,
+        icon: this.icons.LucideKeyRound,
       },
       {
         label: 'Preferências',
         path: '/configuracoes',
-        icon: this.icons.Settings,
+        icon: this.icons.LucideSettings,
       },
       {
         label: 'Sair',
         path: '/logout',
-        icon: this.icons.LogOut,
+        icon: this.icons.LucideLogOut,
       }
     ];
 
