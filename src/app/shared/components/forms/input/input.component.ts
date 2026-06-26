@@ -2,8 +2,8 @@ import { Component, forwardRef, input } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
 import { MatLabel, MatHint } from '@angular/material/select';
-import {provideNativeDateAdapter} from '@angular/material/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { Moment } from 'moment';
 @Component({
   selector: 'app-input',
   imports: [
@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
     ReactiveFormsModule, 
     MatInputModule
   ],
-  providers: [provideNativeDateAdapter(),
+  providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => InputComponent),
@@ -25,7 +25,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
   styleUrl: './input.component.scss',
 })
 export class InputComponent implements ControlValueAccessor {
-  value:string | Date | null = null;
+  value: string | Moment | null = null;
   label = input.required<string>();
   required = input<boolean>();
   placeholder = input.required<string>();
@@ -33,11 +33,11 @@ export class InputComponent implements ControlValueAccessor {
   type = input.required<string>();
   id = input<string>();
 
-  private onChange = (value:string | Date | null ) => {};
+  private onChange = (value:string | Moment | null ) => {};
   private onTouched = () => {};
   disabled: boolean = false;
 
-  writeValue(value: string): void {
+  writeValue(value: string | Moment | null): void {
     this.value = value ?? '';
   }
 
@@ -61,12 +61,10 @@ export class InputComponent implements ControlValueAccessor {
     this.onTouched();
   }
 
-  onDateChange(event: MatDatepickerInputEvent<Date>) {
-    const value = event.value;
+  onDateChange(event: MatDatepickerInputEvent<Moment>) {
+    this.value = event.value;
 
-    this.value = value;
-
-    this.onChange(value);
+    this.onChange(event.value);
     this.onTouched();
   }
 

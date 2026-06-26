@@ -17,6 +17,7 @@
             <input matInput
             (input)="onInput($event)"
             [placeholder]="placeholder()"
+            [required]="required()"
             [value]="value"
             [disabled]="disabled"
             [type]="type()"
@@ -27,9 +28,10 @@
         <div class="form-wrapper">
             <mat-label>{{label() ?? ''}}</mat-label>
             <input matInput
-              (input)="onInput($event)"
+            (input)="onInput($event)"
             [placeholder]="placeholder()"
             [value]="value"
+            [required]="required()"
             [disabled]="disabled"
             [type]="type()"
             >
@@ -42,6 +44,7 @@
            (input)="onInput($event)"
             [placeholder]="placeholder()"
             [value]="value"
+            [required]="required()"
             [disabled]="disabled"
             [type]="type()"
         >
@@ -54,6 +57,7 @@
           <input matInput [matDatepicker]="picker"
           [value]="value"
           [disabled]="disabled"
+          [required]="required()"
           (dateChange)="onDateChange($event)"
           >
           <div class="date-picker">
