@@ -1,12 +1,3 @@
-.container-table {
-    display: flex;
-    align-items: start;
-    min-width: 320px;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 20px;
-
-}
 app-card:nth-of-type(even) {
     max-width: 40%;
     min-width: 700px;
