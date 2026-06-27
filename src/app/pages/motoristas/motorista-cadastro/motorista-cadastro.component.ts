@@ -5,10 +5,11 @@ import { FormTabsComponent } from "../../../shared/components/form-tabs/form-tab
 import { DadosPessoaisComponent } from '../form-steps/dados-pessoais/dados-pessoais.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { EnderecoComponent } from "../form-steps/endereco/endereco.component";
 
 @Component({
   selector: 'app-motorista-cadastro',
-  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent],
+  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent, EnderecoComponent],
   templateUrl: './motorista-cadastro.component.html',
   styleUrl: './motorista-cadastro.component.scss',
 })
@@ -46,9 +47,9 @@ export class MotoristaCadastroComponent implements OnInit {
     endereco: this.fb.group({
       cep: ['', Validators.required],
       endereco: ['', Validators.required],
-      numero: ['', Validators.required],
+      numero: [''],
       complemento: [''],
-      bairro: ['', Validators.required],
+      bairro: [''],
       cidade: ['', Validators.required],
       estado: ['', Validators.required]
     }),

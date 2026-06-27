@@ -1,0 +1,69 @@
+<div [formGroup]="formGroup()">
+    <div class="wrapper-group">
+        <app-input
+        [label]="'CEP'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'00000-000'"
+        formControlName="cep"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Endereço'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Rua liberdade'"
+        formControlName="endereco"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Número'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="'223'"
+        formControlName="numero"
+        >
+        </app-input>
+        <app-input
+        [label]="'Complemento'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="'perto da padaria'"
+        formControlName="complemento"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Bairro'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="'Embaré'"
+        formControlName="bairro"
+        >
+        </app-input>
+        <app-input
+        [label]="'Cidade'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Santos'"
+        formControlName="cidade"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Estado'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'SP'"
+        formControlName="estado"
+        >
+        </app-input>
+    </div>
+
+</div>

@@ -15,7 +15,9 @@
                     </app-dados-pessoais>
                 </div>
                 <div class="container-form-left-side" [hidden]="this.activeTab !== 'endereco'">
-                    <p>Endereco</p>
+                    <app-endereco
+                    [formGroup]="form.controls.endereco"
+                    ></app-endereco>
                 </div>
                 <div class="container-form-left-side" [hidden]="this.activeTab !== 'dados_profissionais'">
                     <p>Dados profissionais</p>
