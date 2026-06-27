@@ -281,6 +281,15 @@ body::-webkit-scrollbar {
 ::ng-deep .mat-calendar-content {
   box-shadow: 0 8px 32px rgba(189, 88, 88, 0.25) !important;
 }
+
+// select panel
+:root {
+  @include mat.select-overrides((
+    panel-background-color: var(--palette-white),
+    enabled-trigger-text-color: var(--palette-gray-800) ,
+    trigger-text-size: var(--font-size-sm),
+  ));
+}
 // Estilos extras que não dependem do Material podem vir aqui
 // Exemplo:
 @include mix.design-tokens-css-vars;

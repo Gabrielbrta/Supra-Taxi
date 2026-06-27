@@ -1,14 +1,11 @@
 import { Component, forwardRef, input } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
-import { MatLabel, MatHint } from '@angular/material/select';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { Moment } from 'moment';
 @Component({
   selector: 'app-input',
   imports: [
-    MatLabel, 
-    MatHint, 
     MatInputModule,
     MatDatepickerModule, 
     ReactiveFormsModule, 
@@ -28,10 +25,13 @@ export class InputComponent implements ControlValueAccessor {
   value: string | Moment | null = null;
   label = input.required<string>();
   required = input<boolean>();
-  placeholder = input.required<string>();
+  placeholder = input<string>();
   hidden = input<boolean>();
   type = input.required<string>();
   id = input<string>();
+  max = input<number | null>();
+  min = input<number | null>();
+  inputId = crypto.randomUUID();
 
   private onChange = (value:string | Moment | null ) => {};
   private onTouched = () => {};

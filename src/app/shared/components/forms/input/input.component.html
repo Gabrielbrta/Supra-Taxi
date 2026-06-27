@@ -1,67 +1,80 @@
 @if(type() === 'text') {
     <div class="form-wrapper">
-        <mat-label>{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></mat-label>
+        <label  [for]="inputId" >{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
         <input matInput
         (input)="onInput($event)"
-        [placeholder]="placeholder()"
+        [placeholder]="placeholder() ?? ''"
         [value]="value"
+        [id]="inputId"
         [required]="required()"
         [disabled]="disabled"
         [type]="type()"
+        [attr.maxlength]="max()"
+        [attr.minlength]="min()"
         >
     </div>
 }
 @if(type() === 'email') {
         <div class="form-wrapper">
-            <mat-label>{{label() ?? ''}}</mat-label>
+            <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
             <input matInput
             (input)="onInput($event)"
-            [placeholder]="placeholder()"
+            [placeholder]="placeholder() ?? ''"
+            [id]="inputId"
             [required]="required()"
             [value]="value"
             [disabled]="disabled"
             [type]="type()"
+            [attr.maxlength]="max()"
+            [attr.minlength]="min()"
             >
         </div>
 }
 @if(type() === 'tel') {
         <div class="form-wrapper">
-            <mat-label>{{label() ?? ''}}</mat-label>
+            <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
             <input matInput
             (input)="onInput($event)"
-            [placeholder]="placeholder()"
+            [placeholder]="placeholder() ?? ''"
             [value]="value"
+            [id]="inputId"
             [required]="required()"
             [disabled]="disabled"
             [type]="type()"
+            [attr.maxlength]="max()"
+            [attr.minlength]="min()"
             >
         </div>
 }
 @if(type() === 'password') {
     <div class="form-wrapper">
-        <mat-label>{{label() ?? ''}}</mat-label>
+        <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
         <input matInput
            (input)="onInput($event)"
-            [placeholder]="placeholder()"
+            [placeholder]="placeholder() ?? ''"
             [value]="value"
+            [id]="inputId"
             [required]="required()"
             [disabled]="disabled"
             [type]="type()"
+            [attr.maxlength]="max()"
+            [attr.minlength]="min()"
         >
     </div>
 }
 @if(type() === 'date') {
   <div class="form-wrapper-date">
-      <mat-label>{{label()}}</mat-label>
+      <label [for]="inputId">{{label()}} <span>{{required() ? '*' : ''}}</span></label>
       <div class="form-wrapper-input">
           <input matInput [matDatepicker]="picker"
           [value]="value"
+          [id]="inputId"
           [disabled]="disabled"
           [required]="required()"
+          [placeholder]="placeholder() ?? ''"
           (dateChange)="onDateChange($event)"
           >
           <div class="date-picker">
-              <mat-hint>{{placeholder() ?? 'dd/mm/aaaa' }}</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker
               ></mat-datepicker>

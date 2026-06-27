@@ -39,6 +39,8 @@
         <app-input
         [label]="'CPF'"
         [type]="'text'"
+        [max]="11"
+        [min]="11"
         [required]="true"
         [placeholder]="'000.000.000-00'"
         formControlName="cpfMotorista"
@@ -48,6 +50,8 @@
         [label]="'RG'"
         [type]="'text'"
         [required]="true"
+        [max]="11"
+        [min]="11"
         [placeholder]="'00.000.000-0'"
         formControlName="rgMotorista"
         >
@@ -58,29 +62,87 @@
         [label]="'CNH'"
         [type]="'text'"
         [required]="true"
-        [placeholder]="'000.000.000-00'"
+        [placeholder]="'00000000000'"
+        [max]="11"
+        [min]="11"
         formControlName="cnhMotorista"
         >
         </app-input>
         <app-input
-        [label]="'Data'"
+        [label]="'Data emissão CNH'"
         [type]="'date'"
         [required]="true"
-        [placeholder]="''"
+        [placeholder]="'dd/mm/aaaa'"
         formControlName="dataEmissaoCNH"
         >
         </app-input>
+        <app-input
+        [label]="'Data validade CNH'"
+        [type]="'date'"
+        [placeholder]="'dd/mm/aaaa'"
+        [required]="true"
+        formControlName="dataValidadeCNH"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+            [label]="'Nacionalidade'"
+            [type]="'text'"
+            [required]="true"
+            [placeholder]="'Brasileiro'"
+            formControlName="nacionalidade"
+            >
+        </app-input>
+        <app-input
+            [label]="'Naturalidade'"
+            [type]="'text'"
+            [required]="true"
+            [placeholder]="'São Paulo / SP'"
+            formControlName="naturalidade"
+            >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+            [label]="'Estado civil'"
+            [type]="'text'"
+            [required]="true"
+            [placeholder]="'Brasileiro'"
+            formControlName="estadoCivil"
+            >
+        </app-input>
+        <app-input
+            [label]="'Escolaridade'"
+            [type]="'text'"
+            [placeholder]="'Ensino médio(Completo)'"
+            [required]="true"
+            formControlName="escolaridade"
+            >
+        </app-input>
+        <app-input-select
+        [required]="true"
+        [label]="'Escolaridade'"
+        [selectSource]="escolaridadeDataSource"
+        ></app-input-select>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+            [label]="'Telefone'"
+            [type]="'tel'"
+            [required]="true"
+            [placeholder]="'(13) 9999-9999'"
+            formControlName="telMotorista"
+            >
+        </app-input>
+        <app-input
+            [label]="'Celular'"
+            [type]="'tel'"
+            [required]="true"
+            [placeholder]="'(13) 99999-9999'"
+            formControlName="celMotorista"
+            >
+        </app-input>
     </div>
 
-    <!--
-      dataEmissaoCNH: ['', Validators.required],
-      dataValidadeCNH: ['', Validators.required],
-      nacionalidade: ['', Validators.required],
-      naturalidade: ['', Validators.required],
-      estadoCivil: ['', Validators.required],
-      escolaridade: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telMotorista: ['', Validators.required],
-      celMotorista: ['', Validators.required]
-    -->
 </div>
