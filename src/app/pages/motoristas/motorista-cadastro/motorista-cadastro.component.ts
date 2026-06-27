@@ -18,7 +18,7 @@ export class MotoristaCadastroComponent implements OnInit {
   ngOnInit(): void {
     this.selectedTab(this.tabs[0].key);
 
-    this.form.get('dadosPessoais.nomeMotorista')?.valueChanges.subscribe(value => {
+    this.form.get('dadosPessoais.estadoCivil')?.valueChanges.subscribe(value => {
       console.log(value);
     })
   }

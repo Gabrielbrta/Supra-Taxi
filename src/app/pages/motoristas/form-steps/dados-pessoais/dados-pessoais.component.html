@@ -104,26 +104,17 @@
         </app-input>
     </div>
     <div class="wrapper-group">
-        <app-input
-            [label]="'Estado civil'"
-            [type]="'text'"
-            [required]="true"
-            [placeholder]="'Brasileiro'"
-            formControlName="estadoCivil"
-            >
-        </app-input>
-        <app-input
-            [label]="'Escolaridade'"
-            [type]="'text'"
-            [placeholder]="'Ensino médio(Completo)'"
-            [required]="true"
-            formControlName="escolaridade"
-            >
-        </app-input>
+        <app-input-select
+        [required]="true"
+        [label]="'Estado civil'"
+        [selectSource]="estadoCivilDataSource"
+        formControlName="estadoCivil"
+        ></app-input-select>
         <app-input-select
         [required]="true"
         [label]="'Escolaridade'"
         [selectSource]="escolaridadeDataSource"
+        formControlName="escolaridade"
         ></app-input-select>
     </div>
     <div class="wrapper-group">
