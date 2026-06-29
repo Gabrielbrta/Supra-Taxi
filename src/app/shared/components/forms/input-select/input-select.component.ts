@@ -29,6 +29,7 @@ import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 })
 export class InputSelectComponent implements ControlValueAccessor {
   selectSource = input.required<PageResult<any>>()
+  placeholder = input<string>('Selecione um item');
   label = input.required<string>();
   required = input<boolean>();
   value: string | null = null;

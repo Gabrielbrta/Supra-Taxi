@@ -6,10 +6,11 @@ import { DadosPessoaisComponent } from '../form-steps/dados-pessoais/dados-pesso
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { EnderecoComponent } from "../form-steps/endereco/endereco.component";
+import { DadosProfissionaisComponent } from "../form-steps/dados-profissionais/dados-profissionais.component";
 
 @Component({
   selector: 'app-motorista-cadastro',
-  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent, EnderecoComponent],
+  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent, EnderecoComponent, DadosProfissionaisComponent],
   templateUrl: './motorista-cadastro.component.html',
   styleUrl: './motorista-cadastro.component.scss',
 })

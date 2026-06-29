@@ -20,7 +20,11 @@
                     ></app-endereco>
                 </div>
                 <div class="container-form-left-side" [hidden]="this.activeTab !== 'dados_profissionais'">
-                    <p>Dados profissionais</p>
+                    <app-dados-profissionais
+                    [formGroup]="form.controls.dadosProfissionais"
+                    >
+
+                    </app-dados-profissionais>
                 </div>
                 <div class="container-form-left-side" [hidden]="this.activeTab !== 'documentos'">
                     <p>Documentos</p>
@@ -31,6 +35,7 @@
                 <app-button
                 [labelButton]="'Salvar'"
                 [buttonType]="'filled'"
+                [tooltip]="!this.form.valid ? 'Preencha o formulário': ''"
                 [disabled]="!this.form.valid"
                 >
                 </app-button>
