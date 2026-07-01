@@ -4,9 +4,9 @@
         <input 
         #input
         matInput
-        /* (input)="onInput($event)" */
+        (input)="onInput($event)"
         [placeholder]="placeholder() ?? ''"
-        [value]="value"
+        /* [value]="value" */
         [id]="inputId"
         [required]="required()"
         [disabled]="disabled"
@@ -19,12 +19,14 @@
 @if(type() === 'email') {
         <div class="form-wrapper">
             <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
-            <input matInput
-            /* (input)="onInput($event)" */
+            <input 
+            #input
+            matInput
+            (input)="onInput($event)"
             [placeholder]="placeholder() ?? ''"
             [id]="inputId"
             [required]="required()"
-            [value]="value"
+            /* [value]="value" */
             [disabled]="disabled"
             [type]="type()"
             [attr.maxlength]="max()"
@@ -38,9 +40,9 @@
             <input 
             #input
             matInput
-            /* (input)="onInput($event)" */
+            (input)="onInput($event)"
             [placeholder]="placeholder() ?? ''"
-            [value]="value"
+            /* [value]="value" */
             [id]="inputId"
             [required]="required()"
             [disabled]="disabled"
@@ -54,10 +56,11 @@
     <div class="form-wrapper">
         <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
         <input 
+            #input
             matInput
-           /* (input)="onInput($event)" */
+           (input)="onInput($event)"
             [placeholder]="placeholder() ?? ''"
-            [value]="value"
+            /* [value]="value" */
             [id]="inputId"
             [required]="required()"
             [disabled]="disabled"

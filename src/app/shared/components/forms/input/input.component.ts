@@ -59,17 +59,16 @@ export class InputComponent implements ControlValueAccessor {
       });
 
       this.imask.on('accept', () => {
-        this.value = this.imask!.value;
         this.onChange(this.imask!.value);
       });
     });
   }
 
   writeValue(value: string | Moment | null): void {
-    this.value = value ?? '';
-
     if (this.imask) {
       this.imask.value = String(value ?? '');
+    } else {
+      this.value = value ?? '';
     }
   }
 

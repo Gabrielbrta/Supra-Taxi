@@ -20,6 +20,7 @@ export class MotoristaCadastroComponent implements OnInit {
   
   ngOnInit(): void {
     this.selectedTab(this.tabs[0].key);
+    this.form.valueChanges.subscribe(value => console.log(value));
   }
   
   activeTab: string = '';
@@ -55,7 +56,7 @@ export class MotoristaCadastroComponent implements OnInit {
     dadosProfissionais: this.fb.group({
       rct: ['', Validators.required],
       rctDataValidade: ['', Validators.required],
-      registro: [''],
+      registro: [null],
       situacao: ['', Validators.required],
       observacoes: [null]
     }),
