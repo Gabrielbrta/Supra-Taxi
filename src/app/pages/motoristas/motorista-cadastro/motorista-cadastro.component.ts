@@ -39,7 +39,7 @@ export class MotoristaCadastroComponent implements OnInit {
       estadoCivil: ['', Validators.required],
       escolaridade: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      telMotorista: ['', Validators.required],
+      telMotorista: [null],
       celMotorista: ['', Validators.required]
     }),
     endereco: this.fb.group({

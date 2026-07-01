@@ -1,8 +1,9 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { afterNextRender, Component, effect, ElementRef, forwardRef, input, viewChild } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { Moment } from 'moment';
+import IMask from 'imask';
 @Component({
   selector: 'app-input',
   imports: [
@@ -29,16 +30,47 @@ export class InputComponent implements ControlValueAccessor {
   hidden = input<boolean>();
   type = input.required<string>();
   id = input<string>();
+  mask = input<string | null>(null);
   max = input<number | null>();
   min = input<number | null>();
   inputId = crypto.randomUUID();
 
   private onChange = (value:string | Moment | null ) => {};
   private onTouched = () => {};
+  private imask?: ReturnType<typeof IMask>;
+
+  inputRef = viewChild<ElementRef<HTMLInputElement>>('input');
+
   disabled: boolean = false;
+
+  constructor() {
+    afterNextRender(() => {
+      const element = this.inputRef()?.nativeElement;
+      const mask = this.mask();
+
+      if (!element || !mask) {
+        return;
+      }
+
+      this.imask?.destroy();
+
+      this.imask = IMask(element, {
+        mask
+      });
+
+      this.imask.on('accept', () => {
+        this.value = this.imask!.value;
+        this.onChange(this.imask!.value);
+      });
+    });
+  }
 
   writeValue(value: string | Moment | null): void {
     this.value = value ?? '';
+
+    if (this.imask) {
+      this.imask.value = String(value ?? '');
+    }
   }
 
   registerOnChange(fn: any): void {

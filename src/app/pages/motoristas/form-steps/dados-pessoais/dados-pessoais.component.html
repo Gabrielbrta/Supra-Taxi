@@ -39,8 +39,10 @@
         <app-input
         [label]="'CPF'"
         [type]="'text'"
-        [max]="11"
+        [max]="14"
+        [min]="14"
         [required]="true"
+        [mask]="'000.000.000-00'"
         [placeholder]="'000.000.000-00'"
         formControlName="cpfMotorista"
         >
@@ -49,7 +51,9 @@
         [label]="'RG'"
         [type]="'text'"
         [required]="true"
-        [max]="11"
+        [max]="12"
+        [min]="12"
+        [mask]="'00.000.000-0'"
         [placeholder]="'00.000.000-0'"
         formControlName="rgMotorista"
         >
@@ -62,6 +66,7 @@
         [required]="true"
         [placeholder]="'00000000000'"
         [max]="11"
+        [min]="11"
         formControlName="cnhMotorista"
         >
         </app-input>
@@ -118,8 +123,8 @@
         <app-input
             [label]="'Telefone'"
             [type]="'tel'"
-            [required]="true"
-            [max]="11"
+            [required]="false"
+            [mask]="'(00) 0000-0000'"
             [placeholder]="'(13) 9999-9999'"
             formControlName="telMotorista"
             >
@@ -128,7 +133,7 @@
             [label]="'Celular'"
             [type]="'tel'"
             [required]="true"
-            [max]="11"
+            [mask]="'(00) 00000-0000'"
             [placeholder]="'(13) 99999-9999'"
             formControlName="celMotorista"
             >

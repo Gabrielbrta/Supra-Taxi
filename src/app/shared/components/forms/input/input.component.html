@@ -1,8 +1,10 @@
 @if(type() === 'text') {
     <div class="form-wrapper">
         <label  [for]="inputId" >{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
-        <input matInput
-        (input)="onInput($event)"
+        <input 
+        #input
+        matInput
+        /* (input)="onInput($event)" */
         [placeholder]="placeholder() ?? ''"
         [value]="value"
         [id]="inputId"
@@ -18,7 +20,7 @@
         <div class="form-wrapper">
             <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
             <input matInput
-            (input)="onInput($event)"
+            /* (input)="onInput($event)" */
             [placeholder]="placeholder() ?? ''"
             [id]="inputId"
             [required]="required()"
@@ -33,8 +35,10 @@
 @if(type() === 'tel') {
         <div class="form-wrapper">
             <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
-            <input matInput
-            (input)="onInput($event)"
+            <input 
+            #input
+            matInput
+            /* (input)="onInput($event)" */
             [placeholder]="placeholder() ?? ''"
             [value]="value"
             [id]="inputId"
@@ -49,8 +53,9 @@
 @if(type() === 'password') {
     <div class="form-wrapper">
         <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
-        <input matInput
-           (input)="onInput($event)"
+        <input 
+            matInput
+           /* (input)="onInput($event)" */
             [placeholder]="placeholder() ?? ''"
             [value]="value"
             [id]="inputId"
@@ -66,7 +71,10 @@
   <div class="form-wrapper-date">
       <label [for]="inputId">{{label()}} <span>{{required() ? '*' : ''}}</span></label>
       <div class="form-wrapper-input">
-          <input matInput [matDatepicker]="picker"
+          <input 
+          #input
+          matInput 
+          [matDatepicker]="picker"
           [value]="value"
           [id]="inputId"
           [disabled]="disabled"
