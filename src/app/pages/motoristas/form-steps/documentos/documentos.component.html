@@ -1,1 +1,55 @@
-<p>documentos works!</p>
+<div [formGroup]="formGroup()">
+    <p class="notification">* Todos os documentos devem ter até 5MB de tamanho</p>
+    <p class="notification">* O nome do documento deve ter no máximo 50 caracteres</p>
+    <div class="wrapper-group">
+        <app-input-file
+        [label]="'CNH'"
+        [documentType]="'cnh'"
+        formControlName="cnhDocumento"
+        >
+        </app-input-file>
+        <app-input-file
+        [label]="'CPF'"
+        [documentType]="'cpf'"
+        formControlName="cpf"
+        >
+        </app-input-file>
+    </div>
+    <div class="wrapper-group">
+        <app-input-file
+        [label]="'RG'"
+        [documentType]="'rg'"
+        formControlName="rg"
+        >
+        </app-input-file>
+        <app-input-file
+        [label]="'RCT'"
+        [documentType]="'rct'"
+        formControlName="rct"
+        >
+        </app-input-file>
+    </div>
+    <div class="wrapper-group">
+        <app-input-file
+        [label]="'Comprovante de residência'"
+        [documentType]="'comprovanteResidencia'"
+        formControlName="comprovanteResidencia"
+        >
+        </app-input-file>
+        <app-input-file
+        [label]="'Antecedentes criminais'"
+        [documentType]="'antecedentesCriminais'"
+        formControlName="antecedentesCriminais"
+        >
+        </app-input-file>
+    </div>
+        <app-input-file
+        [label]="'Foto (1280 × 720)'"
+        [required]="true"
+        [accept]="'image/png, image/jpeg'"
+        [documentType]="'foto'"
+        formControlName="foto"
+        >
+        </app-input-file>
+
+</div>

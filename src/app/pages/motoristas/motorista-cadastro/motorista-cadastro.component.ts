@@ -7,10 +7,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { EnderecoComponent } from "../form-steps/endereco/endereco.component";
 import { DadosProfissionaisComponent } from "../form-steps/dados-profissionais/dados-profissionais.component";
+import { DocumentosComponent } from "../form-steps/documentos/documentos.component";
 
 @Component({
   selector: 'app-motorista-cadastro',
-  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent, EnderecoComponent, DadosProfissionaisComponent],
+  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent, EnderecoComponent, DadosProfissionaisComponent, DocumentosComponent],
   templateUrl: './motorista-cadastro.component.html',
   styleUrl: './motorista-cadastro.component.scss',
 })
@@ -19,10 +20,6 @@ export class MotoristaCadastroComponent implements OnInit {
   
   ngOnInit(): void {
     this.selectedTab(this.tabs[0].key);
-
-    this.form.get('dadosPessoais.estadoCivil')?.valueChanges.subscribe(value => {
-      console.log(value);
-    })
   }
   
   activeTab: string = '';
@@ -48,9 +45,9 @@ export class MotoristaCadastroComponent implements OnInit {
     endereco: this.fb.group({
       cep: ['', Validators.required],
       endereco: ['', Validators.required],
-      numero: [''],
-      complemento: [''],
-      bairro: [''],
+      numero: [null],
+      complemento: [null],
+      bairro: [null],
       cidade: ['', Validators.required],
       estado: ['', Validators.required]
     }),
@@ -58,18 +55,18 @@ export class MotoristaCadastroComponent implements OnInit {
     dadosProfissionais: this.fb.group({
       rct: ['', Validators.required],
       rctDataValidade: ['', Validators.required],
-      registro: ['', Validators.required],
+      registro: [''],
       situacao: ['', Validators.required],
-      observacoes: ['']
+      observacoes: [null]
     }),
     documentos: this.fb.group({
-      cnhDocumento: [''],
-      cpf: [''],
-      rg: [''],
-      rct: [''],
-      comprovanteResidencia: [''],
-      antecedentesCriminais: [''],
-      foto3x4: [''],
+      cnhDocumento: [null],
+      cpf: [null],
+      rg: [null],
+      rct: [null],
+      comprovanteResidencia: [null],
+      antecedentesCriminais: [null],
+      foto: ['', Validators.required],
     })
 
 
@@ -96,6 +93,11 @@ export class MotoristaCadastroComponent implements OnInit {
 
   selectedTab(tab: string) {
     this.activeTab = tab;
+  }
+
+  onSubmit(event: MouseEvent) {
+    event.preventDefault();
+    console.log(this.form.value)
   }
 
 }

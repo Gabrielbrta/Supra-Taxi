@@ -1,11 +1,3 @@
-<!--
-    dadosProfissionais: this.fb.group({
-      rctDataValidade: ['', Validators.required],
-      registro: ['', Validators.required],
-      situacao: ['', Validators.required],
-      observacoes: ['']
-    }),
--->
 <div [formGroup]="formGroup()">
     <div class="wrapper-group">
         <app-input
@@ -39,6 +31,7 @@
         [placeholder]="'Selecione um item'"
         [selectSource]="selectSource"
         [required]="true"
+        formControlName="situacao"
         >
         </app-input-select>
     </div>

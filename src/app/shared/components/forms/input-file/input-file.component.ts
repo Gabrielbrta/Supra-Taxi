@@ -1,9 +1,11 @@
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, input, signal, Signal } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { LucideDynamicIcon } from '@lucide/angular';
+import { Icons } from '../../../icons/icons';
 
 @Component({
   selector: 'app-input-file',
-  imports: [],
+  imports: [LucideDynamicIcon],
   templateUrl: './input-file.component.html',
   styleUrl: './input-file.component.scss',
   providers: [
@@ -22,6 +24,7 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 export class InputFileComponent implements ControlValueAccessor, Validator {
   label = input.required<string>();
   documentType = input.required<string>();
+  accept = input<string>('');
   required = input(false);
   allowedTypes: string[] = [  
   'application/pdf',
@@ -30,9 +33,11 @@ export class InputFileComponent implements ControlValueAccessor, Validator {
 ];
   inputId = crypto.randomUUID();
   disabled = false;
-  fileName: string = '';
+  fileName = signal<string>('');
   value: File | null = null;
   maxSize: number = 5 * 1024 * 1024; 
+  fileState = signal<'empty' | 'validating' | 'success' | 'error'>('empty');
+  icons = Icons;
 
 private readonly signatures: Record<string, string> =  {
   'application/pdf': '25 50 44 46',
@@ -55,7 +60,7 @@ private readonly signatures: Record<string, string> =  {
   private clearFile(input: HTMLInputElement) {
     input.value = '';
     this.value = null;
-    this.fileName = '';
+    this.fileName.set('');
     this.onChange(null);
   }
 
@@ -73,8 +78,6 @@ private readonly signatures: Record<string, string> =  {
     this.disabled = isDisabled;
   }
 
-
-
   validate(control: AbstractControl): ValidationErrors | null {
     const value = control.value as {
       file: File,
@@ -82,12 +85,13 @@ private readonly signatures: Record<string, string> =  {
     } | null;
 
     const file = value?.file;
-
     if(!file) {
+      this.fileState.set('empty');
       return null;
     }
-
+    
     if(this.maxSize && file.size > this.maxSize) {
+      this.fileState.set('error');
       return {
         maxSize: {
           actual: file.size,
@@ -99,8 +103,9 @@ private readonly signatures: Record<string, string> =  {
     if(
       this.allowedTypes.length > 0 &&
       !this.allowedTypes.includes(file.type)
-
+      
     ){
+      this.fileState.set('error')
       return {
         invalidType: true
       };
@@ -114,51 +119,78 @@ private readonly signatures: Record<string, string> =  {
   documentType: string;
 } | null) {
     this.value = value?.file ?? null;
-    this.fileName = value?.file?.name ?? '';
+    this.fileName.set(value?.file?.name ?? '');
   }
 
 async onFileChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    const file = input.files?.[0]
-
-    if(!file) {
+  
+  const fileSizeError: string = 'O arquivo deve ter no máximo 5 MB'
+  const fileTypeError: string = 'Apenas arquivos PDF, JPEG e PNG são permitidos'
+  const fileSignatureError: string = 'O arquivo parece estar corrompido ou não corresponde ao tipo informado.'
+  const fileNameSizeError: string = 'O nome do arquivo deve possuir até 50 caracteres.'
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0]
+  this.fileState.set('validating');
+  
+  if(!file) {
+    this.clearFile(input);
+    this.fileState.set('empty');
       return; 
     }
 
     const signature = await this.getSignature(file);
 
+    
     if(file.size > this.maxSize) {
-      alert('O arquivo deve ter no máximo 5 MB.');
+      alert(fileSizeError);
       this.clearFile(input);
-      this.onChange(null);
-
+      this.fileState.set('error')
       return;
     }
 
     
     if(!this.allowedTypes.includes(file.type)) {
-      alert('Apenas arquivos PDF, JPEG e PNG são permitidos.');
+      alert(fileTypeError);
       this.clearFile(input);
-      this.onChange(null);
+      this.fileState.set('error')
+      return;
+    }
+
+    if(file.name.length > 50) {
+      alert(fileNameSizeError)
+      this.clearFile(input);
+      this.fileState.set('error')
       return;
     }
 
     const expected = this.signatures[file.type];
 
     if(expected && !signature.toLowerCase().startsWith(expected)) {
-     this.clearFile(input)
-      this.onChange(null);
-      alert('O arquivo parece estar corrompido ou não corresponde ao tipo informado.');
+       this.fileState.set('error')
+      this.clearFile(input)
+      alert(fileSignatureError);
       return;
     }
 
     this.value = file;
-    this.fileName = file.name;
+    this.fileName.set(file.name);
     this.onChange({
       file,
       documentType: this.documentType(),
     });
-    this.clearFile(input)
     this.onTouched();
+    this.fileState.set('success');
+  }
+
+  calculateSize(fileSize: number) : string {
+    const base = 1024;
+    const kb = fileSize / base;
+    const mb = fileSize / (base * base);
+
+    return kb > base ? mb.toFixed(2) +' mb' : kb.toFixed(2) + ' kb' 
+  }
+
+  openModal() {
+
   }
 }

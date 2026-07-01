@@ -27,7 +27,10 @@
                     </app-dados-profissionais>
                 </div>
                 <div class="container-form-left-side" [hidden]="this.activeTab !== 'documentos'">
-                    <p>Documentos</p>
+                    <app-documentos
+                    [formGroup]="form.controls.documentos"
+                    >
+                    </app-documentos>
                 </div>
                 <div class="container-form-right-side"></div>
             </div>
@@ -35,8 +38,9 @@
                 <app-button
                 [labelButton]="'Salvar'"
                 [buttonType]="'filled'"
-                [tooltip]="!this.form.valid ? 'Preencha o formulário': ''"
-                [disabled]="!this.form.valid"
+                [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+                [disabled]="this.form.invalid"
+                (clicked)="onSubmit($event)"
                 >
                 </app-button>
             </div>

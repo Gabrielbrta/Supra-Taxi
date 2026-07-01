@@ -1,1 +1,36 @@
-<p>input-file works!</p>
+<div class="form-wrapper"
+    [class.empty]="fileState() === 'empty'"
+    [class.validating]="fileState() === 'validating'"
+    [class.success]="fileState() === 'success'"
+    [class.error]="fileState() === 'error'"
+>
+
+    <label [for]="inputId" class="wrapper">
+        <div class="icon-status-container">
+            <svg [lucideIcon]="
+            fileState() === 'empty' ? icons.LucideFileUp :
+            fileState() === 'validating' ? icons.LucideLoaderCircle :
+            fileState() === 'success' ? icons.LucideCheck : icons.LucideX"
+            ></svg>
+        </div>
+        <div class="file-content-container">
+            <p>{{ label() ?? ''}} <span>{{required() ? '*' : ''}}</span></p>
+            <p class="state">{{fileState() === 'success' ? 'Anexado - ' + fileName() + ' - ' + calculateSize(value!.size) : ''}}</p>
+            <p class="state">{{fileState() === 'empty' ? 'Pendente - clique para enviar' : ''}}</p>
+            <p class="state">{{fileState() === 'error' ? 'Arquivo não permitido - clique para enviar novamente' : ''}}</p>
+            <p class="state">{{fileState() === 'validating' ? 'Carregando...' : ''}}</p>
+        </div>
+    </label>
+
+    <input
+    #fileInput
+    hidden
+    [id]="inputId"
+    type="file"
+    [accept]="accept() == '' ? allowedTypes.join(',') : accept()"
+    [disabled]="disabled"
+    (change)="onFileChange($event)"
+    (blur)="onTouched()"
+  >
+
+</div>

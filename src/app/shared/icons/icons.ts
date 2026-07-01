@@ -29,7 +29,10 @@ import {
   LucideChevronLeft,
   LucideChevronDown,
   LucideArrowDownToLine,
-  LucidePrinter
+  LucidePrinter,
+  LucideLoaderCircle ,
+  LucideCheck,
+  LucideX
 } from '@lucide/angular';
 
 export const Icons = {
@@ -63,5 +66,8 @@ export const Icons = {
   LucideChevronDown,
   LucideMenu,
   LucideArrowDownToLine,
-  LucidePrinter 
+  LucidePrinter ,
+  LucideLoaderCircle ,
+  LucideCheck,
+  LucideX
 };
