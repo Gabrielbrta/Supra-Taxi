@@ -3,6 +3,7 @@ import { Icons } from "../../icons/icons";
 export interface PageResult<T> {
     data?: T[],
     paginadora?: paginadora;
+    status?: status;
 }
 
 interface paginadora {
@@ -12,6 +13,11 @@ interface paginadora {
     totalPages?: number;
     hasNextPage?: boolean;
     hasPreviousPage?: boolean
+}
+
+interface status {
+    status: boolean;
+    message: string; 
 }
 
 export interface ColumnType<T> {

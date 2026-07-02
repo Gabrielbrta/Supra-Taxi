@@ -8,6 +8,8 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { EnderecoComponent } from "../form-steps/endereco/endereco.component";
 import { DadosProfissionaisComponent } from "../form-steps/dados-profissionais/dados-profissionais.component";
 import { DocumentosComponent } from "../form-steps/documentos/documentos.component";
+import { MotoristasService } from '../../../core/services/motoristas.service';
+import { CadastroMotoristaForm, CadastroMotoristaPayload, DocumentItem } from '../../../shared/models/motoristas/cadastroMotoristaPayload';
 
 @Component({
   selector: 'app-motorista-cadastro',
@@ -17,24 +19,24 @@ import { DocumentosComponent } from "../form-steps/documentos/documentos.compone
 })
 export class MotoristaCadastroComponent implements OnInit {
   private fb = inject(FormBuilder);
+  private MotoristaService = inject(MotoristasService);
   
   ngOnInit(): void {
     this.selectedTab(this.tabs[0].key);
-    this.form.valueChanges.subscribe(value => console.log(value));
   }
   
   activeTab: string = '';
 
   form = this.fb.group({
-    dadosPessoais: this.fb.group({
+    dadosPessoais: this.fb.nonNullable.group({
       nomeMotorista: ['', Validators.required],
       nomePai: ['', Validators.required],
       nomeMae: ['', Validators.required],
       cpfMotorista: ['', Validators.required],
       rgMotorista: ['', Validators.required],
       cnhMotorista: ['', Validators.required],
-      dataEmissaoCNH: ['', Validators.required],
-      dataValidadeCNH: ['', Validators.required],
+      dataEmissaoCNH: [null, Validators.required],
+      dataValidadeCNH: [null, Validators.required],
       nacionalidade: ['', Validators.required],
       naturalidade: ['', Validators.required],
       estadoCivil: ['', Validators.required],
@@ -55,19 +57,19 @@ export class MotoristaCadastroComponent implements OnInit {
 
     dadosProfissionais: this.fb.group({
       rct: ['', Validators.required],
-      rctDataValidade: ['', Validators.required],
+      rctDataValidade: [null, Validators.required],
       registro: [null],
       situacao: ['', Validators.required],
       observacoes: [null]
     }),
     documentos: this.fb.group({
-      cnhDocumento: [null],
-      cpf: [null],
-      rg: [null],
-      rct: [null],
-      comprovanteResidencia: [null],
-      antecedentesCriminais: [null],
-      foto: ['', Validators.required],
+      cnhDocumento: this.fb.control<DocumentItem<File> | null>(null),
+      cpf: this.fb.control<DocumentItem<File> | null>(null),
+      rg: this.fb.control<DocumentItem<File> | null>(null),
+      rct: this.fb.control<DocumentItem<File> | null>(null),
+      comprovanteResidencia: this.fb.control<DocumentItem<File> | null>(null),
+      antecedentesCriminais: this.fb.control<DocumentItem<File> | null>(null),
+      foto: this.fb.control<DocumentItem<File> | null>(null, Validators.required),
     })
 
 
@@ -96,9 +98,16 @@ export class MotoristaCadastroComponent implements OnInit {
     this.activeTab = tab;
   }
 
-  onSubmit(event: MouseEvent) {
+  async onSubmit(event: MouseEvent) {
     event.preventDefault();
-    console.log(this.form.value)
+    if(this.form.valid) {
+      const payload = {
+        ...(this.form.getRawValue() as CadastroMotoristaForm), 
+      }
+
+    const result = await this.MotoristaService.cadastroMotorista(payload, crypto.randomUUID());
+    alert(result.status?.message);
+    }
   }
 
 }
