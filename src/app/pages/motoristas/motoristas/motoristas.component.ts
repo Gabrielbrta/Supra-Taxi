@@ -1,13 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { DataSourceTableMotorista } from '../../../shared/models/motoristas/dataSourceTableMotorista';
-import { ColumnType, PageResult, TableAction } from '../../../shared/models/table/Table';
+import { ColumnType, PageResult, paginadora, TableAction } from '../../../shared/models/table/Table';
 import { CardComponent } from "../../../shared/components/card/card.component";
 import { TableComponent } from "../../../shared/components/table/table.component";
 import { MotoristasService } from '../../../core/services/motoristas.service';
+import { PageEvent } from '@angular/material/paginator';
+import { SearchBarComponent } from "../../../shared/components/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-motoristas',
-  imports: [CardComponent, TableComponent],
+  imports: [CardComponent, TableComponent, SearchBarComponent],
   templateUrl: './motoristas.component.html',
   styleUrl: './motoristas.component.scss',
 })
@@ -25,17 +27,17 @@ export class MotoristasComponent implements OnInit {
         type: 'name'
       },
       {
-        key: 'cpfMotorista',
+        key: 'cpf',
         header: 'CPF',
         type: 'cpf'
       },
       {
-        key: 'cnhMotorista',
+        key: 'cnh',
         header: 'CNH',
         type: 'cnh'
       },
       {
-        key: 'telefoneMotorista',
+        key: 'telMotorista',
         header: 'Telefone',
         type: 'tel'
       },
@@ -87,6 +89,13 @@ export class MotoristasComponent implements OnInit {
 
     ngOnInit() {
       this.getMotoristasPaginado();
+    }
+
+    onPage(page: PageEvent) {
+      this.dataSource = this.motoristaService.getTableMotoristasPaginado(
+        page.pageIndex + 1,
+        page.pageSize
+      )
     }
 
     getMotoristasPaginado() {

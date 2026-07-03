@@ -1,10 +1,12 @@
 <main class="container">
+    <app-search-bar></app-search-bar>
     <article class="container-table">
         <app-card>
             <app-table
             [dataSource]="dataSource"
             [displayedColumns]="tableColumns"
             [actions]="actions"
+            (pageChange)="onPage($event)"
             >
 
             </app-table>

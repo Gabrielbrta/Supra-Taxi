@@ -1,7 +1,7 @@
 import {Component, computed, input, output, } from '@angular/core';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import { MatTableModule} from '@angular/material/table';
-import { ColumnType, PageResult, TableAction } from '../../models/table/Table';
+import { ColumnType, PageResult, paginadora, TableAction } from '../../models/table/Table';
 import { DatePipe } from '@angular/common';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
@@ -24,6 +24,7 @@ export class TableComponent {
   
   displayedColumns = input.required<ColumnType<any>[]>();
   dataSource =  input.required<PageResult<any>>();
+  paginadora =  input<paginadora>();
   actions = input<TableAction[]>([])
   actionClick = output<{action: string, row:any}>();
   pageChange = output<PageEvent>();

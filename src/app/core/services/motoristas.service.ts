@@ -4,7 +4,8 @@ import { MOTORISTAS_TABLE } from '../../shared/models/Mock-motoristas-table';
 import { DataSourceTableMotorista } from '../../shared/models/motoristas/dataSourceTableMotorista';
 import { PageResult } from '../../shared/models/table/Table';
 import { CadastroMotoristaForm, CadastroMotoristaPayload, CadastroMotoristaStorage, Documentos } from '../../shared/models/motoristas/cadastroMotoristaPayload';
-import { JsonPipe } from '@angular/common';
+import { DataSource } from '@angular/cdk/collections';
+
 
 @Service()
 export class MotoristasService {
@@ -16,6 +17,7 @@ export class MotoristasService {
         if(!localStorage.getItem(this.STORAGE_KEY_MOTORISTAS_TABLE)) {
             this.save(MOTORISTAS_TABLE, this.STORAGE_KEY_MOTORISTAS_TABLE);
         }
+        this.getTableMotoristasPaginado()
     }
 
     private fileToBase64(file: File): Promise<string> {
@@ -103,13 +105,56 @@ export class MotoristasService {
         }
     }
 
-    getTableMotoristasPaginado(): PageResult<DataSourceTableMotorista> {
-        const data = localStorage.getItem(this.STORAGE_KEY_MOTORISTAS_TABLE);
-        if(!data) {
+    getTableMotoristasPaginado(
+        pageNumber = 1, 
+        pageSize = 10,
+        pesquisa = null
+    ): PageResult<DataSourceTableMotorista> {
+        const storage = localStorage.getItem(this.STORAGE_KEY_MOTORISTAS_CADASTRO);
+        if(!storage) {
             return {
                 data: [],
+                paginadora: {
+                    pageNumber,
+                    pageSize,
+                    totalCount: 0,
+                    totalPages: 0,
+                    hasNextPage: false,
+                    hasPreviousPage: false,
+                }
             }
         }
-        return JSON.parse(data);
+
+        const motoristas = JSON.parse(storage);
+        const data: PageResult<DataSourceTableMotorista> = {
+            data: motoristas.data.map((item: any) => ({
+                    id: item.id,
+                    nomeMotorista: item.dadosPessoais.nomeMotorista,
+                    telMotorista: item.dadosPessoais.celMotorista,
+                    cpf: item.dadosPessoais.cpfMotorista,
+                    rct: item.dadosProfissionais.rct,
+                    cnh: item.dadosPessoais.cnhMotorista,
+                    status: item.dadosProfissionais.situacao,
+                    cadastroMotorista: new Date(),
+                })),
+        }
+
+        const totalCount = data.data?.length;
+        const totalPages = Math.ceil(totalCount! / pageSize);
+
+        const inicio = (pageNumber - 1) * pageSize;
+        const fim = inicio + pageSize;
+
+        return {
+            data: data.data?.slice(inicio, fim),
+            paginadora: {
+                pageNumber,
+                pageSize,
+                totalCount,
+                totalPages,
+                hasNextPage: pageNumber < totalPages,
+                hasPreviousPage: pageNumber > 1
+            }
+        };
     }
 }

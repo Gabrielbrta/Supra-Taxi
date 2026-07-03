@@ -6,7 +6,7 @@ export interface PageResult<T> {
     status?: status;
 }
 
-interface paginadora {
+export interface paginadora {
     pageNumber: number;
     pageSize?: number;
     totalCount?: number;
