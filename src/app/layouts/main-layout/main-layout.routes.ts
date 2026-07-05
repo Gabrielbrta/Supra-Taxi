@@ -46,6 +46,34 @@ export const MainLayoutsRoutes: Routes = [
         title: 'Novo Motorista',
         data: <pageHeaderData> {
             description: "Preencha os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'motoristas',
+            icon: null
+        }
+    },
+    {
+        path: 'motoristas/editar/:id',
+        component: MotoristaCadastroComponent,
+        title: 'Editar Motorista',
+        data: <pageHeaderData> {
+            description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'motoristas',
+            icon: null
+        }
+    },
+    {
+        path: 'motoristas/visualizar/:id',
+        component: MotoristaCadastroComponent,
+        title: 'Editar Motorista',
+        data: <pageHeaderData> {
+            description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'motoristas',
+            icon: null
         }
     },
     {

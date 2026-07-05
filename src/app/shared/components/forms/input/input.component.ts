@@ -4,14 +4,19 @@ import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/da
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { Moment } from 'moment';
 import IMask from 'imask';
+import { LucideAArrowDown, LucideDynamicIcon } from "@lucide/angular";
+import { Icons } from '../../../icons/icons';
+import { output } from '@angular/core';
+
 @Component({
   selector: 'app-input',
   imports: [
     MatInputModule,
-    MatDatepickerModule, 
-    ReactiveFormsModule, 
-    MatInputModule
-  ],
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    LucideDynamicIcon,
+    MatInputModule,
+],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -28,12 +33,16 @@ export class InputComponent implements ControlValueAccessor {
   required = input<boolean>();
   placeholder = input<string>();
   hidden = input<boolean>();
+  readOnly = input<boolean>();
   type = input.required<string>();
   id = input<string>();
   mask = input<string | null>(null);
   max = input<number | null>();
   min = input<number | null>();
   inputId = crypto.randomUUID();
+  icons = Icons;
+  search = output<string>();
+
 
   private onChange = (value:string | Moment | null ) => {};
   private onTouched = () => {};
@@ -65,10 +74,10 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   writeValue(value: string | Moment | null): void {
+    this.value = value ?? '';
     if (this.imask) {
-      this.imask.value = String(value ?? '');
-    } else {
-      this.value = value ?? '';
+      this.imask.value = String(this.value ?? '');
+      this.imask.updateValue();
     }
   }
 
@@ -91,6 +100,11 @@ export class InputComponent implements ControlValueAccessor {
     this.onChange(value);
     this.onTouched();
   }
+  onSearch(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.search.emit(value);
+  }
+
 
   onDateChange(event: MatDatepickerInputEvent<Moment>) {
     this.value = event.value;

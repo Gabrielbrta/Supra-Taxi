@@ -6,14 +6,37 @@
         matInput
         (input)="onInput($event)"
         [placeholder]="placeholder() ?? ''"
-        /* [value]="value" */
+        [value]="value"
         [id]="inputId"
+        [readonly]="readOnly()"
         [required]="required()"
         [disabled]="disabled"
         [type]="type()"
         [attr.maxlength]="max()"
         [attr.minlength]="min()"
         >
+    </div>
+}
+@if(type() === 'search') {
+    <div class="form-wrapper">
+        <label  [for]="inputId" >{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
+        <div class="search-container">
+            <input
+            #input
+            matInput
+            (input)="onSearch($event)"
+            [placeholder]="placeholder() ?? ''"
+            [value]="value"
+            [id]="inputId"
+            [readonly]="readOnly()"
+            [required]="required()"
+            [disabled]="disabled"
+            [type]="type()"
+            [attr.maxlength]="max()"
+            [attr.minlength]="min()"
+            >
+            <svg [lucideIcon]="icons['LucideSearch']"></svg>
+        </div>
     </div>
 }
 @if(type() === 'email') {
@@ -26,7 +49,8 @@
             [placeholder]="placeholder() ?? ''"
             [id]="inputId"
             [required]="required()"
-            /* [value]="value" */
+            [readonly]="readOnly()"
+            [value]="value"
             [disabled]="disabled"
             [type]="type()"
             [attr.maxlength]="max()"
@@ -42,7 +66,8 @@
             matInput
             (input)="onInput($event)"
             [placeholder]="placeholder() ?? ''"
-            /* [value]="value" */
+            [value]="value"
+            [readonly]="readOnly()"
             [id]="inputId"
             [required]="required()"
             [disabled]="disabled"
@@ -60,9 +85,10 @@
             matInput
            (input)="onInput($event)"
             [placeholder]="placeholder() ?? ''"
-            /* [value]="value" */
+            [value]="value"
             [id]="inputId"
             [required]="required()"
+            [readonly]="readOnly()"
             [disabled]="disabled"
             [type]="type()"
             [attr.maxlength]="max()"
@@ -81,15 +107,16 @@
           [value]="value"
           [id]="inputId"
           [disabled]="disabled"
+          [readonly]="readOnly()"
           [required]="required()"
           [placeholder]="placeholder() ?? ''"
           (dateChange)="onDateChange($event)"
           >
-          <div class="date-picker">
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <div class="date-picker">
+              <mat-datepicker-toggle [disabled]="readOnly()" matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker
-              ></mat-datepicker>
-          </div>
+                  ></mat-datepicker>
+              </div>
       </div>
   </div>
 }

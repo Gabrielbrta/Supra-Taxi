@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { InputComponent } from "../forms/input/input.component";
 
 @Component({
@@ -8,5 +8,9 @@ import { InputComponent } from "../forms/input/input.component";
   styleUrl: './search-bar.component.scss',
 })
 export class SearchBarComponent {
+  search = output<string>();
 
+  onSearch(pesquisa: string) {
+    this.search.emit(pesquisa);
+  }
 }

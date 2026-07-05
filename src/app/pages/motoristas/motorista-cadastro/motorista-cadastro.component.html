@@ -34,16 +34,18 @@
                 </div>
                 <div class="container-form-right-side"></div>
             </div>
-            <div class="button-container">
-                <app-button
-                [labelButton]="'Salvar'"
-                [buttonType]="'filled'"
-                [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
-                [disabled]="this.form.invalid"
-                (clicked)="onSubmit($event)"
-                >
-                </app-button>
-            </div>
+            @if(!viewOnly) {
+                <div class="button-container">
+                    <app-button
+                    [labelButton]="'Salvar'"
+                    [buttonType]="'filled'"
+                    [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+                    [disabled]="this.form.invalid"
+                    (clicked)="onSubmit($event)"
+                    >
+                    </app-button>
+                </div>
+            }
         </form>
     </app-card>
 </div>

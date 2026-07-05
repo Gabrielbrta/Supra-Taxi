@@ -8,14 +8,13 @@
         </div>
         
         <div class="header-content-buttons">
-            @if(buttonLabel() && icon()) {
-
+            @if(buttonLabel()) {
                 <app-button
                 [labelButton]="buttonLabel()"
                 (clicked)="click($event)"
-                [buttonType]="'filled'"
+                [buttonType]="buttonType()"
                 [routerLink]="routerLink()"
-                [icon]="icon()"
+                [icon]="icon() ?? ''"
                 ></app-button>
             }
             

@@ -6,6 +6,7 @@ import { TableComponent } from "../../../shared/components/table/table.component
 import { MotoristasService } from '../../../core/services/motoristas.service';
 import { PageEvent } from '@angular/material/paginator';
 import { SearchBarComponent } from "../../../shared/components/search-bar/search-bar.component";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-motoristas',
@@ -15,6 +16,8 @@ import { SearchBarComponent } from "../../../shared/components/search-bar/search
 })
 export class MotoristasComponent implements OnInit {
   private readonly motoristaService = inject(MotoristasService);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   dataSource!: PageResult<DataSourceTableMotorista>;
   tableColumns: ColumnType<DataSourceTableMotorista>[] =  [
       {
@@ -54,21 +57,21 @@ export class MotoristasComponent implements OnInit {
     ]
 
     actions: TableAction[] = [
-        {
-          icon: 'LucidePencil',
-          action: 'edit',
-          tooltip: 'Editar'
-        },
-        {
-          icon: 'LucideTrash2',
-          action: 'delete',
-          tooltip: 'Excluir'
-        },
-        {
-          icon: 'LucideEye',
-          action: 'view',
-          tooltip: 'Visualizar'
-        },
+      {
+        icon: 'LucideEye',
+        action: 'view',
+        tooltip: 'Visualizar'
+      },
+      {
+        icon: 'LucidePencil',
+        action: 'edit',
+        tooltip: 'Editar'
+      },
+      {
+        icon: 'LucideTrash2',
+        action: 'delete',
+        tooltip: 'Excluir'
+      },
         // {
         //   icon: 'LucideKeyRound',
         //   action: 'view',
@@ -96,6 +99,37 @@ export class MotoristasComponent implements OnInit {
         page.pageIndex + 1,
         page.pageSize
       )
+    }
+
+    getSearchValue(value: string) {
+      console.log(value);
+    }
+
+    edit(row: any) {
+      this.router.navigate(['/motoristas/editar', row.id]);
+    }
+    delete(row: any) {
+      
+    }
+    view(row: any) {
+      this.router.navigate(['/motoristas/visualizar', row.id]);
+
+    }
+
+    onActionClick(event: {action: string, row:any}) {
+      console.log(event)
+      if(event.action == 'edit') {
+        this.edit(event.row);
+      } 
+      else if(event.action == 'delete') {
+        this.delete(event.row);
+      } 
+      else if (event.action == 'view') {
+        this.view(event.row);
+      } 
+      else {
+        console.error('ação não existente');
+      }
     }
 
     getMotoristasPaginado() {

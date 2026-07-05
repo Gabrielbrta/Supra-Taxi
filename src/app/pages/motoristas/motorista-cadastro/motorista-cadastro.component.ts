@@ -9,7 +9,9 @@ import { EnderecoComponent } from "../form-steps/endereco/endereco.component";
 import { DadosProfissionaisComponent } from "../form-steps/dados-profissionais/dados-profissionais.component";
 import { DocumentosComponent } from "../form-steps/documentos/documentos.component";
 import { MotoristasService } from '../../../core/services/motoristas.service';
-import { CadastroMotoristaForm, CadastroMotoristaPayload, DocumentItem } from '../../../shared/models/motoristas/cadastroMotoristaPayload';
+import { CadastroMotoristaForm, CadastroMotoristaPayload, CadastroMotoristaStorage, DocumentItem } from '../../../shared/models/motoristas/cadastroMotoristaPayload';
+import { ActivatedRoute } from '@angular/router';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-motorista-cadastro',
@@ -20,47 +22,74 @@ import { CadastroMotoristaForm, CadastroMotoristaPayload, DocumentItem } from '.
 export class MotoristaCadastroComponent implements OnInit {
   private fb = inject(FormBuilder);
   private MotoristaService = inject(MotoristasService);
-  
+  private route = inject(ActivatedRoute)
+  viewOnly: boolean = false; 
   ngOnInit(): void {
+    const path = this.route.snapshot.routeConfig?.path ?? '';
+    const idMotorista: string = this.route.snapshot.paramMap.get('id')!;
+    if(path.includes('editar')) {
+      const motorista = this.getMotoristaById(idMotorista);
+      console.log(motorista);
+
+      if(!motorista) {
+          console.error('Motorista não encontrado');
+          return;
+      }
+      this.patchValueForm(motorista);
+    }
+    if(path.includes('visualizar')){
+      this.form.disable();
+      this.viewOnly = true;
+      const motorista = this.getMotoristaById(idMotorista);
+      console.log(motorista);
+
+      if(!motorista) {
+          console.error('Motorista não encontrado');
+          return;
+      }
+      this.patchValueForm(motorista);
+    }
     this.selectedTab(this.tabs[0].key);
   }
   
   activeTab: string = '';
+  initForm() {
 
+  }
   form = this.fb.group({
     dadosPessoais: this.fb.nonNullable.group({
-      nomeMotorista: ['', Validators.required],
-      nomePai: ['', Validators.required],
-      nomeMae: ['', Validators.required],
-      cpfMotorista: ['', Validators.required],
-      rgMotorista: ['', Validators.required],
-      cnhMotorista: ['', Validators.required],
-      dataEmissaoCNH: [null, Validators.required],
-      dataValidadeCNH: [null, Validators.required],
-      nacionalidade: ['', Validators.required],
-      naturalidade: ['', Validators.required],
-      estadoCivil: ['', Validators.required],
-      escolaridade: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telMotorista: [null],
-      celMotorista: ['', Validators.required]
+      nomeMotorista: this.fb.control<string>('', Validators.required),
+      nomePai: this.fb.control<string>('', Validators.required),
+      nomeMae: this.fb.control<string>('', Validators.required),
+      cpfMotorista: this.fb.control<string>('', Validators.required),
+      rgMotorista: this.fb.control<string>('', Validators.required),
+      cnhMotorista: this.fb.control<string>('', Validators.required),
+      dataEmissaoCNH: this.fb.control<Moment | string>('', Validators.required),
+      dataValidadeCNH: this.fb.control<Moment | string>('',Validators.required),
+      nacionalidade: this.fb.control<string>('', Validators.required),
+      naturalidade: this.fb.control<string>('', Validators.required),
+      estadoCivil: this.fb.control<string | number>('', Validators.required),
+      escolaridade: this.fb.control<string | number>('', Validators.required),
+      email: this.fb.control<string>('', Validators.email),
+      telMotorista: this.fb.control<string | null>(null),
+      celMotorista: this.fb.control<string>('', Validators.required)
     }),
     endereco: this.fb.group({
-      cep: ['', Validators.required],
-      endereco: ['', Validators.required],
-      numero: [null],
-      complemento: [null],
-      bairro: [null],
-      cidade: ['', Validators.required],
-      estado: ['', Validators.required]
+      cep: this.fb.control<string>('', Validators.required),
+      endereco:  this.fb.control<string>('', Validators.required),
+      numero:  this.fb.control<string | null>(null),
+      complemento: this.fb.control<string | null>(null),
+      bairro: this.fb.control<string | null>(null),
+      cidade:  this.fb.control<string>('', Validators.required),
+      estado:  this.fb.control<string>('', Validators.required)
     }),
 
     dadosProfissionais: this.fb.group({
-      rct: ['', Validators.required],
-      rctDataValidade: [null, Validators.required],
-      registro: [null],
-      situacao: ['', Validators.required],
-      observacoes: [null]
+      rct: this.fb.control<string>('', Validators.required),
+      rctDataValidade: this.fb.control<Moment | string>('',Validators.required),
+      registro: this.fb.control<string | null>(null),
+      situacao: this.fb.control<string | number>('', Validators.required),
+      observacoes: this.fb.control<string | null>(null)
     }),
     documentos: this.fb.group({
       cnhDocumento: this.fb.control<DocumentItem<File> | null>(null),
@@ -74,6 +103,24 @@ export class MotoristaCadastroComponent implements OnInit {
 
 
   });
+
+  patchValueForm(motorista: CadastroMotoristaStorage) {
+    this.form.patchValue({
+      dadosPessoais: motorista.dadosPessoais,
+      endereco: motorista.endereco,
+      dadosProfissionais: motorista.dadosProfissionais,
+      documentos: {
+        // cnhDocumento: motorista.documentos.cnhDocumento,
+        // cpf: motorista.documentos.cpf,
+        // rg: motorista.documentos.rg,
+        // rct: motorista.documentos.rct,
+        // comprovanteResidencia: motorista.documentos.comprovanteResidencia,
+        // antecedentesCriminais: motorista.documentos.antecedentesCriminais,
+        // foto: motorista.documentos.foto,
+      }
+    })
+  }
+
 
   tabs: TabsHeader[] = [
     {
@@ -96,6 +143,11 @@ export class MotoristaCadastroComponent implements OnInit {
 
   selectedTab(tab: string) {
     this.activeTab = tab;
+  }
+
+  getMotoristaById(idMotorista: string) {
+    const motorista = this.MotoristaService.getMotoristaById(idMotorista);
+    return motorista;
   }
 
   async onSubmit(event: MouseEvent) {

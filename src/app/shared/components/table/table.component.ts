@@ -24,7 +24,6 @@ export class TableComponent {
   
   displayedColumns = input.required<ColumnType<any>[]>();
   dataSource =  input.required<PageResult<any>>();
-  paginadora =  input<paginadora>();
   actions = input<TableAction[]>([])
   actionClick = output<{action: string, row:any}>();
   pageChange = output<PageEvent>();

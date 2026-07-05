@@ -51,7 +51,7 @@ export class InputSelectComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = this.disabled;
+    this.disabled = isDisabled;
   }
 
   onSelectionChange(value: string) {

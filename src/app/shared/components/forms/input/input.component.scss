@@ -22,6 +22,26 @@
 
 }
 
+.search-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    position:  relative;
+
+    svg {
+        position: absolute;
+        display: block;
+        max-width: 18px;
+        max-height: 18px;
+        left: 15px;
+        color: var(--palette-gray-400);
+    }
+
+    input {
+        padding-left: 40px;
+    }
+}
+
 label {
     font-size: var(--font-size-sm) !important;
 
@@ -45,5 +65,9 @@ input {
     &:focus {
         outline: 1px solid var(--outline-focus);
 
+    }
+
+    &:read-only {
+        background-color: var(--palette-gray-300);
     }
 }

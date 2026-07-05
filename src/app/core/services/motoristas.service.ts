@@ -105,6 +105,16 @@ export class MotoristasService {
         }
     }
 
+    getMotoristaById(idMotorista: string) {
+        try {
+            const data = this.getMotoristasCadastrados();
+            return data.data?.find((item) => item.id === idMotorista);
+        } catch(e) {
+            console.error(e);
+            return undefined;
+        }
+    }
+
     getTableMotoristasPaginado(
         pageNumber = 1, 
         pageSize = 10,

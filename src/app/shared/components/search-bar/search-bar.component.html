@@ -1,8 +1,9 @@
 <div class="bar-container">
     <div class="input-container">
         <app-input
-        [type]="'text'"
+        [type]="'search'"
         [label]="''"
+        (search)="onSearch($event)"
         [placeholder]="'Pesquise por prefixo ou nome'"
         [required]="false"
         >

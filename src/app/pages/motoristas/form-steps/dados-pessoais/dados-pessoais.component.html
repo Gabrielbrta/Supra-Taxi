@@ -125,6 +125,8 @@
             [type]="'tel'"
             [required]="false"
             [mask]="'(00) 0000-0000'"
+            [max]="14"
+            [min]="14"
             [placeholder]="'(13) 9999-9999'"
             formControlName="telMotorista"
             >
@@ -133,6 +135,8 @@
             [label]="'Celular'"
             [type]="'tel'"
             [required]="true"
+            [max]="15"
+            [min]="15"
             [mask]="'(00) 00000-0000'"
             [placeholder]="'(13) 99999-9999'"
             formControlName="celMotorista"
