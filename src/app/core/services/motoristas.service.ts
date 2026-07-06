@@ -3,8 +3,9 @@ import { inject, Service } from '@angular/core';
 import { MOTORISTAS_TABLE } from '../../shared/models/Mock-motoristas-table';
 import { DataSourceTableMotorista } from '../../shared/models/motoristas/dataSourceTableMotorista';
 import { PageResult } from '../../shared/models/table/Table';
-import { CadastroMotoristaForm, CadastroMotoristaPayload, CadastroMotoristaStorage, Documentos } from '../../shared/models/motoristas/cadastroMotoristaPayload';
+import { CadastroMotoristaForm, CadastroMotoristaDTO, CadastroMotoristaStorage, Documentos } from '../../shared/models/motoristas/cadastroMotoristaDTO';
 import { DataSource } from '@angular/cdk/collections';
+import moment from 'moment';
 
 
 @Service()
@@ -108,10 +109,63 @@ export class MotoristasService {
     getMotoristaById(idMotorista: string) {
         try {
             const data = this.getMotoristasCadastrados();
-            return data.data?.find((item) => item.id === idMotorista);
+            const motorista = data.data?.find((item) => item.id === idMotorista)
+
+            if(!motorista) {
+                return false;
+            }
+            return motorista;
         } catch(e) {
             console.error(e);
             return undefined;
+        }
+    }
+    async editMotoristaById(idMotorista: string, payload: CadastroMotoristaForm) {
+        try {
+             const keys = Object.keys(payload.documentos) as Array<keyof Documentos<File>>;
+            const documentos = {} as Documentos<string>;
+
+            for(const key of keys) {
+                const documento = payload.documentos[key];
+
+                if(!documento) {
+                    if (key === 'foto') {
+                        throw new Error('A foto é obrigatória.');
+                    }
+                    documentos[key] = null;
+                    continue;
+                }
+    
+                documentos[key as keyof Documentos<string>] = {
+                    file: await this.fileToBase64(documento.file),
+                    fileName: documento.file.name,
+                    mimeType: documento.file.type,
+                    documentType: documento.documentType,
+                }
+            }
+            const response = this.getMotoristasCadastrados();
+            if(!response.data) {
+                return false;
+            }
+
+            const index = response.data?.findIndex(item => item.id === idMotorista);
+
+            if(index === -1) {
+                return false;
+            }
+
+            response.data[index] = {
+                ...response.data[index],
+                ...payload,
+                documentos
+            }
+
+            this.save(response, this.STORAGE_KEY_MOTORISTAS_CADASTRO);
+            return true;
+
+        } catch(e) {
+            console.error(e);
+            return false;
         }
     }
 

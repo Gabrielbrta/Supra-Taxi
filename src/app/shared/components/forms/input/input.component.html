@@ -6,7 +6,7 @@
         matInput
         (input)="onInput($event)"
         [placeholder]="placeholder() ?? ''"
-        [value]="value"
+        /* [value]="value" */
         [id]="inputId"
         [readonly]="readOnly()"
         [required]="required()"
@@ -26,7 +26,7 @@
             matInput
             (input)="onSearch($event)"
             [placeholder]="placeholder() ?? ''"
-            [value]="value"
+            /* [value]="value" */
             [id]="inputId"
             [readonly]="readOnly()"
             [required]="required()"
@@ -50,7 +50,7 @@
             [id]="inputId"
             [required]="required()"
             [readonly]="readOnly()"
-            [value]="value"
+            /* [value]="value" */
             [disabled]="disabled"
             [type]="type()"
             [attr.maxlength]="max()"
@@ -66,7 +66,7 @@
             matInput
             (input)="onInput($event)"
             [placeholder]="placeholder() ?? ''"
-            [value]="value"
+            /* [value]="value" */
             [readonly]="readOnly()"
             [id]="inputId"
             [required]="required()"
@@ -85,7 +85,7 @@
             matInput
            (input)="onInput($event)"
             [placeholder]="placeholder() ?? ''"
-            [value]="value"
+            /* [value]="value" */
             [id]="inputId"
             [required]="required()"
             [readonly]="readOnly()"
@@ -104,7 +104,7 @@
           #input
           matInput 
           [matDatepicker]="picker"
-          [value]="value"
+          /* [value]="value" */
           [id]="inputId"
           [disabled]="disabled"
           [readonly]="readOnly()"
@@ -113,7 +113,7 @@
           (dateChange)="onDateChange($event)"
           >
               <div class="date-picker">
-              <mat-datepicker-toggle [disabled]="readOnly()" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker-toggle [disabled]="disabled" matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker
                   ></mat-datepicker>
               </div>

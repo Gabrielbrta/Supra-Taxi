@@ -67,7 +67,7 @@ export const MainLayoutsRoutes: Routes = [
     {
         path: 'motoristas/visualizar/:id',
         component: MotoristaCadastroComponent,
-        title: 'Editar Motorista',
+        title: 'Visualizar Motorista',
         data: <pageHeaderData> {
             description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
             buttonLabel: "Voltar",

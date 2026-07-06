@@ -9,9 +9,10 @@ import { EnderecoComponent } from "../form-steps/endereco/endereco.component";
 import { DadosProfissionaisComponent } from "../form-steps/dados-profissionais/dados-profissionais.component";
 import { DocumentosComponent } from "../form-steps/documentos/documentos.component";
 import { MotoristasService } from '../../../core/services/motoristas.service';
-import { CadastroMotoristaForm, CadastroMotoristaPayload, CadastroMotoristaStorage, DocumentItem } from '../../../shared/models/motoristas/cadastroMotoristaPayload';
-import { ActivatedRoute } from '@angular/router';
+import { CadastroMotoristaForm, CadastroMotoristaDTO, CadastroMotoristaStorage, DocumentItem } from '../../../shared/models/motoristas/cadastroMotoristaDTO';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'app-motorista-cadastro',
@@ -23,14 +24,16 @@ export class MotoristaCadastroComponent implements OnInit {
   private fb = inject(FormBuilder);
   private MotoristaService = inject(MotoristasService);
   private route = inject(ActivatedRoute)
+  private router = inject(Router);
   viewOnly: boolean = false; 
+  mode: string = '';
+  idMotorista: string = this.route.snapshot.paramMap.get('id')!;
   ngOnInit(): void {
     const path = this.route.snapshot.routeConfig?.path ?? '';
-    const idMotorista: string = this.route.snapshot.paramMap.get('id')!;
     if(path.includes('editar')) {
-      const motorista = this.getMotoristaById(idMotorista);
-      console.log(motorista);
+      this.mode = 'edit';
 
+      const motorista = this.getMotoristaById(this.idMotorista);
       if(!motorista) {
           console.error('Motorista não encontrado');
           return;
@@ -38,9 +41,9 @@ export class MotoristaCadastroComponent implements OnInit {
       this.patchValueForm(motorista);
     }
     if(path.includes('visualizar')){
-      this.form.disable();
       this.viewOnly = true;
-      const motorista = this.getMotoristaById(idMotorista);
+      this.form.disable();
+      const motorista = this.getMotoristaById(this.idMotorista);
       console.log(motorista);
 
       if(!motorista) {
@@ -64,8 +67,8 @@ export class MotoristaCadastroComponent implements OnInit {
       cpfMotorista: this.fb.control<string>('', Validators.required),
       rgMotorista: this.fb.control<string>('', Validators.required),
       cnhMotorista: this.fb.control<string>('', Validators.required),
-      dataEmissaoCNH: this.fb.control<Moment | string>('', Validators.required),
-      dataValidadeCNH: this.fb.control<Moment | string>('',Validators.required),
+      dataEmissaoCNH: this.fb.control<Moment | string | Date>('', Validators.required),
+      dataValidadeCNH: this.fb.control<Moment | string | Date>('',Validators.required),
       nacionalidade: this.fb.control<string>('', Validators.required),
       naturalidade: this.fb.control<string>('', Validators.required),
       estadoCivil: this.fb.control<string | number>('', Validators.required),
@@ -86,7 +89,7 @@ export class MotoristaCadastroComponent implements OnInit {
 
     dadosProfissionais: this.fb.group({
       rct: this.fb.control<string>('', Validators.required),
-      rctDataValidade: this.fb.control<Moment | string>('',Validators.required),
+      rctDataValidade: this.fb.control<Moment | string | Date>('',Validators.required),
       registro: this.fb.control<string | null>(null),
       situacao: this.fb.control<string | number>('', Validators.required),
       observacoes: this.fb.control<string | null>(null)
@@ -145,6 +148,10 @@ export class MotoristaCadastroComponent implements OnInit {
     this.activeTab = tab;
   }
 
+  back(event: MouseEvent) {
+    this.router.navigate(['/motoristas'])
+  }
+
   getMotoristaById(idMotorista: string) {
     const motorista = this.MotoristaService.getMotoristaById(idMotorista);
     return motorista;
@@ -156,9 +163,26 @@ export class MotoristaCadastroComponent implements OnInit {
       const payload = {
         ...(this.form.getRawValue() as CadastroMotoristaForm), 
       }
+      payload.dadosPessoais.dataEmissaoCNH =
+        moment(payload.dadosPessoais.dataEmissaoCNH).format('DD/MM/YYYY');
 
-    const result = await this.MotoristaService.cadastroMotorista(payload, crypto.randomUUID());
-    alert(result.status?.message);
+      payload.dadosPessoais.dataValidadeCNH =
+        moment(payload.dadosPessoais.dataValidadeCNH).format('DD/MM/YYYY')
+
+      payload.dadosProfissionais.rctDataValidade =
+       moment(payload.dadosProfissionais.rctDataValidade).format('DD/MM/YYYY')
+
+    if(this.mode == 'edit'){
+      const result = await this.MotoristaService.editMotoristaById(this.idMotorista, payload);
+      if(result) {
+        alert('Motorista editado com sucesso!');
+      } else {
+        alert('Ocorreu um erro ao editar motorista!');
+      }
+    } else {
+      const result = await this.MotoristaService.cadastroMotorista(payload, crypto.randomUUID());
+      alert(result.status?.message);
+    }
     }
   }
 

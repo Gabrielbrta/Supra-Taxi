@@ -1,6 +1,6 @@
 import { Moment } from "moment";
 
-export interface CadastroMotoristaPayload<TFile = File> {
+export interface CadastroMotoristaDTO<TFile = File> {
     id: string,
     dadosPessoais: DadosPessoais;
     endereco: Endereco;
@@ -15,8 +15,8 @@ interface DadosPessoais {
     cpfMotorista: string;
     rgMotorista: string;
     cnhMotorista: string;
-    dataEmissaoCNH: Moment | string | null;
-    dataValidadeCNH: Moment | string | null;
+    dataEmissaoCNH: Moment | string | Date | null;
+    dataValidadeCNH: Moment | string | Date | null;
     nacionalidade: string;
     naturalidade: string;
     estadoCivil: number | string;
@@ -28,7 +28,7 @@ interface DadosPessoais {
 
 interface DadosProfissionais {
     rct: string,
-    rctDataValidade: Moment | string | null,
+    rctDataValidade: Moment | string | Date | null,
     registro: string | null,
     situacao: number | string,
     observacoes: string | null
@@ -61,6 +61,6 @@ export interface DocumentItem<TFile> {
     documentType: string | null;
 }
 
-export type CadastroMotoristaForm = CadastroMotoristaPayload<File>;
+export type CadastroMotoristaForm = CadastroMotoristaDTO<File>;
 
-export type CadastroMotoristaStorage = CadastroMotoristaPayload<string>;
+export type CadastroMotoristaStorage = CadastroMotoristaDTO<string>;

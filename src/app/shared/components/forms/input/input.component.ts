@@ -1,4 +1,4 @@
-import { afterNextRender, Component, effect, ElementRef, forwardRef, input, viewChild } from '@angular/core';
+import { Component, effect, ElementRef, forwardRef, input, viewChild } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerInputEvent, MatDatepickerModule} from '@angular/material/datepicker';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import IMask from 'imask';
 import { LucideAArrowDown, LucideDynamicIcon } from "@lucide/angular";
 import { Icons } from '../../../icons/icons';
 import { output } from '@angular/core';
+import moment from 'moment';
 
 @Component({
   selector: 'app-input',
@@ -53,31 +54,53 @@ export class InputComponent implements ControlValueAccessor {
   disabled: boolean = false;
 
   constructor() {
-    afterNextRender(() => {
-      const element = this.inputRef()?.nativeElement;
-      const mask = this.mask();
+    effect(() => {
+      const input = this.inputRef()?.nativeElement;
 
-      if (!element || !mask) {
+      if (!input) {
         return;
       }
 
-      this.imask?.destroy();
+      if (this.imask) {
+        this.imask.destroy();
+        this.imask = undefined;
+      }
 
-      this.imask = IMask(element, {
-        mask
-      });
+      if (this.mask()) {
+        this.imask = IMask(input, {
+          mask: this.mask()!
+        });
 
-      this.imask.on('accept', () => {
-        this.onChange(this.imask!.value);
-      });
-    });
+        this.imask.value = String(this.value ?? '');
+
+        this.imask.on('accept', () => {
+          this.value = this.imask!.value;
+          this.onChange(this.imask!.value);
+          this.onTouched();
+        });
+      } else {
+        input.value = String(this.value ?? '');
+      }
+  });
   }
 
   writeValue(value: string | Moment | null): void {
-    this.value = value ?? '';
+    this.value = value;
+
+    const input = this.inputRef()?.nativeElement;
+
+    if (!input) {
+      return;
+    }
+
+    if (this.type() === 'date') {
+      return;
+    }
+
     if (this.imask) {
-      this.imask.value = String(this.value ?? '');
-      this.imask.updateValue();
+      this.imask.value = String(value ?? '');
+    } else {
+      input.value = String(value ?? '');
     }
   }
 
@@ -94,6 +117,9 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   onInput(event: Event) {
+    if (this.imask) {
+      return;
+    }
     const value = (event.target as HTMLInputElement).value;
 
     this.value = value;
