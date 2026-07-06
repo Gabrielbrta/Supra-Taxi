@@ -1,0 +1,122 @@
+@if(type() === 'text') {
+    <div class="form-wrapper">
+        <label  [for]="inputId" >{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
+        <input 
+        #input
+        matInput
+        (input)="onInput($event)"
+        [placeholder]="placeholder() ?? ''"
+        /* [value]="value" */
+        [id]="inputId"
+        [readonly]="readOnly()"
+        [required]="required()"
+        [disabled]="disabled"
+        [type]="type()"
+        [attr.maxlength]="max()"
+        [attr.minlength]="min()"
+        >
+    </div>
+}
+@if(type() === 'search') {
+    <div class="form-wrapper">
+        <label  [for]="inputId" >{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
+        <div class="search-container">
+            <input
+            #input
+            matInput
+            (input)="onSearch($event)"
+            [placeholder]="placeholder() ?? ''"
+            /* [value]="value" */
+            [id]="inputId"
+            [readonly]="readOnly()"
+            [required]="required()"
+            [disabled]="disabled"
+            [type]="type()"
+            [attr.maxlength]="max()"
+            [attr.minlength]="min()"
+            >
+            <svg [lucideIcon]="icons['LucideSearch']"></svg>
+        </div>
+    </div>
+}
+@if(type() === 'email') {
+        <div class="form-wrapper">
+            <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
+            <input 
+            #input
+            matInput
+            (input)="onInput($event)"
+            [placeholder]="placeholder() ?? ''"
+            [id]="inputId"
+            [required]="required()"
+            [readonly]="readOnly()"
+            /* [value]="value" */
+            [disabled]="disabled"
+            [type]="type()"
+            [attr.maxlength]="max()"
+            [attr.minlength]="min()"
+            >
+        </div>
+}
+@if(type() === 'tel') {
+        <div class="form-wrapper">
+            <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
+            <input 
+            #input
+            matInput
+            (input)="onInput($event)"
+            [placeholder]="placeholder() ?? ''"
+            /* [value]="value" */
+            [readonly]="readOnly()"
+            [id]="inputId"
+            [required]="required()"
+            [disabled]="disabled"
+            [type]="type()"
+            [attr.maxlength]="max()"
+            [attr.minlength]="min()"
+            >
+        </div>
+}
+@if(type() === 'password') {
+    <div class="form-wrapper">
+        <label [for]="inputId">{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label>
+        <input 
+            #input
+            matInput
+           (input)="onInput($event)"
+            [placeholder]="placeholder() ?? ''"
+            /* [value]="value" */
+            [id]="inputId"
+            [required]="required()"
+            [readonly]="readOnly()"
+            [disabled]="disabled"
+            [type]="type()"
+            [attr.maxlength]="max()"
+            [attr.minlength]="min()"
+        >
+    </div>
+}
+@if(type() === 'date') {
+  <div class="form-wrapper-date">
+      <label [for]="inputId">{{label()}} <span>{{required() ? '*' : ''}}</span></label>
+      <div class="form-wrapper-input">
+          <input 
+          #input
+          matInput 
+          [matDatepicker]="picker"
+          /* [value]="value" */
+          [id]="inputId"
+          [disabled]="disabled"
+          [readonly]="readOnly()"
+          [required]="required()"
+          [placeholder]="placeholder() ?? ''"
+          (dateChange)="onDateChange($event)"
+          >
+              <div class="date-picker">
+              <mat-datepicker-toggle [disabled]="disabled" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker
+                  ></mat-datepicker>
+              </div>
+      </div>
+  </div>
+}

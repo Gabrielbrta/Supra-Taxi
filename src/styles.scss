@@ -254,14 +254,42 @@ body::-webkit-scrollbar {
 
 }
 
+//tooltip
 :root {
   @include mat.tooltip-overrides((
     container-color: var(--primary-blue-900),
     supporting-text-color: var(--palette-gray-100),
     supporting-text-size: var(--font-size-sm)
+    ));
+  }
+// datepicker  
+:root {
+  --mat-datepicker-calendar-container-elevation-shadow:
+    0px 12px 32px rgba(0, 0, 0, 0.2);
+}
+:root {
+  @include mat.datepicker-overrides((
+    calendar-body-label-text-color: var(--pallete-gray-900),
+    toggle-icon-color: var(--primary-blue-700),
+    calendar-container-shape: var(--radius-lg),
+    calendar-container-background-color: var(--palette-white),
+    calendar-container-touch-elevation-shadow: 0px 0px 10px var(--pallete-gray-900),
   ));
 }
+ 
 
+::ng-deep .mat-calendar-content {
+  box-shadow: 0 8px 32px rgba(189, 88, 88, 0.25) !important;
+}
+
+// select panel
+:root {
+  @include mat.select-overrides((
+    panel-background-color: var(--palette-white),
+    enabled-trigger-text-color: var(--palette-gray-800) ,
+    trigger-text-size: var(--font-size-sm),
+  ));
+}
 // Estilos extras que não dependem do Material podem vir aqui
 // Exemplo:
 @include mix.design-tokens-css-vars;

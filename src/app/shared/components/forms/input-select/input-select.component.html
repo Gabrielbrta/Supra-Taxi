@@ -1,0 +1,21 @@
+<div class="form-wrapper">
+    @if(label()) {
+        <label>{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label> 
+
+    }
+    <mat-form-field  appearance="outline">
+      <mat-select 
+      [value]="value"
+      [required]="required()" 
+      [disabled]="disabled"
+      [placeholder]="placeholder()"
+      (selectionChange)="onSelectionChange($event.value)"
+      panelClass="custom-panel">
+        @if(selectSource().data?.length) {
+            @for (item of selectSource().data; track item.id) {
+              <mat-option [matTooltip]="item.value" [matTooltipPosition]="'right'" [value]="item.id">{{item.value}}</mat-option>
+            }
+        }
+      </mat-select>
+    </mat-form-field>
+</div>

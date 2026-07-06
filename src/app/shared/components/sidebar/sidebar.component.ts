@@ -1,12 +1,12 @@
 import { Component, EventEmitter, output, Output } from '@angular/core';
 import { Icons } from '../../icons/icons';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { MenuItemsComponent } from '../menu-items/menu-items.component';
 import { MenuItem } from '../../models/menu/menuList';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [LucideAngularModule, MenuItemsComponent ],
+  imports: [LucideDynamicIcon, MenuItemsComponent ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
@@ -33,63 +33,63 @@ export class SidebarComponent {
       name: 'Operação',
       label: 'Dashboard',
       path: '/dashboard',
-      icon: this.icons.LayoutDashboard,
+      icon: this.icons.LucideLayoutDashboard,
       children: []
     },
     {
       name: null,
       label: 'Motoristas',
       path: '/motoristas',
-      icon: this.icons.Car,
+      icon: this.icons.LucideCar,
       children: []
     },
     {
       name: null,
       label: 'Associados',
       path: '/associados',
-      icon: this.icons.Users,
+      icon: this.icons.LucideUsers,
       children: []
     },
     {
       name: null,
       label: 'Vistorias',
       path: '/vistorias',
-      icon: this.icons.ClipboardCheck,
+      icon: this.icons.LucideClipboardCheck,
       children: []
     },
     {
       name: null,
       label: 'Unidades',
       path: '/unidades',
-      icon: this.icons.ListOrdered,
+      icon: this.icons.LucideListOrdered,
       children: []
     },
     {
       name: null,
       label: 'Ocorrências',
       path: '/ocorrencias',
-      icon: this.icons.OctagonAlert,
+      icon: this.icons.LucideOctagonAlert,
       children: []
     },
     {
       name: null,
       label: 'Banidos',
       path: '/banidos',
-      icon: this.icons.Ban,
+      icon: this.icons.LucideBan,
       children: []
     },
     {
       name: null,
       label: 'Usuários',
       path: '/usuarios',
-      icon: this.icons.UserCog,
+      icon: this.icons.LucideUserCog,
       children: []
     },
     {
       name: null,
       label: 'Configurações',
       path: '/configuracoes',
-      icon: this.icons.Settings,
+      icon: this.icons.LucideSettings,
       children: []
     }
   ];

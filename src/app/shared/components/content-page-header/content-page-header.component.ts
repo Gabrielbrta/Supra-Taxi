@@ -1,15 +1,14 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { every, filter } from 'rxjs';
-import { LucideAngularModule } from "lucide-angular";
 import { Icons } from '../../icons/icons';
-import { MatButtonModule } from '@angular/material/button';
+import { MatButtonAppearance, MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from '../button/button.component';
 
 
 @Component({
   selector: 'app-content-page-header',
-  imports: [LucideAngularModule, MatButtonModule, ButtonComponent],
+  imports: [MatButtonModule, ButtonComponent],
   templateUrl: './content-page-header.component.html',
   styleUrl: './content-page-header.component.scss',
 })
@@ -24,8 +23,9 @@ click($event: MouseEvent) {
   title = signal<string>('');
   description = signal<string>('');
   buttonLabel = signal<string>('');
+  buttonType = signal<MatButtonAppearance>('filled');
   routerLink = signal<string>('');
-  icon = signal<keyof typeof Icons>('Plus');
+  icon = signal<keyof typeof Icons>('LucidePlus');
   exportable = signal<boolean>(false);
 
   ngOnInit() {
@@ -52,6 +52,7 @@ click($event: MouseEvent) {
       this.title.set(route.snapshot.title ?? "");
       this.description.set(route.snapshot.data['description'] ?? '');
       this.buttonLabel.set(route.snapshot.data['buttonLabel'] ?? '');
+      this.buttonType.set(route.snapshot.data['buttonType'] ?? 'filled');
       this.icon.set(route.snapshot.data['icon'] ?? '');
       this.routerLink.set(route.snapshot.data['routerLink'] ?? '');
       this.exportable.set(route.snapshot.data['exportable'] ?? false);

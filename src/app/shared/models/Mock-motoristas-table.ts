@@ -7,30 +7,30 @@ export const MOTORISTAS_TABLE: PageResult<DataSourceTableMotorista> = {
         {
             id: 'asd1234-1234123',
             nomeMotorista: 'Carlos Eduardo Silva',
-            cpfMotorista: '123.456.789-01',
-            cnhMotorista: '12345678901',
-            rctMotorista: '0042',
-            telefoneMotorista: '11987654321',
+            cpf: '123.456.789-01',
+            cnh: '12345678901',
+            rct: '0042',
+            telMotorista: '11987654321',
             status: StatusEnum.Ativo,
             cadastroMotorista: new Date('06-03-2024')
         },
         {
             id: 'asd1234-1234412',
             nomeMotorista: 'Pedro Henrique Souza',
-            cpfMotorista: '23456789012',
-            cnhMotorista: '23456789012',
-            rctMotorista: '0118',
-            telefoneMotorista: '11976543210',
+            cpf: '23456789012',
+            cnh: '23456789012',
+            rct: '0118',
+            telMotorista: '11976543210',
             status: StatusEnum.Ativo,
             cadastroMotorista: new Date('06-03-2024')
         },
         {
             id: 'asd143234-1234412',
             nomeMotorista: 'Roberto Almeida',
-            cpfMotorista: '34567890123',
-            cnhMotorista: '23456789012',
-            rctMotorista: '0118',
-            telefoneMotorista: '11976543210',
+            cpf: '34567890123',
+            cnh: '23456789012',
+            rct: '0118',
+            telMotorista: '11976543210',
             status: StatusEnum.Inativo,
             cadastroMotorista: new Date('06-03-2024')
         }

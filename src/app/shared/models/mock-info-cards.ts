@@ -6,33 +6,33 @@ export const INFO_CARDS: InfoCardsData =  {
             title: '1.284',
             description: 'Motoristas Ativos',
             stats: '12',
-            icon: 'Car',
+            icon: 'LucideCar',
             typeIconStatus: 'data',
-            statsIcon: 'ClipboardCheck'
+            statsIcon: 'LucideClipboardCheck'
         },
         {
             title: '318',
             description: 'Associados Ativos',
             stats: '3',
-            icon: 'Users',
+            icon: 'LucideUsers',
             typeIconStatus: 'data',
-            statsIcon: 'ClipboardCheck'
+            statsIcon: 'LucideClipboardCheck'
         },
         {
             title: '2.741',
             description: 'Vistorias Registradas',
             stats: '128',
-            icon: 'ClipboardCheck',
+            icon: 'LucideClipboardCheck',
             typeIconStatus: 'approved',
-            statsIcon: 'ClipboardCheck'
+            statsIcon: 'LucideClipboardCheck'
         },
         {
             title: '47',
             description: 'Documentos Pendentes',
             stats: '9',
-            icon: 'TriangleAlert',
+            icon: 'LucideTriangleAlert',
             typeIconStatus: 'denied',
-            statsIcon: 'ClipboardCheck'
+            statsIcon: 'LucideClipboardCheck'
         }
     ]
 }

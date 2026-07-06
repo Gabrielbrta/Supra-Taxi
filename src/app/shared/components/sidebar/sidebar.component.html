@@ -1,7 +1,7 @@
 <aside> 
     <div class="logo-container" [class.center]="this.isClose">
         <span class="bg-logo">
-            <lucide-icon class="logo" [img]="icons.Car"></lucide-icon>        
+            <svg class="logo" [lucideIcon]="icons.LucideCar"></svg>        
         </span>
         @if(!this.isClose) {
             <div class="title-name">
@@ -14,7 +14,7 @@
         <button
             (click)="toggleClose()"
         >
-        <lucide-icon [img]=" this.isClose ? icons.ChevronRight: icons.ChevronLeft"></lucide-icon>
+        <svg [lucideIcon]=" this.isClose ? icons.LucideChevronRight: icons.LucideChevronLeft"></svg>
         @if(!this.isClose) {
             <p>Recolher menu</p>
         }

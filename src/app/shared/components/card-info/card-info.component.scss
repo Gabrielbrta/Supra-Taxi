@@ -52,7 +52,7 @@
     padding: 5px;
     border-radius: 50%;
 
-    lucide-icon{
+    svg.lucide{
         width: 22px;
     }
 
@@ -75,7 +75,7 @@
 }
 
 .card > .info-stats .icon:last-of-type {
-    lucide-icon {
+    svg.lucide {
         color: var(--primary-green-700);
     }
 }

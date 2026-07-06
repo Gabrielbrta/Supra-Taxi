@@ -1,19 +1,58 @@
-<app-card>
-    <app-form-tabs
-    [tabs]="tabs"
-    (clicked)="selectedTab($event)"
-    ></app-form-tabs>
 
-    <div [hidden]="this.activeTab !== 'dados_pessoais'">
-        <p>Dados pessoais</p>
-    </div>
-    <div [hidden]="this.activeTab !== 'endereco'">
-        <p>Endereco</p>
-    </div>
-    <div [hidden]="this.activeTab !== 'dados_profissionais'">
-        <p>Dados profissionais</p>
-    </div>
-    <div [hidden]="this.activeTab !== 'documentos'">
-        <p>Documentos</p>
-    </div>
-</app-card>
+<div class="container-motoristas">
+    <app-card>
+            <app-form-tabs
+            [tabs]="tabs"
+            (clicked)="selectedTab($event)"
+            ></app-form-tabs>
+        <form class="container-form" [formGroup]="form">
+        
+            <div class="container-sides">
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'dados_pessoais'">
+                    <app-dados-pessoais
+                    [formGroup]="form.controls.dadosPessoais"
+                    >
+                    </app-dados-pessoais>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'endereco'">
+                    <app-endereco
+                    [formGroup]="form.controls.endereco"
+                    ></app-endereco>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'dados_profissionais'">
+                    <app-dados-profissionais
+                    [formGroup]="form.controls.dadosProfissionais"
+                    >
+
+                    </app-dados-profissionais>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'documentos'">
+                    <app-documentos
+                    [formGroup]="form.controls.documentos"
+                    >
+                    </app-documentos>
+                </div>
+                <div class="container-form-right-side"></div>
+            </div>
+            <div class="button-container">
+                @if(!viewOnly) {
+                    <app-button
+                    [labelButton]="mode !== 'edit' ? 'Salvar' : 'Editar'"
+                    [buttonType]="'filled'"
+                    [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+                    [disabled]="this.form.invalid"
+                    (clicked)="onSubmit($event)"
+                    >
+                    </app-button>
+                    <app-button
+                    [labelButton]="'Cancelar'"
+                    [buttonType]="'outlined'"
+                    [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+                    (clicked)="back($event)"
+                    >
+                    </app-button>
+                }
+                </div>
+        </form>
+    </app-card>
+</div>

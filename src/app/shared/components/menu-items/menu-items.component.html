@@ -12,7 +12,7 @@
                 [matTooltipPosition]="'right'"
                 [class.center]="this.closedMenu()"
                 >
-                <lucide-icon class="icon-md" [img]="item.icon"></lucide-icon>
+                <svg [lucideIcon]="item.icon" class="icon-md"></svg>
 
                 @if(!this.closedMenu()) {
                     <span class="text-sm" [class.center]="this.closedMenu()">{{item.label}}</span>
@@ -37,9 +37,9 @@
             class="item-menu item-select"
             [attr.data-id]="item.label.toLowerCase()"
             >
-            <lucide-icon class="icon-md" [img]="item.icon"
+            <svg class="icon-md" [lucideIcon]="item.icon"
             [attr.data-id]="item.label.toLowerCase()"
-            ></lucide-icon>
+            ></svg>
 
             @if(!this.closedMenu()) {
 

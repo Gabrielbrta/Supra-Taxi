@@ -2,7 +2,7 @@
     <div [class]="'icon icon--' + typeIconStatus()" 
     >
         @if(icon()) {
-            <lucide-icon [img]="icons[icon()!]"></lucide-icon>
+            <svg [lucideIcon]="icons[icon()!]"></svg>
         }
     </div>
     <div class="info-title-container">
@@ -12,7 +12,7 @@
     <div class="info-stats">
         @if(statsIcon()) {
             <div class="icon">
-                <lucide-icon [img]="icons[statsIcon()!]"></lucide-icon>
+                <svg [lucideIcon]="icons[statsIcon()!]"></svg>
             </div>
         }
         <p>{{stats()}}</p>

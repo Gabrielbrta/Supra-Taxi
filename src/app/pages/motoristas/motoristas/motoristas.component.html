@@ -1,10 +1,15 @@
 <main class="container">
+    <app-search-bar
+    (search)="getSearchValue($event)"
+    ></app-search-bar>
     <article class="container-table">
         <app-card>
             <app-table
             [dataSource]="dataSource"
             [displayedColumns]="tableColumns"
             [actions]="actions"
+            (actionClick)="onActionClick($event)"
+            (pageChange)="onPage($event)"
             >
 
             </app-table>

@@ -36,7 +36,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "1.284 motoristas cadastrados — 12 novos nos últimos 30 dias.",
             buttonLabel: "Novo motorista",
             routerLink: 'motoristas/novo',
-            icon: 'Plus',
+            icon: 'LucidePlus',
             exportable: true
         }
     },
@@ -46,6 +46,34 @@ export const MainLayoutsRoutes: Routes = [
         title: 'Novo Motorista',
         data: <pageHeaderData> {
             description: "Preencha os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'motoristas',
+            icon: null
+        }
+    },
+    {
+        path: 'motoristas/editar/:id',
+        component: MotoristaCadastroComponent,
+        title: 'Editar Motorista',
+        data: <pageHeaderData> {
+            description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'motoristas',
+            icon: null
+        }
+    },
+    {
+        path: 'motoristas/visualizar/:id',
+        component: MotoristaCadastroComponent,
+        title: 'Visualizar Motorista',
+        data: <pageHeaderData> {
+            description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'motoristas',
+            icon: null
         }
     },
     {
@@ -56,7 +84,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "318 associados — gerencie cadastros, documentos e veículos.",
             buttonLabel: "Novo associado",
             routerLink: 'associados/novo',
-            icon: 'Plus',
+            icon: 'LucidePlus',
             exportable: true
         },
         children: [{
@@ -72,7 +100,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Acompanhe vistorias de frota — aprove ou registre reprovações com motivo detalhado.",
             buttonLabel: "Nova vistoria",
             routerLink: 'vistorias/novo',
-            icon: 'Plus',
+            icon: 'LucidePlus',
             exportable: true
         },
         children: [{
@@ -88,7 +116,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Cadastre e gerencie as unidades operacionais da cooperativa.",
             buttonLabel: "Nova unidade",
             routerLink: 'unidades/novo',
-            icon: 'Plus',
+            icon: 'LucidePlus',
             exportable: true
         },
         children: [{
@@ -104,7 +132,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Lista negra utilizada nas validações de cadastro.",
             buttonLabel: "Adicionar banimento",
             routerLink: 'banidos/novo',
-            icon: 'Plus',
+            icon: 'LucidePlus',
             exportable: true
         },
         children: [{
@@ -120,7 +148,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Registro de eventos operacionais reportados pelos diretores.",
             buttonLabel: "Nova ocorrência",
             routerLink: 'ocorrencias/novo',
-            icon: 'Plus',
+            icon: 'LucidePlus',
             exportable: true
         },
         children: [{
@@ -136,7 +164,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Crie diretores e operadores, defina perfis de acesso e gerencie credenciais.",
             buttonLabel: "Novo usuário",
             routerLink: 'usuarios/novo',
-            icon: 'Plus',
+            icon: 'LucidePlus',
             exportable: true
         },
         children: [{

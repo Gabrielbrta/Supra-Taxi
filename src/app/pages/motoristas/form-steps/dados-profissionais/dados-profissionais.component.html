@@ -1,0 +1,49 @@
+<div [formGroup]="formGroup()">
+    <div class="wrapper-group">
+        <app-input
+        [label]="'RCT'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'00000'"
+        formControlName="rct"
+        >
+        </app-input>
+        <app-input
+        [label]="'Data validade RCT'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="''"
+        formControlName="rctDataValidade"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Registro'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="'223'"
+        formControlName="registro"
+        >
+        </app-input>
+        <app-input-select
+        [label]="'Situação'"
+        [placeholder]="'Selecione um item'"
+        [selectSource]="selectSource"
+        [required]="true"
+        formControlName="situacao"
+        >
+        </app-input-select>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Observações'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="''"
+        formControlName="observacoes"
+        >
+        </app-input>
+    </div>
+
+</div>

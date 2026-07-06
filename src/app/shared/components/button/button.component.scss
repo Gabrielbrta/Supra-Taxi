@@ -1,27 +1,39 @@
+@use '@angular/material' as mat;
+
 ::ng-deep .mdc-button__label {
     display: flex !important;
+    width: 100% !important;
     align-items: center;    
     gap: 5px;
     font-weight: bold;
     justify-content: center;
-    lucide-icon {
+    svg.lucide {
         max-width: 20px !important;
     }
 }
 
-.primary-color-button-filled {
-    background-color: var(--primary) !important;
-    transition: all 0.2s ease !important;
+.wrapper {
+    width: 100%;
+}
 
-    &:hover {
-        background-color: var(--primary-blue-600) !important;
-        transition: all 0.2s ease !important;
-    }
+.primary-color-button-filled {
+  @include mat.button-overrides((
+    filled-container-color: var(--primary),
+    filled-label-text-color: white,
+  ));
+}
+
+.primary-color-button-filled:hover {
+  background: var(--primary-blue-600);
 }
 
 // botão da tabela
 .primary-color-button--text {
-    color: var(--palette-gray-500) !important;
+  @include mat.button-overrides((
+    text-label-text-color: var(--palette-gray-500),
+  ));
+}
+.primary-color-button--text {
     display: inline-block !important;
 
     .red {
@@ -39,9 +51,14 @@
     }
 }
 
+.primary-color-button-outlined {
+  @include mat.button-overrides((
+    outlined-outline-color: var(--primary),
+    outlined-label-text-color: var(--primary),
+  ));
+}
+
 ::ng-deep .mat-mdc-outlined-button {
-    border: 1px solid var(--primary) !important;
-    color: var(--primary) !important;
     
     &:hover {
         transition:
@@ -53,6 +70,7 @@
         max-width: 20px !important;
     }
 }
+
 ::ng-deep .mat-mdc-outlined-button:hover {
     transition: all 0.3s ease-in-out !important;
 }

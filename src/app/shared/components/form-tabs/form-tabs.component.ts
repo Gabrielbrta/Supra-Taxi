@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output } from '@angular/core';
+import { Component, input, OnInit, output, signal } from '@angular/core';
 import { TabsHeader } from '../../models/forms/TabsHeader';
 import { PageEvent } from '@angular/material/paginator';
 
@@ -12,7 +12,7 @@ export class FormTabsComponent implements OnInit {
 
   tabs = input.required<TabsHeader[]>();
   clicked = output<string>();
-  activeTab: string = '';
+  activeTab = signal<string>(''); ;
 
   ngOnInit() {
     this.selectFirstTab();
@@ -20,12 +20,12 @@ export class FormTabsComponent implements OnInit {
 
   selectedTab(tab: string) {
     this.clicked.emit(tab)
-    this.activeTab = tab; 
+    this.activeTab.set(tab); 
   }
 
   selectFirstTab() {
     if(this.tabs().length > 0) {
-      this.activeTab = this.tabs()[0].key;
+      this.activeTab.set(this.tabs()[0].key);
     }
   }
 }

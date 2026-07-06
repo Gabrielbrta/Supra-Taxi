@@ -1,13 +1,13 @@
 import { Component, input } from '@angular/core';
 import { cardStatusType } from '../../models/cards/cardTypes';
 import { Icons } from '../../icons/icons';
-import { LucideAngularModule } from 'lucide-angular';
+import { LucideDynamicIcon } from '@lucide/angular';
 import { TableComponent } from "../table/table.component";
 
 
 @Component({
   selector: 'app-card-info',
-  imports: [LucideAngularModule],
+  imports: [LucideDynamicIcon],
   templateUrl: './card-info.component.html',
   styleUrl: './card-info.component.scss',
 })
