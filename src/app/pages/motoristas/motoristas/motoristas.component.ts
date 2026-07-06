@@ -109,7 +109,14 @@ export class MotoristasComponent implements OnInit {
       this.router.navigate(['/motoristas/editar', row.id]);
     }
     delete(row: any) {
-      
+      // colocar modal
+      const result = this.motoristaService.deleteMotoristaById(row.id);
+      if(result) {
+        this.getMotoristasPaginado();
+        alert('Motorista removido com sucesso!');
+      } else {
+        console.error('Ocorreu um erro');
+      }
     }
     view(row: any) {
       this.router.navigate(['/motoristas/visualizar', row.id]);

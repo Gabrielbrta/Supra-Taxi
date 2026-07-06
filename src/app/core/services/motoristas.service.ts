@@ -120,6 +120,35 @@ export class MotoristasService {
             return undefined;
         }
     }
+
+    deleteMotoristaById(idMotorista: string) {
+        try {
+            const motoristas = this.getMotoristasCadastrados();
+
+            if(!motoristas.data) {
+                return false;
+            }
+
+            const motoristasAtuais = motoristas.data.length;
+
+            motoristas.data = motoristas.data.filter(
+                motorista => motorista.id !== idMotorista
+            )
+
+            if(motoristas.data.length === motoristasAtuais) {
+                console.error('Motorista não encontrado')
+                return false;
+            }
+
+            this.save(motoristas, this.STORAGE_KEY_MOTORISTAS_CADASTRO)
+            return true;
+
+        }
+        catch(error) {
+            console.error(error);
+            return false;
+        }
+    }
     async editMotoristaById(idMotorista: string, payload: CadastroMotoristaForm) {
         try {
              const keys = Object.keys(payload.documentos) as Array<keyof Documentos<File>>;
