@@ -118,8 +118,15 @@ private readonly signatures: Record<string, string> =  {
   file: File;
   documentType: string;
 } | null) {
-    this.value = value?.file ?? null;
-    this.fileName.set(value?.file?.name ?? '');
+  this.value = value?.file ?? null;
+  this.fileName.set(value?.file?.name ?? '');
+
+  if (!value?.file) {
+    this.fileState.set('empty');
+    return;
+  }
+
+  this.fileState.set('success');
   }
 
 async onFileChange(event: Event) {

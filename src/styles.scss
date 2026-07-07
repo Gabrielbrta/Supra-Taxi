@@ -289,8 +289,16 @@ body::-webkit-scrollbar {
     panel-background-color: var(--palette-white),
     enabled-trigger-text-color: var(--palette-gray-800) ,
     trigger-text-size: var(--font-size-sm),
+    ));
+  }
+  
+  
+// progress panel
+  @include mat.progress-bar-overrides((
+    active-indicator-color: var(--primary),
+    track-color: var(--palette-gray-200),
+    track-shape: var(--radius-lg)
   ));
-}
 // Estilos extras que não dependem do Material podem vir aqui
 // Exemplo:
 @include mix.design-tokens-css-vars;
