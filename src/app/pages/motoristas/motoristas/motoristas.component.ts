@@ -7,10 +7,11 @@ import { MotoristasService } from '../../../core/services/motoristas.service';
 import { PageEvent } from '@angular/material/paginator';
 import { SearchBarComponent } from "../../../shared/components/search-bar/search-bar.component";
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalComponent } from "../../../shared/components/modal/modal.component";
 
 @Component({
   selector: 'app-motoristas',
-  imports: [CardComponent, TableComponent, SearchBarComponent],
+  imports: [CardComponent, TableComponent, SearchBarComponent, ModalComponent],
   templateUrl: './motoristas.component.html',
   styleUrl: './motoristas.component.scss',
 })
@@ -19,6 +20,9 @@ export class MotoristasComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   dataSource!: PageResult<DataSourceTableMotorista>;
+  openModal: boolean = false;
+  nomeMotorista: string = '';
+  idMotorista :string = '';
   tableColumns: ColumnType<DataSourceTableMotorista>[] =  [
       {
         key: 'id',
@@ -109,12 +113,18 @@ export class MotoristasComponent implements OnInit {
       this.router.navigate(['/motoristas/editar', row.id]);
     }
     delete(row: any) {
-      // colocar modal
-      const result = this.motoristaService.deleteMotoristaById(row.id);
+      this.openModal = true;
+      this.nomeMotorista = row.nomeMotorista;
+      this.idMotorista = row.id;
+    }
+    
+    confirmDelete(event: MouseEvent) {
+      const result = this.motoristaService.deleteMotoristaById(this.idMotorista);
       if(result) {
         this.getMotoristasPaginado();
-        alert('Motorista removido com sucesso!');
+        this.resetModalInfo();
       } else {
+        this.resetModalInfo();
         console.error('Ocorreu um erro');
       }
     }
@@ -123,8 +133,12 @@ export class MotoristasComponent implements OnInit {
 
     }
 
+    resetModalInfo() {
+      this.idMotorista = '';
+      this.closeModal();
+    }
+
     onActionClick(event: {action: string, row:any}) {
-      console.log(event)
       if(event.action == 'edit') {
         this.edit(event.row);
       } 
@@ -137,6 +151,14 @@ export class MotoristasComponent implements OnInit {
       else {
         console.error('ação não existente');
       }
+    }
+
+    closeModal() {
+      this.openModal = false;
+    }
+
+    cancel(event: MouseEvent) {
+      this.resetModalInfo();
     }
 
     getMotoristasPaginado() {

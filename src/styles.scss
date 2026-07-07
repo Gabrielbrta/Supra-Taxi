@@ -206,6 +206,7 @@ html, body {
 
 body { 
   margin: 0; 
+  position: relative;
   font-family: var.$font-family-sans;
   background-color: var(--mat-sys-background);
   color: var(--mat-sys-on-surface);
