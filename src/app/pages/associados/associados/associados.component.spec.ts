@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssociadosComponent } from './associados.component';
+import { AssociadosComponent } from '../associados.component';
 
 describe('AssociadosComponent', () => {
   let component: AssociadosComponent;

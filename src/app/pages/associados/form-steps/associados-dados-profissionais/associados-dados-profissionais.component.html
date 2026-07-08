@@ -1,0 +1,58 @@
+<div [formGroup]="formGroup()">
+        <div class="wrapper-group">
+        <app-input
+        [label]="'CPEST'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'00000'"
+        formControlName="cpest"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'RCT'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'00000'"
+        formControlName="rct"
+        >
+        </app-input>
+        <app-input
+        [label]="'Data Vencimento RCT'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="''"
+        formControlName="rctDataValidade"
+        >
+        </app-input>
+        <app-input
+        [label]="'Data Emissão RCT'"
+        [type]="'date'"
+        [required]="false"
+        [placeholder]="''"
+        formControlName="rctDataEmissao"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input-select
+        [label]="'Situação'"
+        [placeholder]="'Selecione um item'"
+        [selectSource]="selectSource"
+        [required]="true"
+        formControlName="situacao"
+        >
+        </app-input-select>
+        <app-input-select
+        [label]="'Unidades'"
+        [placeholder]="'Selecione um item'"
+        [selectSource]="selectSource"
+        [required]="true"
+        formControlName="unidades"
+        >
+        </app-input-select>
+
+    </div>
+
+</div>
