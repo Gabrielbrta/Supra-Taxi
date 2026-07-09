@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import { SelectOption } from "../forms/SelectOption";
 
 export interface CadastroAssociadoDTO<TFile = File> {
     id: string,
@@ -6,6 +7,7 @@ export interface CadastroAssociadoDTO<TFile = File> {
     endereco: Endereco;
     dadosProfissionais: DadosProfissionais;
     documentos: Documentos<TFile>;
+    veiculos: Veiculos;
 }
 
 interface DadosPessoais {
@@ -31,7 +33,7 @@ interface DadosPessoais {
 interface DadosProfissionais {
     rct: string,
     cpest: string,
-    unidades: string[],
+    unidades: SelectOption[],
     rctDataValidade: Moment | string | Date | null,
     rctDataEmissao: Moment | string | Date | null,
     situacao: number | string,
@@ -46,6 +48,17 @@ interface Endereco {
     cidade: string;
     estado: string;
 
+}
+
+interface Veiculos {
+    placa: string,
+    marca: string,
+    modelo: string,
+    ano: string,
+    cor: string,
+    chassi: string,
+    renavan: string,
+    observacoes: string,
 }
 
 export interface Documentos<TFile> {

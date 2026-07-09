@@ -1,0 +1,29 @@
+<div class="form-wrapper">
+    @if(label()) {
+        <label>{{label() ?? ''}} <span>{{required() ? '*' : ''}}</span></label> 
+    }
+    <mat-form-field appearance="outline">
+        <mat-select 
+        multiple
+        [formControl]="selectControl"
+        [placeholder]="'Selecione as unidades do associado'"
+        >
+            <mat-option>
+                <ngx-mat-select-search
+                    [formControl]="searchControl"
+                    placeholderLabel="Pesquisar..."
+                    noEntriesFoundLabel="Nenhuma unidade encontrada">
+                </ngx-mat-select-search>
+            </mat-option>
+    
+            @for (item of filteredOptions(); track item.id) {
+    
+                <mat-option [value]="item.id">
+                    {{ item.nome }}
+                </mat-option>
+    
+            }
+    
+        </mat-select>
+    </mat-form-field>
+</div>

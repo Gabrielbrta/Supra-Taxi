@@ -44,14 +44,18 @@
         formControlName="situacao"
         >
         </app-input-select>
-        <app-input-select
+        <app-select-autocomplete
+        [options]="[
+            {id: 'adsada', nome:'P501'},
+            {id: 'asdweqs', nome:'P502'},
+            {id: '513412', nome:'P503'},
+        ]"
         [label]="'Unidades'"
-        [placeholder]="'Selecione um item'"
-        [selectSource]="selectSource"
         [required]="true"
         formControlName="unidades"
         >
-        </app-input-select>
+        </app-select-autocomplete>
+
 
     </div>
 

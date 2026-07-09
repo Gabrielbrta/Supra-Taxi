@@ -5,15 +5,16 @@ import { InputSelectComponent } from '../../../../shared/components/forms/input-
 import { PageResult } from '../../../../shared/models/table/Table';
 import { StatusMotoristaQuery } from '../../../../shared/models/forms/StatusMotorista';
 import { StatusEnum } from '../../../../shared/enums/StatusEnum';
+import { SelectAutocompleteComponent } from '../../../../shared/components/select-autocomplete/select-autocomplete.component';
 
 @Component({
   selector: 'app-associados-dados-profissionais',
-  imports: [InputComponent, ɵInternalFormsSharedModule, ReactiveFormsModule, InputSelectComponent],
+  imports: [InputComponent, ɵInternalFormsSharedModule, ReactiveFormsModule, InputSelectComponent, SelectAutocompleteComponent],
   templateUrl: './associados-dados-profissionais.component.html',
   styleUrl: './associados-dados-profissionais.component.scss',
 })
 export class AssociadosDadosProfissionaisComponent {
-  formGroup = input.required<FormGroup>();
+    formGroup = input.required<FormGroup>();
     selectSource!: PageResult<StatusMotoristaQuery>;
 
     ngOnInit(): void {

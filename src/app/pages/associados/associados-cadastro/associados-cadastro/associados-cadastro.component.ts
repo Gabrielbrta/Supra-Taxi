@@ -14,6 +14,8 @@ import { AssociadosDadosPessoaisComponent } from '../../form-steps/associados-da
 import { AssociadosEnderecoComponent } from '../../form-steps/associados-endereco/associados-endereco.component';
 import { AssociadosDadosProfissionaisComponent } from '../../form-steps/associados-dados-profissionais/associados-dados-profissionais.component';
 import { AssociadosDocumentosComponent } from '../../form-steps/associados-documentos/associados-documentos.component';
+import { SelectOption } from '../../../../shared/models/forms/SelectOption';
+import { AssociadosVeiculosComponent } from '../../form-steps/associados-veiculos/associados-veiculos.component';
 
 @Component({
   selector: 'app-associados-cadastro',
@@ -26,7 +28,8 @@ import { AssociadosDocumentosComponent } from '../../form-steps/associados-docum
     AssociadosDadosPessoaisComponent, 
     AssociadosEnderecoComponent,
     AssociadosDadosProfissionaisComponent,
-    AssociadosDocumentosComponent
+    AssociadosDocumentosComponent,
+    AssociadosVeiculosComponent
   ],
   templateUrl: './associados-cadastro.component.html',
   styleUrl: './associados-cadastro.component.scss',
@@ -40,6 +43,9 @@ export class AssociadosCadastroComponent {
   mode: string = '';
   idMotorista: string = this.route.snapshot.paramMap.get('id')!;
   ngOnInit(): void {
+    this.form.valueChanges.subscribe(value => {
+      console.log(value.dadosProfissionais?.unidades)
+    })
     const path = this.route.snapshot.routeConfig?.path ?? '';
     // if(path.includes('editar')) {
     //   this.mode = 'edit';
@@ -102,7 +108,7 @@ export class AssociadosCadastroComponent {
     }),
 
     dadosProfissionais: this.fb.group({
-      unidades: this.fb.control<string[]>([''], Validators.required),
+      unidades: this.fb.control<SelectOption[]>([], Validators.required),
       cpest: this.fb.control<string>('', Validators.required),
       rct: this.fb.control<string>('', Validators.required),
       rctDataValidade: this.fb.control<Moment | string | Date>(''),
@@ -120,6 +126,17 @@ export class AssociadosCadastroComponent {
       comprovanteResidencia: this.fb.control<DocumentItem<File> | null>(null),
       antecedentesCriminais: this.fb.control<DocumentItem<File> | null>(null),
       foto: this.fb.control<DocumentItem<File> | null>(null, Validators.required),
+    }),
+
+    veiculos: this.fb.group({
+      placa: this.fb.control<string>('', Validators.required),
+      marca: this.fb.control<string>('', Validators.required),
+      modelo: this.fb.control<string>('', Validators.required),
+      ano: this.fb.control<string>('', Validators.required),
+      cor: this.fb.control<string>('', Validators.required),
+      chassi: this.fb.control<string>('', Validators.required),
+      renavan: this.fb.control<string>('', Validators.required),
+      observacoes: this.fb.control<string>('', Validators.required)
     })
 
 
