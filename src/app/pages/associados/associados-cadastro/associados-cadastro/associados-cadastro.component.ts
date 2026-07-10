@@ -44,7 +44,7 @@ export class AssociadosCadastroComponent {
   idMotorista: string = this.route.snapshot.paramMap.get('id')!;
   ngOnInit(): void {
     this.form.valueChanges.subscribe(value => {
-      console.log(value.dadosProfissionais?.unidades)
+      // console.log(value.dadosProfissionais?.unidades)
     })
     const path = this.route.snapshot.routeConfig?.path ?? '';
     // if(path.includes('editar')) {

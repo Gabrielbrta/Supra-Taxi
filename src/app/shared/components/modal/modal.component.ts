@@ -14,6 +14,8 @@ export class ModalComponent {
   status = input<'warn' | 'success' | 'error' | 'info'>();
   type = input<'confirm' | 'custom'>('confirm');
   message = input<string>('');
+  title = input<string>();
+  subtitle = input<string>();
   icons = Icons;
   toggle = input<boolean>();
 
@@ -21,7 +23,6 @@ export class ModalComponent {
   refuseClick = output<MouseEvent>();
 
   onConfirmClick(event: MouseEvent) {
-    console.log(this.toggle());
     this.confirmClick.emit(event);
   }
   onRefuseClick(event: MouseEvent) {

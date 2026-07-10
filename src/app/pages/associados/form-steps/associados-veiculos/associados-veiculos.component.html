@@ -2,6 +2,101 @@
 [dataSource]="dataSource"
 [displayedColumns]="tableColumns"
 [actions]="actions"
+(actionClick)="actionClick($event)"
 >
 
 </app-table>
+
+<app-modal
+[type]="'custom'"
+(refuseClick)="closeModal($event)"
+(confirmClick)="closeModal($event)"
+[toggle]="toggleModal"
+[title]="'Adicionar veículo'"
+[subtitle]="'Informe os dados do veículo vinculado ao associado'"
+>
+<div [formGroup]="formGroup()">
+    <!--
+      renavan: this.fb.control<string>('', Validators.required),
+      observacoes: this.fb.control<string>('', Validators.required)
+    -->
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Placa'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'ABC-0000'"
+        formControlName="placa"
+        [mask]="'placa'"
+        >
+        </app-input>
+        <app-input
+        [label]="'Marca'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Toyota'"
+        formControlName="marca"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Ano'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'0000'"
+        [mask]="'0000'"
+        formControlName="ano"
+        >
+        </app-input>
+        <app-input
+        [label]="'Modelo'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Corolla'"
+        formControlName="modelo"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Cor'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Vermelho'"
+        formControlName="cor"
+        >
+        </app-input>
+        <app-input
+        [label]="'Chassi'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'9BWZZZ377VT004251'"
+        [mask]="'chassi'"
+        formControlName="chassi"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Renavan'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'00000000000'"
+        [mask]="'00000000000'"
+        formControlName="renavan"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Observações'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="''"
+        formControlName="observacoes"
+        >
+        </app-input>
+    </div>
+</div>
+</app-modal>

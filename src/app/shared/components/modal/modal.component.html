@@ -60,3 +60,45 @@
         </div>
     </div>
 }
+
+@if(type() === 'custom') {
+    <div class="overlay"
+    [class.none]="toggle() === false"
+    >
+        <div class="container-modal custom">
+            <header>
+                <h2>{{title() ?? ''}}</h2>
+                <p>{{subtitle() ?? ''}}</p>
+
+            </header>
+            <div class="icon-container-close"
+            (click)="onRefuseClick($event)"
+            >
+                    <svg [lucideIcon]="icons['LucideX']"></svg>
+            </div>
+            <div class="content">
+                <ng-content></ng-content>
+            </div>
+            <footer>
+                <div class="action-button-container">
+                    <app-button
+                    [buttonType]="'filled'"
+                    [labelButton]="'Confirmar'"
+                    (clicked)="onConfirmClick($event)"
+                    >
+
+                    </app-button>
+
+                    @if(status() !== 'success' && status() !== 'info') {
+                        <app-button
+                        [buttonType]="'outlined'"
+                        [labelButton]="'Cancelar'"
+                        (clicked)="onRefuseClick($event)"
+                        >
+                        </app-button>
+                    }
+                </div>
+            </footer>
+        </div>
+    </div>
+}

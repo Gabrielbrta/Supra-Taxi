@@ -4,15 +4,18 @@ import { ColumnType, PageResult, TableAction } from '../../../../shared/models/t
 import { DataSourceTableMotorista } from '../../../../shared/models/motoristas/dataSourceTableMotorista';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { TableVeiculos } from '../../../../shared/models/associados/dataSourceTableVeiculos';
+import { ModalComponent } from '../../../../shared/components/modal/modal.component';
+import { InputComponent } from '../../../../shared/components/forms/input/input.component';
 
 @Component({
   selector: 'app-associados-veiculos',
-  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule, TableComponent],
+  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule, TableComponent, ModalComponent, InputComponent],
   templateUrl: './associados-veiculos.component.html',
   styleUrl: './associados-veiculos.component.scss',
 })
 export class AssociadosVeiculosComponent implements OnInit {
   formGroup = input.required<FormGroup>();
+  toggleModal = false;
   dataSource!: PageResult<TableVeiculos>;
   tableColumns: ColumnType<TableVeiculos>[] =  [
     {
@@ -71,6 +74,7 @@ export class AssociadosVeiculosComponent implements OnInit {
         // },
     
       ]
+      
 
   ngOnInit(): void {
     this.dataSource = {
@@ -92,6 +96,26 @@ export class AssociadosVeiculosComponent implements OnInit {
     ]
     }
   }
+     
+ actionClick(event: {action: any; row: any}) {
+    switch (event.action) {
+    case 'view':
+      this.openModal();
+      break;
+
+    case 'edit':
+      this.openModal();
+      break;
+    }
+  }
+
+  openModal() {
+    this.toggleModal = true;
+  }
+  closeModal(event: MouseEvent) {
+    this.toggleModal = false;
+  }
+    
 
     
 }

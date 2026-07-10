@@ -48,6 +48,29 @@ export class InputComponent implements ControlValueAccessor {
   private onChange = (value:string | Moment | null ) => {};
   private onTouched = () => {};
   private imask?: ReturnType<typeof IMask>;
+  private createMask(mask: string) {
+  switch (mask) {
+    case 'placa':
+      return {
+        mask: [
+          { mask: 'aaa-0000' },
+        ],
+        prepare: (str: string) => str.toUpperCase()
+      };
+    case 'chassi':
+      return {
+        mask: '*****************', // 17 posições
+        definitions: {
+          '*': /[A-HJ-NPR-Z0-9]/
+        },
+        prepare: (str: string) => str.toUpperCase()
+    };
+    default:
+      return {
+        mask
+      };
+  }
+}
 
   inputRef = viewChild<ElementRef<HTMLInputElement>>('input');
 
@@ -67,9 +90,7 @@ export class InputComponent implements ControlValueAccessor {
       }
 
       if (this.mask()) {
-        this.imask = IMask(input, {
-          mask: this.mask()!
-        });
+        this.imask =  IMask(input, this.createMask(this.mask()!));
 
         this.imask.value = String(this.value ?? '');
 

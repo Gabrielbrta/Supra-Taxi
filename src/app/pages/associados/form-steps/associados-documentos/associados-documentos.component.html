@@ -1,6 +1,23 @@
+<app-table
+[dataSource]="dataSource"
+[displayedColumns]="tableColumns"
+[actions]="actions"
+(actionClick)="actionClick($event)"
+>
+
+</app-table>
+<app-modal
+[type]="'custom'"
+(refuseClick)="closeModal($event)"
+(confirmClick)="closeModal($event)"
+[toggle]="toggleModal"
+[title]="'Upload de documento'"
+[subtitle]="'clique para selecionar (PDF, JPG, PNG até 5MB)'"
+>
 <div [formGroup]="formGroup()">
-    <p class="notification">* Todos os documentos devem ter até 5MB de tamanho</p>
-    <p class="notification">* O nome do documento deve ter no máximo 50 caracteres</p>
+
+    <p class="notification">* Todos os arquivos devem ter até 5MB de tamanho</p>
+    <p class="notification">* O nome do arquivo deve ter no máximo 50 caracteres</p>
     <div class="wrapper-group">
         <app-input-file
         [label]="'CNH'"
@@ -67,3 +84,5 @@
         </app-input-file>
 
 </div>
+</app-modal>
+

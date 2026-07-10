@@ -28,6 +28,7 @@ export class BadgeComponent {
                    this.status() === StatusEnum.Pendente ? 'Pendente' : 
                    this.status() === StatusEnum.Ativo ? 'Ativo' : 
                    this.status() === StatusEnum.Inativo ? 'Inativo' : 
+                   this.status() === StatusEnum.Enviado ? 'Enviado' : 
                    this.status() === TipoMotoristaEnum.Motorista ? 'Motorista' : 'Associado'
                    return status
     }
