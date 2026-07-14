@@ -44,7 +44,7 @@ export class AssociadosCadastroComponent {
   idMotorista: string = this.route.snapshot.paramMap.get('id')!;
   ngOnInit(): void {
     this.form.valueChanges.subscribe(value => {
-      // console.log(value.dadosProfissionais?.unidades)
+      console.log(value.veiculos)
     })
     const path = this.route.snapshot.routeConfig?.path ?? '';
     // if(path.includes('editar')) {
@@ -128,16 +128,7 @@ export class AssociadosCadastroComponent {
       foto: this.fb.control<DocumentItem<File> | null>(null, Validators.required),
     }),
 
-    veiculos: this.fb.group({
-      placa: this.fb.control<string>('', Validators.required),
-      marca: this.fb.control<string>('', Validators.required),
-      modelo: this.fb.control<string>('', Validators.required),
-      ano: this.fb.control<string>('', Validators.required),
-      cor: this.fb.control<string>('', Validators.required),
-      chassi: this.fb.control<string>('', Validators.required),
-      renavan: this.fb.control<string>('', Validators.required),
-      observacoes: this.fb.control<string>('', Validators.required)
-    })
+    veiculos: this.fb.array<FormGroup>([])
 
 
   });
@@ -154,6 +145,19 @@ export class AssociadosCadastroComponent {
     return new File([arrayBuffer], fileName, {
       type: mimeType,
     });
+  }
+
+  createVeiculoForm() {
+    return this.fb.group({
+        placa: this.fb.control('', Validators.required),
+        marca: this.fb.control('', Validators.required),
+        modelo: this.fb.control('', Validators.required),
+        ano: this.fb.control('', Validators.required),
+        cor: this.fb.control('', Validators.required),
+        chassi: this.fb.control('', Validators.required),
+        renavan: this.fb.control('', Validators.required),
+        observacoes: this.fb.control('')
+      });
   }
 
   // patchValueForm(motorista: CadastroMotoristaStorage) {

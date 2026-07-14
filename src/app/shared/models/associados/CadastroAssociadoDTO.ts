@@ -7,7 +7,7 @@ export interface CadastroAssociadoDTO<TFile = File> {
     endereco: Endereco;
     dadosProfissionais: DadosProfissionais;
     documentos: Documentos<TFile>;
-    veiculos: Veiculos;
+    veiculos: Veiculos[];
 }
 
 interface DadosPessoais {

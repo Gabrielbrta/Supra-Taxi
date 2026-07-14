@@ -15,18 +15,19 @@ export class ModalComponent {
   type = input<'confirm' | 'custom'>('confirm');
   message = input<string>('');
   title = input<string>();
+  disabled = input<boolean>(false);
   subtitle = input<string>();
   icons = Icons;
   toggle = input<boolean>();
 
-  confirmClick = output<MouseEvent>();
-  refuseClick = output<MouseEvent>();
+  confirmClick = output();
+  refuseClick = output();
 
-  onConfirmClick(event: MouseEvent) {
-    this.confirmClick.emit(event);
+  onConfirmClick() {
+    this.confirmClick.emit();
   }
-  onRefuseClick(event: MouseEvent) {
-    this.refuseClick.emit(event);
+  onRefuseClick() {
+    this.refuseClick.emit();
   }
 
 }

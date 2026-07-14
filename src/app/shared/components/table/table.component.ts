@@ -25,7 +25,7 @@ export class TableComponent {
   displayedColumns = input.required<ColumnType<any>[]>();
   dataSource =  input.required<PageResult<any>>();
   actions = input<TableAction[]>([])
-  actionClick = output<{action: string, row:any}>();
+  actionClick = output<{action: string, row:any, index?: number}>();
   pageChange = output<PageEvent>();
 
   
@@ -39,10 +39,11 @@ export class TableComponent {
     return columns;
   });
 
-  onActionClick(action: string, row: any) {
+  onActionClick(action: string, row: any, index?: number) {
     this.actionClick.emit({
       action,
-      row
+      row,
+      index
     });
   }
 

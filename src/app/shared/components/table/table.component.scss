@@ -76,3 +76,10 @@ app-button.button-action-table {
         width: 10px !important;
     }
 }
+
+.buttons {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}

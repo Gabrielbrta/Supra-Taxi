@@ -3,11 +3,11 @@
     
     <table mat-table [dataSource]="dataSource().data ?? []">
       
-      @for(col of displayedColumns(); track col.key) {
+      @for(col of displayedColumns(); track $index) {
         <!-- Position Column -->
         <ng-container [matColumnDef]="col.key.toString()">
           <th mat-header-cell *matHeaderCellDef> {{col.header}}</th>
-          <td mat-cell *matCellDef="let row"> 
+          <td mat-cell *matCellDef="let row; let tableIndex = index"> 
             @if(col.type === 'name') {
               <p [matTooltip]="row[col.key]"
               [matTooltipPosition]="'above'"
@@ -61,24 +61,29 @@
         </ng-container>
       }
 
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data</td>
+    </tr>
+
       @if(actions().length > 0) {
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Ações</th>
           
-          <td mat-cell *matCellDef="let row"> 
-            @for(action of actions(); track action) {
+          <td mat-cell *matCellDef="let row; let rowIndex = index"> 
+            <div class="buttons">
+            @for(action of actions(); track $index) {
 
-              <app-button
-              [buttonType]="'text'"
-              [matTooltip]="action.tooltip"
-              [matTooltipPosition]="'right'"
-              [icon]="action.icon"
-              (clicked)="onActionClick(action.action, row)"
-              class="button-action-table"
-              >
-
-              </app-button>
-           }
+                <app-button
+                [buttonType]="'text'"
+                [matTooltip]="action.tooltip"
+                [matTooltipPosition]="'right'"
+                [icon]="action.icon"
+                (clicked)="onActionClick(action.action, row, rowIndex)"
+                class="button-action-table"
+                >
+                </app-button>
+              }
+            </div>
 
             
           </td>

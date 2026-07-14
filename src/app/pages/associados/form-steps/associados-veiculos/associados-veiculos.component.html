@@ -1,33 +1,45 @@
-<app-table
-[dataSource]="dataSource"
-[displayedColumns]="tableColumns"
-[actions]="actions"
-(actionClick)="actionClick($event)"
->
-
-</app-table>
+<div class="table-container">
+    <div class="button-container">
+        <app-button
+        [labelButton]="'Veículo'"
+        [icon]="'LucidePlus'"
+        (clicked)="novoVeiculo($event)"
+        >
+        
+        </app-button>
+    </div>
+    
+    @if(dataSource().data?.length) {
+        <app-table
+        [dataSource]="dataSource()"
+        [displayedColumns]="tableColumns"
+        [actions]="actions"
+        (actionClick)="actionClick($event)"
+        >
+        </app-table>
+    } @else {
+        <div>Nenhum item cadastrado...</div>
+    }
+</div>
 
 <app-modal
 [type]="'custom'"
-(refuseClick)="closeModal($event)"
-(confirmClick)="closeModal($event)"
+(refuseClick)="closeModal()"
+(confirmClick)="addNovoVeiculos()"
 [toggle]="toggleModal"
-[title]="'Adicionar veículo'"
+[title]="titleModal"
+[disabled]="!this.veiculoForm.valid"
 [subtitle]="'Informe os dados do veículo vinculado ao associado'"
 >
-<div [formGroup]="formGroup()">
-    <!--
-      renavan: this.fb.control<string>('', Validators.required),
-      observacoes: this.fb.control<string>('', Validators.required)
-    -->
+<div [formGroup]="veiculoForm">
     <div class="wrapper-group">
         <app-input
         [label]="'Placa'"
         [type]="'text'"
         [required]="true"
         [placeholder]="'ABC-0000'"
-        formControlName="placa"
         [mask]="'placa'"
+        formControlName="placa"
         >
         </app-input>
         <app-input

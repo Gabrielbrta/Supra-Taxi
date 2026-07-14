@@ -4,4 +4,7 @@ export interface TableVeiculos {
     modelo: string,
     ano: string,
     cor: string,
+    chassi: string,
+    renavan: string,
+    observacoes: string
 }

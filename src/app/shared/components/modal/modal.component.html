@@ -5,7 +5,7 @@
     >
         <div class="container-modal">
             <div class="icon-container-close"
-            (click)="onRefuseClick($event)"
+            (click)="onRefuseClick()"
             >
                  <svg [lucideIcon]="icons['LucideX']"></svg>
             </div>
@@ -43,7 +43,7 @@
                 <app-button
                 [buttonType]="'filled'"
                 [labelButton]="'Confirmar'"
-                (clicked)="onConfirmClick($event)"
+                (clicked)="onConfirmClick()"
                 >
 
                 </app-button>
@@ -52,7 +52,7 @@
                     <app-button
                     [buttonType]="'outlined'"
                     [labelButton]="'Cancelar'"
-                    (clicked)="onRefuseClick($event)"
+                    (clicked)="onRefuseClick()"
                     >
                     </app-button>
                 }
@@ -72,7 +72,7 @@
 
             </header>
             <div class="icon-container-close"
-            (click)="onRefuseClick($event)"
+            (click)="onRefuseClick()"
             >
                     <svg [lucideIcon]="icons['LucideX']"></svg>
             </div>
@@ -84,7 +84,8 @@
                     <app-button
                     [buttonType]="'filled'"
                     [labelButton]="'Confirmar'"
-                    (clicked)="onConfirmClick($event)"
+                    [disabled]="disabled()"
+                    (clicked)="onConfirmClick()"
                     >
 
                     </app-button>
@@ -93,7 +94,7 @@
                         <app-button
                         [buttonType]="'outlined'"
                         [labelButton]="'Cancelar'"
-                        (clicked)="onRefuseClick($event)"
+                        (clicked)="onRefuseClick()"
                         >
                         </app-button>
                     }
