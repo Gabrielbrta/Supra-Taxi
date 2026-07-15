@@ -1,21 +1,22 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
-import { CadastroMotoristaForm, DocumentItem } from '../../../../shared/models/motoristas/cadastroMotoristaDTO';
 import { TabsHeader } from '../../../../shared/models/forms/TabsHeader';
 import moment from 'moment';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { FormTabsComponent } from '../../../../shared/components/form-tabs/form-tabs.component';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { ProfilePanelComponent } from '../../../../shared/components/profile-panel/profile-panel.component';
-import { CadastroAssociadoForm } from '../../../../shared/models/associados/CadastroAssociadoDTO';
+import { CadastroAssociadoForm, CadastroAssociadoStorage, DocumentItem } from '../../../../shared/models/associados/CadastroAssociadoDTO';
 import { AssociadosDadosPessoaisComponent } from '../../form-steps/associados-dados-pessoais/associados-dados-pessoais.component';
 import { AssociadosEnderecoComponent } from '../../form-steps/associados-endereco/associados-endereco.component';
 import { AssociadosDadosProfissionaisComponent } from '../../form-steps/associados-dados-profissionais/associados-dados-profissionais.component';
 import { AssociadosDocumentosComponent } from '../../form-steps/associados-documentos/associados-documentos.component';
 import { SelectOption } from '../../../../shared/models/forms/SelectOption';
 import { AssociadosVeiculosComponent } from '../../form-steps/associados-veiculos/associados-veiculos.component';
+import { minItems } from '../../../../shared/utils/FormArrayValidator';
+import { AssociadosService } from '../../../../core/services/Associados.service';
 
 @Component({
   selector: 'app-associados-cadastro',
@@ -36,47 +37,44 @@ import { AssociadosVeiculosComponent } from '../../form-steps/associados-veiculo
 })
 export class AssociadosCadastroComponent {
  private fb = inject(FormBuilder);
-  // private MotoristaService = inject(MotoristasService);
+  private AssociadosService = inject(AssociadosService);
   private route = inject(ActivatedRoute)
   private router = inject(Router);
   viewOnly: boolean = false; 
   mode: string = '';
-  idMotorista: string = this.route.snapshot.paramMap.get('id')!;
+  idAssociado: string = this.route.snapshot.paramMap.get('id')!;
   ngOnInit(): void {
     this.form.valueChanges.subscribe(value => {
-      console.log(value.veiculos)
+      // console.log(value.dadosProfissionais?.unidades)
     })
     const path = this.route.snapshot.routeConfig?.path ?? '';
-    // if(path.includes('editar')) {
-    //   this.mode = 'edit';
+    if(path.includes('editar')) {
+      this.mode = 'edit';
 
-    //   // const motorista = this.getMotoristaById(this.idMotorista);
-    //   if(!motorista) {
-    //       console.error('Motorista não encontrado');
-    //       return;
-    //   }
-    //   this.patchValueForm(motorista);
-    // }
-    // if(path.includes('visualizar')){
-    //   this.viewOnly = true;
-    //   this.form.disable();
-    //   // const motorista = this.getMotoristaById(this.idMotorista);
-    //   console.log(motorista);
+      const associado = this.getAssociadoById(this.idAssociado);
+      if(!associado) {
+          console.error('Associado não encontrado');
+          return;
+      }
+      this.patchValueForm(associado);
+    }
+    if(path.includes('visualizar')){
+      this.viewOnly = true;
+      this.form.disable();
+      const associado = this.getAssociadoById(this.idAssociado);
+      console.log(associado);
 
-    //   if(!motorista) {
-    //       console.error('Motorista não encontrado');
-    //       return;
-    //   }
-    //   this.patchValueForm(motorista);
-    // }
+      if(!associado) {
+          console.error('Motorista não encontrado');
+          return;
+      }
+      this.patchValueForm(associado);
+    }
     this.selectedTab(this.tabs[0].key);
 
   }
   
   activeTab: string = '';
-  initForm() {
-
-  }
   form = this.fb.group({
     dadosPessoais: this.fb.nonNullable.group({
       nomeAssociado: this.fb.control<string>('', Validators.required),
@@ -128,8 +126,7 @@ export class AssociadosCadastroComponent {
       foto: this.fb.control<DocumentItem<File> | null>(null, Validators.required),
     }),
 
-    veiculos: this.fb.array<FormGroup>([])
-
+    veiculos: this.fb.array<FormGroup>([], {validators: minItems(1)})
 
   });
 
@@ -160,32 +157,45 @@ export class AssociadosCadastroComponent {
       });
   }
 
-  // patchValueForm(motorista: CadastroMotoristaStorage) {
-  //   this.form.patchValue({
-  //     dadosPessoais: motorista.dadosPessoais,
-  //     endereco: motorista.endereco,
-  //     dadosProfissionais: motorista.dadosProfissionais,
-  //     documentos: {
-  //       // cnhDocumento: motorista.documentos.cnhDocumento,
-  //       // cpf: motorista.documentos.cpf,
-  //       // rg: motorista.documentos.rg,
-  //       // rct: motorista.documentos.rct,
-  //       // comprovanteResidencia: motorista.documentos.comprovanteResidencia,
-  //       // antecedentesCriminais: motorista.documentos.antecedentesCriminais,
-  //       // foto: motorista.documentos.foto,
-  //       foto: motorista.documentos.foto
-  //       ? {
-  //           ...motorista.documentos.foto,
-  //           file: this.base64ToFile(
-  //             motorista.documentos.foto.file,
-  //             motorista.documentos.foto.fileName!,
-  //             motorista.documentos.foto.mimeType!
-  //           )
-  //         }
-  //       : null,
-  //     }
-  //   })
-  // }
+  patchValueForm(associado: CadastroAssociadoStorage) {
+    this.form.patchValue({
+      dadosPessoais: associado.dadosPessoais,
+      endereco: associado.endereco,
+      dadosProfissionais: associado.dadosProfissionais,
+      veiculos: String(associado.veiculos).split(','),
+      documentos: {
+        // cnhDocumento: associado.documentos.cnhDocumento,
+        // cpf: associado.documentos.cpf,
+        // rg: associado.documentos.rg,
+        // rct: associado.documentos.rct,
+        // comprovanteResidencia: associado.documentos.comprovanteResidencia,
+        // antecedentesCriminais: associado.documentos.antecedentesCriminais,
+        // foto: associado.documentos.foto,
+        foto: associado.documentos.foto
+        ? {
+            ...associado.documentos.foto,
+            file: this.base64ToFile(
+              associado.documentos.foto.file,
+              associado.documentos.foto.fileName!,
+              associado.documentos.foto.mimeType!
+            )
+          }
+        : null,
+      }
+    })
+
+    const veiculosArray = this.form.controls.veiculos;
+
+    veiculosArray.clear();
+
+    associado.veiculos.forEach(veiculo => {
+      const grupo = this.createVeiculoForm()
+
+      grupo.patchValue(veiculo);
+
+      veiculosArray.push(grupo);
+    });
+  }
 
   get profileImage(): File | null {
     return this.form.controls.documentos.controls.foto.value?.file ?? null;
@@ -220,13 +230,13 @@ export class AssociadosCadastroComponent {
   }
 
   back(event: MouseEvent) {
-    this.router.navigate(['/motoristas'])
+    this.router.navigate(['/associados'])
   }
 
-  // getMotoristaById(idMotorista: string) {
-  //   const motorista = this.MotoristaService.getMotoristaById(idMotorista);
-  //   return motorista;
-  // }
+  getAssociadoById(idAssociado: string) {
+    const associado = this.AssociadosService.getAssociadoById(idAssociado);
+    return associado;
+  }
 
   async onSubmit(event: MouseEvent) {
     event.preventDefault();
@@ -243,22 +253,30 @@ export class AssociadosCadastroComponent {
       payload.dadosProfissionais.rctDataValidade =
        moment(payload.dadosProfissionais.rctDataValidade).format('DD/MM/YYYY')
 
-    // if(this.mode == 'edit'){
-      // const result = await this.MotoristaService.editMotoristaById(this.idMotorista, payload);
-      // if(result) {
-      //   alert('Motorista editado com sucesso!');
-      // } else {
-      //   alert('Ocorreu um erro ao editar motorista!');
-      // }
-    // } else {
-      // const result = await this.MotoristaService.cadastroMotorista(payload, crypto.randomUUID());
-      // alert(result.status?.message);
-    // }
+      payload.dadosProfissionais.rctDataEmissao =
+       moment(payload.dadosProfissionais.rctDataEmissao).format('DD/MM/YYYY')
+
+    if(this.mode == 'edit'){
+      const result = await this.AssociadosService.editAssociadoById(this.idAssociado, payload);
+      if(result) {
+        alert('Associado editado com sucesso!');
+      } else {
+        alert('Ocorreu um erro ao editar associado!');
+      }
+    } else {
+      const result = await this.AssociadosService.cadastroAssociado(payload, crypto.randomUUID());
+      alert(result.status?.message);
+    }
     }
   }
 
-  getProgress(group: FormGroup): number {
-    const controls = Object.values(group.controls);
+  getProgress(control: FormGroup | FormArray): number {
+    const controls = control instanceof FormArray
+    ? control.controls : Object.values(control.controls);
+
+    if(controls.length === 0) {
+      return 0;
+    }
 
     const filledControls = controls.filter(control => {
       const value = control.value;
@@ -291,7 +309,7 @@ export class AssociadosCadastroComponent {
           },
           {
             label: 'Veículos',
-            progress: 0
+            progress: this.getProgress(this.form.controls.veiculos)
           },
         ]
     

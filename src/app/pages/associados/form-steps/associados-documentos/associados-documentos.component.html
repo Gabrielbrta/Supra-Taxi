@@ -8,8 +8,8 @@
 </app-table>
 <app-modal
 [type]="'custom'"
-(refuseClick)="closeModal($event)"
-(confirmClick)="closeModal($event)"
+(refuseClick)="closeModal()"
+(confirmClick)="closeModal()"
 [toggle]="toggleModal"
 [title]="'Upload de documento'"
 [subtitle]="'clique para selecionar (PDF, JPG, PNG até 5MB)'"

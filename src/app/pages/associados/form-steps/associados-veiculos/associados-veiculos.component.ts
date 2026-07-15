@@ -101,7 +101,7 @@ export class AssociadosVeiculosComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateTable();
-
+    console.log(this.formArray().value);
     this.formArray().valueChanges.subscribe(() => {
       this.updateTable();
     });
@@ -131,7 +131,7 @@ export class AssociadosVeiculosComponent implements OnInit {
       break;
       
       case 'edit':
-        this.veiculoForm.enable();
+      this.veiculoForm.enable();
       this.titleModal = 'Editar veículo';
       this.openModal();
       break;

@@ -102,6 +102,30 @@ export const MainLayoutsRoutes: Routes = [
         }
     },
     {
+        path: 'associados/editar/:id',
+        component: AssociadosCadastroComponent,
+        title: 'Editar Associado',
+        data: <pageHeaderData> {
+            description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'associados',
+            icon: null
+        }
+    },
+    {
+        path: 'associados/visualizar/:id',
+        component: AssociadosCadastroComponent,
+        title: 'Visualizar Associado',
+        data: <pageHeaderData> {
+            description: "Visualize os dados cadastrados.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'associados',
+            icon: null
+        }
+    },
+    {
         path: 'vistorias',
         component: VistoriasComponent,
         title: 'Vistorias',

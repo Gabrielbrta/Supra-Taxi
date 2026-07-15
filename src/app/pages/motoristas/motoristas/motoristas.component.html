@@ -19,8 +19,8 @@
     [type]="'confirm'"
     [status]="'warn'"
     [toggle]="openModal"
-    (confirmClick)="confirmDelete($event)"
-    (refuseClick)="cancel($event)"
+    (confirmClick)="confirmDelete()"
+    (refuseClick)="cancel()"
     >
         <p class="modal-message">Deseja excluir o motorista <span class="red">{{nomeMotorista}}</span>?</p>
     </app-modal>

@@ -19,7 +19,7 @@ export class AssociadosDocumentosComponent {
     formGroup = input.required<FormGroup>();
     toggleModal = false;
 
-    closeModal(event: MouseEvent) {
+    closeModal() {
       this.toggleModal = false;
     }
     
@@ -36,7 +36,7 @@ export class AssociadosDocumentosComponent {
       case 'edit':
         this.openModal();
         break;
-    }
+      }
     }
 
   dataSource!: PageResult<DocumentosTable>;

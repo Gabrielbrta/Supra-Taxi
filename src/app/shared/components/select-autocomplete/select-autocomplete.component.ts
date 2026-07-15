@@ -87,7 +87,11 @@ export class SelectAutocompleteComponent implements ControlValueAccessor, OnInit
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    if (isDisabled) {
+      this.selectControl.disable({ emitEvent: false });
+    } else {
+      this.selectControl.enable({ emitEvent: false });
+    }
   }
 
   selectionChange(event: MatSelectChange) {

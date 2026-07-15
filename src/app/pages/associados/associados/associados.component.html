@@ -1,1 +1,28 @@
 <p>associados works!</p>
+<main class="container">
+    <app-search-bar
+    (search)="getSearchValue($event)"
+    ></app-search-bar>
+    <article class="container-table">
+        <app-card>
+            <app-table
+            [dataSource]="dataSource"
+            [displayedColumns]="tableColumns"
+            [actions]="actions"
+            (actionClick)="onActionClick($event)"
+            (pageChange)="onPage($event)"
+            >
+
+            </app-table>
+        </app-card>
+    </article>
+    <app-modal
+    [type]="'confirm'"
+    [status]="'warn'"
+    [toggle]="openModal"
+    (confirmClick)="confirmDelete()"
+    (refuseClick)="cancel()"
+    >
+        <p class="modal-message">Deseja excluir o associado <span class="red">{{nomeAssociado}}</span>?</p>
+    </app-modal>
+</main>

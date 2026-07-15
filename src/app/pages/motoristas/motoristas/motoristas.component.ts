@@ -118,7 +118,7 @@ export class MotoristasComponent implements OnInit {
       this.idMotorista = row.id;
     }
     
-    confirmDelete(event: MouseEvent) {
+    confirmDelete() {
       const result = this.motoristaService.deleteMotoristaById(this.idMotorista);
       if(result) {
         this.getMotoristasPaginado();
@@ -157,7 +157,7 @@ export class MotoristasComponent implements OnInit {
       this.openModal = false;
     }
 
-    cancel(event: MouseEvent) {
+    cancel() {
       this.resetModalInfo();
     }
 

@@ -16,6 +16,13 @@
         formControlName="email"
         >
         </app-input>
+        <app-input
+        [label]="'Data Nascimento'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="'dd/mm/aaaa'"
+        formControlName="dataNascimento"
+        ></app-input>
     </div>
     <div class="wrapper-group">
         <app-input
@@ -58,13 +65,6 @@
         formControlName="rgAssociado"
         >
         </app-input>
-        <app-input
-        [label]="'Data expedição RG'"
-        [type]="'date'"
-        [required]="true"
-        [placeholder]="'dd/mm/aaaa'"
-        formControlName="dataExpedicaoRG"
-        ></app-input>
     </div>
     <div class="wrapper-group">
         <app-input
@@ -78,19 +78,28 @@
         >
         </app-input>
         <app-input
-        [label]="'Data emissão CNH'"
-        [type]="'date'"
-        [required]="true"
-        [placeholder]="'dd/mm/aaaa'"
-        formControlName="dataEmissaoCNH"
-        >
-        </app-input>
-        <app-input
         [label]="'Data vencimento CNH'"
         [type]="'date'"
         [placeholder]="'dd/mm/aaaa'"
         [required]="true"
         formControlName="dataVencimentoCNH"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Data expedição RG'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="'dd/mm/aaaa'"
+        formControlName="dataExpedicaoRG"
+        ></app-input>
+        <app-input
+        [label]="'Data emissão CNH'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="'dd/mm/aaaa'"
+        formControlName="dataEmissaoCNH"
         >
         </app-input>
     </div>
