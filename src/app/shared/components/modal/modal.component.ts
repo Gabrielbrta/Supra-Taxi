@@ -13,7 +13,6 @@ export class ModalComponent {
 
   status = input<'warn' | 'success' | 'error' | 'info'>();
   type = input<'confirm' | 'custom'>('confirm');
-  message = input<string>('');
   title = input<string>();
   disabled = input<boolean>(false);
   subtitle = input<string>();

@@ -41,7 +41,7 @@ export class AssociadosCadastroComponent {
   private route = inject(ActivatedRoute)
   private router = inject(Router);
   viewOnly: boolean = false; 
-  mode: string = '';
+  mode: 'create' | 'edit' | 'view' = 'create';
   idAssociado: string = this.route.snapshot.paramMap.get('id')!;
   ngOnInit(): void {
     this.form.valueChanges.subscribe(value => {
@@ -59,6 +59,7 @@ export class AssociadosCadastroComponent {
       this.patchValueForm(associado);
     }
     if(path.includes('visualizar')){
+      this.mode = 'view';
       this.viewOnly = true;
       this.form.disable();
       const associado = this.getAssociadoById(this.idAssociado);
@@ -249,6 +250,12 @@ export class AssociadosCadastroComponent {
 
       payload.dadosPessoais.dataVencimentoCNH =
         moment(payload.dadosPessoais.dataVencimentoCNH).format('DD/MM/YYYY')
+
+      payload.dadosPessoais.dataNascimento =
+        moment(payload.dadosPessoais.dataNascimento).format('DD/MM/YYYY')
+
+      payload.dadosPessoais.dataExpedicaoRG =
+        moment(payload.dadosPessoais.dataExpedicaoRG).format('DD/MM/YYYY')
 
       payload.dadosProfissionais.rctDataValidade =
        moment(payload.dadosProfissionais.rctDataValidade).format('DD/MM/YYYY')

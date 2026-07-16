@@ -1,19 +1,21 @@
 <div class="table-container">
-    <div class="button-container">
-        <app-button
-        [labelButton]="'Veículo'"
-        [icon]="'LucidePlus'"
-        (clicked)="novoVeiculo($event)"
-        >
-        
-        </app-button>
-    </div>
+    @if(mode() !== 'view') {
+        <div class="button-container">
+            <app-button
+            [labelButton]="'Veículo'"
+            [icon]="'LucidePlus'"
+            (clicked)="novoVeiculo($event)"
+            >
+            
+            </app-button>
+        </div>
+    }
     
     @if(dataSource().data?.length) {
         <app-table
         [dataSource]="dataSource()"
         [displayedColumns]="tableColumns"
-        [actions]="actions"
+        [actions]="getActions()"
         (actionClick)="actionClick($event)"
         >
         </app-table>
@@ -111,4 +113,12 @@
         </app-input>
     </div>
 </div>
+</app-modal>
+<app-modal
+[type]="'confirm'"
+[status]="'warn'"
+[toggle]="toggleConfirmModal"
+(refuseClick)="closeModal()"
+(confirmClick)="deleteVeiculo()"
+>
 </app-modal>

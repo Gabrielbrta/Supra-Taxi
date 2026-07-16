@@ -16,6 +16,10 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 })
 export class AssociadosVeiculosComponent implements OnInit {
   formArray = input.required<FormArray<FormGroup>>();
+  mode = input<'create' | 'edit' | 'view'>('create');
+  toggleConfirmModal = false;
+  indexVeiculoAtual: number | null = null;   
+
   toggleModal = false;
   titleModal: string = 'Adicionar veículo';
   dataSource = signal<PageResult<TableVeiculos>>({ data: [] });
@@ -43,7 +47,18 @@ export class AssociadosVeiculosComponent implements OnInit {
     },
   ]
 
-  actions: TableAction[] = [
+  getActions(): TableAction[]  {
+    if(this.mode() === 'view') {
+      return [ 
+        {
+        icon: 'LucideEye',
+        action: 'view',
+        tooltip: 'Visualizar'
+        }
+      ]
+    }
+
+    return [
       {
         icon: 'LucideEye',
         action: 'view',
@@ -58,24 +73,9 @@ export class AssociadosVeiculosComponent implements OnInit {
         icon: 'LucideTrash2',
         action: 'delete',
         tooltip: 'Excluir'
-      },
-        // {
-        //   icon: 'LucideKeyRound',
-        //   action: 'view',
-        //   tooltip: 'Alterar senha'
-        // },
-        // {
-        //   icon: 'LucidePrinter',
-        //   action: 'view',
-        //   tooltip: 'Imprimir'
-        // },
-        // {
-        //   icon: 'LucideLockOpen',
-        //   action: 'view',
-        //   tooltip: 'Remover banimento'
-        // },
-    
-      ]
+      }
+    ];
+  }
 
   private createVeiculoForm(data?: Partial<TableVeiculos>) {
     return new FormGroup({
@@ -122,7 +122,7 @@ export class AssociadosVeiculosComponent implements OnInit {
     switch (event.action) {
     case 'view':
       this.titleModal = 'Visualizar veículo';
-      
+      this.veiculoForm.reset();
       this.veiculoForm.patchValue(
         this.formArray().at(event.index!).getRawValue()
       )
@@ -131,10 +131,20 @@ export class AssociadosVeiculosComponent implements OnInit {
       break;
       
       case 'edit':
-      this.veiculoForm.enable();
-      this.titleModal = 'Editar veículo';
-      this.openModal();
-      break;
+        this.veiculoForm.reset();
+        this.veiculoForm.patchValue(
+          this.formArray().at(event.index!).getRawValue()
+        )
+        this.veiculoForm.enable();
+        this.titleModal = 'Editar veículo';
+        this.openModal();
+        break;
+        
+        case 'delete':
+          this.veiculoForm.reset();
+          this.toggleConfirmModal = true;
+          this.indexVeiculoAtual = event.index!;
+        break;
     }
   }
   novoVeiculo(event: MouseEvent) {
@@ -154,11 +164,17 @@ export class AssociadosVeiculosComponent implements OnInit {
     this.closeModal();
   }
 
+  deleteVeiculo() {
+    this.formArray().removeAt(this.indexVeiculoAtual!);
+    this.closeModal();
+  }
+
   openModal() {
     this.toggleModal = true;
   }
   closeModal() {
     this.toggleModal = false;
+    this.toggleConfirmModal = false;
   }
     
 
