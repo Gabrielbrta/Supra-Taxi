@@ -1,7 +1,7 @@
 import { RouterLink, Routes } from '@angular/router';
 import { DashboardComponent } from '../../pages/dashboard/dashboard/dashboard.component';
 import { MotoristasComponent } from '../../pages/motoristas/motoristas/motoristas.component';
-import { AssociadosComponent } from '../../pages/associados/associados.component';
+import { AssociadosComponent } from '../../pages/associados/associados/associados.component';
 import { UnidadesComponent } from '../../pages/unidades/unidades.component';
 import { BanidosComponent } from '../../pages/banidos/banidos.component';
 import { OcorrenciasComponent } from '../../pages/ocorrencias/ocorrencias.component';
@@ -10,6 +10,7 @@ import { ConfiguracoesComponent } from '../../pages/configuracoes/configuracoes.
 import { VistoriasComponent } from '../../pages/vistorias/vistorias.component';
 import { pageHeaderData } from '../../shared/models/pageHeaderContent/pageHeaderContentModel';
 import { MotoristaCadastroComponent } from '../../pages/motoristas/motorista-cadastro/motorista-cadastro.component';
+import { AssociadosCadastroComponent } from '../../pages/associados/associados-cadastro/associados-cadastro/associados-cadastro.component';
 
 export const MainLayoutsRoutes: Routes = [
     {
@@ -86,11 +87,43 @@ export const MainLayoutsRoutes: Routes = [
             routerLink: 'associados/novo',
             icon: 'LucidePlus',
             exportable: true
-        },
-        children: [{
-            path: 'novo',
-            component: AssociadosComponent,
-        }]
+        }
+    },
+    {
+        path: 'associados/novo',
+        component: AssociadosCadastroComponent,
+        title: 'Novo Associado',
+        data: <pageHeaderData> {
+            description: "Preencha os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'associados',
+            icon: null
+        }
+    },
+    {
+        path: 'associados/editar/:id',
+        component: AssociadosCadastroComponent,
+        title: 'Editar Associado',
+        data: <pageHeaderData> {
+            description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'associados',
+            icon: null
+        }
+    },
+    {
+        path: 'associados/visualizar/:id',
+        component: AssociadosCadastroComponent,
+        title: 'Visualizar Associado',
+        data: <pageHeaderData> {
+            description: "Visualize os dados cadastrados.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'associados',
+            icon: null
+        }
     },
     {
         path: 'vistorias',

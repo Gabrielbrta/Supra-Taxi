@@ -1,0 +1,18 @@
+<div class="profile-panel-container">
+    <div class="profile-panel-content">
+        <div class="profile">
+            <img [src]="fotoUrl()" alt="">
+        </div>
+        <div class="profile-form-status-complete">
+        @if(progressItems().length) {
+
+            @for(item of progressItems(); track item.label) {
+                <div class="item">
+                    <p class="progress-label">{{item.label}} <span class="percent">{{(item.progress.toFixed())}}%</span></p>
+                    <mat-progress-bar mode="determinate" [value]="item.progress"></mat-progress-bar>
+                </div>
+            }
+        }
+        </div>
+    </div>
+</div>

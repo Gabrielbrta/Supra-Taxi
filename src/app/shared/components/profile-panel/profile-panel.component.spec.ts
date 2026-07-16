@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssociadosComponent } from './associados.component';
+import { ProfilePanelComponent } from './profile-panel.component';
 
-describe('AssociadosComponent', () => {
-  let component: AssociadosComponent;
-  let fixture: ComponentFixture<AssociadosComponent>;
+describe('ProfilePanelComponent', () => {
+  let component: ProfilePanelComponent;
+  let fixture: ComponentFixture<ProfilePanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AssociadosComponent],
+      imports: [ProfilePanelComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AssociadosComponent);
+    fixture = TestBed.createComponent(ProfilePanelComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

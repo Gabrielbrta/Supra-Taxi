@@ -1,0 +1,124 @@
+<div class="table-container">
+    @if(mode() !== 'view') {
+        <div class="button-container">
+            <app-button
+            [labelButton]="'Veículo'"
+            [icon]="'LucidePlus'"
+            (clicked)="novoVeiculo($event)"
+            >
+            
+            </app-button>
+        </div>
+    }
+    
+    @if(dataSource().data?.length) {
+        <app-table
+        [dataSource]="dataSource()"
+        [displayedColumns]="tableColumns"
+        [actions]="getActions()"
+        (actionClick)="actionClick($event)"
+        >
+        </app-table>
+    } @else {
+        <div>Nenhum item cadastrado...</div>
+    }
+</div>
+
+<app-modal
+[type]="'custom'"
+(refuseClick)="closeModal()"
+(confirmClick)="addNovoVeiculos()"
+[toggle]="toggleModal"
+[title]="titleModal"
+[disabled]="!this.veiculoForm.valid"
+[subtitle]="'Informe os dados do veículo vinculado ao associado'"
+>
+<div [formGroup]="veiculoForm">
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Placa'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'ABC-0000'"
+        [mask]="'placa'"
+        formControlName="placa"
+        >
+        </app-input>
+        <app-input
+        [label]="'Marca'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Toyota'"
+        formControlName="marca"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Ano'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'0000'"
+        [mask]="'0000'"
+        formControlName="ano"
+        >
+        </app-input>
+        <app-input
+        [label]="'Modelo'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Corolla'"
+        formControlName="modelo"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Cor'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Vermelho'"
+        formControlName="cor"
+        >
+        </app-input>
+        <app-input
+        [label]="'Chassi'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'9BWZZZ377VT004251'"
+        [mask]="'chassi'"
+        formControlName="chassi"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Renavan'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'00000000000'"
+        [mask]="'00000000000'"
+        formControlName="renavan"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Observações'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="''"
+        formControlName="observacoes"
+        >
+        </app-input>
+    </div>
+</div>
+</app-modal>
+<app-modal
+[type]="'confirm'"
+[status]="'warn'"
+[toggle]="toggleConfirmModal"
+(refuseClick)="closeModal()"
+(confirmClick)="deleteVeiculo()"
+>
+</app-modal>

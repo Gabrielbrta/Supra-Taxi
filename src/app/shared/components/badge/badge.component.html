@@ -4,7 +4,9 @@
      [class.alert]="status() === StatusEnum.Pendente"   
      [class.sucess]="status() === StatusEnum.Aprovado ||
                      status() === tipoMotoristaEnum.Associado ||
-                     status() === StatusEnum.Ativo"   
+                     status() === StatusEnum.Ativo ||
+                     status() === StatusEnum.Enviado
+                     "    
      [class.data]="status() === tipoMotoristaEnum.Motorista"   
 >
     <span>{{getLabel()}}</span>

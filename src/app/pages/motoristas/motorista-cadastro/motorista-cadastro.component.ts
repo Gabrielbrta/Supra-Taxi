@@ -13,10 +13,11 @@ import { CadastroMotoristaForm, CadastroMotoristaDTO, CadastroMotoristaStorage, 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
 import moment from 'moment';
+import { ProfilePanelComponent } from "../../../shared/components/profile-panel/profile-panel.component";
 
 @Component({
   selector: 'app-motorista-cadastro',
-  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent, EnderecoComponent, DadosProfissionaisComponent, DocumentosComponent],
+  imports: [CardComponent, FormTabsComponent, DadosPessoaisComponent, ReactiveFormsModule, ButtonComponent, EnderecoComponent, DadosProfissionaisComponent, DocumentosComponent, ProfilePanelComponent],
   templateUrl: './motorista-cadastro.component.html',
   styleUrl: './motorista-cadastro.component.scss',
 })
@@ -53,6 +54,7 @@ export class MotoristaCadastroComponent implements OnInit {
       this.patchValueForm(motorista);
     }
     this.selectedTab(this.tabs[0].key);
+
   }
   
   activeTab: string = '';
@@ -107,6 +109,20 @@ export class MotoristaCadastroComponent implements OnInit {
 
   });
 
+  base64ToFile(base64: string, fileName: string, mimeType: string): File {
+    const byteString = atob(base64.split(',')[1]);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+
+    for (let i = 0; i < byteString.length; i++) {
+      uint8Array[i] = byteString.charCodeAt(i);
+    }
+
+    return new File([arrayBuffer], fileName, {
+      type: mimeType,
+    });
+}
+
   patchValueForm(motorista: CadastroMotoristaStorage) {
     this.form.patchValue({
       dadosPessoais: motorista.dadosPessoais,
@@ -120,9 +136,23 @@ export class MotoristaCadastroComponent implements OnInit {
         // comprovanteResidencia: motorista.documentos.comprovanteResidencia,
         // antecedentesCriminais: motorista.documentos.antecedentesCriminais,
         // foto: motorista.documentos.foto,
+        foto: motorista.documentos.foto
+        ? {
+            ...motorista.documentos.foto,
+            file: this.base64ToFile(
+              motorista.documentos.foto.file,
+              motorista.documentos.foto.fileName!,
+              motorista.documentos.foto.mimeType!
+            )
+          }
+        : null,
       }
     })
   }
+
+get profileImage(): File | null {
+  return this.form.controls.documentos.controls.foto.value?.file ?? null;
+}
 
 
   tabs: TabsHeader[] = [
@@ -186,4 +216,41 @@ export class MotoristaCadastroComponent implements OnInit {
     }
   }
 
-}
+  getProgress(group: FormGroup): number {
+    const controls = Object.values(group.controls);
+
+    const filledControls = controls.filter(control => {
+      const value = control.value;
+
+      return value !== null &&
+            value !== '' &&
+            value !== undefined;
+      }).length;
+
+      return (filledControls / controls.length) * 100 ;
+    }
+
+    get progressItems() {
+        return [
+          {
+            label: 'Dados Pessoais',
+            progress: this.getProgress(this.form.controls.dadosPessoais)
+          },
+          {
+            label: 'Endereço',
+            progress: this.getProgress(this.form.controls.endereco)
+          },
+          {
+            label: 'Dados Profissionais',
+            progress: this.getProgress(this.form.controls.dadosProfissionais)
+          },
+          {
+            label: 'Documentos',
+            progress: this.getProgress(this.form.controls.documentos)
+          },
+        ]
+    
+    }
+} 
+
+  

@@ -5,4 +5,5 @@ export enum StatusEnum {
     'Aprovado' = 4,
     'Inativo' = 5,
     'Ativo' = 6,
+    'Enviado' = 7
 }

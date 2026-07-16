@@ -1,0 +1,71 @@
+
+<div class="container-motoristas">
+    <app-card>
+            <app-form-tabs
+            [tabs]="tabs"
+            (clicked)="selectedTab($event)"
+            ></app-form-tabs>
+        <form class="container-form" [formGroup]="form">
+        
+            <div class="container-sides">
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'dados_pessoais'">
+                    <app-associados-dados-pessoais
+                    [formGroup]="form.controls.dadosPessoais"
+                    >
+                    </app-associados-dados-pessoais>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'endereco'">
+                    <app-associados-endereco
+                    [formGroup]="form.controls.endereco"
+                    ></app-associados-endereco>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'dados_profissionais'">
+                    <app-associados-dados-profissionais
+                    [formGroup]="form.controls.dadosProfissionais"
+                    >
+
+                    </app-associados-dados-profissionais>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'veiculos'">
+                    <app-associados-veiculos
+                    [formArray]="form.controls.veiculos"
+                    [mode]="mode";
+                    >
+
+                    </app-associados-veiculos>
+                </div>
+                <div class="container-form-left-side" [hidden]="this.activeTab !== 'documentos'">
+                    <app-associados-documentos
+                    [formGroup]="form.controls.documentos"
+                    >
+                    </app-associados-documentos>
+                </div>
+                <div class="container-form-right-side">
+                    <app-profile-panel
+                    [progressItems]="progressItems"
+                    [profileImage]="profileImage"
+                    ></app-profile-panel>
+                </div>
+            </div>
+            <div class="button-container">
+                @if(!viewOnly) {
+                    <app-button
+                    [labelButton]="mode !== 'edit' ? 'Salvar' : 'Editar'"
+                    [buttonType]="'filled'"
+                    [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+                    [disabled]="this.form.invalid"
+                    (clicked)="onSubmit($event)"
+                    >
+                    </app-button>
+                    <app-button
+                    [labelButton]="'Cancelar'"
+                    [buttonType]="'outlined'"
+                    [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+                    (clicked)="back($event)"
+                    >
+                    </app-button>
+                }
+                </div>
+        </form>
+    </app-card>
+</div>

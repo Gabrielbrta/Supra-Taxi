@@ -15,4 +15,13 @@
             </app-table>
         </app-card>
     </article>
+    <app-modal
+    [type]="'confirm'"
+    [status]="'warn'"
+    [toggle]="openModal"
+    (confirmClick)="confirmDelete()"
+    (refuseClick)="cancel()"
+    >
+        <p class="modal-message">Deseja excluir o motorista <span class="red">{{nomeMotorista}}</span>?</p>
+    </app-modal>
 </main>

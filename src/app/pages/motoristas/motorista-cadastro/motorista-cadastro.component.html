@@ -32,7 +32,12 @@
                     >
                     </app-documentos>
                 </div>
-                <div class="container-form-right-side"></div>
+                <div class="container-form-right-side">
+                    <app-profile-panel
+                    [progressItems]="progressItems"
+                    [profileImage]="profileImage"
+                    ></app-profile-panel>
+                </div>
             </div>
             <div class="button-container">
                 @if(!viewOnly) {

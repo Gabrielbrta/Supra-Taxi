@@ -1,0 +1,9 @@
+.wrapper-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    app-input, app-input-select {
+        flex: 1;
+    }
+}

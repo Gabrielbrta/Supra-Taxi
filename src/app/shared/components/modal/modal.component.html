@@ -1,0 +1,105 @@
+
+@if(type() === 'confirm') {
+    <div class="overlay"
+        [class.none]="toggle() === false"
+    >
+        <div class="container-modal">
+            <div class="icon-container-close"
+            (click)="onRefuseClick()"
+            >
+                 <svg [lucideIcon]="icons['LucideX']"></svg>
+            </div>
+            <div class="icon-status-container"
+                [class.warn]="status() === 'warn'"
+                [class.success]="status() === 'success'"
+                [class.info]="status() === 'info'"
+                [class.error]="status() === 'error'"
+            >
+                <svg [lucideIcon]="
+                icons[
+                    status() === 'warn' ? 'LucideOctagonAlert' :
+                    status() === 'success' ? 'LucideCheck' : 
+                    status() === 'error' ? 'LucideX' : 'LucideOctagonAlert'
+                ]"></svg>
+            </div>
+            <div class="modal-message-container">
+                <p class="warning-status"
+                    [class.warn]="status() === 'warn'"
+                    [class.success]="status() === 'success'"
+                    [class.info]="status() === 'info'"
+                    [class.error]="status() === 'error'"
+                >
+            {{
+                status() === 'warn' ? 'Atenção! Essa ação não poderá ser desfeita!': 
+                status() === 'success' ? 'Ação concluída com sucesso!': 
+                status() === 'info' ? 'Confira as informações antes de continuar!':
+                            "Ocorreu um erro ao processar a ação. Tente novamente!" 
+            }}
+                </p>
+                <ng-content></ng-content>
+            </div>
+
+            <div class="action-button-container">
+                <app-button
+                [buttonType]="'filled'"
+                [labelButton]="'Confirmar'"
+                (clicked)="onConfirmClick()"
+                >
+
+                </app-button>
+
+                @if(status() !== 'success' && status() !== 'info') {
+                    <app-button
+                    [buttonType]="'outlined'"
+                    [labelButton]="'Cancelar'"
+                    (clicked)="onRefuseClick()"
+                    >
+                    </app-button>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@if(type() === 'custom') {
+    <div class="overlay"
+    [class.none]="toggle() === false"
+    >
+        <div class="container-modal custom">
+            <header>
+                <h2>{{title() ?? ''}}</h2>
+                <p>{{subtitle() ?? ''}}</p>
+
+            </header>
+            <div class="icon-container-close"
+            (click)="onRefuseClick()"
+            >
+                    <svg [lucideIcon]="icons['LucideX']"></svg>
+            </div>
+            <div class="content">
+                <ng-content></ng-content>
+            </div>
+            <footer>
+                <div class="action-button-container">
+                    <app-button
+                    [buttonType]="'filled'"
+                    [labelButton]="'Confirmar'"
+                    [disabled]="disabled()"
+                    (clicked)="onConfirmClick()"
+                    >
+
+                    </app-button>
+
+                    @if(status() !== 'success' && status() !== 'info') {
+                        <app-button
+                        [buttonType]="'outlined'"
+                        [labelButton]="'Cancelar'"
+                        (clicked)="onRefuseClick()"
+                        >
+                        </app-button>
+                    }
+                </div>
+            </footer>
+        </div>
+    </div>
+}

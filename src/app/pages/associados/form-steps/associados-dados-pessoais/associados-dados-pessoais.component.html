@@ -1,0 +1,163 @@
+<div [formGroup]="formGroup()">
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Nome completo'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'Pedrinho da silva'"
+        formControlName="nomeAssociado"
+        >
+        </app-input>
+        <app-input
+        [label]="'E-mail'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'email@gmail.com'"
+        formControlName="email"
+        >
+        </app-input>
+        <app-input
+        [label]="'Data Nascimento'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="'dd/mm/aaaa'"
+        formControlName="dataNascimento"
+        ></app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Nome do pai'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="'joao da silva'"
+        formControlName="nomePai"
+        >
+        </app-input>
+        <app-input
+        [label]="'Nome da mãe'"
+        [type]="'text'"
+        [required]="false"
+        [placeholder]="'maria da silva'"
+        formControlName="nomeMae"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'CPF'"
+        [type]="'text'"
+        [max]="14"
+        [min]="14"
+        [required]="true"
+        [mask]="'000.000.000-00'"
+        [placeholder]="'000.000.000-00'"
+        formControlName="cpfAssociado"
+        >
+        </app-input>
+        <app-input
+        [label]="'RG'"
+        [type]="'text'"
+        [required]="true"
+        [max]="12"
+        [min]="12"
+        [mask]="'00.000.000-0'"
+        [placeholder]="'00.000.000-0'"
+        formControlName="rgAssociado"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'CNH'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'00000000000'"
+        [max]="11"
+        [min]="11"
+        formControlName="cnhAssociado"
+        >
+        </app-input>
+        <app-input
+        [label]="'Data vencimento CNH'"
+        [type]="'date'"
+        [placeholder]="'dd/mm/aaaa'"
+        [required]="true"
+        formControlName="dataVencimentoCNH"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Data expedição RG'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="'dd/mm/aaaa'"
+        formControlName="dataExpedicaoRG"
+        ></app-input>
+        <app-input
+        [label]="'Data emissão CNH'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="'dd/mm/aaaa'"
+        formControlName="dataEmissaoCNH"
+        >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+            [label]="'Nacionalidade'"
+            [type]="'text'"
+            [required]="false"
+            [placeholder]="'Brasileiro'"
+            formControlName="nacionalidade"
+            >
+        </app-input>
+        <app-input
+            [label]="'Naturalidade'"
+            [type]="'text'"
+            [required]="false"
+            [placeholder]="'São Paulo / SP'"
+            formControlName="naturalidade"
+            >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input-select
+        [required]="true"
+        [label]="'Estado civil'"
+        [selectSource]="estadoCivilDataSource"
+        formControlName="estadoCivil"
+        ></app-input-select>
+        <app-input-select
+        [required]="false"
+        [label]="'Escolaridade'"
+        [selectSource]="escolaridadeDataSource"
+        formControlName="escolaridade"
+        ></app-input-select>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+            [label]="'Telefone'"
+            [type]="'tel'"
+            [required]="false"
+            [mask]="'(00) 0000-0000'"
+            [max]="14"
+            [min]="14"
+            [placeholder]="'(13) 9999-9999'"
+            formControlName="telAssociado"
+            >
+        </app-input>
+        <app-input
+            [label]="'Celular'"
+            [type]="'tel'"
+            [required]="true"
+            [max]="15"
+            [min]="15"
+            [mask]="'(00) 00000-0000'"
+            [placeholder]="'(13) 99999-9999'"
+            formControlName="celAssociado"
+            >
+        </app-input>
+    </div>
+
+</div>
