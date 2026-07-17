@@ -1,0 +1,144 @@
+<div class="vistoria-container">
+    
+    
+    <app-card-form-block
+    [title]="'Informações gerais'"
+    [icon]="'LucideOctagonAlert'"
+    [description]="'Identificação da vistoria e responsáveis.'"
+    >
+    
+        <div class="form-container">
+            <div class="wrapper-group">
+                <app-input
+                [label]="'Unidade'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'501'"
+                >
+                </app-input>
+                <app-input
+                [label]="'Diretor responsável'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'Eduardo Ramos'"
+                >
+                </app-input>
+                <app-input
+                [label]="'RCT'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'0000000'"
+                >
+                </app-input>
+            </div>
+            <div class="wrapper-group">
+               <app-input
+                [label]="'Data da vistoria'"
+                [type]="'date'"
+                [required]="true"
+                [placeholder]="'dd/mm/aaaa'"
+                >
+                </app-input>
+                <app-input
+                [label]="'CPEST'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'000000000'"
+                >
+                </app-input>
+                <div class=""></div>
+
+            </div>
+        </div>
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Dados do veículo'"
+    [icon]="'LucideCar'"
+    >
+    
+        <div class="form-container">
+            <div class="wrapper-group">
+                <app-input
+                [label]="'Veículo'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'501'"
+                >
+                </app-input>
+                <app-input
+                [label]="'Proprietário'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'Eduardo Ramos'"
+                >
+                </app-input>
+                <app-input
+                [label]="'Auxiliar'"
+                [type]="'text'"
+                [required]="false"
+                [placeholder]="'Eduardo Ramos'"
+                >
+                </app-input>
+            </div>
+            <div class="wrapper-group">
+                <app-input
+                [label]="'Quem acompanhou'"
+                [type]="'text'"
+                [required]="false"
+                [placeholder]="'Eduardo Ramos'"
+                >
+                </app-input>
+                <app-input
+                [label]="'KM'"
+                [type]="'text'"
+                [required]="false"
+                [placeholder]="'00.000'"
+                >
+                </app-input>
+                <app-input
+                [label]="'Modelo'"
+                [type]="'text'"
+                [required]="false"
+                [placeholder]="'Corolla'"
+                >
+                </app-input>
+            </div>
+            <div class="wrapper-group">
+                <app-input
+                [label]="'Ano'"
+                [type]="'text'"
+                [required]="false"
+                [mask]="'0000'"
+                [placeholder]="'2030'"
+                >
+                </app-input>
+                <div class=""></div>
+                <div class=""></div>
+            </div>
+        </div>
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Pneus'"
+    [icon]="'LucideClipboardList'"
+    [description]="'Marque a condição de cada pneu.'"
+    >
+    
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Itens internos'"
+    [icon]="'LucideClipboardList'"
+    [description]="'Marque a condição de cada item.'"
+    >
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Inspeção visual'"
+    [icon]="'LucideEye'"
+    [description]="'Marque OK ou Danificado e adicione observações.'"
+    ></app-card-form-block>
+    <app-card-form-block
+    [title]="'Resultado final'"
+    [icon]="'LucideClipboardList'"
+    [description]="'Confira todos os itens antes de aprovar.'"
+    >
+    </app-card-form-block>
+</div>
