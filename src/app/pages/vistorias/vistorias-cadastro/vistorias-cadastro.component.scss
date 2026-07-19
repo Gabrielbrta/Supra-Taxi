@@ -7,3 +7,9 @@
         flex: 1;
     }
 }
+
+.container-table {
+    overflow: hidden;
+    width: 100%;
+    border-radius: var(--radius-xl);
+}

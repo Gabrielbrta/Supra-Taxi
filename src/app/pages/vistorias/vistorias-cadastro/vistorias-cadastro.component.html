@@ -122,13 +122,22 @@
     [icon]="'LucideClipboardList'"
     [description]="'Marque a condição de cada pneu.'"
     >
-    
+        <app-table-checklist
+            formControlName="checklistPneus"      
+            [posicoes]="listaPosicoes"             
+            [opcoes]="listaOpcoes">
+        </app-table-checklist>               
     </app-card-form-block>
     <app-card-form-block
     [title]="'Itens internos'"
     [icon]="'LucideClipboardList'"
     [description]="'Marque a condição de cada item.'"
     >
+        <app-table-checklist
+            formControlName="checklistPneus"      
+            [posicoes]="listaPosicoesItems"             
+            [opcoes]="listaOpcoesItems">
+        </app-table-checklist> 
     </app-card-form-block>
     <app-card-form-block
     [title]="'Inspeção visual'"
