@@ -1,0 +1,20 @@
+ <div class="radio-group" role="radiogroup" [attr.aria-label]="ariaLabel()">
+    @for (option of options(); track option.value) {
+    <label 
+        class="radio-option"
+        [class.checked]="isSelected(option.value)"
+        [class.disabled]="option.disabled || disabled()"
+    >
+        <input
+        type="radio"
+        [name]="name()"
+        [value]="option.value"
+        [checked]="isSelected(option.value)"
+        [disabled]="option.disabled || disabled()"
+        (change)="selectOption(option.value)"
+        />
+        <span class="radio-indicator"></span>
+        <span class="radio-label">{{ option.label }}</span>
+    </label>
+    }
+</div>

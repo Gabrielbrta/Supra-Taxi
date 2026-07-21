@@ -14,13 +14,14 @@
             <mat-radio-group 
                 [name]="'radio-' + row.posicao" 
                 [(ngModel)]="row.status"
+                [disabled]="disabled"
                 [class.status-ok]="row.status === 'ok'"
                 [class.status-meia-vida]="row.status === 'meia_vida' || row.status === 'aceitavel'"
                 [class.status-careca]="row.status === 'careca' || row.status === 'pessima'"
                 (change)="onStatusChange(row, opcao.key)"
                 (blur)="onTouched()">
               
-              <mat-radio-button [value]="opcao.key"></mat-radio-button>
+              <mat-radio-button [disabled]="disabled" [value]="opcao.key"></mat-radio-button>
               
             </mat-radio-group>
           </td>

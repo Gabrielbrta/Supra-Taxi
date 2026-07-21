@@ -147,7 +147,6 @@ export const MainLayoutsRoutes: Routes = [
             buttonLabel: "Voltar",
             routerLink: 'vistorias',
             icon: null,
-            exportable: true
         }
     },
     {

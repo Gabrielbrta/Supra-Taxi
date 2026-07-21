@@ -1,10 +1,11 @@
-<div class="vistoria-container">
+<form class="vistoria-container" [formGroup]="form">
     
     
     <app-card-form-block
     [title]="'Informações gerais'"
     [icon]="'LucideOctagonAlert'"
     [description]="'Identificação da vistoria e responsáveis.'"
+    [required]="true"
     >
     
         <div class="form-container">
@@ -54,6 +55,7 @@
     <app-card-form-block
     [title]="'Dados do veículo'"
     [icon]="'LucideCar'"
+    [required]="true"
     >
     
         <div class="form-container">
@@ -121,6 +123,7 @@
     [title]="'Pneus'"
     [icon]="'LucideClipboardList'"
     [description]="'Marque a condição de cada pneu.'"
+    [required]="true"
     >
         <app-table-checklist
             formControlName="checklistPneus"      
@@ -132,9 +135,10 @@
     [title]="'Itens internos'"
     [icon]="'LucideClipboardList'"
     [description]="'Marque a condição de cada item.'"
+    [required]="true"
     >
         <app-table-checklist
-            formControlName="checklistPneus"      
+            formControlName="checklistItems"      
             [posicoes]="listaPosicoesItems"             
             [opcoes]="listaOpcoesItems">
         </app-table-checklist> 
@@ -143,11 +147,119 @@
     [title]="'Inspeção visual'"
     [icon]="'LucideEye'"
     [description]="'Marque OK ou Danificado e adicione observações.'"
-    ></app-card-form-block>
+    [required]="true"
+    >
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Lado Direito</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'lado-direito'"
+            [required]="true"
+            formControlName="ladoDireito"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Retrovisor quebrado (opcional)'"
+        formControlName="ladoDireitoDescricao"
+
+        >
+            
+        </app-textarea>
+    </div>
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Lado Esquerdo</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'lado-esquerdo'"
+            [required]="true"
+            formControlName="ladoEsquerdo"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Retrovisor quebrado (opcional)'"
+        formControlName="ladoEsquerdoDescricao"
+
+        >
+        </app-textarea>
+    </div>
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Parte Superior</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'parte-superior'"
+            [required]="true"
+            formControlName="parteSuperior"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Teto amassado (opcional)'"
+        formControlName="parteSuperiorDescricao"
+
+        >
+        </app-textarea>
+    </div>
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Para-choque Dianteiro</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'parachoque-dianteiro'"
+            [required]="true"
+            formControlName="paraChoqueDianteiro"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Capô amassado (opcional)'"
+        formControlName="paraChoqueDianteiroDescricao"
+
+        >
+        </app-textarea>
+    </div>
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Para-choque Traseiro</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'parachoque-traseiro'"
+            [required]="true"
+            formControlName="paraChoqueTraseiro"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Capô amassado (opcional)'"
+        formControlName="paraChoqueTraseiroDescricao"
+
+        >
+        </app-textarea>
+    </div>
+    </app-card-form-block>
     <app-card-form-block
     [title]="'Resultado final'"
     [icon]="'LucideClipboardList'"
     [description]="'Confira todos os itens antes de aprovar.'"
     >
     </app-card-form-block>
-</div>
+</form>

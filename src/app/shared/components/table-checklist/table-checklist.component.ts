@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
 export class TableChecklistComponent implements ControlValueAccessor {
   posicoes = input<string[]>([]);
   opcoes = input<OpcaoChecklist[]>([]);
-
+  disabled: boolean = false;
   internalData = signal<ItemChecklist[]>([]);
   displayedColumns = computed(() => [
     'posicao', 
@@ -60,6 +60,7 @@ export class TableChecklistComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   onStatusChange(row: ItemChecklist, statusKey: string) {

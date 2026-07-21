@@ -6,6 +6,7 @@
 .card-content {
     width: 100%;
     padding: 10px 0;
+    position: relative;
 
     .title-form-container {
         width: 100%;
@@ -41,4 +42,22 @@
 
 .content-container {
     padding: 20px 30px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: var(--radius-xl);
+    position:absolute;
+    top: 30px;
+    right: 20px;
+    font-size: var(--font-size-sm);
+
+    &.obrigatorio {
+        background-color: var(--primary-red-300);
+        color: var(--primary-red-700);
+    }
+    &.opcional {
+        background-color: var(--palette-gray-200);
+        color: var(--palette-gray-800);
+    }
 }
