@@ -1,0 +1,25 @@
+<div class="button-container">
+    <button
+    (click)="onClick($event)"
+    [disabled]="disabled()"
+    class="button"
+    [id]="status() === 'approval' ? 'approved' : 'reproved'"
+    [class.approved]="status() === 'approval'"
+    [class.reproved]="status() === 'reproved'"
+    [class.selected]="actualSelected() === true"
+    [class.selectedReproved]="actualSelected() === false"
+    >
+        <div class="container-approval-button">
+            <div class="icon-container"
+                [class.approved]="status() === 'approval'"
+                [class.reproved]="status() === 'reproved'"
+                >
+                        <svg [lucideIcon]="icons[status() === 'approval' ? 'LucideCheck' : 'LucideX']"></svg>
+            </div>
+            <div class="content">
+                <h2>{{title() ?? ''}}</h2>
+                <p>{{description() ?? ''}}</p>
+            </div>
+        </div>
+    </button>
+</div>

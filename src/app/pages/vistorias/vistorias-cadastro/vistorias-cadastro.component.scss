@@ -2,8 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 800px) {
+        flex-wrap: wrap;
+    }
     gap: 15px;
-    app-input, app-input-select, div {
+    app-input, app-input-select, div, app-textarea {
         flex: 1;
     }
 }
@@ -35,5 +39,16 @@
     h3 {
         font-weight: 500;
         font-size: var(--font-size-md);
+    }
+}
+
+
+.approval-container {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+
+    .item {
+        flex: 1;
     }
 }

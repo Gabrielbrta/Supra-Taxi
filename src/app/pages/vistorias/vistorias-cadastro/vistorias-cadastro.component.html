@@ -148,8 +148,9 @@
     [icon]="'LucideEye'"
     [description]="'Marque OK ou Danificado e adicione observações.'"
     [required]="true"
+    formGroupName="dadosVisuais"
     >
-    <div class="carro-container">
+    <div class="carro-container" >
         <div class="radio-container">
             <h3>Lado Direito</h3>
             <app-radio-button
@@ -244,6 +245,7 @@
             formControlName="paraChoqueTraseiro"
             >
             </app-radio-button>
+           
         </div>
         <app-textarea
         [maxlength]="200"
@@ -260,6 +262,93 @@
     [title]="'Resultado final'"
     [icon]="'LucideClipboardList'"
     [description]="'Confira todos os itens antes de aprovar.'"
+    formGroupName="dadosVisuais"
     >
+        <div class="approval-container">
+            <div class="item">
+                <app-button-approval
+                [status]="'approval'"
+                [title]="'Aprovar vistoria'"
+                [description]="'O veículo está apto para operação.'"
+                [selected]="selectedButton"
+                (click)="approvalClick($event)"
+                >
+                </app-button-approval>
+            </div>
+            <div class="item">
+            <app-button-approval
+            [status]="'reproved'"
+            [title]="'Reprovar vistoria'"
+            [description]="'Será obrigatório informar o motivo da reprovação.'"
+            [selected]="selectedButton"
+            (click)="reprovedClick($event)"
+            >
+            </app-button-approval>
+            </div>
+        </div>
+            @if(motivoReprovacao() === true){
+            <div class="wrapper-group">
+                <app-textarea
+                [maxlength]="200"
+                [showCharCount]="true"
+                [rows]="3"
+                [label]="'Motivo da reprovação'"
+                [required]="true"
+                [placeholder]="'Documento vencido, amassado, pneu careca e etc...'"
+                formControlName="motivoReprovacao"
+
+                >
+                </app-textarea>
+            </div>
+            }
+            <div class="wrapper-group">
+                <app-textarea
+                    [maxlength]="200"
+                    [showCharCount]="true"
+                    [rows]="3"
+                    [label]="'Observação geral'"
+                    [required]="false"
+                    [placeholder]="'Documento vencido, amassado, pneu careca e etc...'"
+                    formControlName="observacaoGeral"
+    
+                    >
+                    </app-textarea>
+            </div>
+            <div class="wrapper-group" [formGroup]="form">
+                <app-input
+                [label]="'Diretor responsável'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'aaasdasda'"
+                formControlName="diretorResponsavel"
+                >
+                </app-input>
+                <app-input
+                [label]="'Data da vistoria'"
+                [type]="'date'"
+                [required]="true"
+                [placeholder]="'dd/mm/aaaa'"
+                formControlName="dataVistoria"
+                >
+                </app-input>
+            </div>
+
+
+     <app-radio-button
+     hidden
+        [options]="inspecaoVisualOptions"
+        [name]="'parachoque-traseiro'"
+        [required]="true"
+        formControlName="aprovarVistoria"
+        >
+    </app-radio-button>
     </app-card-form-block>
+    <app-button
+    [labelButton]="'Salvar'"
+    [buttonType]="'filled'"
+    [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+    [disabled]="this.form.invalid"
+    (clicked)="onSubmit($event)"
+    >
+    </app-button>
 </form>
