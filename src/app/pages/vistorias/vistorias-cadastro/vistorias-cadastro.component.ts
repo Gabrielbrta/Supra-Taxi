@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, signal } from '@angular/core';
 import { CardFormBlockComponent } from '../../../shared/components/card-form-block/card-form-block.component';
 import { InputComponent } from '../../../shared/components/forms/input/input.component';
 import { OpcaoChecklist } from '../../../shared/models/table/TableCheckList';
@@ -12,6 +12,10 @@ import { Moment } from 'moment';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SubmitBarComponent } from "../../../shared/components/submit-bar/submit-bar.component";
+import { ActivatedRoute, Router } from '@angular/router';
+import moment from 'moment';
+import { CadastroVistoriaDTO } from '../../../shared/models/vistorias/CadastroVistoriaDTO';
+import { VistoriaService } from '../../../core/services/Vistorias.service';
 
 @Component({
   selector: 'app-vistorias-cadastro',
@@ -31,12 +35,16 @@ import { SubmitBarComponent } from "../../../shared/components/submit-bar/submit
   styleUrl: './vistorias-cadastro.component.scss',
 })
 export class VistoriasCadastroComponent implements OnInit {
+  private route = inject(ActivatedRoute)
+  private router = inject(Router);
+  private VistoriaService = inject(VistoriaService);
+
   form: FormGroup;
   selectedButton: boolean | null = null;
   motivoReprovacao = signal<boolean>(false);
   ngOnInit(): void {
     // this.form.disable();
-    this.form.valueChanges.subscribe(value => console.log(value))
+    // this.form.valueChanges.subscribe(value => console.log(value))
     this.form.get('dadosVisuais.aprovarVistoria')?.valueChanges
     .subscribe(value => {
       if(value === 0) {
@@ -128,17 +136,17 @@ export class VistoriasCadastroComponent implements OnInit {
   approvalClick(event: string) {
     this.selectedButton = true;
     this.hideMotivoReprovacao();
-    this.form.get('dadosVisuais.aprovarVistoria')?.setValue(1);
+    this.form.get('dadosVisuais.aprovarVistoria')?.setValue(1, { emitEvent: false });
   }
   
   hideMotivoReprovacao() {
-    this.form.get('dadosVisuais.motivoReprovacao')?.disable();
+    this.form.get('dadosVisuais.motivoReprovacao')?.disable({emitEvent: false});
     this.form.get('dadosVisuais.motivoReprovacao')?.clearValidators();
     this.motivoReprovacao.set(false);
   }
 
   showMotivoReprovacao() {
-    this.form.get('dadosVisuais.motivoReprovacao')?.enable();
+    this.form.get('dadosVisuais.motivoReprovacao')?.enable({emitEvent: false});
     this.form.get('dadosVisuais.motivoReprovacao')?.setValidators([Validators.required]);
     this.motivoReprovacao.set(true);
   }
@@ -146,14 +154,35 @@ export class VistoriasCadastroComponent implements OnInit {
   reprovedClick(event: string) {
     this.selectedButton = false;
     this.showMotivoReprovacao();
-    this.form.get('dadosVisuais.aprovarVistoria')?.setValue(0);
+    this.form.get('dadosVisuais.aprovarVistoria')?.setValue(0, { emitEvent: false });
   }
 
-  onSubmit(event: Event) {
-    console.log(event)
+ async onSubmit(event: Event) {
+    event.preventDefault();
+
+     if (this.form.invalid) {
+        this.form.markAllAsTouched();
+        return;
+    }
+
+    if(this.form.valid) {
+      const payload = {
+        ...(this.form.getRawValue() as CadastroVistoriaDTO), 
+      }
+      payload.dataVistoria =
+        moment(payload.dataVistoria).format('DD/MM/YYYY');
+
+
+        const response = await this.VistoriaService.cadastroVistoria(payload, crypto.randomUUID());
+        if(response.status?.message) {
+          alert(response.status.message);
+        }
+    }
+
+    console.log(this.form.value)
   }
 
   goBack() {
-
+    this.router.navigate(['/vistorias']);
   }
 }
