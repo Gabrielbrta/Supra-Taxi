@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 import { LucideDynamicIcon } from '@lucide/angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-export type ButtonColor = 'primary' | 'danger' | 'success' | 'warn' | 'info' | 'neutral';
+export type ButtonColor = 'primary' | 'danger' | 'success' | 'warn' | 'info' | 'neutral' | 'ghost';
 
 @Component({
   selector: 'app-button',
@@ -30,8 +30,13 @@ export class ButtonComponent {
 
   // ===== Computed: gera a classe CSS baseada na cor + tipo =====
   colorClass = computed(() => {
-    const type = this.buttonType();
     const color = this.color();
+    const type = this.buttonType();
+
+    if (color === 'ghost') {
+      return 'ghost-button';
+    }
+    
     return `${color}-button--${type}`;
   });
 

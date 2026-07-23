@@ -1,5 +1,5 @@
 export interface RadioOptions {
-    value: string | number | boolean;
+    value: string | number;
     label: string;
     disabled?: boolean;
 }

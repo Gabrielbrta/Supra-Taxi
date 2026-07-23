@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, OnInit, signal } from '@angular/core';
 import { CardFormBlockComponent } from '../../../shared/components/card-form-block/card-form-block.component';
 import { InputComponent } from '../../../shared/components/forms/input/input.component';
 import { OpcaoChecklist } from '../../../shared/models/table/TableCheckList';
@@ -11,20 +11,22 @@ import { ButtonApprovalComponent } from "../../../shared/components/button-appro
 import { Moment } from 'moment';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SubmitBarComponent } from "../../../shared/components/submit-bar/submit-bar.component";
 
 @Component({
   selector: 'app-vistorias-cadastro',
   imports: [
-    CardFormBlockComponent, 
-    InputComponent, 
-    TableChecklistComponent, 
-    ReactiveFormsModule, 
-    RadioButtonComponent, 
-    TextareaComponent, 
+    CardFormBlockComponent,
+    InputComponent,
+    TableChecklistComponent,
+    ReactiveFormsModule,
+    RadioButtonComponent,
+    TextareaComponent,
     ButtonApprovalComponent,
     ButtonComponent,
-    MatTooltipModule
-  ],
+    MatTooltipModule,
+    SubmitBarComponent
+],
   templateUrl: './vistorias-cadastro.component.html',
   styleUrl: './vistorias-cadastro.component.scss',
 })
@@ -37,7 +39,7 @@ export class VistoriasCadastroComponent implements OnInit {
     this.form.valueChanges.subscribe(value => console.log(value))
     this.form.get('dadosVisuais.aprovarVistoria')?.valueChanges
     .subscribe(value => {
-      if(value === false) {
+      if(value === 0) {
         this.showMotivoReprovacao();
       } else {
         this.hideMotivoReprovacao();
@@ -82,16 +84,28 @@ export class VistoriasCadastroComponent implements OnInit {
   ];
 
   aprovarVistoria: RadioOptions[] = [
-    { value: true, label: 'aprovado' },
-    { value: false, label: 'reprovado' },
+    { value: 1, label: 'aprovado' },
+    { value: 0, label: 'reprovado' },
   ];
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       checklistPneus: this.fb.control<OpcaoChecklist[]>([], Validators.required),
       checklistItems: this.fb.control<OpcaoChecklist[]>([], Validators.required),
+
       dataVistoria: this.fb.control<Moment | string | Date>('', Validators.required),
       diretorResponsavel: this.fb.control<string>(''),
+      unidade: this.fb.control<string>('', Validators.required),
+      rct: this.fb.control<string>('', Validators.required),
+      cpest: this.fb.control<string>('', Validators.required),
+      
+      veiculo: this.fb.control<string>('', Validators.required),
+      proprietario: this.fb.control<string>('', Validators.required),
+      auxiliar: this.fb.control<string>(''),
+      km: this.fb.control<string>('', Validators.required),
+      ano: this.fb.control<string>(''),
+      modelo: this.fb.control<string>(''),
+      
 
       dadosVisuais: this.fb.group({
         ladoDireito: this.fb.control<string>('', Validators.required),
@@ -114,7 +128,7 @@ export class VistoriasCadastroComponent implements OnInit {
   approvalClick(event: string) {
     this.selectedButton = true;
     this.hideMotivoReprovacao();
-    this.form.get('dadosVisuais.aprovarVistoria')?.setValue(true);
+    this.form.get('dadosVisuais.aprovarVistoria')?.setValue(1);
   }
   
   hideMotivoReprovacao() {
@@ -132,10 +146,14 @@ export class VistoriasCadastroComponent implements OnInit {
   reprovedClick(event: string) {
     this.selectedButton = false;
     this.showMotivoReprovacao();
-    this.form.get('dadosVisuais.aprovarVistoria')?.setValue(false);
+    this.form.get('dadosVisuais.aprovarVistoria')?.setValue(0);
   }
 
   onSubmit(event: Event) {
     console.log(event)
+  }
+
+  goBack() {
+
   }
 }

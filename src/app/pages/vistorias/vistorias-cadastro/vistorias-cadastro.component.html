@@ -7,7 +7,6 @@
     [description]="'Identificação da vistoria e responsáveis.'"
     [required]="true"
     >
-    
         <div class="form-container">
             <div class="wrapper-group">
                 <app-input
@@ -15,29 +14,15 @@
                 [type]="'text'"
                 [required]="true"
                 [placeholder]="'501'"
-                >
-                </app-input>
-                <app-input
-                [label]="'Diretor responsável'"
-                [type]="'text'"
-                [required]="true"
-                [placeholder]="'Eduardo Ramos'"
+                formControlName="unidade"
                 >
                 </app-input>
                 <app-input
                 [label]="'RCT'"
                 [type]="'text'"
                 [required]="true"
-                [placeholder]="'0000000'"
-                >
-                </app-input>
-            </div>
-            <div class="wrapper-group">
-               <app-input
-                [label]="'Data da vistoria'"
-                [type]="'date'"
-                [required]="true"
-                [placeholder]="'dd/mm/aaaa'"
+                [placeholder]="'000000'"
+                formControlName="rct"
                 >
                 </app-input>
                 <app-input
@@ -45,10 +30,9 @@
                 [type]="'text'"
                 [required]="true"
                 [placeholder]="'000000000'"
+                formControlName="cpest"
                 >
                 </app-input>
-                <div class=""></div>
-
             </div>
         </div>
     </app-card-form-block>
@@ -64,7 +48,8 @@
                 [label]="'Veículo'"
                 [type]="'text'"
                 [required]="true"
-                [placeholder]="'501'"
+                [placeholder]="'Toyota'"
+                formControlName="veiculo"
                 >
                 </app-input>
                 <app-input
@@ -72,6 +57,7 @@
                 [type]="'text'"
                 [required]="true"
                 [placeholder]="'Eduardo Ramos'"
+                formControlName="proprietario"
                 >
                 </app-input>
                 <app-input
@@ -79,22 +65,17 @@
                 [type]="'text'"
                 [required]="false"
                 [placeholder]="'Eduardo Ramos'"
+                formControlName="auxiliar"
                 >
                 </app-input>
             </div>
             <div class="wrapper-group">
                 <app-input
-                [label]="'Quem acompanhou'"
-                [type]="'text'"
-                [required]="false"
-                [placeholder]="'Eduardo Ramos'"
-                >
-                </app-input>
-                <app-input
                 [label]="'KM'"
                 [type]="'text'"
-                [required]="false"
+                [required]="true"
                 [placeholder]="'00.000'"
+                formControlName="km"
                 >
                 </app-input>
                 <app-input
@@ -102,20 +83,18 @@
                 [type]="'text'"
                 [required]="false"
                 [placeholder]="'Corolla'"
+                formControlName="modelo"
                 >
                 </app-input>
-            </div>
-            <div class="wrapper-group">
                 <app-input
                 [label]="'Ano'"
                 [type]="'text'"
                 [required]="false"
                 [mask]="'0000'"
                 [placeholder]="'2030'"
+                formControlName="ano"
                 >
                 </app-input>
-                <div class=""></div>
-                <div class=""></div>
             </div>
         </div>
     </app-card-form-block>
@@ -343,12 +322,31 @@
         >
     </app-radio-button>
     </app-card-form-block>
-    <app-button
-    [labelButton]="'Salvar'"
-    [buttonType]="'filled'"
-    [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
-    [disabled]="this.form.invalid"
-    (clicked)="onSubmit($event)"
+    <app-submit-bar
+    [formValid]="!this.form.invalid"
     >
-    </app-button>
+        <app-button
+        [labelButton]="'Imprimir'"
+        [icon]="'LucidePrinter'"
+        [buttonType]="'filled'"
+        [color]="'ghost'"
+        (clicked)="goBack()"
+        >
+        </app-button>
+        <app-button
+        [labelButton]="'Cancelar'"
+        [buttonType]="'outlined'"
+        [color]="'ghost'"
+        (clicked)="goBack()"
+        >
+        </app-button>
+        <app-button
+        [labelButton]="'Salvar'"
+        [buttonType]="'filled'"
+        [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+        [disabled]="this.form.invalid"
+        (clicked)="onSubmit($event)"
+        >
+        </app-button>
+    </app-submit-bar>
 </form>

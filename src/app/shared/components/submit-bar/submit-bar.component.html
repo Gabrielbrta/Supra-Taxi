@@ -1,0 +1,10 @@
+<div class="submitBarContainer"
+(mouseenter)="show()"
+(mouseleave)="hide()"
+[class.show]="isShowing() === true"
+[class.hide]="isShowing() === false"
+>
+    <div class="actionButtonsContainer">
+        <ng-content></ng-content>
+    </div>
+</div>
