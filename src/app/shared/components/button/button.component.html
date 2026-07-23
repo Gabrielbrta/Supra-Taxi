@@ -1,56 +1,44 @@
 @if(routerLink()) {
-    <a  [matButton]="buttonType()"  [routerLink]="routerLink() ?? ''" (click)="onClick($event)" class="title"
-    [class.primary-color-button-filled]="buttonType() === 'filled'"
-    [class.primary-color-button-outlined]="buttonType() === 'outlined'"
-    >
-    @if(icon()) {
-        <svg [lucideIcon]="icons[icon() ?? 'LucidePlus']"></svg>
-    }
+    <a [matButton]="buttonType()" 
+       [routerLink]="routerLink() ?? ''" 
+       (click)="onClick($event)" 
+       class="title"
+       [class]="colorClass()">
+        @if(icon()) {
+            <svg [lucideIcon]="icons[icon() ?? 'LucidePlus']"></svg>
+        }
         {{labelButton()}}
     </a>
-}@else if(buttonType() === 'text'){
-        <span class="wrapper"
-        [matTooltip]="disabled() && tooltip() ? tooltip() : ''"
-    >
-        <button
-        [matButton]="buttonType()"
-        (click)="onClick($event)"
-        [disabled]="disabled()"
-        [matTooltip]="disabled() && tooltip() ? tooltip() : ''"
-        [class]="'primary-color-button--' + buttonType()"
-        class="title">
-
-        @if(icon()) {
-            <svg
-            [class.red]="icon()=== 'LucideTrash2'"
-            [class.key]="icon() === 'LucideKeyRound'"
-            [lucideIcon]="icons[icon()!]">
-            </svg>
-        }
-
-        {{ labelButton() }}
+} @else if(buttonType() === 'text') {
+    <span class="wrapper"
+          [matTooltip]="disabled() && tooltip() ? tooltip() : ''">
+        <button [matButton]="buttonType()"
+                (click)="onClick($event)"
+                [disabled]="disabled()"
+                [matTooltip]="disabled() && tooltip() ? tooltip() : ''"
+                [class]="'title ' + colorClass()">
+            @if(icon()) {
+                <svg [class.red]="icon()=== 'LucideTrash2'"
+                     [class.key]="icon() === 'LucideKeyRound'"
+                     [lucideIcon]="icons[icon()!]">
+                </svg>
+            }
+            {{ labelButton() }}
         </button>
     </span>
-}@else  {
+} @else {
     <div class="wrapper"
-        [matTooltip]="disabled() && tooltip() ? tooltip() : ''"
-        [matTooltipPosition]="'left'"
-    >
-        <button
-        [matButton]="buttonType()"
-        [routerLink]="routerLink()"
-        [disabled]="disabled()"
-        (click)="onClick($event)"
-        [class.primary-color-button-filled]="buttonType() === 'filled'"
-        [class.primary-color-button-outlined]="buttonType() === 'outlined'"
-        class="title">
-      
-        @if(icon()) {
-          <svg [lucideIcon]="icons[icon()!]"></svg>
-        }
-      
-        {{ labelButton() }}
-      </button>
+         [matTooltip]="disabled() && tooltip() ? tooltip() : ''"
+         [matTooltipPosition]="'left'">
+        <button [matButton]="buttonType()"
+                [routerLink]="routerLink()"
+                [disabled]="disabled()"
+                (click)="onClick($event)"
+                [class]="'title ' + colorClass()">
+            @if(icon()) {
+                <svg [lucideIcon]="icons[icon()!]"></svg>
+            }
+            {{ labelButton() }}
+        </button>
     </div>
 }
-

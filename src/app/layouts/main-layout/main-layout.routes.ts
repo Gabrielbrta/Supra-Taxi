@@ -145,6 +145,7 @@ export const MainLayoutsRoutes: Routes = [
         data:<pageHeaderData> {
             description: "Preencha cada bloco com atenção. Apenas Diretores e Administradores podem aprovar ou reprovar.",
             buttonLabel: "Voltar",
+            buttonType: 'outlined',
             routerLink: 'vistorias',
             icon: null,
         }
@@ -157,6 +158,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Visualize os dados cadastrados",
             buttonLabel: "Voltar",
             routerLink: 'vistorias',
+            buttonType: 'outlined',
             icon: null,
             exportable: true
         }
@@ -169,6 +171,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Edite os dados cadastrados",
             buttonLabel: "Voltar",
             routerLink: 'vistorias',
+            buttonType: 'outlined',
             icon: null,
             exportable: true
         }

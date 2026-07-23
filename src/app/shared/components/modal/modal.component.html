@@ -43,6 +43,7 @@
                 <app-button
                 [buttonType]="'filled'"
                 [labelButton]="'Confirmar'"
+                [color]="'success'"
                 (clicked)="onConfirmClick()"
                 >
 
@@ -50,8 +51,9 @@
 
                 @if(status() !== 'success' && status() !== 'info') {
                     <app-button
-                    [buttonType]="'outlined'"
+                    [buttonType]="'filled'"
                     [labelButton]="'Cancelar'"
+                    [color]="'danger'"
                     (clicked)="onRefuseClick()"
                     >
                     </app-button>
@@ -93,6 +95,7 @@
                     @if(status() !== 'success' && status() !== 'info') {
                         <app-button
                         [buttonType]="'outlined'"
+                        [color]="'danger'"
                         [labelButton]="'Cancelar'"
                         (clicked)="onRefuseClick()"
                         >

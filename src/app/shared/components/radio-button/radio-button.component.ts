@@ -1,6 +1,11 @@
 import { Component, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { RadioOptions } from '../../models/forms/RadioOptions';
+
+export interface RadioOptions {
+    value: string | number;
+    label: string;
+    disabled?: boolean;
+}
 
 @Component({
   selector: 'app-radio-button',
