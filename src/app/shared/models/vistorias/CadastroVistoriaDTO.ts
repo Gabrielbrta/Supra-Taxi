@@ -4,7 +4,7 @@ import { OpcaoChecklist } from "../table/TableCheckList";
 export interface CadastroVistoriaDTO {
     id: string;
     checklistPneus: OpcaoChecklist[];
-    checkListItems: OpcaoChecklist[];
+    checklistItems: OpcaoChecklist[];
     dataVistoria: Moment | string | Date;
     diretorResponsavel: string;
     unidade: string;

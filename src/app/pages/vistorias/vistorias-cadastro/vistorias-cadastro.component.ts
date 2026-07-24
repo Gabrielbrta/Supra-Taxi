@@ -38,10 +38,12 @@ export class VistoriasCadastroComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private router = inject(Router);
   private VistoriaService = inject(VistoriaService);
-
+  viewOnly: boolean = false; 
+  mode: 'create' | 'edit' | 'view' = 'create';
   form: FormGroup;
   selectedButton: boolean | null = null;
   motivoReprovacao = signal<boolean>(false);
+  private idVistoria: string = this.route.snapshot.paramMap.get('id')!;
   ngOnInit(): void {
     // this.form.disable();
     // this.form.valueChanges.subscribe(value => console.log(value))
@@ -49,10 +51,38 @@ export class VistoriasCadastroComponent implements OnInit {
     .subscribe(value => {
       if(value === 0) {
         this.showMotivoReprovacao();
+        this.reprovedClick();
       } else {
         this.hideMotivoReprovacao();
+        this.approvalClick();
       }
-    })
+    });
+
+    const path = this.route.snapshot.routeConfig?.path ?? '';
+
+     if(path.includes('editar')) {
+      this.mode = 'edit';
+
+      const vistoria = this.getVistoriaById(this.idVistoria);
+      if(!vistoria) {
+          console.error('Vistoria não encontrado');
+          return;
+      }
+      this.patchValueForm(vistoria);
+    }
+    if(path.includes('visualizar')){
+      this.mode = 'view';
+      this.viewOnly = true;
+      const vistoria = this.getVistoriaById(this.idVistoria);
+      console.log(vistoria);
+      
+      if(!vistoria) {
+        console.error('Vistoria não encontrada');
+        return;
+      }
+      this.patchValueForm(vistoria);
+      this.form.disable();
+    }
   }
 
    listaPosicoes: string[] = [
@@ -97,6 +127,7 @@ export class VistoriasCadastroComponent implements OnInit {
   ];
 
   constructor(private fb: FormBuilder) {
+
     this.form = this.fb.group({
       checklistPneus: this.fb.control<OpcaoChecklist[]>([], Validators.required),
       checklistItems: this.fb.control<OpcaoChecklist[]>([], Validators.required),
@@ -131,9 +162,32 @@ export class VistoriasCadastroComponent implements OnInit {
         observacaoGeral: this.fb.control<string>(''),
       })
     });
+
   }
 
-  approvalClick(event: string) {
+  patchValueForm(vistoria: CadastroVistoriaDTO) {
+      this.form.patchValue({
+        id: vistoria.id,
+        checklistPneus: vistoria.checklistPneus,
+        checklistItems: vistoria.checklistItems,
+        dataVistoria: vistoria.dataVistoria,
+        diretorResponsavel: vistoria.diretorResponsavel,
+        unidade: vistoria.unidade,
+        rct: vistoria.rct,
+        cpest: vistoria.cpest,
+    
+        veiculo: vistoria.veiculo,
+        proprietario: vistoria.proprietario,
+        auxiliar: vistoria.auxiliar,
+        km: vistoria.km,
+        ano: vistoria.ano,
+        modelo: vistoria.modelo,
+        dadosVisuais: vistoria.dadosVisuais,
+      });
+      
+  }
+
+  approvalClick() {
     this.selectedButton = true;
     this.hideMotivoReprovacao();
     this.form.get('dadosVisuais.aprovarVistoria')?.setValue(1, { emitEvent: false });
@@ -143,18 +197,41 @@ export class VistoriasCadastroComponent implements OnInit {
     this.form.get('dadosVisuais.motivoReprovacao')?.disable({emitEvent: false});
     this.form.get('dadosVisuais.motivoReprovacao')?.clearValidators();
     this.motivoReprovacao.set(false);
+    
   }
 
+  setApprovedOrReproved() {
+    const aprovado = this.form.get('dadosVisuais.aprovarVistoria')?.value;
+      if (aprovado === 0) {
+        this.motivoReprovacao.set(true);
+        this.reprovedClick();
+      } else {
+        this.motivoReprovacao.set(false);
+        this.approvalClick();
+      }
+  }
+  
   showMotivoReprovacao() {
-    this.form.get('dadosVisuais.motivoReprovacao')?.enable({emitEvent: false});
-    this.form.get('dadosVisuais.motivoReprovacao')?.setValidators([Validators.required]);
-    this.motivoReprovacao.set(true);
+    if(this.mode == 'view') {
+      this.form.get('dadosVisuais.motivoReprovacao')?.disable({emitEvent: false});
+      this.form.get('dadosVisuais.motivoReprovacao')?.clearValidators();
+      
+    }else {
+      this.form.get('dadosVisuais.motivoReprovacao')?.enable({emitEvent: false});
+      this.form.get('dadosVisuais.motivoReprovacao')?.setValidators([Validators.required]);
+      this.motivoReprovacao.set(true);
+    }
   }
 
-  reprovedClick(event: string) {
+  reprovedClick() {
     this.selectedButton = false;
     this.showMotivoReprovacao();
     this.form.get('dadosVisuais.aprovarVistoria')?.setValue(0, { emitEvent: false });
+  }
+
+  getVistoriaById(idVistoria: string) {
+    const vistoria = this.VistoriaService.getVistoriaById(idVistoria);
+    return vistoria;
   }
 
  async onSubmit(event: Event) {
@@ -173,10 +250,21 @@ export class VistoriasCadastroComponent implements OnInit {
         moment(payload.dataVistoria).format('DD/MM/YYYY');
 
 
-        const response = await this.VistoriaService.cadastroVistoria(payload, crypto.randomUUID());
-        if(response.status?.message) {
-          alert(response.status.message);
+      if(this.mode == 'edit'){
+        // const result = await this.VistoriaService.editAssociadoById(this.idAssociado, payload);
+        //   if(result) {
+        //     alert('Associado editado com sucesso!');
+        //   } else {
+        //     alert('Ocorreu um erro ao editar associado!');
+        //   }
+        // } else {
+          const response = await this.VistoriaService.cadastroVistoria(payload, crypto.randomUUID());
+          if(response.status?.message) {
+            alert(response.status.message);
+          }
         }
+
+
     }
 
     console.log(this.form.value)

@@ -1,13 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
-import { DataSourceTableMotorista } from '../../shared/models/motoristas/dataSourceTableMotorista';
 import { PageResult } from '../../shared/models/table/Table';
-import { DataSource } from '@angular/cdk/collections';
-import moment from 'moment';
-import { CadastroAssociadoForm, CadastroAssociadoStorage, Documentos } from '../../shared/models/associados/CadastroAssociadoDTO';
-import { DataSourceTableAssociados } from '../../shared/models/associados/DataSourceTableAssociados';
 import { StatusEnum } from '../../shared/enums/StatusEnum';
 import { CadastroVistoriaDTO } from '../../shared/models/vistorias/CadastroVistoriaDTO';
+import { DataSourceTableVistorias } from '../../shared/models/vistorias/DataSourceTableVistorias';
 
 
 @Service()
@@ -28,9 +24,9 @@ export class VistoriaService {
     }
 
     
-    // getTableAssociadosPaginado(): Observable<PageResult<DataSourceTableAssociados>> {
-    //     return this.http.get<PageResult<DataSourceTableAssociados>>(
-    //         'api/v1/associados/paginado'
+    // getTableVistoriasPaginado(): Observable<PageResult<DataSourceTableVistorias>> {
+    //     return this.http.get<PageResult<DataSourceTableVistorias>>(
+    //         'api/v1/vistorias/paginado'
     //     );
     // }
 
@@ -76,50 +72,50 @@ export class VistoriaService {
         }
     }
 
-    // getAssociadoById(idAssociado: string) {
-    //     try {
-    //         const data = this.getAssociadosCadastrados();
-    //         const associado = data.data?.find((item) => item.id === idAssociado)
+    getVistoriaById(idVistoria: string) {
+        try {
+            const data = this.getVistoriasCadastradas();
+            const vistoria = data.data?.find((item) => item.id === idVistoria)
 
-    //         if(!associado) {
-    //             return false;
-    //         }
-    //         return associado;
-    //     } catch(e) {
-    //         console.error(e);
-    //         return undefined;
-    //     }
-    // }
+            if(!vistoria) {
+                return false;
+            }
+            return vistoria;
+        } catch(e) {
+            console.error(e);
+            return undefined;
+        }
+    }
 
-    // deleteAssociadoById(idAssociado: string) {
-    //     try {
-    //         const associados = this.getAssociadosCadastrados();
+    deleteVistoriaById(idVistoria: string) {
+        try {
+            const vistorias = this.getVistoriasCadastradas();
 
-    //         if(!associados.data) {
-    //             return false;
-    //         }
+            if(!vistorias.data) {
+                return false;
+            }
 
-    //         const associadosAtuais = associados.data.length;
+            const vistoriasAtuais = vistorias.data.length;
 
-    //         associados.data = associados.data.filter(
-    //             motorista => motorista.id !== idAssociado
-    //         )
+            vistorias.data = vistorias.data.filter(
+                vistoria => vistoria.id !== idVistoria
+            )
 
-    //         if(associados.data.length === associadosAtuais) {
-    //             console.error('Associado não encontrado')
-    //             return false;
-    //         }
+            if(vistorias.data.length === vistoriasAtuais) {
+                console.error('Vistoria não encontrado')
+                return false;
+            }
 
-    //         this.save(associados, this.STORAGE_KEY_ASSOCIADOS_CADASTRO)
-    //         return true;
+            this.save(vistorias, this.STORAGE_KEY_VISTORIAS_CADASTRO)
+            return true;
 
-    //     }
-    //     catch(error) {
-    //         console.error(error);
-    //         return false;
-    //     }
-    // }
-    // async editAssociadoById(idAssociado: string, payload: CadastroAssociadoForm) {
+        }
+        catch(error) {
+            console.error(error);
+            return false;
+        }
+    }
+    // async editVistoriaById(idVistoria: string, payload: CadastroVistoriaDTO) {
     //     try {
             
 
@@ -128,57 +124,55 @@ export class VistoriaService {
     //     }
     // }
 
-    // getTableAssociadosPaginado(
-    //     pageNumber = 1, 
-    //     pageSize = 10,
-    //     pesquisa = null
-    // ): PageResult<DataSourceTableAssociados> {
-    //     const storage = localStorage.getItem(this.STORAGE_KEY_ASSOCIADOS_CADASTRO);
-    //     if(!storage) {
-    //         return {
-    //             data: [],
-    //             paginadora: {
-    //                 pageNumber,
-    //                 pageSize,
-    //                 totalCount: 0,
-    //                 totalPages: 0,
-    //                 hasNextPage: false,
-    //                 hasPreviousPage: false,
-    //             }
-    //         }
-    //     }
+    getTableVistoriaPaginado(
+        pageNumber = 1, 
+        pageSize = 10,
+        pesquisa = null
+    ): PageResult<DataSourceTableVistorias> {
+        const storage = localStorage.getItem(this.STORAGE_KEY_VISTORIAS_CADASTRO);
+        if(!storage) {
+            return {
+                data: [],
+                paginadora: {
+                    pageNumber,
+                    pageSize,
+                    totalCount: 0,
+                    totalPages: 0,
+                    hasNextPage: false,
+                    hasPreviousPage: false,
+                }
+            }
+        }
 
-    //     const associados = JSON.parse(storage);
-    //     const data: PageResult<DataSourceTableAssociados> = {
-    //         data: associados.data.map((item: any) => ({
-    //                 id: item.id,
-    //                 nomeAssociado: item.dadosPessoais.nomeAssociado,
-    //                 email:  item.dadosPessoais.email,
-    //                 unidades: item.dadosProfissionais.unidades.toString(),
-    //                 rct: item.dadosProfissionais.rct,
-    //                 veiculos: item.veiculos.length,
-    //                 telAssociado: item.dadosPessoais.telAssociado,
-    //                 status: item.dadosProfissionais.situacao,
-    //                 cadastroAssociado: new Date()
-    //             })),
-    //     }
+        const vistorias = JSON.parse(storage);
+        const data: PageResult<DataSourceTableVistorias> = {
+            data: vistorias.data.map((item: any) => ({
+                    id: item.id,
+                    unidade: item.unidade,
+                    veiculo:  item.veiculo,
+                    proprietario: item.proprietario,
+                    diretor: item.diretorResponsavel,
+                    dataVistoria: item.dataVistoria,
+                    situacao: item.situacao === 1 ? 4 : 2,
+                })),
+        }
 
-    //     const totalCount = data.data?.length;
-    //     const totalPages = Math.ceil(totalCount! / pageSize);
+        const totalCount = data.data?.length;
+        const totalPages = Math.ceil(totalCount! / pageSize);
 
-    //     const inicio = (pageNumber - 1) * pageSize;
-    //     const fim = inicio + pageSize;
+        const inicio = (pageNumber - 1) * pageSize;
+        const fim = inicio + pageSize;
 
-    //     return {
-    //         data: data.data?.slice(inicio, fim),
-    //         paginadora: {
-    //             pageNumber,
-    //             pageSize,
-    //             totalCount,
-    //             totalPages,
-    //             hasNextPage: pageNumber < totalPages,
-    //             hasPreviousPage: pageNumber > 1
-    //         }
-    //     };
-    // }
+        return {
+            data: data.data?.slice(inicio, fim),
+            paginadora: {
+                pageNumber,
+                pageSize,
+                totalCount,
+                totalPages,
+                hasNextPage: pageNumber < totalPages,
+                hasPreviousPage: pageNumber > 1
+            }
+        };
+    }
 }

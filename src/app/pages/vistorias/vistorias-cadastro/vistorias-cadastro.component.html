@@ -251,7 +251,8 @@
                 [title]="'Aprovar vistoria'"
                 [description]="'O veículo está apto para operação.'"
                 [selected]="selectedButton"
-                (click)="approvalClick($event)"
+                [disabled]="viewOnly"
+                (click)="approvalClick()"
                 >
                 </app-button-approval>
             </div>
@@ -260,8 +261,9 @@
             [status]="'reproved'"
             [title]="'Reprovar vistoria'"
             [description]="'Será obrigatório informar o motivo da reprovação.'"
+            [disabled]="viewOnly"
             [selected]="selectedButton"
-            (click)="reprovedClick($event)"
+            (click)="reprovedClick()"
             >
             </app-button-approval>
             </div>
@@ -341,13 +343,15 @@
         (clicked)="goBack()"
         >
         </app-button>
-        <app-button
-        [labelButton]="'Salvar'"
-        [buttonType]="'filled'"
-        [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
-        [disabled]="this.form.invalid"
-        (clicked)="onSubmit($event)"
-        >
-        </app-button>
+        @if (mode !== 'view') {
+            <app-button
+            [labelButton]="'Salvar'"
+            [buttonType]="'filled'"
+            [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+            [disabled]="this.form.invalid"
+            (clicked)="onSubmit($event)"
+            >
+            </app-button>
+        }
     </app-submit-bar>
 </form>

@@ -44,9 +44,6 @@ export class AssociadosCadastroComponent {
   mode: 'create' | 'edit' | 'view' = 'create';
   idAssociado: string = this.route.snapshot.paramMap.get('id')!;
   ngOnInit(): void {
-    this.form.valueChanges.subscribe(value => {
-      // console.log(value.dadosProfissionais?.unidades)
-    })
     const path = this.route.snapshot.routeConfig?.path ?? '';
     if(path.includes('editar')) {
       this.mode = 'edit';
@@ -63,8 +60,6 @@ export class AssociadosCadastroComponent {
       this.viewOnly = true;
       this.form.disable();
       const associado = this.getAssociadoById(this.idAssociado);
-      console.log(associado);
-
       if(!associado) {
           console.error('Motorista não encontrado');
           return;
@@ -265,15 +260,15 @@ export class AssociadosCadastroComponent {
 
     if(this.mode == 'edit'){
       const result = await this.AssociadosService.editAssociadoById(this.idAssociado, payload);
-      if(result) {
-        alert('Associado editado com sucesso!');
+        if(result) {
+          alert('Associado editado com sucesso!');
+        } else {
+          alert('Ocorreu um erro ao editar associado!');
+        }
       } else {
-        alert('Ocorreu um erro ao editar associado!');
+        const result = await this.AssociadosService.cadastroAssociado(payload, crypto.randomUUID());
+        alert(result.status?.message);
       }
-    } else {
-      const result = await this.AssociadosService.cadastroAssociado(payload, crypto.randomUUID());
-      alert(result.status?.message);
-    }
     }
   }
 

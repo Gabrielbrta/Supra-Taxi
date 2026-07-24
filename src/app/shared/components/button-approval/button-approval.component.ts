@@ -9,7 +9,7 @@ import { LucideDynamicIcon } from '@lucide/angular';
   styleUrl: './button-approval.component.scss',
 })
 export class ButtonApprovalComponent {
-  click = output<string>();
+  click = output();
   status = input.required<'approval' | 'reproved'>();
   title = input<string>('');
   disabled = input<boolean>(false);
@@ -29,8 +29,7 @@ export class ButtonApprovalComponent {
     return null
   });
   
-  onClick(event: MouseEvent) {
-    const element = event.target as HTMLButtonElement;
-    this.click.emit(element.id)
+  onClick() {
+    this.click.emit()
   }
 }
