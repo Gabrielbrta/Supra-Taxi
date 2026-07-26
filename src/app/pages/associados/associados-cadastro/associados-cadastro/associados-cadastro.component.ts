@@ -240,23 +240,35 @@ export class AssociadosCadastroComponent {
       const payload = {
         ...(this.form.getRawValue() as CadastroAssociadoForm), 
       }
-      payload.dadosPessoais.dataEmissaoCNH =
-        moment(payload.dadosPessoais.dataEmissaoCNH).format('DD/MM/YYYY');
+      const dataEmissaoCNH = moment(payload.dadosPessoais.dataEmissaoCNH);
+      payload.dadosPessoais.dataEmissaoCNH = dataEmissaoCNH.isValid()
+        ? dataEmissaoCNH.toISOString()
+        : '';
 
-      payload.dadosPessoais.dataVencimentoCNH =
-        moment(payload.dadosPessoais.dataVencimentoCNH).format('DD/MM/YYYY')
+      const dataVencimentoCNH = moment(payload.dadosPessoais.dataVencimentoCNH);
+      payload.dadosPessoais.dataVencimentoCNH = dataVencimentoCNH.isValid()
+        ? dataVencimentoCNH.toISOString()
+        : '';
 
-      payload.dadosPessoais.dataNascimento =
-        moment(payload.dadosPessoais.dataNascimento).format('DD/MM/YYYY')
+      const dataNascimento = moment(payload.dadosPessoais.dataNascimento);
+      payload.dadosPessoais.dataNascimento = dataNascimento.isValid()
+        ? dataNascimento.toISOString()
+        : '';
 
-      payload.dadosPessoais.dataExpedicaoRG =
-        moment(payload.dadosPessoais.dataExpedicaoRG).format('DD/MM/YYYY')
+      const dataExpedicaoRG = moment(payload.dadosPessoais.dataExpedicaoRG);
+      payload.dadosPessoais.dataExpedicaoRG = dataExpedicaoRG.isValid()
+        ? dataExpedicaoRG.toISOString()
+        : '';
 
-      payload.dadosProfissionais.rctDataValidade =
-       moment(payload.dadosProfissionais.rctDataValidade).format('DD/MM/YYYY')
+      const rctDataValidade = moment(payload.dadosProfissionais.rctDataValidade);
+      payload.dadosProfissionais.rctDataValidade = rctDataValidade.isValid()
+        ? rctDataValidade.toISOString()
+        : '';
 
-      payload.dadosProfissionais.rctDataEmissao =
-       moment(payload.dadosProfissionais.rctDataEmissao).format('DD/MM/YYYY')
+      const rctDataEmissao = moment(payload.dadosProfissionais.rctDataEmissao);
+      payload.dadosProfissionais.rctDataEmissao = rctDataEmissao.isValid()
+        ? rctDataEmissao.toISOString()
+        : '';
 
     if(this.mode == 'edit'){
       const result = await this.AssociadosService.editAssociadoById(this.idAssociado, payload);

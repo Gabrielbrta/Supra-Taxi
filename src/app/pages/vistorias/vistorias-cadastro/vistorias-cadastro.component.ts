@@ -164,12 +164,24 @@ export class VistoriasCadastroComponent implements OnInit {
 
   }
 
+  private toMomentDate(value: Moment | string | Date | null | undefined) {
+    if (!value) {
+      return null;
+    }
+
+    const parsedDate = moment.isMoment(value)
+      ? value
+      : moment(value, [moment.ISO_8601, 'DD/MM/YYYY', 'YYYY-MM-DD'], true);
+
+    return parsedDate.isValid() ? parsedDate : null;
+  }
+
   patchValueForm(vistoria: CadastroVistoriaDTO) {
       this.form.patchValue({
         id: vistoria.id,
         checklistPneus: vistoria.checklistPneus,
         checklistItems: vistoria.checklistItems,
-        dataVistoria: vistoria.dataVistoria,
+        dataVistoria: this.toMomentDate(vistoria.dataVistoria) ?? '',
         diretorResponsavel: vistoria.diretorResponsavel,
         unidade: vistoria.unidade,
         rct: vistoria.rct,
@@ -245,8 +257,10 @@ export class VistoriasCadastroComponent implements OnInit {
       const payload = {
         ...(this.form.getRawValue() as CadastroVistoriaDTO), 
       }
-      payload.dataVistoria =
-        moment(payload.dataVistoria).format('DD/MM/YYYY');
+      const dataVistoria = moment(payload.dataVistoria);
+      payload.dataVistoria = dataVistoria.isValid()
+        ? dataVistoria.toISOString()
+        : '';
 
 
       if(this.mode == 'edit'){

@@ -9,6 +9,8 @@ import { Icons } from '../../../icons/icons';
 import { output } from '@angular/core';
 import moment from 'moment';
 
+type InputValue = string | Moment | Date | null;
+
 @Component({
   selector: 'app-input',
   imports: [
@@ -29,7 +31,7 @@ import moment from 'moment';
   styleUrl: './input.component.scss',
 })
 export class InputComponent implements ControlValueAccessor {
-  value: string | Moment | null = null;
+  value: InputValue = null;
   label = input.required<string>();
   required = input<boolean>();
   placeholder = input<string>();
@@ -45,7 +47,7 @@ export class InputComponent implements ControlValueAccessor {
   search = output<string>();
 
 
-  private onChange = (value:string | Moment | null ) => {};
+  private onChange = (value: InputValue) => {};
   private onTouched = () => {};
   private imask?: ReturnType<typeof IMask>;
   private createMask(mask: string) {
@@ -105,7 +107,7 @@ export class InputComponent implements ControlValueAccessor {
   });
   }
 
-  writeValue(value: string | Moment | null): void {
+  writeValue(value: InputValue): void {
     this.value = value;
 
     const input = this.inputRef()?.nativeElement;
@@ -115,6 +117,19 @@ export class InputComponent implements ControlValueAccessor {
     }
 
     if (this.type() === 'date') {
+      if (!value) {
+        input.value = '';
+        return;
+      }
+
+      const parsedDate = moment.isMoment(value)
+        ? value
+        : moment(value, [moment.ISO_8601, 'DD/MM/YYYY', 'YYYY-MM-DD'], true);
+
+      input.value = parsedDate.isValid()
+        ? parsedDate.format('DD/MM/YYYY')
+        : '';
+
       return;
     }
 
@@ -125,7 +140,7 @@ export class InputComponent implements ControlValueAccessor {
     }
   }
 
-  registerOnChange(fn: any): void {
+  registerOnChange(fn: (value: InputValue) => void): void {
     this.onChange = fn;
   }
 
