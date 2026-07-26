@@ -74,7 +74,6 @@ export class VistoriasCadastroComponent implements OnInit {
       this.mode = 'view';
       this.viewOnly = true;
       const vistoria = this.getVistoriaById(this.idVistoria);
-      console.log(vistoria);
       
       if(!vistoria) {
         console.error('Vistoria não encontrada');
@@ -251,13 +250,14 @@ export class VistoriasCadastroComponent implements OnInit {
 
 
       if(this.mode == 'edit'){
-        // const result = await this.VistoriaService.editAssociadoById(this.idAssociado, payload);
-        //   if(result) {
-        //     alert('Associado editado com sucesso!');
-        //   } else {
-        //     alert('Ocorreu um erro ao editar associado!');
-        //   }
-        // } else {
+        const result = await this.VistoriaService.editVistoriaById(this.idVistoria, payload);
+          if(result) {
+            alert('Vistoria editada com sucesso!');
+            this.goBack();
+          } else {
+            alert('Ocorreu um erro ao editar vistoria!');
+          }
+        } else {
           const response = await this.VistoriaService.cadastroVistoria(payload, crypto.randomUUID());
           if(response.status?.message) {
             alert(response.status.message);
@@ -266,8 +266,6 @@ export class VistoriasCadastroComponent implements OnInit {
 
 
     }
-
-    console.log(this.form.value)
   }
 
   goBack() {

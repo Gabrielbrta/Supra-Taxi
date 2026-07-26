@@ -115,14 +115,34 @@ export class VistoriaService {
             return false;
         }
     }
-    // async editVistoriaById(idVistoria: string, payload: CadastroVistoriaDTO) {
-    //     try {
-            
+    
+    async editVistoriaById(idVistoria: string, payload: CadastroVistoriaDTO) {
+        try {
+            const response = this.getVistoriasCadastradas();
 
-    //     } catch(e) {
+            if(!response.data) {
+                return false;
+            }
 
-    //     }
-    // }
+            const index = response.data?.findIndex(item => item.id === idVistoria);
+
+            if(index === -1) {
+                return false;
+            }
+
+            response.data[index] = {
+                ...response.data[index],
+                ...payload,
+            }
+
+            this.save(response, this.STORAGE_KEY_VISTORIAS_CADASTRO);
+            return true;
+
+        } catch(e) {
+            console.error(e);
+            return false;
+        }
+    }
 
     getTableVistoriaPaginado(
         pageNumber = 1, 
@@ -153,7 +173,7 @@ export class VistoriaService {
                     proprietario: item.proprietario,
                     diretor: item.diretorResponsavel,
                     dataVistoria: item.dataVistoria,
-                    situacao: item.situacao === 1 ? 4 : 2,
+                    situacao: item.dadosVisuais.aprovarVistoria === 1 ? 4 : 2,
                 })),
         }
 
