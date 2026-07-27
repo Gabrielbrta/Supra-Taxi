@@ -1,0 +1,128 @@
+@use '@angular/material' as mat;
+.container-table {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+}
+
+table {
+    flex: 1;
+    width: 100%;
+}
+.paginadora-container {
+    width: 100%;
+    display: flex;
+}
+
+::ng-deep .mat-mdc-paginator {
+  background-color: transparent !important;
+  font-size: var(--font-size-xs) !important;
+}
+
+::ng-deep .mat-mdc-header-row {
+    color: var(--palette-gray-700) !important;
+    background-color: var(--palette-cyan-50) !important;
+    padding: 0px !important;
+    th {
+        font-size: var(--font-size-xs) !important;
+        text-transform: uppercase;
+        font-weight: 600;
+        
+    }
+    
+}
+
+::ng-deep .mat-mdc-paginator-icon {
+    fill: var(--palette-gray-400) !important;
+}
+
+::ng-deep .mat-mdc-paginator {
+    color: var(--primary-gray);
+}
+
+::ng-deep .mat-mdc-select-panel{
+    background-color: var(--palette-white) !important;
+}
+
+//celulas
+::ng-deep .mat-mdc-row {
+    background-color: var(--palette-white) !important;
+    color: var(--palette-gray-700) !important;
+        font-size: var(--font-size-sm) !important;
+
+
+}
+::ng-deep .mat-mdc-row:hover {
+  background-color: var(--palette-gray-100) !important;
+}
+//bordas das celulas
+::ng-deep .mat-mdc-cell {
+    border-bottom: 1px solid var(--palette-gray-200) !important;
+    
+}
+
+//bordas dos titulos
+::ng-deep .mat-mdc-header-cell {
+  border-top: 1px solid var(--palette-gray-200) !important;   
+  border-bottom: 1px solid var(--palette-gray-200) !important;
+}
+
+// altura dos titulos
+::ng-deep .mat-mdc-header-row {
+    height: 40px !important;
+
+}
+
+::ng-deep.mat-column-actions {
+  white-space: nowrap !important;
+}
+
+app-button.button-action-table {
+    svg.lucide {
+        padding: 0px !important;
+        width: 10px !important;
+    }
+}
+
+.buttons {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.status-ok {
+  @include mat.radio-overrides((
+    checked-ripple-color: var(--primary-green-600),
+    ripple-color: var(--primary-green-600),
+    selected-icon-color: var(--primary-green-600),
+    selected-focus-icon-color: var(--primary-green-600),
+    selected-hover-icon-color: var(--primary-green-600),
+    selected-pressed-icon-color: var(--primary-green-600),
+  ));
+}
+
+// Status 1/2 Vida (Laranja)
+.status-meia-vida {
+  @include mat.radio-overrides((
+    checked-ripple-color: var(--primary-yellow-600),
+    ripple-color: var(--primary-yellow-600),
+    selected-icon-color: var(--primary-yellow-600),
+    selected-focus-icon-color: var(--primary-yellow-600),
+    selected-hover-icon-color: var(--primary-yellow-600),
+    selected-pressed-icon-color: var(--primary-yellow-600),
+  ));
+}
+
+// Status Careca (Vermelho)
+.status-careca {
+  @include mat.radio-overrides((
+    checked-ripple-color: var(--primary-red-600),
+    ripple-color: var(--primary-red-600),
+    selected-icon-color: var(--primary-red-600),
+    selected-focus-icon-color: var(--primary-red-600),
+    selected-hover-icon-color: var(--primary-red-600),
+    selected-pressed-icon-color: var(--primary-red-600),
+  ));
+}

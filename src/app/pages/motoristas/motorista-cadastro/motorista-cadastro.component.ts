@@ -193,14 +193,20 @@ get profileImage(): File | null {
       const payload = {
         ...(this.form.getRawValue() as CadastroMotoristaForm), 
       }
-      payload.dadosPessoais.dataEmissaoCNH =
-        moment(payload.dadosPessoais.dataEmissaoCNH).format('DD/MM/YYYY');
+      const dataEmissaoCNH = moment(payload.dadosPessoais.dataEmissaoCNH);
+      payload.dadosPessoais.dataEmissaoCNH = dataEmissaoCNH.isValid()
+        ? dataEmissaoCNH.toISOString()
+        : '';
 
-      payload.dadosPessoais.dataValidadeCNH =
-        moment(payload.dadosPessoais.dataValidadeCNH).format('DD/MM/YYYY')
+      const dataValidadeCNH = moment(payload.dadosPessoais.dataValidadeCNH);
+      payload.dadosPessoais.dataValidadeCNH = dataValidadeCNH.isValid()
+        ? dataValidadeCNH.toISOString()
+        : '';
 
-      payload.dadosProfissionais.rctDataValidade =
-       moment(payload.dadosProfissionais.rctDataValidade).format('DD/MM/YYYY')
+      const rctDataValidade = moment(payload.dadosProfissionais.rctDataValidade);
+      payload.dadosProfissionais.rctDataValidade = rctDataValidade.isValid()
+        ? rctDataValidade.toISOString()
+        : '';
 
     if(this.mode == 'edit'){
       const result = await this.MotoristaService.editMotoristaById(this.idMotorista, payload);

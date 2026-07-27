@@ -7,10 +7,11 @@ import { BanidosComponent } from '../../pages/banidos/banidos.component';
 import { OcorrenciasComponent } from '../../pages/ocorrencias/ocorrencias.component';
 import { UsuariosComponent } from '../../pages/admin/usuarios/usuarios.component';
 import { ConfiguracoesComponent } from '../../pages/configuracoes/configuracoes.component';
-import { VistoriasComponent } from '../../pages/vistorias/vistorias.component';
+import { VistoriasComponent } from '../../pages/vistorias/vistorias/vistorias.component';
 import { pageHeaderData } from '../../shared/models/pageHeaderContent/pageHeaderContentModel';
 import { MotoristaCadastroComponent } from '../../pages/motoristas/motorista-cadastro/motorista-cadastro.component';
 import { AssociadosCadastroComponent } from '../../pages/associados/associados-cadastro/associados-cadastro/associados-cadastro.component';
+import { VistoriasCadastroComponent } from '../../pages/vistorias/vistorias-cadastro/vistorias-cadastro.component';
 
 export const MainLayoutsRoutes: Routes = [
     {
@@ -135,11 +136,45 @@ export const MainLayoutsRoutes: Routes = [
             routerLink: 'vistorias/novo',
             icon: 'LucidePlus',
             exportable: true
-        },
-        children: [{
-            path: 'novo',
-            component: VistoriasComponent,
-        }]
+        }
+    },
+    {
+        path: 'vistorias/novo',
+        component: VistoriasCadastroComponent,
+        title: 'Nova vistoria',
+        data:<pageHeaderData> {
+            description: "Preencha cada bloco com atenção. Apenas Diretores e Administradores podem aprovar ou reprovar.",
+            buttonLabel: "Voltar",
+            buttonType: 'outlined',
+            routerLink: 'vistorias',
+            icon: null,
+        }
+    },
+    {
+        path: 'vistorias/visualizar/:id',
+        component: VistoriasCadastroComponent,
+        title: 'Visualizar vistoria',
+        data:<pageHeaderData> {
+            description: "Visualize os dados cadastrados",
+            buttonLabel: "Voltar",
+            routerLink: 'vistorias',
+            buttonType: 'outlined',
+            icon: null,
+            exportable: true
+        }
+    },
+    {
+        path: 'vistorias/editar/:id',
+        component: VistoriasCadastroComponent,
+        title: 'Editar vistoria',
+        data:<pageHeaderData> {
+            description: "Edite os dados cadastrados",
+            buttonLabel: "Voltar",
+            routerLink: 'vistorias',
+            buttonType: 'outlined',
+            icon: null,
+            exportable: true
+        }
     },
     {
         path: 'unidades',

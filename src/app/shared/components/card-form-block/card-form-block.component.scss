@@ -1,0 +1,63 @@
+.vistorias-container {
+    margin: 20px 0;
+    width: 100%;
+}
+
+.card-content {
+    width: 100%;
+    padding: 10px 0;
+    position: relative;
+
+    .title-form-container {
+        width: 100%;
+        display: flex;
+        padding: 20px 20px;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid var(--palette-gray-200);
+    }
+
+    .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 48px;
+        height: 48px;
+        color: var(--primary-blue-900);
+        background-color: var(--primary-blue-100);
+        border-radius: var(--radius-xl);
+    }
+
+    .title-info {
+        h2 {
+            font-weight: bold;
+            font-size: var(--font-size-lg);
+        }
+        p {
+            font-size: var(--font-size-sm);
+            color: var(--primary-gray);
+        }
+    }
+}
+
+.content-container {
+    padding: 20px 30px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: var(--radius-xl);
+    position:absolute;
+    top: 30px;
+    right: 20px;
+    font-size: var(--font-size-sm);
+
+    &.obrigatorio {
+        background-color: var(--primary-red-300);
+        color: var(--primary-red-700);
+    }
+    &.opcional {
+        background-color: var(--palette-gray-200);
+        color: var(--palette-gray-800);
+    }
+}

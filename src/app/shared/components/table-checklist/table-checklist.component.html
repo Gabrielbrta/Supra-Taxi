@@ -1,0 +1,35 @@
+<div class="container-table">
+    <table mat-table [dataSource]="internalData()" class="full-width-table">
+    
+      <ng-container matColumnDef="posicao">
+        <th mat-header-cell *matHeaderCellDef> POSIÇÃO </th>
+        <td mat-cell *matCellDef="let row"> {{ row.posicao }} </td>
+      </ng-container>
+    
+      @for (opcao of opcoes(); track opcao.key) {
+        <ng-container [matColumnDef]="opcao.key">
+          <th mat-header-cell *matHeaderCellDef> {{ opcao.label }} </th>
+          <td mat-cell *matCellDef="let row">
+            
+            <mat-radio-group 
+                [name]="'radio-' + row.posicao" 
+                [(ngModel)]="row.status"
+                [disabled]="disabled"
+                [class.status-ok]="row.status === 'ok'"
+                [class.status-meia-vida]="row.status === 'meia_vida' || row.status === 'aceitavel'"
+                [class.status-careca]="row.status === 'careca' || row.status === 'pessima'"
+                (change)="onStatusChange(row, opcao.key)"
+                (blur)="onTouched()">
+              
+              <mat-radio-button [disabled]="disabled" [value]="opcao.key"></mat-radio-button>
+              
+            </mat-radio-group>
+          </td>
+        </ng-container>
+      }
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns();"></tr>
+    </table>
+
+</div>

@@ -1,0 +1,357 @@
+<form class="vistoria-container" [formGroup]="form">
+    
+    
+    <app-card-form-block
+    [title]="'Informações gerais'"
+    [icon]="'LucideOctagonAlert'"
+    [description]="'Identificação da vistoria e responsáveis.'"
+    [required]="true"
+    >
+        <div class="form-container">
+            <div class="wrapper-group">
+                <app-input
+                [label]="'Unidade'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'501'"
+                formControlName="unidade"
+                >
+                </app-input>
+                <app-input
+                [label]="'RCT'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'000000'"
+                formControlName="rct"
+                >
+                </app-input>
+                <app-input
+                [label]="'CPEST'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'000000000'"
+                formControlName="cpest"
+                >
+                </app-input>
+            </div>
+        </div>
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Dados do veículo'"
+    [icon]="'LucideCar'"
+    [required]="true"
+    >
+    
+        <div class="form-container">
+            <div class="wrapper-group">
+                <app-input
+                [label]="'Veículo'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'Toyota'"
+                formControlName="veiculo"
+                >
+                </app-input>
+                <app-input
+                [label]="'Proprietário'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'Eduardo Ramos'"
+                formControlName="proprietario"
+                >
+                </app-input>
+                <app-input
+                [label]="'Auxiliar'"
+                [type]="'text'"
+                [required]="false"
+                [placeholder]="'Eduardo Ramos'"
+                formControlName="auxiliar"
+                >
+                </app-input>
+            </div>
+            <div class="wrapper-group">
+                <app-input
+                [label]="'KM'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'00.000'"
+                formControlName="km"
+                >
+                </app-input>
+                <app-input
+                [label]="'Modelo'"
+                [type]="'text'"
+                [required]="false"
+                [placeholder]="'Corolla'"
+                formControlName="modelo"
+                >
+                </app-input>
+                <app-input
+                [label]="'Ano'"
+                [type]="'text'"
+                [required]="false"
+                [mask]="'0000'"
+                [placeholder]="'2030'"
+                formControlName="ano"
+                >
+                </app-input>
+            </div>
+        </div>
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Pneus'"
+    [icon]="'LucideClipboardList'"
+    [description]="'Marque a condição de cada pneu.'"
+    [required]="true"
+    >
+        <app-table-checklist
+            formControlName="checklistPneus"      
+            [posicoes]="listaPosicoes"             
+            [opcoes]="listaOpcoes">
+        </app-table-checklist>               
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Itens internos'"
+    [icon]="'LucideClipboardList'"
+    [description]="'Marque a condição de cada item.'"
+    [required]="true"
+    >
+        <app-table-checklist
+            formControlName="checklistItems"      
+            [posicoes]="listaPosicoesItems"             
+            [opcoes]="listaOpcoesItems">
+        </app-table-checklist> 
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Inspeção visual'"
+    [icon]="'LucideEye'"
+    [description]="'Marque OK ou Danificado e adicione observações.'"
+    [required]="true"
+    formGroupName="dadosVisuais"
+    >
+    <div class="carro-container" >
+        <div class="radio-container">
+            <h3>Lado Direito</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'lado-direito'"
+            [required]="true"
+            formControlName="ladoDireito"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Retrovisor quebrado (opcional)'"
+        formControlName="ladoDireitoDescricao"
+
+        >
+            
+        </app-textarea>
+    </div>
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Lado Esquerdo</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'lado-esquerdo'"
+            [required]="true"
+            formControlName="ladoEsquerdo"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Retrovisor quebrado (opcional)'"
+        formControlName="ladoEsquerdoDescricao"
+
+        >
+        </app-textarea>
+    </div>
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Parte Superior</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'parte-superior'"
+            [required]="true"
+            formControlName="parteSuperior"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Teto amassado (opcional)'"
+        formControlName="parteSuperiorDescricao"
+
+        >
+        </app-textarea>
+    </div>
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Para-choque Dianteiro</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'parachoque-dianteiro'"
+            [required]="true"
+            formControlName="paraChoqueDianteiro"
+            >
+            </app-radio-button>
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Capô amassado (opcional)'"
+        formControlName="paraChoqueDianteiroDescricao"
+
+        >
+        </app-textarea>
+    </div>
+    <div class="carro-container">
+        <div class="radio-container">
+            <h3>Para-choque Traseiro</h3>
+            <app-radio-button
+            [options]="inspecaoVisualOptions"
+            [name]="'parachoque-traseiro'"
+            [required]="true"
+            formControlName="paraChoqueTraseiro"
+            >
+            </app-radio-button>
+           
+        </div>
+        <app-textarea
+        [maxlength]="200"
+        [showCharCount]="true"
+        [rows]="3"
+        [placeholder]="'Capô amassado (opcional)'"
+        formControlName="paraChoqueTraseiroDescricao"
+
+        >
+        </app-textarea>
+    </div>
+    </app-card-form-block>
+    <app-card-form-block
+    [title]="'Resultado final'"
+    [icon]="'LucideClipboardList'"
+    [description]="'Confira todos os itens antes de aprovar.'"
+    [required]="true"
+    formGroupName="dadosVisuais"
+    >
+        <div class="approval-container">
+            <div class="item">
+                <app-button-approval
+                [status]="'approval'"
+                [title]="'Aprovar vistoria'"
+                [description]="'O veículo está apto para operação.'"
+                [selected]="selectedButton"
+                [disabled]="viewOnly"
+                (click)="approvalClick()"
+                >
+                </app-button-approval>
+            </div>
+            <div class="item">
+            <app-button-approval
+            [status]="'reproved'"
+            [title]="'Reprovar vistoria'"
+            [description]="'Será obrigatório informar o motivo da reprovação.'"
+            [disabled]="viewOnly"
+            [selected]="selectedButton"
+            (click)="reprovedClick()"
+            >
+            </app-button-approval>
+            </div>
+        </div>
+            @if(motivoReprovacao() === true){
+            <div class="wrapper-group">
+                <app-textarea
+                [maxlength]="200"
+                [showCharCount]="true"
+                [rows]="3"
+                [label]="'Motivo da reprovação'"
+                [required]="true"
+                [placeholder]="'Documento vencido, amassado, pneu careca e etc...'"
+                formControlName="motivoReprovacao"
+
+                >
+                </app-textarea>
+            </div>
+            }
+            <div class="wrapper-group">
+                <app-textarea
+                    [maxlength]="200"
+                    [showCharCount]="true"
+                    [rows]="3"
+                    [label]="'Observação geral'"
+                    [required]="false"
+                    [placeholder]="'Documento vencido, amassado, pneu careca e etc...'"
+                    formControlName="observacaoGeral"
+    
+                    >
+                    </app-textarea>
+            </div>
+            <div class="wrapper-group" [formGroup]="form">
+                <app-input
+                [label]="'Diretor responsável'"
+                [type]="'text'"
+                [required]="true"
+                [placeholder]="'aaasdasda'"
+                formControlName="diretorResponsavel"
+                >
+                </app-input>
+                <app-input
+                [label]="'Data da vistoria'"
+                [type]="'date'"
+                [required]="true"
+                [placeholder]="'dd/mm/aaaa'"
+                formControlName="dataVistoria"
+                >
+                </app-input>
+            </div>
+
+
+     <app-radio-button
+     hidden
+        [options]="inspecaoVisualOptions"
+        [name]="'parachoque-traseiro'"
+        [required]="true"
+        formControlName="aprovarVistoria"
+        >
+    </app-radio-button>
+    </app-card-form-block>
+    <app-submit-bar
+    [formValid]="!this.form.invalid"
+    >
+        <app-button
+        [labelButton]="'Imprimir'"
+        [icon]="'LucidePrinter'"
+        [buttonType]="'filled'"
+        [color]="'ghost'"
+        (clicked)="goBack()"
+        >
+        </app-button>
+        <app-button
+        [labelButton]="'Cancelar'"
+        [buttonType]="'outlined'"
+        [color]="'ghost'"
+        (clicked)="goBack()"
+        >
+        </app-button>
+        @if (mode !== 'view') {
+            <app-button
+            [labelButton]="'Salvar'"
+            [buttonType]="'filled'"
+            [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+            [disabled]="this.form.invalid"
+            (clicked)="onSubmit($event)"
+            >
+            </app-button>
+        }
+    </app-submit-bar>
+</form>

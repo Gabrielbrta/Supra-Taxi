@@ -1,0 +1,28 @@
+<div class="vistorias-container">
+    <app-card>
+        <div class="card-content">
+            <div class="status"
+            [class.obrigatorio]="required() === true"
+            [class.opcional]="required() === false"
+            [class.none]="required() === 'none'"
+            > <p>
+                {{
+                required() === true ? 'Obrigatório' : 
+                required() === false  ? 'Opcional' : ''
+                }}
+            </p></div>
+            <div class="title-form-container">
+                <div class="icon-container">
+                    <svg [lucideIcon]="Icons[icon() ?? 'LucideClipboardCheck']"></svg>
+                </div>
+                <div class="title-info">
+                    <h2>{{title()}}</h2>
+                    <p>{{description()}}</p>
+                </div>
+            </div>
+            <div class="content-container">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </app-card>
+</div>

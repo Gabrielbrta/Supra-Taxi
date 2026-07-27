@@ -32,7 +32,8 @@ import {
   LucidePrinter,
   LucideLoaderCircle ,
   LucideCheck,
-  LucideX
+  LucideX,
+  LucideClipboardList 
 } from '@lucide/angular';
 
 export const Icons = {
@@ -69,5 +70,6 @@ export const Icons = {
   LucidePrinter ,
   LucideLoaderCircle ,
   LucideCheck,
-  LucideX
+  LucideX,
+  LucideClipboardList 
 };
