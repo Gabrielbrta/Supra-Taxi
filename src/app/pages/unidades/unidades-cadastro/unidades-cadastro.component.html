@@ -1,1 +1,44 @@
-<p>unidades-cadastro works!</p>
+<app-card-form-block
+[icon]="'LucideCarTaxiFront'"
+[title]="'Nova unidade'"
+[description]="'Informe o prefixo e o nome da unidade.'"
+>
+<div class="unidade-container-form">
+    <form class="wrapper-group" [formGroup]="form" >
+        <app-input
+        [label]="'Prefixo'"
+        [type]="'text'"
+        [placeholder]="'P'"
+        [formControlName]="'prefixo'"
+        >
+
+    </app-input>
+    <app-input
+        [label]="'Unidade'"
+        [type]="'text'"
+        [required]="true"
+        [placeholder]="'501'" 
+        [formControlName]="'unidade'"
+        >
+
+    </app-input>
+    </form>
+    <div class="form-button">
+        <app-button
+            [labelButton]="'Salvar'"
+            [buttonType]="'filled'"
+            [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+            [disabled]="this.form.invalid"
+            (clicked)="onSubmit($event)"
+            >
+        </app-button>
+        <app-button
+            [labelButton]="'Cancelar'"
+            [buttonType]="'filled'"
+            [color]="'neutral'"
+            (clicked)="goBack()"
+            >
+        </app-button>
+    </div>
+</div>
+</app-card-form-block>
