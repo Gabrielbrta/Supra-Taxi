@@ -12,12 +12,7 @@ export class VistoriaService {
     private readonly STORAGE_KEY_VISTORIAS_TABLE = 'vistorias_table'; 
     private readonly STORAGE_KEY_VISTORIAS_CADASTRO = 'vistorias_cadastro'; 
 
-    constructor() {
-        // if(!localStorage.getItem(this.STORAGE_KEY_ASSOCIADOS_TABLE)) {
-        //     this.save(ASSOCIADOS_TABLE, this.STORAGE_KEY_ASSOCIADOS_TABLE);
-        // }
-        // this.getTableAssociadosPaginado()
-    }
+    constructor() {}
 
     save(data: any, key: any) {
         localStorage.setItem(key, JSON.stringify(data))

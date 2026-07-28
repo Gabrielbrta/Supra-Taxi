@@ -33,7 +33,8 @@ import {
   LucideLoaderCircle ,
   LucideCheck,
   LucideX,
-  LucideClipboardList 
+  LucideClipboardList, 
+  LucideCarTaxiFront
 } from '@lucide/angular';
 
 export const Icons = {
@@ -71,5 +72,6 @@ export const Icons = {
   LucideLoaderCircle ,
   LucideCheck,
   LucideX,
-  LucideClipboardList 
+  LucideClipboardList,
+  LucideCarTaxiFront, 
 };

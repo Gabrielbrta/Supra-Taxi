@@ -14,7 +14,6 @@ export type ButtonColor = 'primary' | 'danger' | 'success' | 'warn' | 'info' | '
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-  // ===== Inputs existentes (mantidos para compatibilidade) =====
   labelButton = input<string | null>();
   icons = Icons;
   icon = input<keyof typeof Icons | null>();
@@ -25,10 +24,8 @@ export class ButtonComponent {
   tooltip = input<string>();
   clicked = output<MouseEvent>();
 
-  // ===== NOVO: input de cor (default 'primary' para não quebrar existentes) =====
   color = input<ButtonColor>('primary');
 
-  // ===== Computed: gera a classe CSS baseada na cor + tipo =====
   colorClass = computed(() => {
     const color = this.color();
     const type = this.buttonType();
