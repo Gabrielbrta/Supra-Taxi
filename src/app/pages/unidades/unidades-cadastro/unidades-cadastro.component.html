@@ -1,6 +1,6 @@
 <app-card-form-block
 [icon]="'LucideCarTaxiFront'"
-[title]="'Nova unidade'"
+[title]="mode === 'edit' ? 'Editar unidade': 'Nova unidade'"
 [description]="'Informe o prefixo e o nome da unidade.'"
 >
 <div class="unidade-container-form">
@@ -24,14 +24,16 @@
     </app-input>
     </form>
     <div class="form-button">
-        <app-button
-            [labelButton]="'Salvar'"
+    @if (mode !== 'view') {
+            <app-button
+            [labelButton]="mode === 'edit' ? 'Editar' : 'Salvar'"
             [buttonType]="'filled'"
             [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
             [disabled]="this.form.invalid"
             (clicked)="onSubmit($event)"
             >
-        </app-button>
+            </app-button>
+    }
         <app-button
             [labelButton]="'Cancelar'"
             [buttonType]="'filled'"
