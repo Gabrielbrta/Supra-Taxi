@@ -1,0 +1,67 @@
+<app-card-form-block
+[title]="'Nova ocorrência'"
+[description]="'O diretor responsável é preenchido com o usuário logado.'"
+>
+<form [formGroup]="form">
+    <div class="wrapper-group">
+        <app-input
+            [label]="'Diretor responsável'"
+            [type]="'text'"
+            [placeholder]="'Jorge'"
+            [required]="true"
+            [formControlName]="'usuario'"
+            >
+        </app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-input
+        [label]="'Data da ocorrência'"
+        [type]="'date'"
+        [required]="true"
+        [placeholder]="'dd/mm/aaaa'"
+        formControlName="dataOcorrencia"
+        ></app-input>
+        <app-input
+            [label]="'Unidade'"
+            [type]="'text'"
+            [placeholder]="'501'"
+            [required]="true"
+            [formControlName]="'unidade'"
+            >
+        </app-input>
+    </div>
+
+    <div class="wrapper-group">
+        <app-textarea
+        [label]="'Descrição'"
+        [placeholder]="'Foi informado que...'"
+        [required]="true"
+        [rows]="6"
+        >
+
+        </app-textarea>
+    </div>
+
+</form>
+<div class="form-button">
+    <!-- @if (mode !== 'view') { -->
+            <app-button
+            /* [labelButton]="mode === 'edit' ? 'Editar' : 'Salvar'" */
+            [labelButton]="'Salvar'"
+            [buttonType]="'filled'"
+            [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+            [disabled]="this.form.invalid"
+            (clicked)="onSubmit($event)"
+            >
+            </app-button>
+    <!-- } -->
+        <app-button
+            [labelButton]="'Cancelar'"
+            [buttonType]="'filled'"
+            [color]="'neutral'"
+            (clicked)="goBack()"
+            >
+        </app-button>
+    </div>
+
+</app-card-form-block>

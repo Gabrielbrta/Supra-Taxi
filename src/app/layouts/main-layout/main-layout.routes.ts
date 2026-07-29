@@ -1,18 +1,9 @@
 import { RouterLink, Routes } from '@angular/router';
-import { DashboardComponent } from '../../pages/dashboard/dashboard/dashboard.component';
-import { MotoristasComponent } from '../../pages/motoristas/motoristas/motoristas.component';
-import { AssociadosComponent } from '../../pages/associados/associados/associados.component';
 import { BanidosComponent } from '../../pages/banidos/banidos.component';
-import { OcorrenciasComponent } from '../../pages/ocorrencias/ocorrencias.component';
 import { UsuariosComponent } from '../../pages/admin/usuarios/usuarios.component';
 import { ConfiguracoesComponent } from '../../pages/configuracoes/configuracoes.component';
-import { VistoriasComponent } from '../../pages/vistorias/vistorias/vistorias.component';
 import { pageHeaderData } from '../../shared/models/pageHeaderContent/pageHeaderContentModel';
-import { MotoristaCadastroComponent } from '../../pages/motoristas/motorista-cadastro/motorista-cadastro.component';
-import { AssociadosCadastroComponent } from '../../pages/associados/associados-cadastro/associados-cadastro/associados-cadastro.component';
-import { VistoriasCadastroComponent } from '../../pages/vistorias/vistorias-cadastro/vistorias-cadastro.component';
-import { UnidadesComponent } from '../../pages/unidades/unidades/unidades.component';
-import { UnidadesCadastroComponent } from '../../pages/unidades/unidades-cadastro/unidades-cadastro.component';
+import { OcorrenciasComponent } from '../../pages/ocorrencias/ocorrencias/ocorrencias.component';
 
 export const MainLayoutsRoutes: Routes = [
     {
@@ -22,7 +13,8 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent,
+        loadComponent: () => import('../../pages/dashboard/dashboard/dashboard.component')
+        .then(c => c.DashboardComponent),
         title: 'Visão geral da operação',
         data: {
             description: null,
@@ -33,7 +25,8 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'motoristas',
-        component: MotoristasComponent,
+        loadComponent: () => import('../../pages/motoristas/motoristas/motoristas.component')
+        .then(c => c.MotoristasComponent),
         title: 'Motoristas',
         data: <pageHeaderData> {
             description: "1.284 motoristas cadastrados — 12 novos nos últimos 30 dias.",
@@ -45,7 +38,8 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'motoristas/novo',
-        component: MotoristaCadastroComponent,
+        loadComponent: () => import('../../pages/motoristas/motorista-cadastro/motorista-cadastro.component')
+        .then(c => c.MotoristaCadastroComponent),
         title: 'Novo Motorista',
         data: <pageHeaderData> {
             description: "Preencha os dados do cadastro e anexe os documentos obrigatórios para concluir.",
@@ -57,7 +51,8 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'motoristas/editar/:id',
-        component: MotoristaCadastroComponent,
+        loadComponent: () => import('../../pages/motoristas/motorista-cadastro/motorista-cadastro.component')
+        .then(c => c.MotoristaCadastroComponent),
         title: 'Editar Motorista',
         data: <pageHeaderData> {
             description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
@@ -69,7 +64,8 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'motoristas/visualizar/:id',
-        component: MotoristaCadastroComponent,
+        loadComponent: () => import('../../pages/motoristas/motorista-cadastro/motorista-cadastro.component')
+        .then(c => c.MotoristaCadastroComponent),
         title: 'Visualizar Motorista',
         data: <pageHeaderData> {
             description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
@@ -81,7 +77,8 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'associados',
-        component: AssociadosComponent,
+        loadComponent: () => import('../../pages/associados/associados/associados.component')
+        .then(c => c.AssociadosComponent),
         title: 'Associados',
         data: <pageHeaderData>{
             description: "318 associados — gerencie cadastros, documentos e veículos.",
@@ -93,7 +90,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'associados/novo',
-        component: AssociadosCadastroComponent,
+        loadComponent: () => import('../../pages/associados/associados-cadastro/associados-cadastro.component').then(c => c.AssociadosCadastroComponent),
         title: 'Novo Associado',
         data: <pageHeaderData> {
             description: "Preencha os dados do cadastro e anexe os documentos obrigatórios para concluir.",
@@ -105,7 +102,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'associados/editar/:id',
-        component: AssociadosCadastroComponent,
+        loadComponent: () => import('../../pages/associados/associados-cadastro/associados-cadastro.component').then(c => c.AssociadosCadastroComponent),
         title: 'Editar Associado',
         data: <pageHeaderData> {
             description: "Altere os dados do cadastro e anexe os documentos obrigatórios para concluir.",
@@ -117,7 +114,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'associados/visualizar/:id',
-        component: AssociadosCadastroComponent,
+        loadComponent: () => import('../../pages/associados/associados-cadastro/associados-cadastro.component').then(c => c.AssociadosCadastroComponent),
         title: 'Visualizar Associado',
         data: <pageHeaderData> {
             description: "Visualize os dados cadastrados.",
@@ -129,7 +126,8 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'vistorias',
-        component: VistoriasComponent,
+        loadComponent: () => import('../../pages/vistorias/vistorias/vistorias.component')
+        .then(c => c.VistoriasComponent),
         title: 'Vistorias',
         data:<pageHeaderData> {
             description: "Acompanhe vistorias de frota — aprove ou registre reprovações com motivo detalhado.",
@@ -141,7 +139,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'vistorias/novo',
-        component: VistoriasCadastroComponent,
+        loadComponent: () => import('../../pages/vistorias/vistorias-cadastro/vistorias-cadastro.component').then(c => c.VistoriasCadastroComponent),
         title: 'Nova vistoria',
         data:<pageHeaderData> {
             description: "Preencha cada bloco com atenção. Apenas Diretores e Administradores podem aprovar ou reprovar.",
@@ -153,7 +151,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'vistorias/visualizar/:id',
-        component: VistoriasCadastroComponent,
+        loadComponent: () => import('../../pages/vistorias/vistorias-cadastro/vistorias-cadastro.component').then(c => c.VistoriasCadastroComponent),
         title: 'Visualizar vistoria',
         data:<pageHeaderData> {
             description: "Visualize os dados cadastrados",
@@ -166,7 +164,8 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'vistorias/editar/:id',
-        component: VistoriasCadastroComponent,
+        loadComponent: () => import('../../pages/vistorias/vistorias-cadastro/vistorias-cadastro.component').then(c => c.VistoriasCadastroComponent),
+
         title: 'Editar vistoria',
         data:<pageHeaderData> {
             description: "Edite os dados cadastrados",
@@ -179,7 +178,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'unidades',
-        component: UnidadesComponent,
+        loadComponent: () => import('../../pages/unidades/unidades/unidades.component').then(c => c.UnidadesComponent),
         title: 'Unidades',
         data:<pageHeaderData> {
             description: "Cadastre e gerencie as unidades operacionais da cooperativa.",
@@ -191,7 +190,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'unidades/novo',
-        component: UnidadesCadastroComponent,
+        loadComponent: () => import('../../pages/unidades/unidades-cadastro/unidades-cadastro.component').then(c => c.UnidadesCadastroComponent),
         title: 'Nova unidade',
         data:<pageHeaderData> {
             description: "",
@@ -203,7 +202,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'unidades/editar/:id',
-        component: UnidadesCadastroComponent,
+        loadComponent: () => import('../../pages/unidades/unidades-cadastro/unidades-cadastro.component').then(c => c.UnidadesCadastroComponent),
         title: 'Editar unidade',
         data:<pageHeaderData> {
             description: "",
@@ -215,7 +214,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'unidades/visualizar/:id',
-        component: UnidadesCadastroComponent,
+        loadComponent: () => import('../../pages/unidades/unidades-cadastro/unidades-cadastro.component').then(c => c.UnidadesCadastroComponent),
         title: 'Visualizar unidade',
         data:<pageHeaderData> {
             description: "",
@@ -223,6 +222,51 @@ export const MainLayoutsRoutes: Routes = [
             routerLink: 'unidades',
             buttonType: 'outlined',
             icon: null
+        },
+    },
+    {
+        path: 'ocorrencias',
+        loadComponent: () => import('../../pages/ocorrencias/ocorrencias/ocorrencias.component').then(c => c.OcorrenciasComponent),
+        title: 'Ocorrências',
+        data:<pageHeaderData> {
+            description: "Registro de eventos operacionais reportados pelos diretores.",
+            buttonLabel: "Nova ocorrência",
+            routerLink: 'ocorrencias/novo',
+            icon: 'LucidePlus',
+            exportable: true
+        },
+    },
+    {
+        path: 'ocorrencias/novo',
+        title: 'Nova ocorrência',
+        loadComponent: () => import('../../pages/ocorrencias/ocorrencias-cadastro/ocorrencias-cadastro.component').then(c => c.OcorrenciasCadastroComponent),
+        data:<pageHeaderData> {
+            description: "Registro de eventos operacionais reportados pelos diretores.",
+            buttonLabel: "Voltar",
+            routerLink: 'ocorrencias',
+            exportable: true
+        },
+    },
+    {
+        path: 'ocorrencias/editar/:id',
+        loadComponent: () => import('../../pages/ocorrencias/ocorrencias-cadastro/ocorrencias-cadastro.component').then(c => c.OcorrenciasCadastroComponent),
+        title: 'Ocorrências',
+        data:<pageHeaderData> {
+            description: "Registro de eventos operacionais reportados pelos diretores.",
+            buttonLabel: "Voltar",
+            routerLink: 'ocorrencias',
+            exportable: true
+        },
+    },
+    {
+        path: 'ocorrencias/visualizar/:id',
+        loadComponent: () => import('../../pages/ocorrencias/ocorrencias-cadastro/ocorrencias-cadastro.component').then(c => c.OcorrenciasCadastroComponent),
+        title: 'Ocorrências',
+        data:<pageHeaderData> {
+            description: "Registro de eventos operacionais reportados pelos diretores.",
+            buttonLabel: "Voltar",
+            routerLink: 'ocorrencias',
+            exportable: true
         },
     },
     {
@@ -239,22 +283,6 @@ export const MainLayoutsRoutes: Routes = [
         children: [{
             path: 'novo',
             component: BanidosComponent,
-        }]
-    },
-    {
-        path: 'ocorrencias',
-        component: OcorrenciasComponent,
-        title: 'Ocorrências',
-        data:<pageHeaderData> {
-            description: "Registro de eventos operacionais reportados pelos diretores.",
-            buttonLabel: "Nova ocorrência",
-            routerLink: 'ocorrencias/novo',
-            icon: 'LucidePlus',
-            exportable: true
-        },
-        children: [{
-            path: 'novo',
-            component: OcorrenciasComponent,
         }]
     },
     {
@@ -280,6 +308,10 @@ export const MainLayoutsRoutes: Routes = [
         data: <pageHeaderData> {
             description: "Preferências da cooperativa, integrações e regras operacionais.",
         } 
+    },
+    {
+        path: '**',        
+        redirectTo: '' 
     }
 ];
 
