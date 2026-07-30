@@ -50,6 +50,8 @@ export class InputComponent implements ControlValueAccessor {
   private onChange = (value: InputValue) => {};
   private onTouched = () => {};
   private imask?: ReturnType<typeof IMask>;
+  private readonly dateInputFormats = [moment.ISO_8601, 'DD/MM/YYYY', 'YYYY-MM-DD'];
+
   private createMask(mask: string) {
   switch (mask) {
     case 'placa':
@@ -78,6 +80,42 @@ export class InputComponent implements ControlValueAccessor {
 
   disabled: boolean = false;
 
+  private formatDateValue(value: InputValue): string {
+    if (!value) {
+      return '';
+    }
+
+    if (moment.isMoment(value)) {
+      return value.isValid() ? value.format('DD/MM/YYYY') : '';
+    }
+
+    if (value instanceof Date) {
+      const parsedDate = moment(value);
+      return parsedDate.isValid() ? parsedDate.format('DD/MM/YYYY') : '';
+    }
+
+    const parsedDate = moment(value, this.dateInputFormats, true);
+    if (parsedDate.isValid()) {
+      return parsedDate.format('DD/MM/YYYY');
+    }
+
+    const fallbackDate = moment(value);
+    return fallbackDate.isValid() ? fallbackDate.format('DD/MM/YYYY') : '';
+  }
+
+  private syncNativeInputValue(input: HTMLInputElement): void {
+    if (this.type() === 'date') {
+      input.value = this.formatDateValue(this.value);
+      return;
+    }
+
+    if (this.imask) {
+      this.imask.value = String(this.value ?? '');
+    } else {
+      input.value = String(this.value ?? '');
+    }
+  }
+
   constructor() {
     effect(() => {
       const input = this.inputRef()?.nativeElement;
@@ -102,7 +140,7 @@ export class InputComponent implements ControlValueAccessor {
           this.onTouched();
         });
       } else {
-        input.value = String(this.value ?? '');
+        this.syncNativeInputValue(input);
       }
   });
   }
@@ -117,27 +155,11 @@ export class InputComponent implements ControlValueAccessor {
     }
 
     if (this.type() === 'date') {
-      if (!value) {
-        input.value = '';
-        return;
-      }
-
-      const parsedDate = moment.isMoment(value)
-        ? value
-        : moment(value, [moment.ISO_8601, 'DD/MM/YYYY', 'YYYY-MM-DD'], true);
-
-      input.value = parsedDate.isValid()
-        ? parsedDate.format('DD/MM/YYYY')
-        : '';
-
+      input.value = this.formatDateValue(value);
       return;
     }
 
-    if (this.imask) {
-      this.imask.value = String(value ?? '');
-    } else {
-      input.value = String(value ?? '');
-    }
+    this.syncNativeInputValue(input);
   }
 
   registerOnChange(fn: (value: InputValue) => void): void {
@@ -175,6 +197,11 @@ export class InputComponent implements ControlValueAccessor {
 
   onDateChange(event: MatDatepickerInputEvent<Moment>) {
     this.value = event.value;
+
+    const input = this.inputRef()?.nativeElement;
+    if (input) {
+      input.value = this.formatDateValue(event.value);
+    }
 
     this.onChange(event.value);
     this.onTouched();

@@ -2,21 +2,20 @@ import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
-import { TabsHeader } from '../../../../shared/models/forms/TabsHeader';
-import moment from 'moment';
-import { CardComponent } from '../../../../shared/components/card/card.component';
-import { FormTabsComponent } from '../../../../shared/components/form-tabs/form-tabs.component';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { ProfilePanelComponent } from '../../../../shared/components/profile-panel/profile-panel.component';
-import { CadastroAssociadoForm, CadastroAssociadoStorage, DocumentItem } from '../../../../shared/models/associados/CadastroAssociadoDTO';
-import { AssociadosDadosPessoaisComponent } from '../../form-steps/associados-dados-pessoais/associados-dados-pessoais.component';
-import { AssociadosEnderecoComponent } from '../../form-steps/associados-endereco/associados-endereco.component';
-import { AssociadosDadosProfissionaisComponent } from '../../form-steps/associados-dados-profissionais/associados-dados-profissionais.component';
-import { AssociadosDocumentosComponent } from '../../form-steps/associados-documentos/associados-documentos.component';
-import { SelectOption } from '../../../../shared/models/forms/SelectOption';
-import { AssociadosVeiculosComponent } from '../../form-steps/associados-veiculos/associados-veiculos.component';
-import { minItems } from '../../../../shared/utils/FormArrayValidator';
-import { AssociadosService } from '../../../../core/services/Associados.service';
+import { TabsHeader } from '../../../shared/models/forms/TabsHeader';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { FormTabsComponent } from '../../../shared/components/form-tabs/form-tabs.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { ProfilePanelComponent } from '../../../shared/components/profile-panel/profile-panel.component';
+import { CadastroAssociadoForm, CadastroAssociadoStorage, DocumentItem } from '../../../shared/models/associados/CadastroAssociadoDTO';
+import { AssociadosDadosPessoaisComponent } from '../form-steps/associados-dados-pessoais/associados-dados-pessoais.component';
+import { AssociadosEnderecoComponent } from '../form-steps/associados-endereco/associados-endereco.component';
+import { AssociadosDadosProfissionaisComponent } from '../form-steps/associados-dados-profissionais/associados-dados-profissionais.component';
+import { AssociadosDocumentosComponent } from '../form-steps/associados-documentos/associados-documentos.component';
+import { SelectOption } from '../../../shared/models/forms/SelectOption';
+import { AssociadosVeiculosComponent } from '../form-steps/associados-veiculos/associados-veiculos.component';
+import { minItems } from '../../../shared/utils/FormArrayValidator';
+import { AssociadosService } from '../../../core/services/Associados.service';
 
 @Component({
   selector: 'app-associados-cadastro',
@@ -237,38 +236,7 @@ export class AssociadosCadastroComponent {
   async onSubmit(event: MouseEvent) {
     event.preventDefault();
     if(this.form.valid) {
-      const payload = {
-        ...(this.form.getRawValue() as CadastroAssociadoForm), 
-      }
-      const dataEmissaoCNH = moment(payload.dadosPessoais.dataEmissaoCNH);
-      payload.dadosPessoais.dataEmissaoCNH = dataEmissaoCNH.isValid()
-        ? dataEmissaoCNH.toISOString()
-        : '';
-
-      const dataVencimentoCNH = moment(payload.dadosPessoais.dataVencimentoCNH);
-      payload.dadosPessoais.dataVencimentoCNH = dataVencimentoCNH.isValid()
-        ? dataVencimentoCNH.toISOString()
-        : '';
-
-      const dataNascimento = moment(payload.dadosPessoais.dataNascimento);
-      payload.dadosPessoais.dataNascimento = dataNascimento.isValid()
-        ? dataNascimento.toISOString()
-        : '';
-
-      const dataExpedicaoRG = moment(payload.dadosPessoais.dataExpedicaoRG);
-      payload.dadosPessoais.dataExpedicaoRG = dataExpedicaoRG.isValid()
-        ? dataExpedicaoRG.toISOString()
-        : '';
-
-      const rctDataValidade = moment(payload.dadosProfissionais.rctDataValidade);
-      payload.dadosProfissionais.rctDataValidade = rctDataValidade.isValid()
-        ? rctDataValidade.toISOString()
-        : '';
-
-      const rctDataEmissao = moment(payload.dadosProfissionais.rctDataEmissao);
-      payload.dadosProfissionais.rctDataEmissao = rctDataEmissao.isValid()
-        ? rctDataEmissao.toISOString()
-        : '';
+      const payload = this.form.getRawValue() as CadastroAssociadoForm;
 
     if(this.mode == 'edit'){
       const result = await this.AssociadosService.editAssociadoById(this.idAssociado, payload);

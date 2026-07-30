@@ -50,7 +50,7 @@
               }
             } 
             @else {
-              <p [matTooltip]="row[col.key]"
+              <p [matTooltip]="row[col.key] | shortenerLongText"
                 [matTooltipPosition]="'above'"
               >
                 {{row[col.key] | shortenerLongText}}

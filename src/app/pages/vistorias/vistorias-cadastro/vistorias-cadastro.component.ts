@@ -47,6 +47,7 @@ export class VistoriasCadastroComponent implements OnInit {
   ngOnInit(): void {
     // this.form.disable();
     // this.form.valueChanges.subscribe(value => console.log(value))
+    
     this.form.get('dadosVisuais.aprovarVistoria')?.valueChanges
     .subscribe(value => {
       if(value === 0) {
@@ -195,12 +196,20 @@ export class VistoriasCadastroComponent implements OnInit {
         modelo: vistoria.modelo,
         dadosVisuais: vistoria.dadosVisuais,
       });
+
+      if(
+        vistoria.dadosVisuais.aprovarVistoria == false && 
+        this.mode === 'view'
+      ) {
+        this.showMotivoReprovacao();
+      }
       
   }
 
   approvalClick() {
     this.selectedButton = true;
     this.hideMotivoReprovacao();
+    this.form.get('dadosVisuais.motivoReprovacao')?.setValue('',{ emitEvent: false });
     this.form.get('dadosVisuais.aprovarVistoria')?.setValue(1, { emitEvent: false });
   }
   
@@ -226,6 +235,7 @@ export class VistoriasCadastroComponent implements OnInit {
     if(this.mode == 'view') {
       this.form.get('dadosVisuais.motivoReprovacao')?.disable({emitEvent: false});
       this.form.get('dadosVisuais.motivoReprovacao')?.clearValidators();
+      this.motivoReprovacao.set(true);
       
     }else {
       this.form.get('dadosVisuais.motivoReprovacao')?.enable({emitEvent: false});
@@ -254,13 +264,7 @@ export class VistoriasCadastroComponent implements OnInit {
     }
 
     if(this.form.valid) {
-      const payload = {
-        ...(this.form.getRawValue() as CadastroVistoriaDTO), 
-      }
-      const dataVistoria = moment(payload.dataVistoria);
-      payload.dataVistoria = dataVistoria.isValid()
-        ? dataVistoria.toISOString()
-        : '';
+      const payload = this.form.getRawValue() as CadastroVistoriaDTO;
 
 
       if(this.mode == 'edit'){
@@ -277,7 +281,6 @@ export class VistoriasCadastroComponent implements OnInit {
             alert(response.status.message);
           }
         }
-
 
     }
   }

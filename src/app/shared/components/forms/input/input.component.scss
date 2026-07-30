@@ -60,6 +60,7 @@ input {
     font-size: var(--font-size-sm);
     &::placeholder {
         font-size: var(--font-size-sm);
+        color: var(--palette-gray-400);
     }
     
     &:focus {

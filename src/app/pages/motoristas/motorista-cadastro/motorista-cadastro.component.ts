@@ -190,23 +190,7 @@ get profileImage(): File | null {
   async onSubmit(event: MouseEvent) {
     event.preventDefault();
     if(this.form.valid) {
-      const payload = {
-        ...(this.form.getRawValue() as CadastroMotoristaForm), 
-      }
-      const dataEmissaoCNH = moment(payload.dadosPessoais.dataEmissaoCNH);
-      payload.dadosPessoais.dataEmissaoCNH = dataEmissaoCNH.isValid()
-        ? dataEmissaoCNH.toISOString()
-        : '';
-
-      const dataValidadeCNH = moment(payload.dadosPessoais.dataValidadeCNH);
-      payload.dadosPessoais.dataValidadeCNH = dataValidadeCNH.isValid()
-        ? dataValidadeCNH.toISOString()
-        : '';
-
-      const rctDataValidade = moment(payload.dadosProfissionais.rctDataValidade);
-      payload.dadosProfissionais.rctDataValidade = rctDataValidade.isValid()
-        ? rctDataValidade.toISOString()
-        : '';
+      const payload = this.form.getRawValue() as CadastroMotoristaForm;
 
     if(this.mode == 'edit'){
       const result = await this.MotoristaService.editMotoristaById(this.idMotorista, payload);
