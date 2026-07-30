@@ -3,7 +3,6 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from 'moment';
 import { TabsHeader } from '../../../shared/models/forms/TabsHeader';
-import moment from 'moment';
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { FormTabsComponent } from '../../../shared/components/form-tabs/form-tabs.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -237,38 +236,7 @@ export class AssociadosCadastroComponent {
   async onSubmit(event: MouseEvent) {
     event.preventDefault();
     if(this.form.valid) {
-      const payload = {
-        ...(this.form.getRawValue() as CadastroAssociadoForm), 
-      }
-      const dataEmissaoCNH = moment(payload.dadosPessoais.dataEmissaoCNH);
-      payload.dadosPessoais.dataEmissaoCNH = dataEmissaoCNH.isValid()
-        ? dataEmissaoCNH.toISOString()
-        : '';
-
-      const dataVencimentoCNH = moment(payload.dadosPessoais.dataVencimentoCNH);
-      payload.dadosPessoais.dataVencimentoCNH = dataVencimentoCNH.isValid()
-        ? dataVencimentoCNH.toISOString()
-        : '';
-
-      const dataNascimento = moment(payload.dadosPessoais.dataNascimento);
-      payload.dadosPessoais.dataNascimento = dataNascimento.isValid()
-        ? dataNascimento.toISOString()
-        : '';
-
-      const dataExpedicaoRG = moment(payload.dadosPessoais.dataExpedicaoRG);
-      payload.dadosPessoais.dataExpedicaoRG = dataExpedicaoRG.isValid()
-        ? dataExpedicaoRG.toISOString()
-        : '';
-
-      const rctDataValidade = moment(payload.dadosProfissionais.rctDataValidade);
-      payload.dadosProfissionais.rctDataValidade = rctDataValidade.isValid()
-        ? rctDataValidade.toISOString()
-        : '';
-
-      const rctDataEmissao = moment(payload.dadosProfissionais.rctDataEmissao);
-      payload.dadosProfissionais.rctDataEmissao = rctDataEmissao.isValid()
-        ? rctDataEmissao.toISOString()
-        : '';
+      const payload = this.form.getRawValue() as CadastroAssociadoForm;
 
     if(this.mode == 'edit'){
       const result = await this.AssociadosService.editAssociadoById(this.idAssociado, payload);
