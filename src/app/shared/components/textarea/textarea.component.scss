@@ -7,46 +7,46 @@
 }
 
 .textarea-label {
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
     font-weight: 500;
     color: #374151;
 }
 
 .required {
-    color: #ef4444;
+    color: var(--primary-red-600);
     margin-left: 0.125rem;
 }
 
 .textarea-field {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--palette-gray-300);
     border-radius: 0.5rem;
-    font-size: 0.875rem;
+    font-size: var(--font-size-sm);
     line-height: 1.5;
-    color: #111827;
-    background-color: #ffffff;
+    color: var(--palette-gray-800);
+    background-color: var(--palette-white);
     resize: vertical;
     transition: border-color 0.2s, box-shadow 0.2s;
     font-family: inherit;
 }
 
 .textarea-field::placeholder {
-    color: #9ca3af;
+    color: var(--palette-gray-400);
 }
 
 .textarea-field:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .textarea-field.focused {
-    border-color: #3b82f6;
+    border-color: var(--primary);
 }
 
 .textarea-field.error {
-    border-color: #ef4444;
+    border-color: var(--primary-red-600);
 }
 
 .textarea-field.error:focus {
@@ -69,15 +69,15 @@
 
 .char-count {
     font-size: 0.75rem;
-    color: #6b7280;
+    color: var(--palette-gray-600);
 }
 
 .char-count.over-limit {
-    color: #ef4444;
+    color: var(--primary-red-600);
     font-weight: 500;
 }
 
 .hint {
     font-size: 0.75rem;
-    color: #6b7280;
+    color: var(--palette-gray-600);
 }
