@@ -1,45 +1,57 @@
 <app-card-form-block
-[title]="mode === 'edit' ? 'Editar ocorrência' : 'Nova ocorrência'"
-[description]="'O diretor responsável é preenchido com o usuário logado.'"
+[title]="mode === 'edit' ? 'Editar banimento' : 'Novo banimento'"
+[description]="'Esta ação impede novos cadastros desta pessoa.'"
+[style]="'danger'"
+[icon]="'LucideUserMinus'"
 >
 <form [formGroup]="form">
     <div class="wrapper-group">
         <app-input
-            [label]="'Diretor responsável'"
+            [label]="'Nome Motorista/Proprietário'"
             [type]="'text'"
             [placeholder]="'Jorge'"
             [required]="true"
-            [formControlName]="'usuario'"
+            [formControlName]="'nome'"
             >
         </app-input>
     </div>
     <div class="wrapper-group">
         <app-input
-        [label]="'Data da ocorrência'"
+        [label]="'Data do banimento'"
         [type]="'date'"
         [required]="true"
         [placeholder]="'dd/mm/aaaa'"
-        formControlName="dataOcorrencia"
+        formControlName="dataBanimento"
         ></app-input>
         <app-input
-            [label]="'Unidade'"
+            [label]="'CPF (sem dígitos)'"
             [type]="'text'"
-            [placeholder]="'501'"
+            [placeholder]="'000.000.000-00'"
             [required]="true"
-            formControlName="unidade"
+            [mask]="'000.000.000-00'"
+            formControlName="cpf"
+            >
+        </app-input>
+        <app-input
+            [label]="'RG (sem dígitos)'"
+            [type]="'text'"
+            [placeholder]="'00.000.000-00'"
+            [required]="true"
+            [mask]="'00.000.000-0'"
+            formControlName="rg"
             >
         </app-input>
     </div>
 
     <div class="wrapper-group">
         <app-textarea
-        [label]="'Descrição'"
-        [placeholder]="'Foi informado que...'"
+        [label]="'Motivo do banimento'"
+        [placeholder]="'Descreva detalhadamente o motivo do banimento...'"
         [required]="true"
         [rows]="6"
-        [maxlength]="1000"
+        [maxlength]="1500"
         [showCharCount]="true"
-        formControlName="descricao"
+        formControlName="motivoBanimento"
         >
 
         </app-textarea>

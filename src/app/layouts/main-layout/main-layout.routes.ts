@@ -1,5 +1,5 @@
 import { RouterLink, Routes } from '@angular/router';
-import { BanidosComponent } from '../../pages/banidos/banidos.component';
+import { BanidosComponent } from '../../pages/banidos/banidos/banidos.component';
 import { UsuariosComponent } from '../../pages/admin/usuarios/usuarios.component';
 import { ConfiguracoesComponent } from '../../pages/configuracoes/configuracoes.component';
 import { pageHeaderData } from '../../shared/models/pageHeaderContent/pageHeaderContentModel';
@@ -244,6 +244,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Registro de eventos operacionais reportados pelos diretores.",
             buttonLabel: "Voltar",
             routerLink: 'ocorrencias',
+            buttonType: 'outlined',
             exportable: true
         },
     },
@@ -255,6 +256,7 @@ export const MainLayoutsRoutes: Routes = [
             description: "Registro de eventos operacionais reportados pelos diretores.",
             buttonLabel: "Voltar",
             routerLink: 'ocorrencias',
+            buttonType: 'outlined',
             exportable: true
         },
     },
@@ -266,12 +268,13 @@ export const MainLayoutsRoutes: Routes = [
             description: "Registro de eventos operacionais reportados pelos diretores.",
             buttonLabel: "Voltar",
             routerLink: 'ocorrencias',
+            buttonType: 'outlined',
             exportable: true
         },
     },
     {
         path: 'banidos',
-        component: BanidosComponent,
+        loadComponent: () => import('../../pages/banidos/banidos/banidos.component').then(c => c.BanidosComponent),
         title: 'Motoristas e associados banidos',
         data:<pageHeaderData> {
             description: "Lista negra utilizada nas validações de cadastro.",
@@ -280,10 +283,42 @@ export const MainLayoutsRoutes: Routes = [
             icon: 'LucidePlus',
             exportable: true
         },
-        children: [{
-            path: 'novo',
-            component: BanidosComponent,
-        }]
+    },
+    {
+        path: 'banidos/novo',
+        loadComponent: () => import('../../pages/banidos/banidos-cadastro/banidos-cadastro.component').then(c => c.BanidosCadastroComponent),
+        title: 'Novo banimento',
+        data:<pageHeaderData> {
+            description: "Preencha os dados abaixo.",
+            buttonLabel: "voltar",
+            routerLink: 'banidos',
+            buttonType: 'outlined',
+            exportable: false
+        },
+    },
+    {
+        path: 'banidos/editar/:id',
+        loadComponent: () => import('../../pages/banidos/banidos-cadastro/banidos-cadastro.component').then(c => c.BanidosCadastroComponent),
+        title: 'Editar banimento',
+        data:<pageHeaderData> {
+            description: "Preencha os dados abaixo.",
+            buttonLabel: "voltar",
+            routerLink: 'banidos',
+            buttonType: 'outlined',
+            exportable: false
+        },
+    },
+    {
+        path: 'banidos/visualizar/:id',
+        loadComponent: () => import('../../pages/banidos/banidos-cadastro/banidos-cadastro.component').then(c => c.BanidosCadastroComponent),
+        title: 'Visualizar banimento',
+        data:<pageHeaderData> {
+            description: "Preencha os dados abaixo.",
+            buttonLabel: "voltar",
+            routerLink: 'banidos',
+            buttonType: 'outlined',
+            exportable: false
+        },
     },
     {
         path: 'usuarios',

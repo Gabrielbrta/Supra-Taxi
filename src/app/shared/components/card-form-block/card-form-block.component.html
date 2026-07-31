@@ -12,7 +12,11 @@
                 }}
             </p></div>
             <div class="title-form-container">
-                <div class="icon-container">
+                <div class="icon-container"
+                [class.danger]="style() === 'danger'"
+                [class.success]="style() === 'success'"
+                [class.default]="style() === 'default'"
+                >
                     <svg [lucideIcon]="Icons[icon() ?? 'LucideClipboardCheck']"></svg>
                 </div>
                 <div class="title-info">

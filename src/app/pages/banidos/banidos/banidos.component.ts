@@ -1,73 +1,61 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { VistoriaService } from '../../../core/services/Vistorias.service';
-import { ColumnType, PageResult, TableAction } from '../../../shared/models/table/Table';
-import { PageEvent } from '@angular/material/paginator';
-import { DataSourceTableVistorias } from '../../../shared/models/vistorias/DataSourceTableVistorias';
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { TableComponent } from '../../../shared/components/table/table.component';
 import { SearchBarComponent } from '../../../shared/components/search-bar/search-bar.component';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
+import { BanidosService } from '../../../core/services/Banidos.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ColumnType, PageResult, TableAction } from '../../../shared/models/table/Table';
+import { CadastroBanidosDTO } from '../../../shared/models/banidos/CadastroBanidosDTO';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-vistorias',
+  selector: 'app-banidos',
   imports: [CardComponent, TableComponent, SearchBarComponent, ModalComponent],
-  templateUrl: './vistorias.component.html',
-  styleUrl: './vistorias.component.scss',
+  templateUrl: './banidos.component.html',
+  styleUrl: './banidos.component.scss',
 })
-export class VistoriasComponent {
-  private readonly vistoriasService = inject(VistoriaService);
+export class BanidosComponent {
+    private readonly banidosService = inject(BanidosService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-  dataSource!: PageResult<DataSourceTableVistorias>;
+  dataSource!: PageResult<CadastroBanidosDTO>;
   openModal: boolean = false;
-  unidade : string = '';
-  private idVistoria : string = '';
-  tableColumns: ColumnType<DataSourceTableVistorias>[] =  [
-    /*
-        situacao: StatusEnum,
-    */
+  banido : string = '';
+  private idBanimento : string = '';
+  tableColumns: ColumnType<CadastroBanidosDTO>[] =  [
       {
         key: 'id',
         header: 'ID',
       },
       {
-        key: 'unidade',
-        header: 'Unidade',
-        type: 'text'
-      },
-      {
-        key: 'veiculo',
-        header: 'Veículo',
+        key: 'nome',
+        header: 'Motorista / Proprietário',
         type: 'name'
       },
       {
-        key: 'proprietario',
-        header: 'Proprietário',
-      },
-      {
-        key: 'diretor',
-        header: 'Diretor',
+        key: 'rg',
+        header: 'RG',
         type: 'text'
       },
       {
-        key: 'dataVistoria',
-        header: 'Data da vistoria',
+        key: 'cpf',
+        header: 'CPF',
+        type: 'text'
+      },
+      {
+        key: 'dataBanimento',
+        header: 'Data do banimento',
         type: 'date'
       },
       {
-        key: 'situacao',
-        header: 'Situação',
-        type: 'status'
+        key: 'motivoBanimento',
+        header: 'Motivo Banimento',
+        type: 'text'
       },
     ]
 
     actions: TableAction[] = [
-      {
-        icon: 'LucidePrinter',
-        action: 'view',
-        tooltip: 'Imprimir'
-      },
       {
         icon: 'LucideEye',
         action: 'view',
@@ -78,30 +66,30 @@ export class VistoriasComponent {
         action: 'edit',
         tooltip: 'Editar'
       },
-      {
-        icon: 'LucideTrash2',
-        action: 'delete',
-        tooltip: 'Excluir'
-      }
+      // {
+      //   icon: 'LucideTrash2',
+      //   action: 'delete',
+      //   tooltip: 'Excluir'
+      // }
         // {
         //   icon: 'LucideKeyRound',
         //   action: 'view',
         //   tooltip: 'Alterar senha'
         // },
-        // {
-        //   icon: 'LucideLockOpen',
-        //   action: 'view',
-        //   tooltip: 'Remover banimento'
-        // },
+        {
+          icon: 'LucideLockOpen',
+          action: 'view',
+          tooltip: 'Remover banimento'
+        },
     
       ]
 
     ngOnInit() {
-      this.getVistoriasPaginado();
+      this.getBanimentosPaginado();
     }
 
     onPage(page: PageEvent) {
-      this.dataSource = this.vistoriasService.getTableVistoriaPaginado(
+      this.dataSource = this.banidosService.getTableBanimentosPaginado(
         page.pageIndex + 1,
         page.pageSize
       )
@@ -112,18 +100,18 @@ export class VistoriasComponent {
     }
 
     edit(row: any) {
-      this.router.navigate(['/vistorias/editar', row.id]);
+      this.router.navigate(['/banidos/editar', row.id]);
     }
     delete(row: any) {
       this.openModal = true;
-      this.unidade = row.unidade;
-      this.idVistoria = row.id;
+      this.banido = row.nome;
+      this.idBanimento = row.id;
     }
     
     confirmDelete() {
-      const result = this.vistoriasService.deleteVistoriaById(this.idVistoria);
+      const result = this.banidosService.deleteBanimentoById(this.idBanimento);
       if(result) {
-        this.getVistoriasPaginado();
+        this.getBanimentosPaginado();
         this.resetModalInfo();
       } else {
         this.resetModalInfo();
@@ -131,12 +119,12 @@ export class VistoriasComponent {
       }
     }
     view(row: any) {
-      this.router.navigate(['/vistorias/visualizar', row.id]);
+      this.router.navigate(['/banidos/visualizar', row.id]);
 
     }
 
     resetModalInfo() {
-      this.idVistoria = '';
+      this.idBanimento = '';
       this.closeModal();
     }
 
@@ -163,7 +151,7 @@ export class VistoriasComponent {
       this.resetModalInfo();
     }
 
-    getVistoriasPaginado() {
+    getBanimentosPaginado() {
       // this.getVistoriasPaginado().subscribe({
       //   next: result => {
       //     if(result.data?.length) {
@@ -174,7 +162,6 @@ export class VistoriasComponent {
       //     console.error(error)
       //   }
       // })
-      this.dataSource = this.vistoriasService.getTableVistoriaPaginado();
+      this.dataSource = this.banidosService.getTableBanimentosPaginado();
     }
-
 }
