@@ -16,5 +16,6 @@ export class CardFormBlockComponent {
   icon = input<keyof typeof Icons>();
   title = input<string>('');
   required = input<boolean | 'none'>('none');
+  style = input< 'danger' | 'default' | 'success'>('default');
   description = input<string>('');
 }

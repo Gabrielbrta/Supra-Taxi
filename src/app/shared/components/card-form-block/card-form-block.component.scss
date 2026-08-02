@@ -25,7 +25,20 @@
         height: 48px;
         color: var(--primary-blue-900);
         background-color: var(--primary-blue-100);
-        border-radius: var(--radius-xl);
+        
+        &.danger {
+            background-color: var(--primary-red-100);
+            color: var(--primary-red-700);
+        }
+        &.default {
+            background-color: var(--primary-blue-100);
+            color: var(--primary-blue-900);
+        }
+        &.success {
+            background-color: var(--primary-green-100);
+            color: var(--primary-green-900);
+        }
+        border-radius: 50%;
     }
 
     .title-info {

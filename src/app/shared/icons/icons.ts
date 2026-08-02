@@ -34,7 +34,8 @@ import {
   LucideCheck,
   LucideX,
   LucideClipboardList, 
-  LucideCarTaxiFront
+  LucideCarTaxiFront,
+  LucideUserMinus
 } from '@lucide/angular';
 
 export const Icons = {
@@ -74,4 +75,5 @@ export const Icons = {
   LucideX,
   LucideClipboardList,
   LucideCarTaxiFront, 
+  LucideUserMinus
 };
