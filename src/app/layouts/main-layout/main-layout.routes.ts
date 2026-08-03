@@ -1,9 +1,9 @@
 import { RouterLink, Routes } from '@angular/router';
 import { BanidosComponent } from '../../pages/banidos/banidos/banidos.component';
-import { UsuariosComponent } from '../../pages/admin/usuarios/usuarios.component';
 import { ConfiguracoesComponent } from '../../pages/configuracoes/configuracoes.component';
 import { pageHeaderData } from '../../shared/models/pageHeaderContent/pageHeaderContentModel';
 import { OcorrenciasComponent } from '../../pages/ocorrencias/ocorrencias/ocorrencias.component';
+import { UsuariosComponent } from '../../pages/usuarios/usuarios/usuarios.component';
 
 export const MainLayoutsRoutes: Routes = [
     {
@@ -322,7 +322,7 @@ export const MainLayoutsRoutes: Routes = [
     },
     {
         path: 'usuarios',
-        component: UsuariosComponent,
+       loadComponent: () => import('../../pages/usuarios/usuarios/usuarios.component').then(c => c.UsuariosComponent),
         title: 'Usuários e permissões',
         data:<pageHeaderData> {
             description: "Crie diretores e operadores, defina perfis de acesso e gerencie credenciais.",
@@ -331,10 +331,39 @@ export const MainLayoutsRoutes: Routes = [
             icon: 'LucidePlus',
             exportable: true
         },
-        children: [{
-            path: 'novo',
-            component: UsuariosComponent,
-        }]
+    },
+    {
+        path: 'usuarios/novo',
+       loadComponent: () => import('../../pages/usuarios/usuarios-cadastro/usuarios-cadastro.component').then(c => c.UsuariosCadastroComponent),
+        title: 'Novo usuário',
+        data:<pageHeaderData> {
+            description: "",
+            buttonLabel: "Voltar",
+            routerLink: 'usuarios',
+            buttonType: 'outlined',
+        },
+    },
+    {
+        path: 'usuarios/editar/:id',
+       loadComponent: () => import('../../pages/usuarios/usuarios-cadastro/usuarios-cadastro.component').then(c => c.UsuariosCadastroComponent),
+        title: 'Editar usuário',
+        data:<pageHeaderData> {
+            description: "",
+            buttonLabel: "Voltar",
+            routerLink: 'usuarios',
+            buttonType: 'outlined',
+        },
+    },
+    {
+        path: 'usuarios/visualizar/:id',
+       loadComponent: () => import('../../pages/usuarios/usuarios-cadastro/usuarios-cadastro.component').then(c => c.UsuariosCadastroComponent),
+        title: 'Visualizar usuário',
+        data:<pageHeaderData> {
+            description: "",
+            buttonLabel: "Voltar",
+            routerLink: 'usuarios',
+            buttonType: 'outlined',
+        },
     },
     {
         path: 'configuracoes',

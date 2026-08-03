@@ -1,20 +1,49 @@
- <div class="radio-group" role="radiogroup" [attr.aria-label]="ariaLabel()">
+@if(customLabel()) {
+    <p class="label">{{label()}} <span class="required"> {{required() ? '*' : ''}}</span></p>
+    <div class="radio-group custom" role="radiogroup" [attr.aria-label]="ariaLabel()">
     @for (option of options(); track option.value) {
-    <label 
-        class="radio-option"
-        [class.checked]="isSelected(option.value)"
-        [class.disabled]="option.disabled || disabled()"
-    >
-        <input
-        type="radio"
-        [name]="name()"
-        [value]="option.value"
-        [checked]="isSelected(option.value)"
-        [disabled]="option.disabled || disabled()"
-        (change)="selectOption(option.value)"
-        />
-        <span class="radio-indicator"></span>
-        <span class="radio-label">{{ option.label }}</span>
-    </label>
-    }
-</div>
+        <label 
+            class="radio-option custom"
+            [class.checked-custom]="isSelected(option.value)"
+            [class.disabled]="option.disabled || disabled()"
+        >
+            <input
+            type="radio"
+                hidden
+                [name]="name()"
+                [value]="option.value"
+                [required]="required()"
+                [checked]="isSelected(option.value)"
+                [disabled]="option.disabled || disabled()"
+                (change)="selectOption(option.value)"
+                />
+                <span class="radio-indicator"></span>
+                <span class="radio-label">{{ option.label }}</span>
+                <p>{{ option.labelDescription }}</p>
+            </label>
+        }
+    </div>
+}
+@else {
+ 
+    <div class="radio-group" role="radiogroup" [attr.aria-label]="ariaLabel()">
+       @for (option of options(); track option.value) {
+       <label 
+           class="radio-option"
+           [class.checked]="isSelected(option.value)"
+           [class.disabled]="option.disabled || disabled()"
+       >
+           <input
+           type="radio"
+           [name]="name()"
+           [value]="option.value"
+           [checked]="isSelected(option.value)"
+           [disabled]="option.disabled || disabled()"
+           (change)="selectOption(option.value)"
+           />
+           <span class="radio-indicator"></span>
+           <span class="radio-label">{{ option.label }}</span>
+       </label>
+       }
+    </div>
+}
