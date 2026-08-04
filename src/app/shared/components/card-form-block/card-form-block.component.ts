@@ -18,4 +18,5 @@ export class CardFormBlockComponent {
   required = input<boolean | 'none'>('none');
   style = input< 'danger' | 'default' | 'success'>('default');
   description = input<string>('');
+  noPadding = input<boolean>(false);
 }

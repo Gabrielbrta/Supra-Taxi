@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CardFormBlockComponent } from '../../../shared/components/card-form-block/card-form-block.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -9,14 +9,16 @@ import { OcorrenciasService } from '../../../core/services/Ocorrencias.service';
 import { Moment } from 'moment';
 import { CadastroOcorrenciasDTO } from '../../../shared/models/ocorrencias/CadastroOcorrenciasDTO';
 import { RadioButtonComponent } from '../../../shared/components/radio-button/radio-button.component';
+import { TablePermissionsComponent } from "../../../shared/components/table-permissions/table-permissions.component";
+import { PermissionColumn } from '../../../shared/models/table/TablePermissions';
 
 @Component({
   selector: 'app-usuarios-cadastro',
-  imports: [ReactiveFormsModule, CardFormBlockComponent, InputComponent, ButtonComponent, TextareaComponent, RadioButtonComponent],
+  imports: [ReactiveFormsModule, CardFormBlockComponent, InputComponent, ButtonComponent, TextareaComponent, RadioButtonComponent, TablePermissionsComponent],
   templateUrl: './usuarios-cadastro.component.html',
   styleUrl: './usuarios-cadastro.component.scss',
 })
-export class UsuariosCadastroComponent {
+export class UsuariosCadastroComponent implements OnInit{
     private route = inject(ActivatedRoute);
   private router = inject(Router);
   private ocorrenciasService = inject(OcorrenciasService);
@@ -24,12 +26,19 @@ export class UsuariosCadastroComponent {
   private idOcorrencia = this.route.snapshot.paramMap.get('id')!;
   form: FormGroup;
 
+  ngOnInit(): void {
+    this.form.get('permissions')?.valueChanges.subscribe((value) => {
+      console.log(value);
+    })
+  }
+
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       nome: this.fb.control<string>('', [Validators.required, Validators.minLength(5)]),
       // dataOcorrencia: this.fb.control<Moment | Date | null>(null, [Validators.required]),
       email: this.fb.control<string>('', [Validators.required, Validators.email]),
-      tipoUsuario: this.fb.control<string>('', [Validators.required])
+      tipoUsuario: this.fb.control<string>('', [Validators.required]),
+      permissions: this.fb.control<PermissionColumn[]>([], [Validators.required])
     })
     
     const path = this.route.snapshot.routeConfig?.path ?? '';

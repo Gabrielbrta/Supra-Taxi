@@ -1,6 +1,8 @@
 <div class="vistorias-container">
     <app-card>
-        <div class="card-content">
+        <div class="card-content"
+            [class.noPadding]="noPadding() === true"               
+        >
             <div class="status"
             [class.obrigatorio]="required() === true"
             [class.opcional]="required() === false"
@@ -24,7 +26,7 @@
                     <p>{{description()}}</p>
                 </div>
             </div>
-            <div class="content-container">
+            <div [class.content-container]="noPadding() === false">
                 <ng-content></ng-content>
             </div>
         </div>
