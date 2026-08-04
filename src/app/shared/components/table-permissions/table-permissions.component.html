@@ -1,0 +1,29 @@
+<div class="container-table">
+  <table mat-table [dataSource]="internalData()" class="full-width-table">
+    <ng-container matColumnDef="modulo">
+      <th mat-header-cell *matHeaderCellDef>MÓDULO</th>
+      <td mat-cell *matCellDef="let row" class="module-cell">
+        {{ row.modulo }}
+      </td>
+    </ng-container>
+
+    @for (coluna of colunas(); track coluna.key) {
+      <ng-container [matColumnDef]="coluna.key">
+        <th mat-header-cell *matHeaderCellDef class="permission-header">
+          {{ coluna.label }}
+        </th>
+        <td mat-cell *matCellDef="let row" class="permission-cell">
+          <mat-checkbox
+            [checked]="isChecked(row, coluna.key)"
+            [disabled]="disabled"
+            (change)="onPermissionChange(row, coluna.key, $event.checked)"
+            [attr.aria-label]="coluna.label + ' - ' + row.modulo"
+          ></mat-checkbox>
+        </td>
+      </ng-container>
+    }
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns();"></tr>
+  </table>
+</div>
