@@ -25,7 +25,8 @@
     </div>
 }
 @else {
- 
+ <div>
+     <p class="label">{{label()}} <span class="required"> {{required() ? '*' : ''}}</span></p>
     <div class="radio-group" role="radiogroup" [attr.aria-label]="ariaLabel()">
        @for (option of options(); track option.value) {
        <label 
@@ -46,4 +47,5 @@
        </label>
        }
     </div>
+</div>
 }

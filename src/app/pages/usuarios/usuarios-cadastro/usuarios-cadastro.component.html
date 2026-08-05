@@ -26,6 +26,8 @@
         [customLabel]="true"
         [label]="'Cargo / Perfil de acesso'"
         [required]="true"
+        [name]="'cargo'"
+        formControlName="tipoUsuario"
         [options]="[
             {
                 label: 'Administrador', value: 1, 
@@ -37,8 +39,25 @@
                 label: 'Operador(a)', value: 3, 
                 labelDescription: 'Cadastra e edita registros de motoristas e associados.'},
             ]"
-        []
         >
+        </app-radio-button>
+    </div>
+    <div class="wrapper-group">
+        <app-radio-button
+        [customLabel]="false"
+        [label]="'Status'"
+        [required]="true"
+        formControlName="status"
+        [options]="[ 
+            {
+                label: 'Ativo', value: 1,
+            },
+            {
+                label: 'Inativo', value: 0,
+            }
+        ]"
+        >
+
         </app-radio-button>
     </div>
 <app-card-form-block

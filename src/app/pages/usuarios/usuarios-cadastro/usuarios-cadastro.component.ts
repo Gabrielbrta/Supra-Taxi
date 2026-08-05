@@ -27,7 +27,7 @@ export class UsuariosCadastroComponent implements OnInit{
   form: FormGroup;
 
   ngOnInit(): void {
-    this.form.get('permissions')?.valueChanges.subscribe((value) => {
+    this.form.valueChanges.subscribe((value) => {
       console.log(value);
     })
   }
@@ -35,10 +35,10 @@ export class UsuariosCadastroComponent implements OnInit{
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       nome: this.fb.control<string>('', [Validators.required, Validators.minLength(5)]),
-      // dataOcorrencia: this.fb.control<Moment | Date | null>(null, [Validators.required]),
       email: this.fb.control<string>('', [Validators.required, Validators.email]),
-      tipoUsuario: this.fb.control<string>('', [Validators.required]),
-      permissions: this.fb.control<PermissionColumn[]>([], [Validators.required])
+      tipoUsuario: this.fb.control<number>(3, [Validators.required]),
+      permissions: this.fb.control<PermissionColumn[]>([], [Validators.required]),
+      status: this.fb.control<number>(1, Validators.required)
     })
     
     const path = this.route.snapshot.routeConfig?.path ?? '';
