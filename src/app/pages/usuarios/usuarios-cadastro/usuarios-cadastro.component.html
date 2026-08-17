@@ -1,0 +1,112 @@
+<app-card-form-block
+[title]="mode === 'edit' ? 'Editar usuário' : 'Novo usuário'"
+[description]="'Defina o perfil de acesso e as permissões por módulo.'"
+[icon]="'LucideUserPlus'"
+>
+<form [formGroup]="form">
+    <div class="wrapper-group">
+        <app-input
+            [label]="'Nome'"
+            [type]="'text'"
+            [placeholder]="'Jorge'"
+            [required]="true"
+            [formControlName]="'nome'"
+            >
+        </app-input>
+        <app-input
+        [label]="'E-mail'"
+        [type]="'email'"
+        [required]="true"
+        [placeholder]="'abcde@abc.com'"
+        formControlName="email"
+        ></app-input>
+    </div>
+    <div class="wrapper-group">
+        <app-radio-button
+        [customLabel]="true"
+        [label]="'Cargo / Perfil de acesso'"
+        [required]="true"
+        [name]="'cargo'"
+        formControlName="tipoUsuario"
+        [options]="[
+            {
+                label: 'Administrador', value: 1, 
+                labelDescription: 'acesso total e irrestrito a todos os módulos'},
+            {
+                label: 'Diretor(a)', value: 2, 
+                labelDescription: 'Gerencia operação, cadastros e aprovações.'},
+            {
+                label: 'Operador(a)', value: 3, 
+                labelDescription: 'Cadastra e edita registros de motoristas e associados.'},
+            ]"
+        >
+        </app-radio-button>
+    </div>
+    <div class="wrapper-group">
+        <app-radio-button
+        [customLabel]="false"
+        [label]="'Status'"
+        [required]="true"
+        formControlName="status"
+        [options]="[ 
+            {
+                label: 'Ativo', value: 1,
+            },
+            {
+                label: 'Inativo', value: 0,
+            }
+        ]"
+        >
+
+        </app-radio-button>
+    </div>
+<app-card-form-block
+    [title]="'Permissões por módulo'"
+    [description]="'Marque o que este usuário pode fazer em cada módulo do menu.'"
+    [noPadding]="true"
+    [style]="'danger'"
+    [icon]="'LucideShield'"
+>
+    <div class="table-checkbox">
+        <app-table-permissions
+        formControlName="permissions"
+        [modulos]="[
+            'Dashboard',
+            'Motoristas',
+            'Associados',
+            'Vistorias',
+            'Unidades',
+            'Ocorrências',
+            'Banidos',
+            'Usuários',
+            'Configurações',
+        ]"
+        >
+
+        </app-table-permissions>
+    </div>
+</app-card-form-block>
+
+
+</form>
+<div class="form-button">
+    @if (mode !== 'view') {
+            <app-button
+            [labelButton]="mode === 'edit' ? 'Editar' : 'Salvar'"
+            [buttonType]="'filled'"
+            [tooltip]="this.form.invalid ? 'Preencha o formulário': ''"
+            [disabled]="this.form.invalid"
+            (clicked)="onSubmit($event)"
+            >
+            </app-button>
+    }
+        <app-button
+            [labelButton]="'Cancelar'"
+            [buttonType]="'filled'"
+            [color]="'neutral'"
+            (clicked)="goBack()"
+            >
+        </app-button>
+    </div>
+
+</app-card-form-block>

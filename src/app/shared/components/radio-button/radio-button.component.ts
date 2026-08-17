@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export interface RadioOptions {
     value: string | number;
     label: string;
+    labelDescription?: string;
     disabled?: boolean;
 }
 
@@ -25,6 +26,9 @@ export class RadioButtonComponent implements ControlValueAccessor {
   options = input.required<RadioOptions[]>();
   name = input<string>('radio-group');
   ariaLabel = input<string>();
+  customLabel = input<boolean>(false);
+  required = input<boolean>(false);
+  label = input<string>();
 
   private selectedValue = signal<string | number | null>(null);
   private onChange: (value: string | number | null) => void = () => {};

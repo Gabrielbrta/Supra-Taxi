@@ -1,0 +1,81 @@
+@use '@angular/material' as mat;
+
+.container-table {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+}
+
+table {
+  flex: 1;
+  width: 100%;
+  table-layout: fixed;
+}
+
+::ng-deep .mat-mdc-header-row {
+  color: var(--palette-gray-700) !important;
+  background-color: var(--palette-cyan-50) !important;
+  padding: 0 !important;
+
+  th {
+    font-size: var(--font-size-xs) !important;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+::ng-deep .mat-mdc-row {
+  background-color: var(--palette-white) !important;
+  color: var(--palette-gray-700) !important;
+  font-size: var(--font-size-sm) !important;
+}
+
+::ng-deep .mat-mdc-row:hover {
+  background-color: var(--palette-gray-100) !important;
+}
+
+::ng-deep .mat-mdc-cell {
+  border-bottom: 1px solid var(--palette-gray-200) !important;
+}
+
+::ng-deep .mat-mdc-header-cell {
+  border-top: 1px solid var(--palette-gray-200) !important;
+  border-bottom: 1px solid var(--palette-gray-200) !important;
+}
+
+::ng-deep .mat-mdc-header-row {
+  height: 40px !important;
+}
+
+.module-cell {
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.permission-header,
+.permission-cell {
+  text-align: center;
+}
+
+::ng-deep .mat-mdc-cell.permission-cell,
+::ng-deep .mat-mdc-header-cell.permission-header {
+  width: 120px;
+}
+
+::ng-deep .mat-column-modulo {
+  width: 30%;
+}
+
+::ng-deep .mat-column-visualizar,
+::ng-deep .mat-column-cadastrar,
+::ng-deep .mat-column-editar,
+::ng-deep .mat-column-tudo {
+  width: 13.5%;
+}
+
+::ng-deep .mat-mdc-checkbox {
+  margin: 0 auto;
+}
