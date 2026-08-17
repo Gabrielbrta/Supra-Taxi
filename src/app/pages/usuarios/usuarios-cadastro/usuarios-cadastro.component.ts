@@ -11,6 +11,8 @@ import { CadastroOcorrenciasDTO } from '../../../shared/models/ocorrencias/Cadas
 import { RadioButtonComponent } from '../../../shared/components/radio-button/radio-button.component';
 import { TablePermissionsComponent } from "../../../shared/components/table-permissions/table-permissions.component";
 import { PermissionColumn } from '../../../shared/models/table/TablePermissions';
+import { CadastroUsuarioDTO } from '../../../shared/models/usuarios/CadastroUsuarioDTO';
+import { UsuarioService } from '../../../core/services/Usuarios.service';
 
 @Component({
   selector: 'app-usuarios-cadastro',
@@ -21,10 +23,10 @@ import { PermissionColumn } from '../../../shared/models/table/TablePermissions'
 export class UsuariosCadastroComponent implements OnInit{
     private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private ocorrenciasService = inject(OcorrenciasService);
+  private usuariosService = inject(UsuarioService);
   mode: 'create' | 'edit' | 'view' = 'create';
-  private idOcorrencia = this.route.snapshot.paramMap.get('id')!;
-  form: FormGroup;
+  private idUsuario = this.route.snapshot.paramMap.get('id')!;
+  readonly form: FormGroup;
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe((value) => {
@@ -46,36 +48,37 @@ export class UsuariosCadastroComponent implements OnInit{
     if(path.includes('editar')) {
       this.mode = 'edit';
 
-      const ocorrencia = this.ocorrenciasService.getOcorrenciaById(this.idOcorrencia);
+      const usuario = this.usuariosService.getUsuarioById(this.idUsuario);
 
-      if(!ocorrencia) {
-        console.error('Ocorrência não existe!')
+      if(!usuario) {
+        console.error('O usuário não existe!')
         return;
       }
 
-      this.patchValueForm(ocorrencia)
+      this.patchValueForm(usuario)
     }
 
     if(path.includes('visualizar')) {
       this.mode = 'view'
 
-      const ocorrencia = this.ocorrenciasService.getOcorrenciaById(this.idOcorrencia);
+      const usuario = this.usuariosService.getUsuarioById(this.idUsuario);
 
-      if(!ocorrencia) {
-        console.error('Ocorrência não existe!')
+      if(!usuario) {
+        console.error('O usuário não existe!')
         return;
       }
-      this.patchValueForm(ocorrencia);
+      this.patchValueForm(usuario);
       this.form.disable();
     }
   }
 
-  patchValueForm(ocorrencia: CadastroOcorrenciasDTO) {
+  patchValueForm(usuario: CadastroUsuarioDTO) {
       this.form.patchValue({
-          usuario: ocorrencia.usuario,
-          unidade: ocorrencia.unidade,
-          dataOcorrencia: ocorrencia.dataOcorrencia,
-          descricao: ocorrencia.descricao
+          nome: usuario.nome,
+          tipoUsuario: usuario.tipoUsuario,
+          status: usuario.status,
+          permissions: usuario.permissions,
+          email: usuario.email,
       })
   }
 
@@ -90,20 +93,20 @@ export class UsuariosCadastroComponent implements OnInit{
 
     if(this.form.valid) {
       const payload = {
-        ...(this.form.getRawValue() as CadastroOcorrenciasDTO), 
+        ...(this.form.getRawValue() as CadastroUsuarioDTO), 
       }
 
       if(this.mode == 'edit'){
-          const result = await this.ocorrenciasService.editOcorrenciaById(this.idOcorrencia, payload);
+          const result = await this.usuariosService.editUsuarioById(this.idUsuario, payload);
           if(result) {
-              alert('Ocorrência editada com sucesso!');
+              alert('Usuário editada com sucesso!');
               this.goBack();
             } else {
-              alert('Ocorreu um erro ao editar ocorrência!');
+              alert('Ocorreu um erro ao editar usuário!');
           }
         } 
         else {
-          const response = await this.ocorrenciasService.cadastroOcorrencias(payload, crypto.randomUUID());
+          const response = await this.usuariosService.cadastroUsuario(payload, crypto.randomUUID());
           if(response.status?.message) {
             alert(response.status.message);
             this.goBack();
@@ -113,7 +116,7 @@ export class UsuariosCadastroComponent implements OnInit{
   }
 
   goBack() {
-    this.router.navigate(['/ocorrencias']);
+    this.router.navigate(['/usuarios']);
   }
 
 }
