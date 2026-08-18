@@ -166,7 +166,10 @@ export class UsuarioService {
             data: usuarios.data.map((item: any) => ({
                     id: item.id,
                     nome: item.nome,
-                    tipoUsuario: item.tipoUsuario,
+                    tipoUsuario: 
+                    item.tipoUsuario === 1 ? 'Administrador': 
+                    item.tipoUsuario === 2 ? 'Diretor' : 
+                    'Operador',
                     status: item.status === 1 ? StatusEnum.Ativo : StatusEnum.Inativo
                 })),
         }
